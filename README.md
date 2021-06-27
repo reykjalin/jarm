@@ -1,14 +1,46 @@
 # Inner Circle
 
+Inner Circle provides an easy and simple way to share updates with family and friends in the form of photos, videos, and text updates.
+
+## Goals
+
+- Private; intended for family and friends. Invite only.
+- Easy setup and management.
+
+## Non-Goals
+
+- Direct messages
+- Federation
+- Publically accessible
+
+## Server setup
+
+### Build a release
+
+```sh
+MIX_ENV=prod mix release
+```
+
+### Start the release so you can migrate the database and send an invitation for the first account
+
+```sh
+inner_circle start_iex
+iex> InnerCircle.Release.migrate
+# ...
+iex> InnerCircle.Release.send_invitation("<email>")
+```
+
+Then press <ctrl-C> to exit the prompt.
+
 ## Roadmap
 
 **V0.1**
 
 - SQLite
 - Accounts
-  - Send invitation via CLI
-  - Username, password, role, date created
-  - User roles; admin — moderator — user
+  - [x] Send invitation via CLI
+  - [ ] Username, password, role, date created
+  - [ ] User roles; admin — moderator — user
 
 **V0.2**
 
@@ -27,7 +59,7 @@
 **V0.4**
 
 - Accounts
-  - Reset password
+  - [x] Reset password
 
 **V0.5**
 
@@ -42,15 +74,15 @@
 
 **V1 - micro-birdsite**
 
-- Single binary ready
-- Automatic SSL cert management (not possible?)
+- [ ] Single binary ready
+- [ ] Automatic SSL cert management
 - Admin commands
-  - Delete account by username, id, email
-  - Send password reset
-  - Set timezone
-  - Set email credentials
-  - Set URL
-  - Export all data on user in CSV
+  - [ ] Delete account by username, id, email
+  - [ ] Send password reset
+  - [ ] Set timezone
+  - [ ] Set email credentials
+  - [ ] Set URL
+  - [ ] Export all data on user in CSV
 - Blog posts
 
 **V1.1**

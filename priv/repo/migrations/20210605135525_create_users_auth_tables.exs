@@ -6,14 +6,13 @@ defmodule InnerCircle.Repo.Migrations.CreateUsersAuthTables do
       add :display_name, :string, null: false, size: 254
       add :email, :string, null: false, size: 160, collate: :nocase
       add :hashed_password, :string, null: false
-      add :confirmed_at, :naive_datetime
       timestamps()
     end
 
     create unique_index(:users, [:email])
 
     create table(:users_tokens) do
-      add :user_id, references(:users, on_delete: :delete_all), null: false
+      add :user_id, references(:users, on_delete: :delete_all), null: true
       add :token, :binary, null: false, size: 32
       add :context, :string, null: false
       add :sent_to, :string

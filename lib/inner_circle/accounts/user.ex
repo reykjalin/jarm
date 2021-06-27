@@ -8,7 +8,6 @@ defmodule InnerCircle.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
-    field :confirmed_at, :naive_datetime
 
     timestamps()
   end
@@ -125,14 +124,6 @@ defmodule InnerCircle.Accounts.User do
     |> cast(attrs, [:password])
     |> validate_confirmation(:password, message: "does not match password")
     |> validate_password(opts)
-  end
-
-  @doc """
-  Confirms the account by setting `confirmed_at`.
-  """
-  def confirm_changeset(user) do
-    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
-    change(user, confirmed_at: now)
   end
 
   @doc """

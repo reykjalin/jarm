@@ -5,26 +5,40 @@ defmodule InnerCircleWeb.UserRegistrationController do
   alias InnerCircle.Accounts.User
   alias InnerCircleWeb.UserAuth
 
-  def new(conn, _params) do
-    changeset = Accounts.change_user_registration(%User{})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, %{"token" => token}) do
+    case Accounts.verify_invitation(token) do
+      {:ok, email} ->
+        user = %User{email: email}
+        changeset = Accounts.change_user_registration(user)
+        render(conn, "new.html", %{changeset: changeset, token: token})
+
+      :error ->
+        conn
+        |> put_flash(:error, "User invitation link is invalid or it has expired.")
+        |> redirect(to: "/")
+    end
   end
 
-  def create(conn, %{"user" => user_params}) do
-    case Accounts.register_user(user_params) do
-      {:ok, user} ->
-        {:ok, _} =
-          Accounts.deliver_user_confirmation_instructions(
-            user,
-            &Routes.user_confirmation_url(conn, :confirm, &1)
-          )
+  def create(conn, %{"user" => user_params, "token" => token}) do
+    case Accounts.verify_invitation(token) do
+      {:ok, _email} ->
+        case Accounts.register_user(user_params) do
+          {:ok, user} ->
+            # Delete the token
+            Accounts.confirm_user(token)
 
+            conn
+            |> put_flash(:info, "User created successfully.")
+            |> UserAuth.log_in_user(user)
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            render(conn, "new.html", %{changeset: changeset, token: token})
+        end
+
+      :error ->
         conn
-        |> put_flash(:info, "User created successfully.")
-        |> UserAuth.log_in_user(user)
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        |> put_flash(:error, "User invitation link is invalid or it has expired.")
+        |> redirect(to: "/")
     end
   end
 end

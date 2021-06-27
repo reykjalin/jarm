@@ -1,28 +1,31 @@
 defmodule InnerCircle.Release do
-	@app :inner_circle
+  @app :inner_circle
 
-	def migrate do
-		load_app()
+  alias InnerCircle.Accounts
 
-		for repo <- repos() do
-			{:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :up, all: true))
-		end
-	end
+  def migrate do
+    load_app()
 
-	def rollback(repo, version) do
-		load_app()
-		{:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :down, to: version))
-	end
+    for repo <- repos() do
+      {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :up, all: true))
+    end
+  end
 
-	def create_account(args) do
-		IO.write(args)
-	end
+  def rollback(repo, version) do
+    load_app()
+    {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :down, to: version))
+  end
 
-	defp repos do
-		Application.fetch_env!(@app, :ecto_repos)
-	end
+  def send_invitation(email) do
+    url_func = &"/users/register/#{&1}"
+    Accounts.deliver_user_invitation(email, url_func)
+  end
 
-	defp load_app do
-		Application.load(@app)
-	end
+  defp repos do
+    Application.fetch_env!(@app, :ecto_repos)
+  end
+
+  defp load_app do
+    Application.load(@app)
+  end
 end

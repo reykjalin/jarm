@@ -49,8 +49,8 @@ defmodule InnerCircleWeb.Router do
   scope "/", InnerCircleWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
+    get "/users/register/:token", UserRegistrationController, :new
+    post "/users/register/:token", UserRegistrationController, :create
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
@@ -65,14 +65,13 @@ defmodule InnerCircleWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    get "/users/invite", UserInvitationController, :new
+    post "/users/invite", UserInvitationController, :create
   end
 
   scope "/", InnerCircleWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :confirm
   end
 end

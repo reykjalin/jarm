@@ -12,7 +12,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
   end
 
   @doc """
-  Deliver instructions to invite an email to create an account.
+  Deliver instructions to the provided email so the recipient can create an account.
   """
   def deliver_invitation(email, url) do
     deliver(email, """
@@ -28,26 +28,6 @@ defmodule InnerCircle.Accounts.UserNotifier do
     #{url}
 
     If you weren't expecting this invitation, please ignore this.
-
-    ==============================
-    """)
-  end
-
-  @doc """
-  Deliver instructions to confirm account.
-  """
-  def deliver_confirmation_instructions(user, url) do
-    deliver(user.email, """
-
-    ==============================
-
-    Hi #{user.email},
-
-    You can confirm your account by visiting the URL below:
-
-    #{url}
-
-    If you didn't create an account with us, please ignore this.
 
     ==============================
     """)

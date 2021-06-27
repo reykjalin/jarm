@@ -1,0 +1,10 @@
+<h1>Send an invitation</h1>
+
+<%= form_for :user, Routes.user_invitation_path(@conn, :create), fn f -> %>
+  <%= label f, :email %>
+  <%= email_input f, :email, required: true %>
+
+  <div>
+    <%= submit "Send Invite" %>
+  </div>
+<% end %>

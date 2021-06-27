@@ -8,7 +8,7 @@ defmodule InnerCircle.Accounts.UserToken do
   # It is very important to keep the reset password token expiry short,
   # since someone with access to the email may take over the account.
   @reset_password_validity_in_days 1
-  @confirm_validity_in_days 7
+  @invitation_validity_in_days 7
   @change_email_validity_in_days 7
   @session_validity_in_days 60
 
@@ -95,7 +95,29 @@ defmodule InnerCircle.Accounts.UserToken do
     end
   end
 
-  defp days_for_context("confirm"), do: @confirm_validity_in_days
+  @doc """
+  Checks if a token is valid and returns its underlying lookup query.
+
+  The query returns the token record.
+  """
+  def verify_invitation_token_query(token, "invite") do
+    case Base.url_decode64(token, padding: false) do
+      {:ok, decoded_token} ->
+        hashed_token = :crypto.hash(@hash_algorithm, decoded_token)
+        days = days_for_context("invite")
+
+        query =
+          from token in token_and_context_query(hashed_token, "invite"),
+            where: token.inserted_at > ago(^days, "day")
+
+        {:ok, query}
+
+      :error ->
+        :error
+    end
+  end
+
+  defp days_for_context("invite"), do: @invitation_validity_in_days
   defp days_for_context("reset_password"), do: @reset_password_validity_in_days
 
   @doc """
@@ -133,7 +155,12 @@ defmodule InnerCircle.Accounts.UserToken do
     from t in InnerCircle.Accounts.UserToken, where: t.user_id == ^user.id
   end
 
+  def user_and_contexts_query(email, ["invite"]) do
+    from t in InnerCircle.Accounts.UserToken, where: t.sent_to == ^email
+  end
+
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in InnerCircle.Accounts.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
+    from t in InnerCircle.Accounts.UserToken,
+      where: t.user_id == ^user.id and t.context in ^contexts
   end
 end
