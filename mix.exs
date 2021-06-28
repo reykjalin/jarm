@@ -20,7 +20,7 @@ defmodule InnerCircle.MixProject do
   def application do
     [
       mod: {InnerCircle.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp]
     ]
   end
 
@@ -48,6 +48,8 @@ defmodule InnerCircle.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phx_gen_auth, "~> 0.7", only: [:dev], runtime: false},
+      {:bamboo, "~> 2.2.0"},
+      {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"}
     ]
   end
 

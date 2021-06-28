@@ -1,8 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :inner_circle, InnerCircle.Repo,
-  database: "./database.sqlite3"
+config :inner_circle, InnerCircle.Repo, database: "./database.sqlite3"
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -24,6 +23,9 @@ config :inner_circle, InnerCircleWeb.Endpoint,
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
+
+## Email support
+config :inner_circle, InnerCircle.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support
 #

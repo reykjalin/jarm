@@ -41,6 +41,7 @@ defmodule InnerCircleWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: InnerCircleWeb.Telemetry
+      forward "/sent_emails", Bamboo.SentEmailViewerPlug
     end
   end
 
