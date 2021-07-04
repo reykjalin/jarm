@@ -45,7 +45,7 @@ Then press <ctrl-C> to exit the prompt.
 **V0.2**
 
 - Deployment
-  - [ ] Move build-time configurations into runtime configurations
+  - [x] Move build-time configurations into runtime configurations
   - [ ] Docker file for building specific releases
   - [ ] Automatic HTTPS via [SiteEncrypt](https://github.com/sasa1977/site_encrypt)
   - [ ] Example `systemd` scripts
