@@ -39,36 +39,45 @@ Then press <ctrl-C> to exit the prompt.
 - SQLite
 - Accounts
   - [x] Send invitation via CLI
-  - [ ] Username, password, role, date created
-  - [ ] User roles; admin — moderator — user
+  - [x] Reset password
+  - [x] Username, password, date created
 
 **V0.2**
 
-- Posts
+- Deployment
+  - [ ] Move build-time configurations into runtime configurations
+  - [ ] Docker file for building specific releases
+  - [ ] Automatic HTTPS via [SiteEncrypt](https://github.com/sasa1977/site_encrypt)
+  - [ ] Example `systemd` scripts
+
+**V0.3**
+
+- [ ] Posts
   - Username
   - Date
   - Message
   - Parent post (for comments — later)
 
-**V0.3**
-
-- Timeline
-  - Display posts (username, date, message)
-  - Pagination
-
 **V0.4**
 
-- Accounts
-  - [x] Reset password
+- Timeline
+  - [ ] Display posts (username, date, message)
+  - [ ] Pagination
 
 **V0.5**
 
-- Edit post
-  - Version history
-  - Show “X revisions” label
-  - Display revisions
+- [ ] Edit post
+- Post version history
+  - [ ] Store versions in database
+  - [ ] Show “X revisions” label
+  - [ ] Display revisions
 
 **V0.6**
+
+- [ ] Move runtime e-mail configuration into in-module configuration
+- [ ] User roles; admin — moderator — user
+
+**V0.7**
 
 - Documentation for server management, build, develop, etc.
 
