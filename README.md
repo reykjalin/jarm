@@ -46,7 +46,7 @@ Then press <ctrl-C> to exit the prompt.
 
 - Deployment
   - [x] Move build-time configurations into runtime configurations
-  - [ ] Docker file for building specific releases
+  - [x] Build manifest for generating releases and build artifacts on [Sourcehut](builds.sr.ht/~reykjalin/inner_circle)
   - [ ] Automatic HTTPS via [SiteEncrypt](https://github.com/sasa1977/site_encrypt)
   - [ ] Example `systemd` scripts
 
