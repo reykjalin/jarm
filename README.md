@@ -13,24 +13,40 @@ Inner Circle provides an easy and simple way to share updates with family and fr
 - Federation
 - Publically accessible
 
+---
+
 ## Server setup
 
 ### Build a release
 
 ```sh
+mix deps.get --only prod
+MIX_ENV=prod mix compile
+npm install --prefix ./assets
+npm run deploy --prefix ./assets
+MIX_ENV=prod mix phx.digest
 MIX_ENV=prod mix release
 ```
 
-### Start the release so you can migrate the database and send an invitation for the first account
+### Migrate the database
 
 ```sh
-inner_circle start_iex
-iex> InnerCircle.Release.migrate
-# ...
-iex> InnerCircle.Release.send_invitation("<email>")
+inner_circle eval 'InnerCircle.Release.migrate()'
 ```
 
-Then press <ctrl-C> to exit the prompt.
+### Start Inner Circle
+
+```sh
+inner_circle start
+```
+
+### Send an invitation
+
+```sh
+inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
+```
+
+---
 
 ## Roadmap
 
