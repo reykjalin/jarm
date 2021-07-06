@@ -1,5 +1,7 @@
 # Inner Circle
 
+[![builds.sr.ht status](https://builds.sr.ht/~reykjalin/inner_circle.svg)](https://builds.sr.ht/~reykjalin/inner_circle?)
+
 Inner Circle provides an easy and simple way to share updates with family and friends in the form of photos, videos, and text updates.
 
 ## Goals
