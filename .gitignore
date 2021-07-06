@@ -38,3 +38,6 @@ npm-debug.log
 *.db
 *-shm
 *-wal
+
+# SSL certificate files
+tmp/

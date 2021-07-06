@@ -10,7 +10,11 @@ config :inner_circle, InnerCircle.Repo, database: "./database.sqlite3"
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :inner_circle, InnerCircleWeb.Endpoint,
+  url: [host: "localhost"],
   http: [port: 4000],
+  https: [port: 4001],
+  secret_key_base: "HIMQEPTD+LljCRQVpb3hcS2+bzTtZC3XxfGPmbcD4+qOXJsCclD5KQuIv+rvs3W8",
+  live_view: [signing_salt: "TK/x3uS6"],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

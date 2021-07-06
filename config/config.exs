@@ -12,11 +12,8 @@ config :inner_circle,
 
 # Configures the endpoint
 config :inner_circle, InnerCircleWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "HIMQEPTD+LljCRQVpb3hcS2+bzTtZC3XxfGPmbcD4+qOXJsCclD5KQuIv+rvs3W8",
   render_errors: [view: InnerCircleWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: InnerCircle.PubSub,
-  live_view: [signing_salt: "TK/x3uS6"]
+  pubsub_server: InnerCircle.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,

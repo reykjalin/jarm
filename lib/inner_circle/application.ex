@@ -14,7 +14,7 @@ defmodule InnerCircle.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: InnerCircle.PubSub},
       # Start the Endpoint (http/https)
-      InnerCircleWeb.Endpoint
+      {SiteEncrypt.Phoenix, InnerCircleWeb.Endpoint}
       # Start a worker by calling: InnerCircle.Worker.start_link(arg)
       # {InnerCircle.Worker, arg}
     ]
