@@ -63,8 +63,8 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 - Deployment
   - [x] Move build-time configurations into runtime configurations
   - [x] Build manifest for generating releases and build artifacts on [Sourcehut](https://builds.sr.ht/~reykjalin/inner_circle)
-  - [ ] Automatic HTTPS via [SiteEncrypt](https://github.com/sasa1977/site_encrypt)
-  - [ ] Example `systemd` scripts
+  - [x] Automatic HTTPS via [SiteEncrypt](https://github.com/sasa1977/site_encrypt)
+  - [x] Example `systemd` scripts
 
 **V0.3**
 
