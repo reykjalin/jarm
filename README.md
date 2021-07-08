@@ -80,7 +80,7 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 - Timeline
   - [x] Display posts (username, date, message)
-  - [ ] Pagination
+  - [ ] [Pagination](https://stackoverflow.com/questions/14468586/efficient-paging-in-sqlite-with-millions-of-records/14468878)
 
 **V0.5**
 
@@ -93,8 +93,8 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 **V0.6**
 
-- [ ] Move runtime e-mail configuration into in-module configuration
-- [ ] User roles; admin — moderator — user
+- [ ] User roles via [canada](https://github.com/jarednorman/canada); admin — moderator — user, or equivalent.
+- [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
 
 **V0.7**
 
@@ -102,14 +102,11 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 **V1 - micro-birdsite**
 
-- [ ] Single binary ready
-- [ ] Automatic SSL cert management
+- [x] Single binary ready
 - Admin commands
   - [ ] Delete account by username, id, email
   - [ ] Send password reset
-  - [ ] Set timezone
-  - [ ] Set email credentials
-  - [ ] Set URL
+  - [ ] Set timezone — handled by the server instead of the software?
   - [ ] Export all data on user in CSV
 - Blog posts
 
@@ -119,8 +116,8 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 **V1.2**
 
-- Photo compression
-- Thumbnail generation
+- Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
+- Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
 
 **V1.3**
 
@@ -173,6 +170,8 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
   - Comments on your posts
   - Comments on posts you commented on
   - Summary of new posts
+- [Telegram integration](https://github.com/rockneurotiko/ex_gram)?
+- Matrix integration?
 
 **V6 - CSS and accessibility**
 
