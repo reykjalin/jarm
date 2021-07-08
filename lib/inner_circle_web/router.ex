@@ -17,12 +17,6 @@ defmodule InnerCircleWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", InnerCircleWeb do
-    pipe_through :browser
-
-    live "/", PageLive, :index
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", InnerCircleWeb do
   #   pipe_through :api
@@ -68,6 +62,15 @@ defmodule InnerCircleWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     get "/users/invite", UserInvitationController, :new
     post "/users/invite", UserInvitationController, :create
+
+    # Posts
+    live "/", PostLive.Index, :index
+    live "/posts/new", PostLive.Index, :new
+
+    live "/posts/:id", PostLive.Show, :show
+    # TODO: enable when role based authentication is in place.
+    # live "/posts/:id/edit", PostLive.Index, :edit
+    # live "/posts/:id/show/edit", PostLive.Show, :edit
   end
 
   scope "/", InnerCircleWeb do

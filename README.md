@@ -70,7 +70,7 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 **V0.3**
 
-- [ ] Posts
+- [x] Posts
   - Username
   - Date
   - Message
@@ -79,11 +79,12 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 **V0.4**
 
 - Timeline
-  - [ ] Display posts (username, date, message)
+  - [x] Display posts (username, date, message)
   - [ ] Pagination
 
 **V0.5**
 
+- [ ] Only allow owner to edit and delete posts.
 - [ ] Edit post
 - Post version history
   - [ ] Store versions in database

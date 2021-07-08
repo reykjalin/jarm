@@ -10,7 +10,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
   defp deliver(to, subject, body) do
     new_email(
       to: to,
-      from: {"Inner Circle", System.get_env("SMTP_USERNAME")},
+      from: {"Inner Circle", System.fetch_env!("SMTP_USERNAME")},
       subject: subject,
       text_body: body,
       html_body: nil

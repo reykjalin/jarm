@@ -47,6 +47,8 @@ defmodule InnerCircleWeb do
       use Phoenix.LiveView,
         layout: {InnerCircleWeb.LayoutView, "live.html"}
 
+      import InnerCircleWeb.LiveHelpers
+
       unquote(view_helpers())
     end
   end
@@ -83,6 +85,7 @@ defmodule InnerCircleWeb do
 
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers
+      import InnerCircleWeb.LiveHelpers
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
