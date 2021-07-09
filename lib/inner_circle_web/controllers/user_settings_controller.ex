@@ -28,7 +28,7 @@ defmodule InnerCircleWeb.UserSettingsController do
 
   def update(conn, %{"action" => "update_email"} = params) do
     %{"current_password" => password, "user" => user_params} = params
-    user = conn.assigns.current_user
+    %Accounts.User{} = user = conn.assigns.current_user
 
     case Accounts.apply_user_email(user, password, user_params) do
       {:ok, applied_user} ->
