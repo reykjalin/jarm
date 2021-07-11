@@ -11,10 +11,32 @@ defmodule InnerCircleWeb.PostLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:post, Timeline.get_post!(id))}
+    try do
+      {
+        :noreply,
+        socket
+        |> assign(:page_title, page_title(socket.assigns.live_action))
+        |> assign(:post, Timeline.get_post!(id))
+      }
+    rescue
+      Ecto.NoResultsError ->
+        {
+          :noreply,
+          push_redirect(
+            socket,
+            to: Routes.post_index_path(socket, :index),
+            replace: true
+          )
+        }
+    end
+  end
+
+  @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    post = Timeline.get_post!(id)
+    {:ok, _} = Timeline.delete_post(post)
+
+    {:noreply, socket}
   end
 
   defp page_title(:show), do: "Show Post"

@@ -68,14 +68,6 @@ defmodule InnerCircleWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    post = Timeline.get_post!(id)
-    {:ok, _} = Timeline.delete_post(post)
-
-    {:noreply, assign(socket, :posts, list_posts())}
-  end
-
-  @impl true
   def handle_info({:post_created, _post}, socket) do
     # We don't broadcast creations.
     # TODO: broadcast creation to trigger a "show newer posts" link.
