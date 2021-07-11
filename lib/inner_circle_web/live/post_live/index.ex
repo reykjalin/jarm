@@ -10,7 +10,37 @@ defmodule InnerCircleWeb.PostLive.Index do
 
     socket = assign_current_user(socket, session)
 
-    {:ok, assign(socket, :posts, list_posts()), temporary_assigns: [posts: []]}
+    posts = Timeline.list_posts()
+    first_post = List.first(posts, nil)
+    last_post = List.last(posts, nil)
+
+    socket =
+      assign(socket,
+        posts: posts,
+        first_post: first_post,
+        last_post: last_post
+      )
+
+    {:ok, socket, temporary_assigns: [posts: []]}
+  end
+
+  @impl true
+  def handle_params(%{"older_than" => post}, _url, socket) do
+    post = String.to_integer(post)
+    post = Timeline.get_post!(post)
+
+    posts = Timeline.list_posts_older_than(post)
+    first_post = List.first(posts, nil)
+    last_post = List.last(posts, nil)
+
+    socket =
+      assign(socket,
+        posts: posts,
+        first_post: first_post,
+        last_post: last_post
+      )
+
+    {:noreply, socket}
   end
 
   @impl true
@@ -46,8 +76,10 @@ defmodule InnerCircleWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_info({:post_created, post}, socket) do
-    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
+  def handle_info({:post_created, _post}, socket) do
+    # We don't broadcast creations.
+    # TODO: broadcast creation to trigger a "show newer posts" link.
+    {:noreply, socket}
   end
 
   @impl true

@@ -12,8 +12,15 @@
 
 <p><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></p>
 
-<section id="posts" phx-update="prepend">
+<section id="posts" phx-update="append">
   <%= for post <- @posts do %>
     <%= live_component @socket, InnerCircleWeb.PostLive.PostComponent, id: post.id, post: post %>
+  <% end %>
+
+</section>
+
+<section id="pagination">
+  <%= if @last_post != nil do %>
+    <%= live_patch "Older Posts", to: Routes.post_index_path(@socket, :index, older_than: @last_post) %>
   <% end %>
 </section>

@@ -18,7 +18,26 @@ defmodule InnerCircle.Timeline do
 
   """
   def list_posts do
-    Repo.all(from p in Post, order_by: [desc: :inserted_at]) |> Repo.preload(:user)
+    Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id], limit: 10)
+    |> Repo.preload(:user)
+  end
+
+  def list_posts_older_than(post, number \\ 10)
+
+  def list_posts_older_than(nil, _number), do: list_posts()
+
+  def list_posts_older_than(%Post{} = post, number) do
+    from(p in Post,
+      where: p.inserted_at < ^post.inserted_at,
+      order_by: [desc: :inserted_at, desc: :id],
+      limit: ^number
+    )
+    |> Repo.all()
+    |> Repo.preload(:user)
+  end
+
+  def count_posts() do
+    Repo.aggregate(Post, :count, :id)
   end
 
   @doc """
@@ -50,10 +69,11 @@ defmodule InnerCircle.Timeline do
 
   """
   def create_post(current_user, attrs \\ %{}) do
+    # We don't broadcast creations.
+    # TODO: broadcast creation to trigger a "show newer posts" link.
     %Post{user_id: current_user.id}
     |> Post.changeset(attrs)
     |> Repo.insert()
-    |> broadcast(:post_created)
   end
 
   @doc """
