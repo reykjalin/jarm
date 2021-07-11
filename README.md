@@ -83,8 +83,8 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
   - [x] [Pagination](https://stackoverflow.com/questions/14468586/efficient-paging-in-sqlite-with-millions-of-records/14468878)
 - [x] Edit post
 - [x] Delete post
-- [ ] Only allow owner to edit and delete posts.
-- [ ] User roles via [canada](https://github.com/jarednorman/canada); admin — moderator — user, or equivalent.
+- [x] Only allow owner to edit and delete posts.
+- [x] User roles via [canada](https://github.com/jarednorman/canada); admin — moderator — user, or equivalent.
 
 **V0.5**
 
