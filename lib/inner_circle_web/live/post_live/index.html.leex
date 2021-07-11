@@ -14,7 +14,10 @@
 
 <section id="posts" phx-update="append">
   <%= for post <- @posts do %>
-    <%= live_component @socket, InnerCircleWeb.PostLive.PostComponent, id: post.id, post: post %>
+    <%= live_component @socket,
+      InnerCircleWeb.PostLive.PostComponent,
+      id: post.id,
+      post: post %>
   <% end %>
 
 </section>

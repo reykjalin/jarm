@@ -12,12 +12,16 @@
 <section id="post-<%= @post.id %>"
   <p><strong><%= @post.user.display_name %></strong></p>
 
-  <p><%= live_redirect @post.inserted_at, to: Routes.post_show_path(@socket, :show, @post) %></p>
+  <p>
+    <%= live_redirect @post.inserted_at, to: Routes.post_show_path(@socket, :show, @post) %>
+  </p>
 
   <p><%= text_to_html @post.body %></p>
 </section>
 
-<!--
-<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span>
--->
-<span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
+<p>
+  <%= if @post.user.id == @current_user do %>
+    <span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span>
+  <% end %>
+  <span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
+</p>
