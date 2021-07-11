@@ -80,16 +80,13 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 - Timeline
   - [x] Display posts (username, date, message)
-  - [ ] [Pagination](https://stackoverflow.com/questions/14468586/efficient-paging-in-sqlite-with-millions-of-records/14468878)
+  - [x] [Pagination](https://stackoverflow.com/questions/14468586/efficient-paging-in-sqlite-with-millions-of-records/14468878)
 
 **V0.5**
 
 - [ ] Only allow owner to edit and delete posts.
-- [ ] Edit post
-- Post version history
-  - [ ] Store versions in database
-  - [ ] Show “X revisions” label
-  - [ ] Display revisions
+- [x] Edit post
+- [x] Delete post
 
 **V0.6**
 
@@ -146,7 +143,7 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
   - Create zip of photos from user
   - Delete specific photo by post
 
-**V4 - videos**
+**V3 - videos**
 
 - videos in updates
 - Video compression?
@@ -164,13 +161,22 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
   - Delete specific video by post
   - Delete specific media by post
 
-**V5 - activity digest**
+**V4 - activity digest**
 
 - Daily/weekly digest email
   - Comments on your posts
   - Comments on posts you commented on
   - Summary of new posts
+- Post version history
+  - [ ] Store versions in database
+  - [ ] Show “X revisions” label
+  - [ ] Display revisions
+
+**V5 Third-party integrations**
+
 - [Telegram integration](https://github.com/rockneurotiko/ex_gram)?
+- Instagram integration?
+- Facebook integration?
 - Matrix integration?
 
 **V6 - CSS and accessibility**
