@@ -9,19 +9,15 @@
     return_to: Routes.post_show_path(@socket, :show, @post) %>
 <% end %>
 
-<ul>
+<section id="post-<%= @post.id %>"
+  <p><strong><%= @post.user.display_name %></strong></p>
 
-  <li>
-    <strong>User:</strong>
-    <%= @post.user.display_name %>
-  </li>
+  <p><%= live_redirect @post.inserted_at, to: Routes.post_show_path(@socket, :show, @post) %></p>
 
-  <li>
-    <strong>Body:</strong>
-    <%= @post.body %>
-  </li>
+  <p><%= text_to_html @post.body %></p>
+</section>
 
-</ul>
-
+<!--
 <span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span>
+-->
 <span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
