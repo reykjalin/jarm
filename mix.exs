@@ -50,7 +50,8 @@ defmodule InnerCircle.MixProject do
       {:phx_gen_auth, "~> 0.7", only: [:dev], runtime: false},
       {:bamboo, "~> 2.2.0"},
       {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
-      {:site_encrypt, "~> 0.4"}
+      {:site_encrypt, "~> 0.4"},
+      {:canada, github: "jarednorman/canada"}
     ]
   end
 

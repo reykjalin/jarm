@@ -4,6 +4,8 @@ defmodule InnerCircleWeb.PostLive.Index do
   alias InnerCircle.Timeline
   alias InnerCircle.Timeline.Post
 
+  import Canada, only: [can?: 2]
+
   @impl true
   def mount(_params, session, socket) do
     if connected?(socket), do: Timeline.subscribe()

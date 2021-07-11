@@ -10,14 +10,17 @@
     return_to: Routes.post_index_path(@socket, :index) %>
 <% end %>
 
-<p><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></p>
+<%= if can?(@current_user, create(Post)) do %>
+  <p><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></p>
+<% end %>
 
 <section id="posts" phx-update="append">
   <%= for post <- @posts do %>
     <%= live_component @socket,
       InnerCircleWeb.PostLive.PostComponent,
       id: post.id,
-      post: post %>
+      post: post,
+      current_user: @current_user %>
   <% end %>
 
 </section>

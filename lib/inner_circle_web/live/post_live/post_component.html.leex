@@ -2,8 +2,12 @@
   <strong><%= @post.user.display_name %></strong>
 
   <p>
-    <%= live_redirect @post.inserted_at,
-      to: Routes.post_show_path(@socket, :show, @post) %>
+    <%= if can?(@current_user, read(@post)) do %>
+      <%= live_redirect @post.inserted_at,
+        to: Routes.post_show_path(@socket, :show, @post) %>
+    <% else %>
+      <%= @post.inserted_at %>
+    <% end %>
   </p>
 
   <p><%= text_to_html @post.body %></p>

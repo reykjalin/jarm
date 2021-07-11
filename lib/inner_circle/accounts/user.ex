@@ -153,3 +153,21 @@ defmodule InnerCircle.Accounts.User do
     end
   end
 end
+
+defimpl Canada.Can, for: InnerCircle.Accounts.User do
+  alias InnerCircle.Accounts.User
+  alias InnerCircle.Timeline.Post
+
+  def can?(%User{id: user_id}, action, %Post{user_id: user_id})
+      when action in [:edit, :delete],
+      do: true
+
+  def can?(%User{}, action, %Post{})
+      when action in [:edit, :delete],
+      do: false
+
+  def can?(%User{}, :create, Post), do: true
+  def can?(%User{}, :create, %Post{}), do: true
+  def can?(%User{}, :read, Post), do: true
+  def can?(%User{}, :read, %Post{}), do: true
+end
