@@ -85,8 +85,4 @@ defmodule InnerCircleWeb.PostLive.Index do
   def handle_info({:post_deleted, post}, socket) do
     {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end
-
-  defp list_posts do
-    Timeline.list_posts()
-  end
 end
