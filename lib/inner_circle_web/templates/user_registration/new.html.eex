@@ -8,7 +8,7 @@
   <% end %>
 
   <%= label f, :display_name %>
-  <%= text_input f, :display_name, required: true %>
+  <%= text_input f, :display_name, required: true, autofocus: true %>
   <%= error_tag f, :display_name %>
 
   <%= label f, :email %>
