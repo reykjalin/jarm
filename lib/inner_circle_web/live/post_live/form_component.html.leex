@@ -7,7 +7,7 @@
   phx_submit: "save" %>
 
   <%= label f, :body %>
-  <%= textarea f, :body %>
+  <%= textarea f, :body, autofocus: true %>
   <%= error_tag f, :body %>
 
   <%= submit "Save", phx_disable_with: "Saving..." %>
