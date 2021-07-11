@@ -1,7 +1,6 @@
 <div id="post-<%= @id %>" <%= if @post.__meta__.state == :deleted do %>style="display: none;"<% end %> >
     <strong><%= @post.user.display_name %></strong>
 
-    <p><%= @post.inserted_at %></p>
     <p><%= live_redirect @post.inserted_at, to: Routes.post_show_path(@socket, :show, @post) %></p>
 
     <p><%= text_to_html @post.body %></p>
