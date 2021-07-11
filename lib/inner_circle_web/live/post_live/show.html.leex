@@ -20,8 +20,8 @@
 </section>
 
 <p>
-  <%= if @post.user.id == @current_user do %>
-    <span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span>
+  <%= if @post.user.id == @current_user.id do %>
+    <%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %>
   <% end %>
-  <span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
+  <%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %>
 </p>
