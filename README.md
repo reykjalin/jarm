@@ -30,13 +30,44 @@ MIX_ENV=prod mix phx.digest
 MIX_ENV=prod mix release
 ```
 
+### Create an env file
+
+This will be used by systemd to set up the environment.
+
+To illustrate what this might look like let's assume you store your runtime files, like the database, in `/opt/inner_circle/`:
+
+```sh
+DATABASE_PATH="/opt/inner_circle/inner_circle.db"
+URL="example.com"
+ADMIN_EMAIL="admin@example.com"
+SITE_ENCRYPT_DB="/opt/inner_circle/site_encrypt_db"
+CERT_MODE="production"
+SMTP_USERNAME="admin@example.com"
+SMTP_PASSWORD="<email_password>"
+SMTP_SERVER="smtp.example.com"
+SMTP_PORT=465
+SECRET_KEY_BASE="<secret_key>"
+LIVE_VIEW_SIGNING_SALT="<secret_signing_salt>"
+```
+
 ### Migrate the database
 
 ```sh
+# First, source your environment variables
+source /opt/inner_circle/inner_circle_env
+export $(cut -d= -f1 /opt/inner_circle/inner_circle_env )
 inner_circle eval 'InnerCircle.Release.migrate()'
 ```
 
 ### Start Inner Circle
+
+Using the provided systemctl script from `scripts/inner-circle.service`:
+
+```sh
+systemctl start inner-circle
+```
+
+Running the release directly:
 
 ```sh
 inner_circle start
@@ -47,6 +78,8 @@ inner_circle start
 ```sh
 inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 ```
+
+or, if you already have an account set up, navigate to /users/invite on your site.
 
 ---
 
@@ -88,33 +121,33 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 
 **V0.5**
 
-- Photos in posts
+- [ ] Photos in posts
 
 **V0.6**
 
 - Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
-- Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
+- [ ] Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
 
 **V0.7**
 
-- Comments on posts
+- [ ] Comments on posts
 - [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
 
 **V0.8**
 
-- Lazy loading for images
+- [ ] Lazy loading for images
 
 **V0.9**
 
-- Profile photos
+- [ ] Profile photos
 
 **V0.10**
 
-- Export photo data
+- [ ] Export photo data
 
 **V0.11**
 
-- Documentation for server management, build, develop, etc.
+- [ ] Documentation for server management, build, develop, etc.
 
 **V1 - micro-birdsite**
 
