@@ -81,19 +81,38 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
 - Timeline
   - [x] Display posts (username, date, message)
   - [x] [Pagination](https://stackoverflow.com/questions/14468586/efficient-paging-in-sqlite-with-millions-of-records/14468878)
+- [x] Edit post
+- [x] Delete post
+- [ ] Only allow owner to edit and delete posts.
+- [ ] User roles via [canada](https://github.com/jarednorman/canada); admin — moderator — user, or equivalent.
 
 **V0.5**
 
-- [ ] Only allow owner to edit and delete posts.
-- [x] Edit post
-- [x] Delete post
+- Photos in posts
 
 **V0.6**
 
-- [ ] User roles via [canada](https://github.com/jarednorman/canada); admin — moderator — user, or equivalent.
-- [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
+- Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
+- Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
 
 **V0.7**
+
+- Comments on posts
+- [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
+
+**V0.8**
+
+- Lazy loading for images
+
+**V0.9**
+
+- Profile photos
+
+**V0.10**
+
+- Export photo data
+
+**V0.11**
 
 - Documentation for server management, build, develop, etc.
 
@@ -106,31 +125,6 @@ inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
   - [ ] Set timezone — handled by the server instead of the software?
   - [ ] Export all data on user in CSV
 - Blog posts
-
-**V1.1**
-
-- Photos in posts
-
-**V1.2**
-
-- Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
-- Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
-
-**V1.3**
-
-- Comments on posts
-
-**V1.4**
-
-- Lazy loading for images
-
-**V1.5**
-
-- Profile photos
-
-**V1.6**
-
-- Export photo data
 
 **V2 - photos**
 
