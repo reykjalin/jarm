@@ -28,5 +28,7 @@
 <section id="pagination">
   <%= if @last_post != nil do %>
     <%= live_patch "Older Posts", to: Routes.post_index_path(@socket, :index, older_than: @last_post) %>
+  <% else %>
+    <p>No more posts</p>
   <% end %>
 </section>
