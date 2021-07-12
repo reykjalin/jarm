@@ -121,11 +121,17 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 **V0.5**
 
-- [ ] Photos in posts
+- Photos in posts
+  - [x] Add photos to posts
+  - [ ] Edit photos in posts
+  - [ ] Delete photos in posts
 
 **V0.6**
 
-- [ ] Videos in posts
+- Videos in posts
+  - [ ] Add videos to posts
+  - [ ] Edit videos in posts
+  - [ ] Delete videos in posts
 
 **V0.7**
 
