@@ -141,6 +141,7 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 - [x] Single binary ready
 - [ ] Profile photos
+- [ ] Better styles via Tailwind CSS
 - Blog posts
 
 **V2 - Admin UI and CLI**
@@ -197,9 +198,8 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 - Facebook integration?
 - Matrix integration?
 
-**V7 - CSS and accessibility**
+**V7 - Accessibility**
 
-- Better styles
 - Accessibility audit and fixes
 
 **V8 - For the admins**
