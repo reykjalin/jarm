@@ -6,7 +6,9 @@ defmodule InnerCircle.Timeline do
   import Ecto.Query, warn: false
   alias InnerCircle.Repo
 
+  alias InnerCircle.Accounts.User
   alias InnerCircle.Timeline.Post
+  alias InnerCircle.Timeline.Media
 
   @doc """
   Returns the list of posts.
@@ -20,6 +22,7 @@ defmodule InnerCircle.Timeline do
   def list_posts do
     Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id], limit: 10)
     |> Repo.preload(:user)
+    |> Repo.preload(:media)
   end
 
   def list_posts_older_than(post, number \\ 10)
@@ -34,6 +37,7 @@ defmodule InnerCircle.Timeline do
     )
     |> Repo.all()
     |> Repo.preload(:user)
+    |> Repo.preload(:media)
   end
 
   def count_posts() do
@@ -54,7 +58,7 @@ defmodule InnerCircle.Timeline do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:user)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:user) |> Repo.preload(:media)
 
   @doc """
   Creates a post.
@@ -73,6 +77,12 @@ defmodule InnerCircle.Timeline do
     # TODO: broadcast creation to trigger a "show newer posts" link.
     %Post{user_id: current_user.id}
     |> Post.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_media(%User{id: user_id}, %Post{id: post_id}, attrs \\ %{}) do
+    %Media{user_id: user_id, post_id: post_id}
+    |> Media.changeset(attrs)
     |> Repo.insert()
   end
 

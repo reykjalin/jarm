@@ -4,6 +4,7 @@ defmodule InnerCircle.Timeline.Post do
 
   schema "posts" do
     field :body, :string
+    has_many :media, InnerCircle.Timeline.Media
     belongs_to :user, InnerCircle.Accounts.User
 
     timestamps()

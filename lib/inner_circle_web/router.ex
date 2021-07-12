@@ -13,6 +13,18 @@ defmodule InnerCircleWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :static do
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :fetch_current_user
+    plug :require_authenticated_user
+
+    plug Plug.Static,
+      at: "/media",
+      from: System.get_env("MEDIA_FILE_STORAGE", "priv/static/media"),
+      gzip: true
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -52,6 +64,13 @@ defmodule InnerCircleWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
+  end
+
+  scope "/media", InnerCircleWeb do
+    # see https://binarynoggin.com/blog/saving-the-day-with-secure-static-files-in-phoenix/
+    # wayback machine: http://web.archive.org/web/20210401122722/https://binarynoggin.com/blog/saving-the-day-with-secure-static-files-in-phoenix/
+    pipe_through [:static]
+    get "/*path", StaticFileNotFoundController, :index
   end
 
   scope "/", InnerCircleWeb do

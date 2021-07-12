@@ -10,5 +10,44 @@
   <%= textarea f, :body, autofocus: true %>
   <%= error_tag f, :body %>
 
+  <p>
+    You're allowed to upload up to <%= @uploads.media.max_entries %> items
+    (max <%= @uploads.media.max_file_size / 1_000_000_000 %> GB each).
+  </p>
+
+  <%= live_file_input @uploads.media %>
+
+  <%= for {_ref, error} <- @uploads.media.errors do %>
+    <div>
+      <%= humanize(error) %>
+    </div>
+  <% end %>
+
+  <%= for entry <- @uploads.media.entries do %>
+    <div>
+      <%= live_img_preview entry, width: 100 %>
+
+
+      <label for="media-<%= entry.ref %>"><%= entry.progress %>%</label>
+      <progress name="media-<%= entry.ref %>" max="100" value="<%= entry.progress %>" >
+        <%= entry.progress %>%
+      </progress>
+
+      <a
+        href="#cancel-media-upload"
+        phx-click="cancel"
+        phx-value-ref="<%= entry.ref %>"
+        phx-target="<%= @myself %>" >
+        Remove
+      </a>
+
+      <%= for error <- upload_errors(@uploads.media, entry) do %>
+        <div>
+          <%= humanize(error) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
   <%= submit "Save", phx_disable_with: "Saving..." %>
 </form>

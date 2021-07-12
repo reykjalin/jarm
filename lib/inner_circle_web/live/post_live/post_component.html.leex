@@ -12,5 +12,9 @@
 
   <p><%= text_to_html @post.body %></p>
 
+  <%= for media <- @post.media do %>
+    <img src="<%= media.url %>" >
+  <% end %>
+
   <hr />
 </div>

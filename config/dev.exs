@@ -62,7 +62,7 @@ config :inner_circle, InnerCircle.Mailer, adapter: Bamboo.LocalAdapter
 config :inner_circle, InnerCircleWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/(?!media).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/inner_circle_web/(live|views)/.*(ex)$",
       ~r"lib/inner_circle_web/templates/.*(eex)$"

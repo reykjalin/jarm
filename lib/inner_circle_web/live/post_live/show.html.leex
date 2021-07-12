@@ -10,14 +10,12 @@
     return_to: Routes.post_show_path(@socket, :show, @post) %>
 <% end %>
 
-<section id="post-<%= @post.id %>"
-  <p><strong><%= @post.user.display_name %></strong></p>
-
-  <p>
-    <%= live_redirect @post.inserted_at, to: Routes.post_show_path(@socket, :show, @post) %>
-  </p>
-
-  <p><%= text_to_html @post.body %></p>
+<section id="post-<%= @post.id %>">
+  <%= live_component @socket,
+    InnerCircleWeb.PostLive.PostComponent,
+    id: @post.id,
+    post: @post,
+    current_user: @current_user %>
 </section>
 
 <p>
