@@ -125,71 +125,32 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 **V0.6**
 
-- Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
-- [ ] Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
+- [ ] Videos in posts
 
 **V0.7**
-
-- [ ] Comments on posts
-- [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
-
-**V0.8**
-
-- [ ] Lazy loading for images
-
-**V0.9**
-
-- [ ] Profile photos
-
-**V0.10**
-
-- [ ] Export photo data
-
-**V0.11**
 
 - [ ] Documentation for server management, build, develop, etc.
 
 **V1 - micro-birdsite**
 
 - [x] Single binary ready
+- [ ] Profile photos
+- Blog posts
+
+**V2 - Admin UI and CLI**
+
 - Admin commands
   - [ ] Delete account by username, id, email
   - [ ] Send password reset
   - [ ] Set timezone — handled by the server instead of the software?
-  - [ ] Export all data on user in CSV
-- Blog posts
-
-**V2 - photos**
-
-- Lazy loading for images
-- Admin commands
-  - Generate thumbnails
-  - Compress photos
-  - Delete unused photos
-  - Create zip of all photos
-  - Create zip of photos from user
   - Delete specific photo by post
-
-**V3 - videos**
-
-- videos in updates
-- Video compression?
-- Thumbnail generation for videos
-- Lazy loading for videos
-- Add new info to data export
-- Admin commands
   - Generate thumbnails
-  - Compress videos
-  - Delete unused videos
-  - Create zip of all videos
-  - Create zip of all media
-  - Create create zip of all videos by user
-  - Create zip of all media by user
   - Delete specific video by post
   - Delete specific media by post
 
-**V4 - activity digest**
+**V3 - activity digest**
 
+- [ ] Comments on posts
 - Daily/weekly digest email
   - Comments on your posts
   - Comments on posts you commented on
@@ -199,45 +160,69 @@ or, if you already have an account set up, navigate to /users/invite on your sit
   - [ ] Show “X revisions” label
   - [ ] Display revisions
 
-**V5 Third-party integrations**
+**V4 - optimizations**
+
+- [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
+- [ ] Export photo data
+- Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
+- [ ] Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
+- Thumbnail generation for videos
+- [ ] Lazy loading for images
+- Lazy loading for videos
+- Video compression?
+- Compress photos?
+- Delete unused photos
+- Delete unused videos
+
+**V5 - data export**
+
+- Create zip of all photos
+- Create zip of photos from user
+- Create zip of all videos
+- Create zip of all media
+- Create create zip of all videos by user
+- Create zip of all media by user
+- [ ] Export all data on user in CSV
+
+**V6 Third-party integrations**
 
 - [Telegram integration](https://github.com/rockneurotiko/ex_gram)?
 - Instagram integration?
 - Facebook integration?
 - Matrix integration?
 
-**V6 - CSS and accessibility**
+**V7 - CSS and accessibility**
 
 - Better styles
 - Accessibility audit and fixes
 
-**V7 - For the admins**
+**V8 - For the admins**
 
 - Admin UI
-  - Send invitation
+  - [x] Send invitation
   - Delete accounts
   - Delete comments
   - Delete posts
   - Change URL
   - Setup email credentials for server
 
-**V8 - translations**
+**V9 - translations**
 
 - Support translations for in-app strings
 - Support custom translations for posts/comments
 - Add Icelandic translations
 
-**V9 - timelines**
+**V10 - timelines**
 
 - Timeline for “follow only”
 - Timeline for everyone on instance
 - Change new post notifications to have 2 sections; one per timeline
 
-**V10 - visibility**
+**V11 - visibility**
 
 - Website for the project
 
-**V11 - read-only API**
+**V12 - read-only API**
 
 - GraphQL api for read only access
 
@@ -251,7 +236,7 @@ or, if you already have an account set up, navigate to /users/invite on your sit
   - Qt6/Tk
 - Gemini support
 
-**V12 - mobile apps?**
+**V13 - mobile apps?**
 
 - iOS
 - Android
