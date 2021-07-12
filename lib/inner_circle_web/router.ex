@@ -19,10 +19,7 @@ defmodule InnerCircleWeb.Router do
     plug :fetch_current_user
     plug :require_authenticated_user
 
-    plug Plug.Static,
-      at: "/media",
-      from: System.get_env("MEDIA_FILE_STORAGE", "priv/static/media"),
-      gzip: true
+    plug InnerCircleWeb.StaticFilePlug
   end
 
   pipeline :api do
