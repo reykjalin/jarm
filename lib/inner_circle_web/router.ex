@@ -19,6 +19,13 @@ defmodule InnerCircleWeb.Router do
     plug :fetch_current_user
     plug :require_authenticated_user
 
+    # TODO: What sort of performance implications does this have?
+    #       The plug is re-initialized every time this is called, which could
+    #       feasibly have a devastating effect on performance.
+    # NOTE: This has to be this way because Plug.Static is configured at compile-time,
+    #       meaning that runtime configuration doesn't work without this workaround.
+    #  SEE: https://akoutmos.com/post/plug-runtime-config/
+    #       https://web.archive.org/web/20201124093722/https://akoutmos.com/post/plug-runtime-config/
     plug InnerCircleWeb.StaticFilePlug
   end
 
