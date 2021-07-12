@@ -56,7 +56,7 @@ defmodule InnerCircleWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :inner_circle,
-    gzip: false,
+    gzip: true,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
