@@ -124,7 +124,7 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 - Photos in posts
   - [x] Add photos to posts
 - Videos in posts
-  - [ ] Add videos to posts
+  - [x] Add videos to posts
 
 **V0.6**
 

@@ -14,7 +14,7 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
         socket,
         :media,
         # TODO: Accept a list of mime types instead.
-        accept: ~w(.png .jpeg .jpg .webp .gif),
+        accept: ~w(.png .jpeg .jpg .webp .gif video/mp4 video/webm video/ogg video/quicktime),
         max_entries: String.to_integer(System.get_env("MAX_MEDIA_PER_POST", "5")),
         # Defautls to 1 GB.
         max_file_size: String.to_integer(System.get_env("MAX_FILE_SIZE", "1000000000"))

@@ -60,6 +60,12 @@ defmodule InnerCircle.Timeline do
   """
   def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:user) |> Repo.preload(:media)
 
+  def get_media(uuid) do
+    from(m in Media, where: m.uuid == ^uuid) |> Repo.one()
+  rescue
+    Ecto.Query.CastError -> nil
+  end
+
   @doc """
   Creates a post.
 

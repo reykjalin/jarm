@@ -25,7 +25,12 @@
 
   <%= for entry <- @uploads.media.entries do %>
     <div>
-      <%= live_img_preview entry, width: 100 %>
+      <%= if String.starts_with?(entry.client_type, "image") do %>
+        <%= live_img_preview entry, width: 100 %>
+      <% end %>
+      <%= if String.starts_with?(entry.client_type, "video") do %>
+        <p><%= entry.client_name %></p>
+      <% end %>
 
 
       <label for="media-<%= entry.ref %>"><%= entry.progress %>%</label>

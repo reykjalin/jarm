@@ -13,22 +13,6 @@ defmodule InnerCircleWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :static do
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :fetch_current_user
-    plug :require_authenticated_user
-
-    # TODO: What sort of performance implications does this have?
-    #       The plug is re-initialized every time this is called, which could
-    #       feasibly have a devastating effect on performance.
-    # NOTE: This has to be this way because Plug.Static is configured at compile-time,
-    #       meaning that runtime configuration doesn't work without this workaround.
-    #  SEE: https://akoutmos.com/post/plug-runtime-config/
-    #       https://web.archive.org/web/20201124093722/https://akoutmos.com/post/plug-runtime-config/
-    plug InnerCircleWeb.StaticFilePlug
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -70,13 +54,6 @@ defmodule InnerCircleWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
-  scope "/media", InnerCircleWeb do
-    # see https://binarynoggin.com/blog/saving-the-day-with-secure-static-files-in-phoenix/
-    # wayback machine: http://web.archive.org/web/20210401122722/https://binarynoggin.com/blog/saving-the-day-with-secure-static-files-in-phoenix/
-    pipe_through [:static]
-    get "/*path", StaticFileNotFoundController, :index
-  end
-
   scope "/", InnerCircleWeb do
     pipe_through [:browser, :require_authenticated_user]
 
@@ -94,6 +71,9 @@ defmodule InnerCircleWeb.Router do
     # TODO: enable when role based authentication is in place.
     live "/posts/:id/edit", PostLive.Index, :edit
     live "/posts/:id/show/edit", PostLive.Show, :edit
+
+    # Media
+    get "/media/:id", MediaController, :show
   end
 
   scope "/", InnerCircleWeb do
