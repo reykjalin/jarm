@@ -14,14 +14,15 @@
 
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
-      <img id="<%= media.uuid %>" src="/media/<%= media.uuid %>" loading="lazy" >
+      <img id="<%= media.uuid %>" src="<%= Routes.media_path(@socket, :show, media.uuid) %>" loading="lazy" >
     <% end %>
+
     <%= if String.starts_with?(media.mime_type, "video") do %>
       <video id="<%= media.uuid %>" controls>
         <%= if media.mime_type == "video/quicktime" do %>
-          <source src="/media/<%= media.uuid %>" type="video/mp4" >
+          <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="video/mp4" >
         <% end %>
-        <source src="/media/<%= media.uuid %>" type="<%= media.mime_type %>" >
+        <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
       </video>
     <% end %>
   <% end %>
