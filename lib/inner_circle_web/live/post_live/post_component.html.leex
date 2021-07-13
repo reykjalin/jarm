@@ -13,7 +13,9 @@
   <p><%= text_to_html @post.body %></p>
 
   <%= for media <- @post.media do %>
-    <img src="<%= media.url %>" >
+    <%= if String.starts_with?(media.mime_type, "image") do %>
+      <img src="<%= media.url %>" loading="lazy" >
+    <% end %>
   <% end %>
 
   <hr />
