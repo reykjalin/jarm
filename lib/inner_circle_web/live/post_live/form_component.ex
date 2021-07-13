@@ -84,7 +84,6 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
                 media_path = System.get_env("MEDIA_FILE_STORAGE", "priv/static/media")
                 dest = Path.join(media_path, file_name(entry))
                 path_to_original = Path.absname(dest)
-                url = Routes.static_path(socket, "/media/#{file_name(entry)}")
 
                 # Create static folder if it doesn't exist, then copy file.
                 if not File.exists?(media_path),
@@ -94,7 +93,6 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
 
                 # TODO: Optimize with a Repo.all() query?
                 Timeline.create_media(current_user, post, %{
-                  "url" => url,
                   "path_to_original" => path_to_original,
                   "mime_type" => entry.client_type,
                   "uuid" => entry.uuid
