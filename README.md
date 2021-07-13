@@ -206,6 +206,7 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 **V7 - Accessibility**
 
 - Accessibility audit and fixes
+  - [ ] `alt` text in `<img>` elements
 
 **V8 - For the admins**
 
