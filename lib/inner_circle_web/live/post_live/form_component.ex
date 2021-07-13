@@ -90,7 +90,9 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
                 if not File.exists?(media_path),
                   do: File.mkdir!(media_path)
 
-                File.cp!(meta.path, dest)
+                # GZip the files for compression.
+                media_content = File.read!(meta.path)
+                File.write!("#{dest}.gz", :zlib.gzip(media_content))
 
                 # TODO: Optimize with a Repo.all() query?
                 Timeline.create_media(current_user, post, %{
