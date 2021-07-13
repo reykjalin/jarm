@@ -88,7 +88,7 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
 
                 # Create static folder if it doesn't exist, then copy file.
                 if not File.exists?(media_path),
-                  do: File.mkdir!(media_path)
+                  do: File.mkdir_p!(media_path)
 
                 # GZip the files for compression.
                 media_content = File.read!(meta.path)
