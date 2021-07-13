@@ -21,6 +21,8 @@ tasks:
       MIX_ENV=prod mix compile
       npm install --prefix ./assets
   - build: |
+      export LANG="en_US.UTF-8"
+      export LC_ALL="en_US.UTF-8"
       cd inner_circle
       npm run deploy --prefix ./assets
       MIX_ENV=prod mix phx.digest
