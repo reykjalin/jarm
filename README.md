@@ -123,25 +123,30 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 - Photos in posts
   - [x] Add photos to posts
-  - [ ] Edit photos in posts
-  - [ ] Delete photos in posts
+- Videos in posts
+  - [ ] Add videos to posts
 
 **V0.6**
 
-- Videos in posts
-  - [ ] Add videos to posts
-  - [ ] Edit videos in posts
-  - [ ] Delete videos in posts
+- [ ] Better styles via Tailwind CSS
 
 **V0.7**
 
-- [ ] Documentation for server management, build, develop, etc.
+- Photos
+  - [ ] Edit photos in posts
+  - [ ] Delete photos in posts
+- Videos
+  - [ ] Edit videos in posts
+  - [ ] Delete videos in posts
 
 **V1 - micro-birdsite**
 
 - [x] Single binary ready
-- [ ] Profile photos
-- [ ] Better styles via Tailwind CSS
+- User profiles
+  - [ ] Post overview
+  - [ ] Media overview
+  - [ ] Profile photos
+- [ ] Documentation for server management, build, develop, etc.
 - Blog posts
 
 **V2 - Admin UI and CLI**
