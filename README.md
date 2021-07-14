@@ -129,6 +129,7 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 **V0.6**
 
 - [ ] Better styles via Tailwind CSS
+- [ ] Thumbnails for videos
 
 **V0.7**
 
