@@ -10,14 +10,14 @@ repositories:
 packages:
   - esl-erlang
   - elixir
-  - nvm
 tasks:
   - node: |
-      . /usr/share/nvm/init-nvm.sh
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      . $HOME/.nvm/nvm.sh
       nvm install --lts
   - setup: |
       . /usr/share/nvm/init-nvm.sh
-      nvm use --silent
+      nvm use --lts
       cd inner_circle
       mix local.hex --force
       mix local.rebar --force
@@ -28,7 +28,7 @@ tasks:
       export LANG="en_US.UTF-8"
       export LC_ALL="en_US.UTF-8"
       . /usr/share/nvm/init-nvm.sh
-      nvm use --silent
+      nvm use --lts
       cd inner_circle
       nvm exec npm run deploy --prefix ./assets
       MIX_ENV=prod mix phx.digest
