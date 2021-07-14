@@ -1,4 +1,4 @@
-<h1>Show Post</h1>
+<h1>Post by <%= @current_user.display_name %></h1>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal InnerCircleWeb.PostLive.FormComponent,
