@@ -16,7 +16,7 @@ tasks:
       . $HOME/.nvm/nvm.sh
       nvm install --lts
   - setup: |
-      . /usr/share/nvm/init-nvm.sh
+      . $HOME/.nvm/nvm.sh
       nvm use --lts
       cd inner_circle
       mix local.hex --force
@@ -27,7 +27,7 @@ tasks:
   - build: |
       export LANG="en_US.UTF-8"
       export LC_ALL="en_US.UTF-8"
-      . /usr/share/nvm/init-nvm.sh
+      . $HOME/.nvm/nvm.sh
       nvm use --lts
       cd inner_circle
       nvm exec npm run deploy --prefix ./assets
