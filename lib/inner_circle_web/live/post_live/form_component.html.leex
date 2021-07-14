@@ -1,58 +1,73 @@
-<h2><%= @title %></h2>
+<h2 class="text-2xl mb-5"><%= @title %></h2>
 
 <%= f = form_for @changeset, "#",
   id: "post-form",
+  class: "flex flex-col bg-white",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%= label f, :body %>
-  <%= textarea f, :body, autofocus: true %>
+  <%= label f, :body, class: "font-bold" %>
+  <%= textarea f, :body, autofocus: true, class: "border px-4 py-3 mb-5" %>
   <%= error_tag f, :body %>
 
-  <p>
+  <p class="my-5">
     You're allowed to upload up to <%= @uploads.media.max_entries %> items
     (max <%= @uploads.media.max_file_size / 1_000_000_000 %> GB each).
   </p>
 
-  <%= live_file_input @uploads.media %>
+  <%= live_file_input @uploads.media, class: "my-5" %>
 
   <%= for {_ref, error} <- @uploads.media.errors do %>
-    <div>
+    <p class="my-5 text-red-700">
       <%= humanize(error) %>
-    </div>
+    </p>
   <% end %>
 
-  <%= for entry <- @uploads.media.entries do %>
-    <div>
-      <%= if String.starts_with?(entry.client_type, "image") do %>
-        <%= live_img_preview entry, width: 100 %>
-      <% end %>
-      <%= if String.starts_with?(entry.client_type, "video") do %>
-        <p><%= entry.client_name %></p>
-      <% end %>
-
-
-      <label for="media-<%= entry.ref %>"><%= entry.progress %>%</label>
-      <progress name="media-<%= entry.ref %>" max="100" value="<%= entry.progress %>" >
-        <%= entry.progress %>%
-      </progress>
-
-      <a
-        href="#cancel-media-upload"
-        phx-click="cancel"
-        phx-value-ref="<%= entry.ref %>"
-        phx-target="<%= @myself %>" >
-        Remove
-      </a>
-
-      <%= for error <- upload_errors(@uploads.media, entry) do %>
-        <div>
-          <%= humanize(error) %>
+  <section id="uploads">
+    <hr class="my-5">
+    <%= for entry <- @uploads.media.entries do %>
+      <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="w-2/12">
+          <%= if String.starts_with?(entry.client_type, "image") do %>
+            <%= live_img_preview entry, width: 100 %>
+          <% end %>
+          <%= if String.starts_with?(entry.client_type, "video") do %>
+            <p><%= entry.client_name %></p>
+          <% end %>
         </div>
-      <% end %>
-    </div>
-  <% end %>
 
-  <%= submit "Save", phx_disable_with: "Saving..." %>
+
+        <div class="w-6/12">
+          <label for="media-<%= entry.ref %>"><%= entry.progress %>%</label>
+          <progress class="w-full" name="media-<%= entry.ref %>" max="100" value="<%= entry.progress %>" >
+            <%= entry.progress %>%
+          </progress>
+        </div>
+
+        <div class="w-2/12 text-center">
+          <a
+            href="#cancel-media-upload"
+            class="link"
+            phx-click="cancel"
+            phx-value-ref="<%= entry.ref %>"
+            phx-target="<%= @myself %>" >
+            Remove
+          </a>
+        </div>
+
+        <div class="w-2/12">
+          <%= for error <- upload_errors(@uploads.media, entry) do %>
+            <div>
+              <%= humanize(error) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <hr class="my-5">
+    <% end %>
+  </section>
+
+  <%= submit "Save", phx_disable_with: "Saving...", class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500" %>
 </form>

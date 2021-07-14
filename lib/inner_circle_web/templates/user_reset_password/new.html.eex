@@ -1,14 +1,17 @@
 <h1>Forgot your password?</h1>
 
-<%= form_for :user, Routes.user_reset_password_path(@conn, :create), fn f -> %>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
+<%= form_for :user,
+  Routes.user_reset_password_path(@conn, :create),
+  [class: "flex flex-col border rounded-md p-10 my-10 bg-white"],
+  fn f -> %>
+  <%= label f, :email, class: "font-bold" %>
+  <%= email_input f, :email, required: true, class: "border px-4 py-3 mb-5" %>
 
-  <div>
-    <%= submit "Send instructions to reset password" %>
+  <div class="text-center">
+    <%= submit "Send instructions to reset password", class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500" %>
   </div>
 <% end %>
 
-<p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
+<p class="text-center">
+  <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "link" %>
 </p>

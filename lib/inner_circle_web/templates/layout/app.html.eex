@@ -1,5 +1,11 @@
-<main role="main" class="container">
-  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+<main role="main" class="container max-w-prose p-2 md:p-0">
+  <%= if get_flash(@conn, :info) != nil do %>
+    <p class="ring ring-blue-300 rounded-md bg-blue-200 text-blue-800 p-5 my-5" role="alert"><%= get_flash(@conn, :info) %></p>
+  <% end %>
+
+  <%= if get_flash(@conn, :error) != nil do %>
+    <p class="ring ring-red-300 rounded-md bg-red-200 text-red-800 p-5 my-5" role="alert"><%= get_flash(@conn, :error) %></p>
+  <% end %>
+
   <%= @inner_content %>
 </main>

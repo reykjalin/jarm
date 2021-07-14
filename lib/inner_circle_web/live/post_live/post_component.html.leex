@@ -1,32 +1,41 @@
-<div id="post-<%= @id %>" <%= if @post.__meta__.state == :deleted do %>style="display: none;"<% end %> >
+<div
+  id="post-<%= @id %>"
+  class="my-5 p-5 md:p-10 border rounded-md bg-white"
+  <%= if @post.__meta__.state == :deleted do %>style="display: none;"<% end %> >
   <strong><%= @post.user.display_name %></strong>
 
   <p>
     <%= if can?(@current_user, read(@post)) do %>
       <%= live_redirect @post.inserted_at,
-        to: Routes.post_show_path(@socket, :show, @post) %>
+        to: Routes.post_show_path(@socket, :show, @post), class: "link" %>
     <% else %>
       <%= @post.inserted_at %>
     <% end %>
   </p>
 
-  <p><%= text_to_html @post.body %></p>
+  <p class="my-5"><%= text_to_html @post.body %></p>
 
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
-      <img id="<%= media.uuid %>" src="<%= Routes.media_path(@socket, :show, media.uuid) %>" loading="lazy" >
+      <figure class="my-5 border rounded-md">
+        <img
+          id="<%= media.uuid %>"
+          class="p-3 md:p-5"
+          src="<%= Routes.media_path(@socket, :show, media.uuid) %>"
+          loading="lazy" >
+      </figure>
     <% end %>
 
     <%= if String.starts_with?(media.mime_type, "video") do %>
       <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
-      <video id="<%= media.uuid %>" controls preload="metadata">
-        <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
-        <%= if media.mime_type == "video/quicktime" do %>
-          <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="video/mp4" >
-        <% end %>
-      </video>
+      <div class="my-5 border rounded-md">
+        <video id="<%= media.uuid %>" controls preload="metadata" class="p-3 md:p-5">
+          <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
+          <%= if media.mime_type == "video/quicktime" do %>
+            <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="video/mp4" >
+          <% end %>
+        </video>
+      </div>
     <% end %>
   <% end %>
-
-  <hr />
 </div>

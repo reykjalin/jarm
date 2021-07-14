@@ -18,14 +18,25 @@
     current_user: @current_user %>
 </section>
 
-<p>
-  <%= if can?(@current_user, edit(@post)) do %>
-    <%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %>
-  <% end %>
+<div class="flex flex-row justify-between my-5">
+  <p>
+    <%= live_redirect "Back", to: Routes.post_index_path(@socket, :index), class: "link" %>
+  </p>
 
-  <%= if can?(@current_user, delete(@post)) do %>
-    <%= link "Delete", to: "#delete", phx_click: "delete", phx_value_id: @post.id, data: [confirm: "Are you sure?"] %>
-  <% end %>
+  <p>
+    <%= if can?(@current_user, edit(@post)) do %>
+      <%= live_patch "Edit",
+        to: Routes.post_show_path(@socket, :edit, @post),
+        class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500" %>
+    <% end %>
 
-  <%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %>
-</p>
+    <%= if can?(@current_user, delete(@post)) do %>
+      <%= link "Delete",
+        to: "#delete",
+        phx_click: "delete",
+        phx_value_id: @post.id,
+        data: [confirm: "Are you sure?"],
+        class: "border rounded-md px-4 py-3 bg-red-600 text-white hover:bg-red-500" %>
+    <% end %>
+  </p>
+</div>
