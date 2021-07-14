@@ -18,11 +18,12 @@
     <% end %>
 
     <%= if String.starts_with?(media.mime_type, "video") do %>
-      <video id="<%= media.uuid %>" controls>
+      <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
+      <video id="<%= media.uuid %>" controls preload="metadata">
+        <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
         <%= if media.mime_type == "video/quicktime" do %>
           <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="video/mp4" >
         <% end %>
-        <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
       </video>
     <% end %>
   <% end %>
