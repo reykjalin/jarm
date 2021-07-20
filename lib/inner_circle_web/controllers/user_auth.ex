@@ -146,4 +146,15 @@ defmodule InnerCircleWeb.UserAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: "/"
+
+  def require_authenticated_media_request(conn, _opts) do
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> put_status(401)
+      |> text("Unauthorized")
+      |> halt()
+    end
+  end
 end

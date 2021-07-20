@@ -17,6 +17,26 @@ defmodule InnerCircleWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :media do
+    # Accept supported media types
+    plug :accepts, [
+      "video/mp4",
+      "video/quicktime",
+      "video/webm",
+      "video/ogg",
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp"
+    ]
+
+    plug :fetch_session
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+    # Require login that just returns 401 Unauthorized
+    plug :require_authenticated_media_request
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", InnerCircleWeb do
   #   pipe_through :api
@@ -71,6 +91,10 @@ defmodule InnerCircleWeb.Router do
     # TODO: enable when role based authentication is in place.
     live "/posts/:id/edit", PostLive.Index, :edit
     live "/posts/:id/show/edit", PostLive.Show, :edit
+  end
+
+  scope "/", InnerCircleWeb do
+    pipe_through :media
 
     # Media
     get "/media/:id", MediaController, :show
