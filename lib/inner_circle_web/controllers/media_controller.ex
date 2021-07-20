@@ -24,6 +24,7 @@ defmodule InnerCircleWeb.MediaController do
   defp show_image(conn, media) do
     conn
     |> Plug.Conn.put_resp_header("content-type", media.mime_type)
+    |> Plug.Conn.put_resp_header("cache-control", "private,max-age=31536000,immutable")
     |> Plug.Conn.send_file(200, media.path_to_original)
   end
 
@@ -40,6 +41,7 @@ defmodule InnerCircleWeb.MediaController do
       "content-range",
       "bytes #{start_range}-#{end_range}/#{file_size}"
     )
+    |> Plug.Conn.put_resp_header("cache-control", "private,max-age=31536000, immutable")
     |> Plug.Conn.send_file(
       206,
       media.path_to_original,
