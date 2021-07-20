@@ -13,14 +13,17 @@
     <% end %>
   </p>
 
-  <p class="my-5"><%= text_to_html @post.body %></p>
+  <%= text_to_html @post.body, attributes: [class: "my-5"] %>
 
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
-      <figure class="my-5 border rounded-md">
+      <figure class="p-3 md:p-5 my-5 border rounded-md">
+        <!-- Assume for now that image size is 700x700 until it's loaded. -->
         <img
           id="<%= media.uuid %>"
-          class="p-3 md:p-5"
+          class="bg-gray-200"
+          width="700"
+          height="700"
           src="<%= Routes.media_path(@socket, :show, media.uuid) %>"
           loading="lazy" >
       </figure>
@@ -28,8 +31,9 @@
 
     <%= if String.starts_with?(media.mime_type, "video") do %>
       <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
-      <div class="my-5 border rounded-md">
-        <video id="<%= media.uuid %>" controls preload="metadata" class="p-3 md:p-5">
+      <div class="p-3 md:p-5 my-5 border rounded-md">
+        <!-- Assume for now that video size is 700x700 until it's loaded. -->
+        <video id="<%= media.uuid %>" controls preload="metadata" class="bg-gray-200" width="700" height="700">
           <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
           <%= if media.mime_type == "video/quicktime" do %>
             <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="video/mp4" >
