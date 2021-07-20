@@ -171,6 +171,12 @@ config :inner_circle, InnerCircle.Cache,
   # GC min timeout: 10 min
   gc_cleanup_max_timeout: :timer.minutes(10)
 
+# Configures Elixir's Logger
+config :logger, :console,
+  level: :error,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix
