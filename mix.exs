@@ -51,7 +51,9 @@ defmodule InnerCircle.MixProject do
       {:bamboo, "~> 2.2.0"},
       {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
       {:site_encrypt, "~> 0.4"},
-      {:canada, github: "jarednorman/canada"}
+      {:canada, github: "jarednorman/canada"},
+      {:nebulex, "~> 2.1"},
+      {:decorator, "~> 1.3"}
     ]
   end
 

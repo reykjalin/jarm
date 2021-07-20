@@ -6,6 +6,9 @@ defmodule InnerCircle.Timeline do
   import Ecto.Query, warn: false
   alias InnerCircle.Repo
 
+  use Nebulex.Caching
+  alias InnerCircle.Cache
+
   alias InnerCircle.Accounts.User
   alias InnerCircle.Timeline.Post
   alias InnerCircle.Timeline.Media
@@ -19,17 +22,15 @@ defmodule InnerCircle.Timeline do
       [%Post{}, ...]
 
   """
-  def list_posts do
-    Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id], limit: 10)
+  @decorate cacheable(cache: Cache, key: number)
+  def list_posts(number \\ 10) do
+    Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id], limit: ^number)
     |> Repo.preload(:user)
     |> Repo.preload(:media)
   end
 
-  def list_posts_older_than(post, number \\ 10)
-
-  def list_posts_older_than(nil, _number), do: list_posts()
-
-  def list_posts_older_than(%Post{} = post, number) do
+  @decorate cacheable(cache: Cache, key: {Post, post.id})
+  def list_posts_older_than(%Post{} = post, number \\ 10) do
     from(p in Post,
       where: p.inserted_at < ^post.inserted_at,
       order_by: [desc: :inserted_at, desc: :id],
@@ -58,8 +59,10 @@ defmodule InnerCircle.Timeline do
       ** (Ecto.NoResultsError)
 
   """
+  @decorate cacheable(cache: Cache, key: id)
   def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:user) |> Repo.preload(:media)
 
+  @decorate cacheable(cache: Cache, key: uuid)
   def get_media(uuid) do
     from(m in Media, where: m.uuid == ^uuid) |> Repo.one()
   rescue

@@ -7,6 +7,8 @@ defmodule InnerCircle.Application do
 
   def start(_type, _args) do
     children = [
+      # Start the cache
+      InnerCircle.Cache,
       # Start the Ecto repository
       InnerCircle.Repo,
       # Start the Telemetry supervisor

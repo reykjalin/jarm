@@ -5,6 +5,10 @@ defmodule InnerCircle.Accounts do
 
   import Ecto.Query, warn: false
   alias InnerCircle.Repo
+
+  use Nebulex.Caching
+  alias InnerCircle.Cache
+
   alias InnerCircle.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters
@@ -21,6 +25,7 @@ defmodule InnerCircle.Accounts do
       nil
 
   """
+  @decorate cacheable(cache: Cache, key: email)
   def get_user_by_email(email) when is_binary(email) do
     Repo.get_by(User, email: email)
   end
@@ -57,6 +62,7 @@ defmodule InnerCircle.Accounts do
       ** (Ecto.NoResultsError)
 
   """
+  @decorate cacheable(cache: Cache, key: id)
   def get_user!(id), do: Repo.get!(User, id)
 
   ## User registration

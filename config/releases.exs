@@ -158,6 +158,19 @@ config :inner_circle, InnerCircle.Mailer,
   retries: String.to_integer(smtp_retries),
   no_mx_lookups: true
 
+## Caching via Nebulex
+config :inner_circle, InnerCircle.Cache,
+  # GC interval for pushing new generation: 12 hrs
+  gc_interval: :timer.hours(String.to_integer(System.get_env("CACHE_GC_INTERVAL", "12"))),
+  # Max 1 million entries in cache
+  max_size: 1_00_000,
+  # Max 2 GB of memory, set default to 500 MB
+  allocated_memory: String.to_integer(System.get_env("CACHE_SIZE", "5000000")),
+  # GC min timeout: 10 sec
+  gc_cleanup_min_timeout: :timer.seconds(10),
+  # GC min timeout: 10 min
+  gc_cleanup_max_timeout: :timer.minutes(10)
+
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix
