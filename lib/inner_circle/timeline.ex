@@ -22,7 +22,6 @@ defmodule InnerCircle.Timeline do
       [%Post{}, ...]
 
   """
-  @decorate cacheable(cache: Cache, key: number)
   def list_posts(number \\ 10) do
     Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id], limit: ^number)
     |> Repo.preload(:user)
