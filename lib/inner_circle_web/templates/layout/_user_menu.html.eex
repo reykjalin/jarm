@@ -1,4 +1,4 @@
-<nav role="navigation">
+<nav>
   <ul class="flex flex-col md:flex-row justify-center">
     <%= if @current_user do %>
       <li class="px-5"><%= @current_user.email %></li>
