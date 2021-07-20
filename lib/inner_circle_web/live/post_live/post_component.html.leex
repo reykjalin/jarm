@@ -6,7 +6,7 @@
 
   <p>
     <%= if can?(@current_user, read(@post)) do %>
-      <%= live_redirect @post.inserted_at,
+      <%= link @post.inserted_at,
         to: Routes.post_show_path(@socket, :show, @post), class: "link" %>
     <% else %>
       <%= @post.inserted_at %>
