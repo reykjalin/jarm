@@ -1,16 +1,16 @@
 defmodule InnerCircleWeb.CreatePostLive.Index do
   use InnerCircleWeb, :live_view
 
+  alias InnerCircle.Timeline
   alias InnerCircle.Timeline.Post
+
+  import Canada, only: [can?: 2]
 
   @impl true
   def mount(_params, session, socket) do
     socket = assign_current_user(socket, session)
 
-    socket =
-      assign(socket,
-        changeset: Post.changeset(%Post{}, %{})
-      )
+    changeset = Post.changeset(%Post{}, %{})
 
     socket =
       allow_upload(
@@ -24,7 +24,9 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
         max_file_size: String.to_integer(System.get_env("MAX_FILE_SIZE", "1000000000"))
       )
 
-    {:ok, socket}
+    {:ok,
+     socket
+     |> assign(:changeset, changeset)}
   end
 
   @impl true
@@ -59,5 +61,94 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
       |> Map.put(:action, :validate)
 
     {:noreply, assign(socket, :changeset, changeset)}
+  end
+
+  def handle_event("save", %{"post" => post_params}, socket) do
+    IO.inspect(socket.assigns, label: "assigns")
+    save_post(socket, :new, post_params)
+  end
+
+  defp save_post(socket, :edit, post_params) do
+    post = socket.assigns.post
+    current_user = socket.assigns.current_user
+
+    socket =
+      case current_user |> can?(edit(post)) do
+        true ->
+          case Timeline.update_post(socket.assigns.post, post_params) do
+            {:ok, _post} ->
+              socket
+              |> put_flash(:info, "Post updated successfully")
+              |> push_redirect(to: Routes.post_index_path(socket, :index))
+
+            {:error, %Ecto.Changeset{} = changeset} ->
+              assign(socket, :changeset, changeset)
+          end
+
+        false ->
+          socket
+          |> put_flash(:error, "You're not allowed to modify this post")
+          |> push_redirect(to: Routes.post_index_path(socket, :index))
+      end
+
+    {:noreply, socket}
+  end
+
+  defp save_post(socket, :new, post_params) do
+    current_user = socket.assigns.current_user
+
+    socket =
+      case current_user |> can?(create(InnerCircle.Timeline.Post)) do
+        true ->
+          case Timeline.create_post(current_user, post_params) do
+            {:ok, post} ->
+              # 1. Consume temp files
+              # 2. Assign media to post
+              consume_uploaded_entries(socket, :media, fn meta, entry ->
+                media_path = System.get_env("MEDIA_FILE_STORAGE", "priv/static/media")
+                dest = Path.join(media_path, file_name(entry))
+                path_to_original = Path.absname(dest)
+
+                # Create static folder if it doesn't exist, then copy file.
+                if not File.exists?(media_path),
+                  do: File.mkdir_p!(media_path)
+
+                File.cp!(meta.path, dest)
+
+                # TODO: Optimize with a Repo.all() query?
+                Timeline.create_media(current_user, post, %{
+                  "path_to_original" => path_to_original,
+                  "mime_type" => entry.client_type,
+                  "uuid" => entry.uuid
+                })
+              end)
+
+              socket
+              |> put_flash(:info, "Post created successfully")
+              |> push_redirect(to: Routes.post_index_path(socket, :index))
+
+            {:error, %Ecto.Changeset{} = changeset} ->
+              assign(socket, changeset: changeset)
+          end
+
+        false ->
+          socket
+          |> put_flash(:error, "You're not allowed to create new posts")
+          |> push_redirect(to: Routes.post_index_path(socket, :index))
+      end
+
+    {:noreply, socket}
+  end
+
+  defp file_name(entry) do
+    [ext | _] = MIME.extensions(entry.client_type)
+    "#{entry.uuid}.#{ext}"
+  end
+
+  @impl true
+  def handle_info({:post_created, _post}, socket) do
+    # We don't broadcast creations.
+    # TODO: broadcast creation to trigger a "show newer posts" link.
+    {:noreply, socket}
   end
 end

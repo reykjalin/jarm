@@ -2,7 +2,9 @@
   "name": "assets",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {},
+  "dependencies": {
+    "topbar": "^1.0.1"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.4",

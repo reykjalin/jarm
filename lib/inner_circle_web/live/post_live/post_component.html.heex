@@ -1,7 +1,8 @@
 <div
-  id="post-<%= @id %>"
+  id="post-{ @id }"
   class="my-5 p-5 md:p-10 border rounded-md bg-white"
-  <%= if @post.__meta__.state == :deleted do %>style="display: none;"<% end %> >
+  style={ if @post.__meta__.state == :deleted do "display: none;" end }
+  >
   <strong><%= @post.user.display_name %></strong>
 
   <p>
@@ -20,11 +21,11 @@
       <figure class="p-3 md:p-5 my-5 border rounded-md">
         <!-- Assume for now that image size is 700x700 until it's loaded. -->
         <img
-          id="<%= media.uuid %>"
+          id={ media.uuid }
           class="bg-gray-200"
           width="700"
           height="700"
-          src="<%= Routes.media_path(@socket, :show, media.uuid) %>"
+          src={ Routes.media_path(@socket, :show, media.uuid) }
           loading="lazy" >
       </figure>
     <% end %>
@@ -33,10 +34,10 @@
       <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
       <div class="p-3 md:p-5 my-5 border rounded-md">
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
-        <video id="<%= media.uuid %>" controls preload="metadata" class="bg-gray-200" width="700" height="700">
-          <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="<%= media.mime_type %>" >
+        <video id="{ media.uuid }" controls preload="metadata" class="bg-gray-200" width="700" height="700">
+          <source src={ Routes.media_path(@socket, :show, media.uuid) } type={ media.mime_type } >
           <%= if media.mime_type == "video/quicktime" do %>
-            <source src="<%= Routes.media_path(@socket, :show, media.uuid) %>" type="video/mp4" >
+            <source src={ Routes.media_path(@socket, :show, media.uuid) } type="video/mp4" >
           <% end %>
         </video>
       </div>
