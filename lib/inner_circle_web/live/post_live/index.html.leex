@@ -4,26 +4,15 @@
   <%= if can?(@current_user, create(Post)) do %>
     <p>
       <%= live_patch "New Post",
-        to: Routes.post_index_path(@socket, :new),
+        to: Routes.create_post_index_path(@socket, :new),
         class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500" %>
     </p>
   <% end %>
 </div>
 
-<%= if @live_action in [:new, :edit] do %>
-  <%= live_modal InnerCircleWeb.PostLive.FormComponent,
-    id: @post.id || :new,
-    title: @page_title,
-    action: @live_action,
-    post: @post,
-    current_user: @current_user,
-    return_to: Routes.post_index_path(@socket, :index) %>
-<% end %>
-
 <section id="posts" phx-update="append">
   <%= for post <- @posts do %>
-    <%= live_component @socket,
-      InnerCircleWeb.PostLive.PostComponent,
+    <%= live_component InnerCircleWeb.PostLive.PostComponent,
       id: post.id,
       post: post,
       current_user: @current_user %>

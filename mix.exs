@@ -52,7 +52,8 @@ defmodule InnerCircle.MixProject do
       {:site_encrypt, "~> 0.4"},
       {:canada, github: "jarednorman/canada"},
       {:nebulex, "~> 2.1"},
-      {:decorator, "~> 1.3"}
+      {:decorator, "~> 1.3"},
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
     ]
   end
 
@@ -67,7 +68,12 @@ defmodule InnerCircle.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.deploy": [
+        "cmd --cd assets npm run deploy",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

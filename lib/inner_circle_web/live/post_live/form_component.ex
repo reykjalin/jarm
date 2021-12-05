@@ -2,6 +2,7 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
   use InnerCircleWeb, :live_component
 
   alias InnerCircle.Timeline
+  alias InnerCircle.Timeline.Post
 
   import Canada, only: [can?: 2]
 
@@ -25,6 +26,18 @@ defmodule InnerCircleWeb.PostLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:changeset, changeset)}
+  end
+
+  @impl true
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  defp apply_action(socket, :new, _params) do
+    socket
+    |> assign(:page_title, "New Post")
+    |> assign(:post, %Post{})
+    |> assign(:current_user, socket.assigns.current_user)
   end
 
   @impl true
