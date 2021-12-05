@@ -168,7 +168,7 @@ config :inner_circle, InnerCircle.Cache,
   allocated_memory: String.to_integer(System.get_env("CACHE_SIZE", "5000000")),
   # GC min timeout: 10 sec
   gc_cleanup_min_timeout: :timer.seconds(10),
-  # GC min timeout: 10 min
+  # GC max timeout: 10 min
   gc_cleanup_max_timeout: :timer.minutes(10)
 
 # Configures Elixir's Logger

@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # Set env variables
 System.put_env("SMTP_USERNAME", "admin@example.com")

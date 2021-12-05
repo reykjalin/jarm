@@ -8,6 +8,5 @@ defmodule InnerCircle.Repo.Migrations.CreatePosts do
 
       timestamps()
     end
-
   end
 end
