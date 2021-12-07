@@ -88,9 +88,7 @@ defmodule InnerCircleWeb.Router do
     live "/posts/new", CreatePostLive.Index, :new
 
     live "/posts/:id", PostLive.Show, :show
-    # TODO: enable when role based authentication is in place.
-    live "/posts/:id/edit", PostLive.Index, :edit
-    live "/posts/:id/show/edit", PostLive.Show, :edit
+    live "/posts/:id/edit", EditPostLive.Index, :index
   end
 
   scope "/", InnerCircleWeb do

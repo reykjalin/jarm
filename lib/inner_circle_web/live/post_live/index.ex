@@ -50,19 +50,6 @@ defmodule InnerCircleWeb.PostLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Post")
-    |> assign(:post, Timeline.get_post!(id))
-  end
-
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "New Post")
-    |> assign(:post, %Post{})
-    |> assign(:current_user, socket.assigns.current_user)
-  end
-
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Timeline")

@@ -58,7 +58,6 @@ defmodule InnerCircle.Timeline do
       ** (Ecto.NoResultsError)
 
   """
-  @decorate cacheable(cache: Cache, key: id)
   def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:user) |> Repo.preload(:media)
 
   @decorate cacheable(cache: Cache, key: uuid)

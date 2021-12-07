@@ -7,10 +7,10 @@
 
   <p>
     <%= if can?(@current_user, read(@post)) do %>
-      <%= link @post.inserted_at,
+      <%= live_patch Date.to_string(NaiveDateTime.to_date(@post.inserted_at)),
         to: Routes.post_show_path(@socket, :show, @post), class: "link" %>
     <% else %>
-      <%= @post.inserted_at %>
+      <%= Date.to_string(NaiveDateTime.to_date(@post.inserted_at)) %>
     <% end %>
   </p>
 

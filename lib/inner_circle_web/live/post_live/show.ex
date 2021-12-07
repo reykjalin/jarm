@@ -20,7 +20,7 @@ defmodule InnerCircleWeb.PostLive.Show do
       case current_user |> can?(read(post)) do
         true ->
           socket
-          |> assign(:page_title, page_title(socket.assigns.live_action))
+          |> assign(:page_title, "Post details")
           |> assign(:post, Timeline.get_post!(id))
 
         false ->
@@ -63,7 +63,4 @@ defmodule InnerCircleWeb.PostLive.Show do
       socket
     }
   end
-
-  defp page_title(:show), do: "Post Details"
-  defp page_title(:edit), do: "Edit Post"
 end

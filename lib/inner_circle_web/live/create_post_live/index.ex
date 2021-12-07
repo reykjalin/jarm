@@ -24,6 +24,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
         max_file_size: String.to_integer(System.get_env("MAX_FILE_SIZE", "1000000000"))
       )
 
+    socket = assign(socket, :page_title, "New Post")
+
     {:ok,
      socket
      |> assign(:changeset, changeset)}
@@ -34,23 +36,11 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Post")
-    |> assign(:post, Timeline.get_post!(id))
-  end
-
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Post")
     |> assign(:post, %Post{})
     |> assign(:current_user, socket.assigns.current_user)
-  end
-
-  defp apply_action(socket, :index, _params) do
-    socket
-    # |> assign(:page_title, "Timeline")
-    # |> assign(:post, nil)
   end
 
   @impl true
@@ -66,32 +56,6 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
   def handle_event("save", %{"post" => post_params}, socket) do
     IO.inspect(socket.assigns, label: "assigns")
     save_post(socket, :new, post_params)
-  end
-
-  defp save_post(socket, :edit, post_params) do
-    post = socket.assigns.post
-    current_user = socket.assigns.current_user
-
-    socket =
-      case current_user |> can?(edit(post)) do
-        true ->
-          case Timeline.update_post(socket.assigns.post, post_params) do
-            {:ok, _post} ->
-              socket
-              |> put_flash(:info, "Post updated successfully")
-              |> push_redirect(to: Routes.post_index_path(socket, :index))
-
-            {:error, %Ecto.Changeset{} = changeset} ->
-              assign(socket, :changeset, changeset)
-          end
-
-        false ->
-          socket
-          |> put_flash(:error, "You're not allowed to modify this post")
-          |> push_redirect(to: Routes.post_index_path(socket, :index))
-      end
-
-    {:noreply, socket}
   end
 
   defp save_post(socket, :new, post_params) do
