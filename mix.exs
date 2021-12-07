@@ -33,27 +33,27 @@ defmodule InnerCircle.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 2.0"},
-      {:phoenix, "~> 1.6.0"},
+      {:bcrypt_elixir, "~> 2.3"},
+      {:phoenix, "~> 1.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sqlite3, "~> 0.5.5"},
       {:phoenix_live_view, "~> 0.17.5"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.5"},
+      {:phoenix_html, "~> 3.1"},
+      {:phoenix_live_reload, "~> 1.3", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.6"},
       {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 0.5"},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:telemetry_poller, "~> 1.0"},
+      {:gettext, "~> 0.18"},
+      {:jason, "~> 1.2"},
+      {:plug_cowboy, "~> 2.5"},
       {:bamboo, "~> 2.2.0"},
       {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
       {:site_encrypt, "~> 0.4"},
       {:canada, github: "jarednorman/canada"},
-      {:nebulex, "~> 2.1"},
-      {:decorator, "~> 1.3"},
-      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
+      {:nebulex, "~> 2.3"},
+      {:decorator, "~> 1.4"},
+      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev}
     ]
   end
 
