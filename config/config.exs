@@ -27,6 +27,10 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
+# Set the UUID type to binary to fix the default representation after updating
+# to ecto_sqlite3 0.7.0.
+config :ecto_sqlite3, uuid_type: :binary, binary_id_type: :binary
+
 config :inner_circle, env: config_env()
 
 # Import environment specific config. This must remain at the bottom

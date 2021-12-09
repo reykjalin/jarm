@@ -36,7 +36,7 @@ defmodule InnerCircle.MixProject do
       {:bcrypt_elixir, "~> 2.3"},
       {:phoenix, "~> 1.6"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sqlite3, "~> 0.5.5"},
+      {:ecto_sqlite3, "~> 0.7.0"},
       {:phoenix_live_view, "~> 0.17.5"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_html, "~> 3.1"},
