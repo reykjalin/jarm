@@ -54,7 +54,8 @@ defmodule InnerCircle.MixProject do
       {:nebulex, "~> 2.3"},
       {:decorator, "~> 1.4"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:mogrify, "~> 0.9.1"}
+      {:mogrify, "~> 0.9.1"},
+      {:ffmpex, "~> 0.10.0"}
     ]
   end
 
