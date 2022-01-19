@@ -128,9 +128,14 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 **V0.6**
 
-- [x] Better styles via Tailwind CSS
-- [ ] Basic caching
-- [ ] Thumbnails for videos
+- [x] Better styles via Tailwind CSS.
+- [x] Basic caching.
+- [x] Thumbnails for videos.
+- [x] Compression for photos (imagemagick converts to webp).
+- [x] Compression for videos (ffmpeg converts to mp4 w/ max bitrate of 2Mbps).
+- [x] Links to original videos and images provided.
+- [x] Phoenix updated to v1.6.
+- [x] Post page moved out of a live modal to its own page.
 
 **V0.7**
 
@@ -158,7 +163,6 @@ or, if you already have an account set up, navigate to /users/invite on your sit
   - [ ] Send password reset
   - [ ] Set timezone — handled by the server instead of the software?
   - Delete specific photo by post
-  - Generate thumbnails
   - Delete specific video by post
   - Delete specific media by post
 
@@ -178,13 +182,8 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 - [ ] Accept markdown via [earmark](https://github.com/pragdave/earmark) and [html_sanitize_ex](https://github.com/rrrene/html_sanitize_ex) and save as HTML in DB.
 - [ ] Export photo data
-- Photo compression? Probably via [mogrify](https://github.com/elixir-mogrify/mogrify)
-- [ ] Thumbnail generation via [thumbnex](https://github.com/talklittle/thumbnex)
-- Thumbnail generation for videos
-- [ ] Lazy loading for images
-- Lazy loading for videos
-- Video compression?
-- Compress photos?
+- [x] Lazy loading for images
+- [x] Lazy loading for videos
 - Delete unused photos
 - Delete unused videos
 
