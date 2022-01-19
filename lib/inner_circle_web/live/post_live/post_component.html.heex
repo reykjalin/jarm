@@ -37,10 +37,7 @@
       <div class="p-3 md:p-5 my-5 border rounded-md">
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
         <video id="{ media.uuid }" controls preload="metadata" class="bg-gray-200" width="700" height="700">
-          <source src={ Routes.media_path(@socket, :show, media.uuid) } type={ media.mime_type } >
-          <%= if media.mime_type == "video/quicktime" do %>
-            <source src={ Routes.media_path(@socket, :show, media.uuid) } type="video/mp4" >
-          <% end %>
+          <source src={ Routes.media_path(@socket, :show_compressed, media.uuid) } type="video/mp4" >
         </video>
       </div>
     <% end %>

@@ -31,7 +31,7 @@ defmodule InnerCircleWeb.MediaController do
       %Media{} = media ->
         # We need to do some special handling.
         if media.mime_type |> String.starts_with?("video") do
-          show_video(conn, media)
+          show_video(conn, media, true)
         else
           show_image(conn, media, true)
         end
@@ -48,9 +48,10 @@ defmodule InnerCircleWeb.MediaController do
     |> Plug.Conn.send_file(200, media_path)
   end
 
-  defp show_video(conn, media) do
+  defp show_video(conn, media, compressed \\ false) do
     headers = conn.req_headers
-    %{size: file_size} = File.stat!(media.path_to_original)
+    media_path = if compressed, do: media.path_to_compressed, else: media.path_to_original
+    %{size: file_size} = File.stat!(media_path)
 
     [start_range, end_range] = get_video_ranges(headers, file_size)
 
@@ -64,7 +65,7 @@ defmodule InnerCircleWeb.MediaController do
     |> Plug.Conn.put_resp_header("cache-control", "private,max-age=31536000, immutable")
     |> Plug.Conn.send_file(
       206,
-      media.path_to_original,
+      media_path,
       start_range,
       1 + end_range - start_range
     )

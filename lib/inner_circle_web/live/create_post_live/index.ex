@@ -124,10 +124,30 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     })
                   end
                 else
+                  # Generate a compressed version of the image.
+                  compressed_path =
+                    Path.join(media_path, "compressed-#{entry.uuid}.mp4") |> Path.absname()
+
+                  System.cmd("ffmpeg", [
+                    "-i",
+                    dest,
+                    "-c:v",
+                    "libx264",
+                    "-maxrate",
+                    "2M",
+                    "-bufsize",
+                    "2M",
+                    "-crf",
+                    "23",
+                    "-movflags",
+                    "+faststart",
+                    compressed_path
+                  ])
+
                   # TODO: Optimize with a Repo.all() query?
                   Timeline.create_media(current_user, post, %{
                     "path_to_original" => path_to_original,
-                    "path_to_compressed" => "",
+                    "path_to_compressed" => compressed_path,
                     "mime_type" => entry.client_type,
                     "uuid" => entry.uuid
                   })
