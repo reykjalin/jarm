@@ -84,15 +84,23 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                   compressed_path =
                     Path.join(media_path, "compressed-#{entry.uuid}.webp") |> Path.absname()
 
-                  image =
-                    Mogrify.open(dest)
-                    |> Mogrify.resize("700")
-                    |> Mogrify.custom("strip")
-                    |> Mogrify.custom("auto-orient")
-                    |> Mogrify.format("webp")
-                    |> Mogrify.save(path: compressed_path)
+                  thumbnail_path =
+                    Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
 
-                  IO.inspect(image, label: "image")
+                  Mogrify.open(dest)
+                  |> Mogrify.resize("700")
+                  |> Mogrify.custom("strip")
+                  |> Mogrify.custom("auto-orient")
+                  |> Mogrify.format("webp")
+                  |> Mogrify.save(path: compressed_path)
+
+                  System.cmd("magick", [
+                    "convert",
+                    "#{compressed_path}",
+                    "-resize",
+                    "700",
+                    thumbnail_path
+                  ])
 
                   # Convert HEIC and HEIF files to PNG.
                   mime_type =
@@ -111,6 +119,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     Timeline.create_media(current_user, post, %{
                       "path_to_original" => image.path,
                       "path_to_compressed" => compressed_path,
+                      "path_to_thumbnail" => thumbnail_path,
                       "mime_type" => mime_type,
                       "uuid" => entry.uuid
                     })
@@ -119,6 +128,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     Timeline.create_media(current_user, post, %{
                       "path_to_original" => path_to_original,
                       "path_to_compressed" => compressed_path,
+                      "path_to_thumbnail" => thumbnail_path,
                       "mime_type" => mime_type,
                       "uuid" => entry.uuid
                     })
@@ -127,6 +137,9 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                   # Generate a compressed version of the image.
                   compressed_path =
                     Path.join(media_path, "compressed-#{entry.uuid}.mp4") |> Path.absname()
+
+                  thumbnail_path =
+                    Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
 
                   System.cmd("ffmpeg", [
                     "-i",
@@ -144,10 +157,19 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     compressed_path
                   ])
 
+                  System.cmd("magick", [
+                    "convert",
+                    "#{compressed_path}[1]",
+                    "-resize",
+                    "700",
+                    thumbnail_path
+                  ])
+
                   # TODO: Optimize with a Repo.all() query?
                   Timeline.create_media(current_user, post, %{
                     "path_to_original" => path_to_original,
                     "path_to_compressed" => compressed_path,
+                    "path_to_thumbnail" => thumbnail_path,
                     "mime_type" => entry.client_type,
                     "uuid" => entry.uuid
                   })
