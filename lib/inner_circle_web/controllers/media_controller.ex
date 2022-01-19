@@ -40,7 +40,7 @@ defmodule InnerCircleWeb.MediaController do
 
   defp show_image(conn, media, compressed \\ false) do
     media_path = if compressed, do: media.path_to_compressed, else: media.path_to_original
-    mime_type = if compressed, do: "image/jpeg", else: media.mime_type
+    mime_type = if compressed, do: "image/webp", else: media.mime_type
 
     conn
     |> Plug.Conn.put_resp_header("content-type", mime_type)

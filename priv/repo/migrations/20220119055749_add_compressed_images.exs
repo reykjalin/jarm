@@ -21,21 +21,15 @@ defmodule InnerCircle.Repo.Migrations.AddCompressedImages do
         compressed_path =
           Path.join(
             media_dir,
-            "compressed-#{Path.basename(m.path_to_original, Path.extname(m.path_to_original))}.jpeg"
+            "compressed-#{Path.basename(m.path_to_original, Path.extname(m.path_to_original))}.webp"
           )
 
         System.cmd("magick", [
           "convert",
-          "-sampling-factor",
-          "4:2:0",
           "-strip",
-          "-quality",
-          "40",
-          "-interlace",
-          "JPEG",
-          "-colorspace",
-          "sRGB",
           "-auto-orient",
+          "-resize",
+          "700",
           m.path_to_original,
           compressed_path
         ])

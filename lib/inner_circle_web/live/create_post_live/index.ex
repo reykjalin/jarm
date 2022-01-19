@@ -82,17 +82,14 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                 if entry.client_type |> String.starts_with?("image") do
                   # Generate a compressed version of the image.
                   compressed_path =
-                    Path.join(media_path, "compressed-#{entry.uuid}.jpeg") |> Path.absname()
+                    Path.join(media_path, "compressed-#{entry.uuid}.webp") |> Path.absname()
 
                   image =
                     Mogrify.open(dest)
-                    |> Mogrify.custom("sampling-factor", "4:2:0")
+                    |> Mogrify.resize("700")
                     |> Mogrify.custom("strip")
-                    |> Mogrify.custom("quality", "40")
-                    |> Mogrify.custom("interlace", "JPEG")
-                    |> Mogrify.custom("colorspace", "sRGB")
                     |> Mogrify.custom("auto-orient")
-                    |> Mogrify.format("jpg")
+                    |> Mogrify.format("webp")
                     |> Mogrify.save(path: compressed_path)
 
                   IO.inspect(image, label: "image")
@@ -130,6 +127,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                   # TODO: Optimize with a Repo.all() query?
                   Timeline.create_media(current_user, post, %{
                     "path_to_original" => path_to_original,
+                    "path_to_compressed" => "",
                     "mime_type" => entry.client_type,
                     "uuid" => entry.uuid
                   })
