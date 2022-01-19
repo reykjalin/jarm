@@ -5,6 +5,7 @@ defmodule InnerCircle.Timeline.Media do
   schema "media" do
     field :path_to_original, :string
     field :path_to_compressed, :string
+    field :path_to_thumbnail, :string
     field :mime_type, :string
     field :uuid, Ecto.UUID
     belongs_to :user, InnerCircle.Accounts.User

@@ -36,7 +36,14 @@
       <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
       <div class="p-3 md:p-5 my-5 border rounded-md">
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
-        <video id="{ media.uuid }" controls preload="metadata" class="bg-gray-200" width="700" height="700">
+        <video
+          id={ media.uuid }
+          poster={ Routes.media_path(@socket, :show_thumbnail, media.uuid) }
+          controls
+          preload="metadata"
+          class="bg-gray-200"
+          width="700"
+          height="700" >
           <source src={ Routes.media_path(@socket, :show_compressed, media.uuid) } type="video/mp4" >
         </video>
       </div>

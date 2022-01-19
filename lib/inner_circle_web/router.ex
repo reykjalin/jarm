@@ -97,6 +97,7 @@ defmodule InnerCircleWeb.Router do
     # Media
     get "/media/:id", MediaController, :show
     get "/compressed-media/:id", MediaController, :show_compressed
+    get "/thumbnail/:id", MediaController, :show_thumbnail
   end
 
   scope "/", InnerCircleWeb do
