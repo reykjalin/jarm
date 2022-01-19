@@ -53,7 +53,8 @@ defmodule InnerCircle.MixProject do
       {:canada, github: "jarednorman/canada"},
       {:nebulex, "~> 2.3"},
       {:decorator, "~> 1.4"},
-      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev}
+      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:mogrify, "~> 0.9.1"}
     ]
   end
 

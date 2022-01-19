@@ -21,11 +21,31 @@ defmodule InnerCircleWeb.MediaController do
     end
   end
 
-  defp show_image(conn, media) do
+  def show_compressed(conn, %{"id" => id}) do
+    case Timeline.get_media(id) do
+      nil ->
+        conn
+        |> put_status(404)
+        |> text("File not found")
+
+      %Media{} = media ->
+        # We need to do some special handling.
+        if media.mime_type |> String.starts_with?("video") do
+          show_video(conn, media)
+        else
+          show_image(conn, media, true)
+        end
+    end
+  end
+
+  defp show_image(conn, media, compressed \\ false) do
+    media_path = if compressed, do: media.path_to_compressed, else: media.path_to_original
+    mime_type = if compressed, do: "image/jpeg", else: media.mime_type
+
     conn
-    |> Plug.Conn.put_resp_header("content-type", media.mime_type)
+    |> Plug.Conn.put_resp_header("content-type", mime_type)
     |> Plug.Conn.put_resp_header("cache-control", "private,max-age=31536000,immutable")
-    |> Plug.Conn.send_file(200, media.path_to_original)
+    |> Plug.Conn.send_file(200, media_path)
   end
 
   defp show_video(conn, media) do

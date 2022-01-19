@@ -19,14 +19,16 @@
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
       <figure class="p-3 md:p-5 my-5 border rounded-md">
-        <!-- Assume for now that image size is 700x700 until it's loaded. -->
-        <img
-          id={ media.uuid }
-          class="bg-gray-200"
-          width="700"
-          height="700"
-          src={ Routes.media_path(@socket, :show, media.uuid) }
-          loading="lazy" >
+        <a class="link" href={ Routes.media_path(@socket, :show, media.uuid) }>
+          <!-- Assume for now that image size is 700x700 until it's loaded. -->
+          <img
+            id={ media.uuid }
+            class="bg-gray-200"
+            width="700"
+            height="700"
+            src={ Routes.media_path(@socket, :show_compressed, media.uuid) }
+            loading="lazy" >
+        </a>
       </figure>
     <% end %>
 

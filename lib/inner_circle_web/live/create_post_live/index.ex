@@ -18,7 +18,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
         :media,
         # TODO: Accept a list of mime types instead.
         accept:
-          ~w(image/png image/jpeg image/webp image/gif video/mp4 video/webm video/ogg video/quicktime),
+          ~w(image/png image/jpeg image/webp image/gif image/heic image/heif video/mp4 video/webm video/ogg video/quicktime),
         max_entries: String.to_integer(System.get_env("MAX_MEDIA_PER_POST", "5")),
         # Defautls to 1 GB.
         max_file_size: String.to_integer(System.get_env("MAX_FILE_SIZE", "1000000000"))
@@ -79,12 +79,61 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
 
                 File.cp!(meta.path, dest)
 
-                # TODO: Optimize with a Repo.all() query?
-                Timeline.create_media(current_user, post, %{
-                  "path_to_original" => path_to_original,
-                  "mime_type" => entry.client_type,
-                  "uuid" => entry.uuid
-                })
+                if entry.client_type |> String.starts_with?("image") do
+                  # Generate a compressed version of the image.
+                  compressed_path =
+                    Path.join(media_path, "compressed-#{entry.uuid}.jpeg") |> Path.absname()
+
+                  image =
+                    Mogrify.open(dest)
+                    |> Mogrify.custom("sampling-factor", "4:2:0")
+                    |> Mogrify.custom("strip")
+                    |> Mogrify.custom("quality", "40")
+                    |> Mogrify.custom("interlace", "JPEG")
+                    |> Mogrify.custom("colorspace", "sRGB")
+                    |> Mogrify.custom("auto-orient")
+                    |> Mogrify.format("jpg")
+                    |> Mogrify.save(path: compressed_path)
+
+                  IO.inspect(image, label: "image")
+
+                  # Convert HEIC and HEIF files to PNG.
+                  mime_type =
+                    if entry.client_type == "image/heic" or entry.client_type == "image/heif",
+                      do: "image/png",
+                      else: entry.client_type
+
+                  if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
+                    image =
+                      Mogrify.open(dest) |> Mogrify.format("png") |> Mogrify.save(in_place: true)
+
+                    # We delete the original HEIC/HEIF file.
+                    File.rm!(dest)
+
+                    # TODO: Optimize with a Repo.all() query?
+                    Timeline.create_media(current_user, post, %{
+                      "path_to_original" => image.path,
+                      "path_to_compressed" => compressed_path,
+                      "mime_type" => mime_type,
+                      "uuid" => entry.uuid
+                    })
+                  else
+                    # TODO: Optimize with a Repo.all() query?
+                    Timeline.create_media(current_user, post, %{
+                      "path_to_original" => path_to_original,
+                      "path_to_compressed" => compressed_path,
+                      "mime_type" => mime_type,
+                      "uuid" => entry.uuid
+                    })
+                  end
+                else
+                  # TODO: Optimize with a Repo.all() query?
+                  Timeline.create_media(current_user, post, %{
+                    "path_to_original" => path_to_original,
+                    "mime_type" => entry.client_type,
+                    "uuid" => entry.uuid
+                  })
+                end
               end)
 
               socket

@@ -4,6 +4,7 @@ defmodule InnerCircle.Timeline.Media do
 
   schema "media" do
     field :path_to_original, :string
+    field :path_to_compressed, :string
     field :mime_type, :string
     field :uuid, Ecto.UUID
     belongs_to :user, InnerCircle.Accounts.User
@@ -15,8 +16,8 @@ defmodule InnerCircle.Timeline.Media do
   @doc false
   def changeset(media, attrs) do
     media
-    |> cast(attrs, [:path_to_original, :uuid, :mime_type])
-    |> validate_required([:path_to_original, :uuid, :mime_type])
+    |> cast(attrs, [:path_to_original, :path_to_compressed, :uuid, :mime_type])
+    |> validate_required([:path_to_original, :path_to_compressed, :uuid, :mime_type])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:post_id)
   end
