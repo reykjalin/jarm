@@ -2,7 +2,6 @@ defmodule InnerCircle.Repo.Migrations.RemoveUrlFromMedia do
   use Ecto.Migration
 
   alias InnerCircle.Repo
-  alias InnerCircle.Timeline.Media
 
   def up do
     alter table(:media) do
@@ -19,7 +18,8 @@ defmodule InnerCircle.Repo.Migrations.RemoveUrlFromMedia do
 
     import Ecto.Query, only: [from: 2]
 
-    Repo.all(Media)
+    from("media", select: [:id, :mime_type, :uuid])
+    |> Repo.all()
     |> Enum.map(fn m ->
       ext = MIME.extensions(m.mime_type) |> hd
       url = "/media/#{m.uuid}.#{ext}"

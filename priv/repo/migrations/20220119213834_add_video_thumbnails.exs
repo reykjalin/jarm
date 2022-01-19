@@ -2,7 +2,6 @@ defmodule InnerCircle.Repo.Migrations.AddVideoThumbnails do
   use Ecto.Migration
 
   alias InnerCircle.Repo
-  alias InnerCircle.Timeline.Media
 
   def up do
     alter table(:media) do
@@ -13,7 +12,8 @@ defmodule InnerCircle.Repo.Migrations.AddVideoThumbnails do
 
     import Ecto.Query, only: [from: 2]
 
-    Repo.all(Media)
+    from("media", select: [:id, :mime_type, :path_to_original, :path_to_compressed])
+    |> Repo.all()
     |> Enum.map(fn m ->
       media_dir = Path.dirname(m.path_to_original)
 
@@ -31,13 +31,16 @@ defmodule InnerCircle.Repo.Migrations.AddVideoThumbnails do
         thumbnail_path
       ])
 
-      from(me in Media, where: me.id == ^m.id)
+      from(me in "media", where: me.id == ^m.id)
       |> Repo.update_all(set: [path_to_thumbnail: thumbnail_path])
     end)
   end
 
   def down do
-    Repo.all(Media)
+    import Ecto.Query, only: [from: 2]
+
+    from("media", select: [:path_to_thumbnail, :mime_type])
+    |> Repo.all()
     |> Enum.map(fn m ->
       if m.mime_type |> String.starts_with?("video") do
         File.rm(m.path_to_thumbnail)

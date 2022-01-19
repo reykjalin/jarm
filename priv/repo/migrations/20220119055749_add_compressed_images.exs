@@ -2,7 +2,6 @@ defmodule InnerCircle.Repo.Migrations.AddCompressedImages do
   use Ecto.Migration
 
   alias InnerCircle.Repo
-  alias InnerCircle.Timeline.Media
 
   def up do
     alter table(:media) do
@@ -13,7 +12,8 @@ defmodule InnerCircle.Repo.Migrations.AddCompressedImages do
 
     import Ecto.Query, only: [from: 2]
 
-    Repo.all(Media)
+    from("media", select: [:id, :mime_type, :path_to_original])
+    |> Repo.all()
     |> Enum.map(fn m ->
       if m.mime_type |> String.starts_with?("image") do
         media_dir = Path.dirname(m.path_to_original)
@@ -34,17 +34,20 @@ defmodule InnerCircle.Repo.Migrations.AddCompressedImages do
           compressed_path
         ])
 
-        from(me in Media, where: me.id == ^m.id)
+        from(me in "media", where: me.id == ^m.id)
         |> Repo.update_all(set: [path_to_compressed: compressed_path])
       else
-        from(me in Media, where: me.id == ^m.id)
+        from(me in "media", where: me.id == ^m.id)
         |> Repo.update_all(set: [path_to_compressed: ""])
       end
     end)
   end
 
   def down do
-    Repo.all(Media)
+    import Ecto.Query, only: [from: 2]
+
+    from("media", select: [:path_to_compressed])
+    |> Repo.all()
     |> Enum.map(fn m ->
       File.rm(m.path_to_compressed)
     end)
