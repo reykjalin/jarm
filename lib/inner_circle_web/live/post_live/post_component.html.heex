@@ -1,5 +1,5 @@
 <div
-  id="post-{ @id }"
+  id={ "post-#{ @id }" }
   class="my-5 p-5 md:p-10 border rounded-md bg-white"
   style={ if @post.__meta__.state == :deleted do "display: none;" end }
   >
