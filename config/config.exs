@@ -27,6 +27,17 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
+config :tailwind,
+  version: "3.0.15",
+  default: [
+    args: ~w(
+    --config=tailwind.config.js
+    --input=css/app.css
+    --output=../priv/static/assets/app.css
+  ),
+    cd: Path.expand('../assets', __DIR__)
+  ]
+
 # Set the UUID type to binary to fix the default representation after updating
 # to ecto_sqlite3 0.7.0.
 config :ecto_sqlite3, uuid_type: :binary, binary_id_type: :binary

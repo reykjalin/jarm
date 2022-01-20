@@ -53,8 +53,9 @@ defmodule InnerCircle.MixProject do
       {:canada, github: "jarednorman/canada"},
       {:nebulex, "~> 2.3"},
       {:decorator, "~> 1.4"},
+      {:mogrify, "~> 0.9.1"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:mogrify, "~> 0.9.1"}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
     ]
   end
 
@@ -66,12 +67,12 @@ defmodule InnerCircle.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
+      setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.deploy": [
-        "cmd --cd assets npm run deploy",
+        "tailwind default --minify",
         "esbuild default --minify",
         "phx.digest"
       ]
