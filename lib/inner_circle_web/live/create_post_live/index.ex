@@ -58,6 +58,10 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
     save_post(socket, :new, post_params)
   end
 
+  def handle_event("cancel", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :media, ref)}
+  end
+
   defp save_post(socket, :new, post_params) do
     current_user = socket.assigns.current_user
 

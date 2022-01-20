@@ -27,7 +27,7 @@
       </p>
     <% end %>
 
-    <section id="uploads">
+    <section id="uploads" phx-drop-target={ @uploads.media.ref }>
       <hr class="my-5">
       <%= for entry <- @uploads.media.entries do %>
         <div class="flex flex-col md:flex-row items-center justify-between">
@@ -42,8 +42,8 @@
 
 
           <div class="w-6/12">
-            <label for="media-{ entry.ref }"><%= entry.progress %>%</label>
-            <progress class="w-full" name="media-{ entry.ref }" max="100" value={ entry.progress } >
+            <label for={ "media-#{ entry.ref }" }><%= entry.progress %>%</label>
+            <progress class="w-full" name={ "media-#{ entry.ref }" } max="100" value={ entry.progress } >
               <%= entry.progress %>%
             </progress>
           </div>
@@ -53,8 +53,7 @@
               href="#cancel-media-upload"
               class="link"
               phx-click="cancel"
-              phx-value-ref="{ entry.ref }"
-              phx-target="{ @myself }" >
+              phx-value-ref={ entry.ref } >
               Remove
             </a>
           </div>
@@ -63,6 +62,11 @@
             <%= for error <- upload_errors(@uploads.media, entry) do %>
               <div>
                 <%= humanize(error) %>
+              </div>
+            <% end %>
+            <%= for err <- upload_errors(@uploads.media) do %>
+              <div>
+                <%= humanize(err) %>
               </div>
             <% end %>
           </div>
