@@ -156,6 +156,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     "2M",
                     "-crf",
                     "23",
+                    "-pix_fmt",
+                    "yuv420p",
                     "-movflags",
                     "+faststart",
                     compressed_path

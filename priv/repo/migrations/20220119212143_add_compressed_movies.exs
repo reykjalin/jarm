@@ -29,6 +29,8 @@ defmodule InnerCircle.Repo.Migrations.AddCompressedMovies do
           "2M",
           "-crf",
           "23",
+          "-pix_fmt",
+          "yuv420p",
           "-movflags",
           "+faststart",
           compressed_path
