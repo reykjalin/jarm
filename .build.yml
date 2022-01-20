@@ -30,7 +30,7 @@ tasks:
       . $HOME/.nvm/nvm.sh
       nvm use --lts
       cd inner_circle
-      nvm exec npm run deploy --prefix ./assets
+      MIX_ENV=prod mix assets.deploy
       MIX_ENV=prod mix phx.digest
       MIX_ENV=prod mix release
   - bundle: |
