@@ -49,4 +49,18 @@
       </div>
     <% end %>
   <% end %>
+
+  <section id={ "post-#{ @id }-comments" }>
+    <p><strong>Comments</strong></p>
+    <br>
+    <%= for comment <- @post.comment do %>
+      <div class="">
+        <strong><%= comment.user.display_name %></strong>
+        <p>
+          <%= comment.body %>
+        </p>
+        <hr>
+      </div>
+    <% end %>
+  </section>
 </div>

@@ -5,6 +5,7 @@ defmodule InnerCircle.Timeline.Post do
   schema "posts" do
     field :body, :string
     has_many :media, InnerCircle.Timeline.Media
+    has_many :comment, InnerCircle.Timeline.Comment
     belongs_to :user, InnerCircle.Accounts.User
 
     timestamps()

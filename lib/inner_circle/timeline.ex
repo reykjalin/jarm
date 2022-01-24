@@ -26,6 +26,7 @@ defmodule InnerCircle.Timeline do
     Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id], limit: ^number)
     |> Repo.preload(:user)
     |> Repo.preload(:media)
+    |> Repo.preload(comment: [:user])
   end
 
   @decorate cacheable(cache: Cache, key: {Post, post.id})
@@ -38,6 +39,7 @@ defmodule InnerCircle.Timeline do
     |> Repo.all()
     |> Repo.preload(:user)
     |> Repo.preload(:media)
+    |> Repo.preload(comment: [:user])
   end
 
   def count_posts() do
@@ -58,7 +60,12 @@ defmodule InnerCircle.Timeline do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:user) |> Repo.preload(:media)
+  def get_post!(id),
+    do:
+      Repo.get!(Post, id)
+      |> Repo.preload(:user)
+      |> Repo.preload(:media)
+      |> Repo.preload(comment: [:user])
 
   @decorate cacheable(cache: Cache, key: uuid)
   def get_media(uuid) do
