@@ -20,7 +20,7 @@
 
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
-      <figure class="md:py-5 my-5">
+      <figure class="py-3 md:py-5 my-5">
         <a class="link" href={ Routes.media_path(@socket, :show, media.uuid) }>
           <!-- Assume for now that image size is 700x700 until it's loaded. -->
           <img
@@ -36,7 +36,7 @@
 
     <%= if String.starts_with?(media.mime_type, "video") do %>
       <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
-      <div class="p-3 md:p-5 my-5 border rounded-md">
+      <div class="py-3 md:py-5 my-5">
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
         <video
           id={ media.uuid }
