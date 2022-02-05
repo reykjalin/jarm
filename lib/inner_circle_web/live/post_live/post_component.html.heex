@@ -1,9 +1,10 @@
 <div
   id={ "post-#{ @id }" }
-  class="my-5 p-5 md:p-10 border rounded-md bg-white"
+  class="my-5 border rounded-md bg-white"
   style={ if @post.__meta__.state == :deleted do "display: none;" end }
   >
-  <strong><%= @post.user.display_name %></strong>
+  <div class="p-5 md:p-10">
+    <strong><%= @post.user.display_name %></strong>
 
     <p>
       <%= if can?(@current_user, read(@post)) do %>
@@ -14,11 +15,12 @@
       <% end %>
     </p>
 
-  <%= text_to_html @post.body, attributes: [class: "my-5"] %>
+    <%= text_to_html @post.body, attributes: [class: "my-5"] %>
+  </div>
 
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
-      <figure class="p-3 md:p-5 my-5 border rounded-md">
+      <figure class="md:py-5 my-5">
         <a class="link" href={ Routes.media_path(@socket, :show, media.uuid) }>
           <!-- Assume for now that image size is 700x700 until it's loaded. -->
           <img
@@ -50,7 +52,7 @@
     <% end %>
   <% end %>
 
-  <section id={ "post-#{ @id }-comments" }>
+  <div id={ "post-#{ @id }-comments" } class="p-5 md:p-10">
     <p><strong>Comments</strong></p>
     <br>
     <%= for comment <- @post.comment do %>
@@ -62,5 +64,5 @@
         <hr>
       </div>
     <% end %>
-  </section>
+  </div>
 </div>
