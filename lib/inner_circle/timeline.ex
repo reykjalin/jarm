@@ -12,6 +12,7 @@ defmodule InnerCircle.Timeline do
   alias InnerCircle.Accounts.User
   alias InnerCircle.Timeline.Post
   alias InnerCircle.Timeline.Media
+  alias InnerCircle.Timeline.Comment
 
   @doc """
   Returns the list of posts.
@@ -100,6 +101,13 @@ defmodule InnerCircle.Timeline do
     |> Repo.insert()
   end
 
+  def create_comment(%User{id: user_id}, %Post{id: post_id}, attrs \\ %{}) do
+    %Comment{post_id: post_id, user_id: user_id}
+    |> Post.changeset(attrs)
+    |> Repo.insert()
+    |> broadcast(:comment_created)
+  end
+
   @doc """
   Updates a post.
 
@@ -151,6 +159,7 @@ defmodule InnerCircle.Timeline do
 
   def subscribe do
     Phoenix.PubSub.subscribe(InnerCircle.PubSub, "posts")
+    Phoenix.PubSub.subscribe(InnerCircle.PubSub, "comments")
   end
 
   defp broadcast({:error, _reason} = error, _event), do: error
@@ -160,10 +169,15 @@ defmodule InnerCircle.Timeline do
     {:ok, post}
   end
 
-  defp broadcast({:ok, post}, event) do
+  defp broadcast({:ok, post}, :post_updated) do
     # We need to re-fetch the user to make sure user information is loaded.
     post = get_post!(post.id)
-    Phoenix.PubSub.broadcast(InnerCircle.PubSub, "posts", {event, post})
+    Phoenix.PubSub.broadcast(InnerCircle.PubSub, "posts", {:post_updated, post})
     {:ok, post}
+  end
+
+  defp broadcast({:ok, comment}, :comment_created) do
+    Phoenix.PubSub.broadcast(InnerCircle.PubSub, "comments", {:comment_created, comment})
+    {:ok, comment}
   end
 end

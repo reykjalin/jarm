@@ -8,10 +8,10 @@
 
     <p>
       <%= if can?(@current_user, read(@post)) do %>
-        <%= live_patch "#{ Date.to_string(NaiveDateTime.to_date(@post.inserted_at)) } at #{ Time.to_string(NaiveDateTime.to_time(@post.inserted_at)) }",
+        <%= live_patch "#{ Date.to_string(NaiveDateTime.to_date(@post.inserted_at)) } #{ Time.to_string(NaiveDateTime.to_time(@post.inserted_at)) }",
           to: Routes.post_show_path(@socket, :show, @post), class: "link" %>
       <% else %>
-        <%= "#{ Date.to_string(NaiveDateTime.to_date(@post.inserted_at)) } at #{ Time.to_string(NaiveDateTime.to_time(@post.inserted_at)) }" %>
+        <%= "#{ Date.to_string(NaiveDateTime.to_date(@post.inserted_at)) } #{ Time.to_string(NaiveDateTime.to_time(@post.inserted_at)) }" %>
       <% end %>
     </p>
 
@@ -52,38 +52,8 @@
     <% end %>
   <% end %>
 
-  <div id={ "post-#{ @id }-comments" } class="px-5 md:px-10">
-    <h2 class="text-xl">Comments</h2>
-    <br>
-    <%= for comment <- @post.comments do %>
-      <div class="my-5">
-        <div class="py-3">
-          <strong><%= comment.user.display_name %> says:</strong>
-          <p>
-            <%= "#{ Date.to_string(NaiveDateTime.to_date(comment.inserted_at)) } at #{ Time.to_string(NaiveDateTime.to_time(comment.inserted_at)) }" %> 
-          </p>
-        </div>
-        <%= text_to_html comment.body, attributes: [class: "my-5"] %>
-        <hr>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="my-5 p-5 md:p-10">
-    <.form let={f} for={@changeset} url="#"
-      id="comment-form"
-      class="flex flex-col bg-white"
-      phx-change="validate"
-      phx-submit="save"
-      >
-
-      <%= label f, :body, "New comment", class: "font-bold" %>
-      <%= textarea f, :body, class: "border px-4 py-3 mb-5" %>
-      <%= error_tag f, :body %>
-
-      <%= submit "Post Comment",
-        phx_disable_with: "Posting...",
-        class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500" %>
-    </.form>
-  </div>
+  <p class="text-center py-3 md:py-5">
+    <%= live_patch "#{ ngettext("%{count} comment", "%{count} comments", length(@post.comments)) }",
+        to: Routes.post_show_path(@socket, :show, @post), class: "link" %>
+  </p>
 </div>

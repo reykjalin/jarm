@@ -15,5 +15,6 @@ defmodule InnerCircle.Timeline.Comment do
     comment
     |> cast(attrs, [:body])
     |> validate_required([:body])
+    |> validate_length(:body, min: 1)
   end
 end

@@ -7,7 +7,9 @@ defmodule InnerCircleWeb.PostLive.Show do
 
   @impl true
   def mount(_params, session, socket) do
+    Timeline.subscribe()
     socket = assign_current_user(socket, session)
+
     {:ok, socket}
   end
 
@@ -19,9 +21,13 @@ defmodule InnerCircleWeb.PostLive.Show do
     socket =
       case current_user |> can?(read(post)) do
         true ->
+          comment = %Timeline.Comment{}
+          changeset = Timeline.Comment.changeset(comment, %{})
+
           socket
           |> assign(:page_title, "Post details")
           |> assign(:post, Timeline.get_post!(id))
+          |> assign(:changeset, changeset)
 
         false ->
           socket
@@ -62,5 +68,29 @@ defmodule InnerCircleWeb.PostLive.Show do
       :noreply,
       socket
     }
+  end
+
+  def handle_event("validate", %{"comment" => comment_params}, socket) do
+    changeset =
+      Timeline.Comment.changeset(%Timeline.Comment{}, comment_params)
+      |> Map.put(:action, :validate)
+
+    {:noreply, assign(socket, :changeset, changeset)}
+  end
+
+  def handle_event("save", %{"comment" => comment_params}, socket) do
+    current_user = socket.assigns.current_user
+    post = socket.assigns.post
+    Timeline.create_comment(current_user, post, comment_params)
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:comment_created, comment}, socket) do
+    # Reset the changeset to clear the comment.
+    socket = assign(socket, changeset: Timeline.Comment.changeset(%Timeline.Comment{}, %{}))
+
+    new_post = Timeline.get_post!(comment.post_id)
+    {:noreply, update(socket, :post, fn _post -> new_post end)}
   end
 end

@@ -12,7 +12,7 @@
 
 <section id="posts" phx-update="append">
   <%= for post <- @posts do %>
-    <%= live_component InnerCircleWeb.PostLive.PostComponent,
+    <%= live_component InnerCircleWeb.PostLive.TimelinePostComponent,
       id: post.id,
       post: post,
       current_user: @current_user %>

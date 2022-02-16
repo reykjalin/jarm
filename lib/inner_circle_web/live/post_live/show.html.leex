@@ -14,7 +14,8 @@
   <%= live_component InnerCircleWeb.PostLive.PostComponent,
     id: @post.id,
     post: @post,
-    current_user: @current_user %>
+    current_user: @current_user,
+    changeset: @changeset %>
 </section>
 
 <div class="flex flex-row justify-between my-5">
