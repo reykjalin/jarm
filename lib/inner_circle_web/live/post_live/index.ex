@@ -16,8 +16,6 @@ defmodule InnerCircleWeb.PostLive.Index do
     first_post = List.first(posts, nil)
     last_post = List.last(posts, nil)
 
-    IO.inspect(first_post, label: "first post")
-
     socket =
       assign(socket,
         posts: posts,

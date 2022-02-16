@@ -54,7 +54,6 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
-    IO.inspect(socket.assigns, label: "assigns")
     save_post(socket, :new, post_params)
   end
 
