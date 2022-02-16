@@ -55,7 +55,7 @@
   <div id={ "post-#{ @id }-comments" } class="p-5 md:p-10">
     <p><strong>Comments</strong></p>
     <br>
-    <%= for comment <- @post.comment do %>
+    <%= for comment <- @post.comments do %>
       <div class="">
         <strong><%= comment.user.display_name %></strong>
         <p>
