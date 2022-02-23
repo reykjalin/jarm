@@ -83,103 +83,108 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
 
                 File.cp!(meta.path, dest)
 
-                if entry.client_type |> String.starts_with?("image") do
-                  # Generate a compressed version of the image.
-                  compressed_path =
-                    Path.join(media_path, "compressed-#{entry.uuid}.webp") |> Path.absname()
+                # After file has been copied, process it asynchronously.
+                Task.Supervisor.start_child(FireAndForget.TaskSupervisor, fn ->
+                  if entry.client_type |> String.starts_with?("image") do
+                    # Generate a compressed version of the image.
+                    compressed_path =
+                      Path.join(media_path, "compressed-#{entry.uuid}.webp") |> Path.absname()
 
-                  thumbnail_path =
-                    Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
+                    thumbnail_path =
+                      Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
 
-                  Mogrify.open(dest)
-                  |> Mogrify.resize("700")
-                  |> Mogrify.custom("strip")
-                  |> Mogrify.custom("auto-orient")
-                  |> Mogrify.format("webp")
-                  |> Mogrify.save(path: compressed_path)
+                    Mogrify.open(dest)
+                    |> Mogrify.resize("700")
+                    |> Mogrify.custom("strip")
+                    |> Mogrify.custom("auto-orient")
+                    |> Mogrify.format("webp")
+                    |> Mogrify.save(path: compressed_path)
 
-                  System.cmd("magick", [
-                    "convert",
-                    "#{compressed_path}",
-                    "-resize",
-                    "700",
-                    thumbnail_path
-                  ])
+                    System.cmd("magick", [
+                      "convert",
+                      "#{compressed_path}",
+                      "-resize",
+                      "700",
+                      thumbnail_path
+                    ])
 
-                  # Convert HEIC and HEIF files to PNG.
-                  mime_type =
-                    if entry.client_type == "image/heic" or entry.client_type == "image/heif",
-                      do: "image/png",
-                      else: entry.client_type
+                    # Convert HEIC and HEIF files to PNG.
+                    mime_type =
+                      if entry.client_type == "image/heic" or entry.client_type == "image/heif",
+                        do: "image/png",
+                        else: entry.client_type
 
-                  if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
-                    image =
-                      Mogrify.open(dest) |> Mogrify.format("png") |> Mogrify.save(in_place: true)
+                    if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
+                      image =
+                        Mogrify.open(dest)
+                        |> Mogrify.format("png")
+                        |> Mogrify.save(in_place: true)
 
-                    # We delete the original HEIC/HEIF file.
-                    File.rm!(dest)
+                      # We delete the original HEIC/HEIF file.
+                      File.rm!(dest)
 
-                    # TODO: Optimize with a Repo.all() query?
-                    Timeline.create_media(current_user, post, %{
-                      "path_to_original" => image.path,
-                      "path_to_compressed" => compressed_path,
-                      "path_to_thumbnail" => thumbnail_path,
-                      "mime_type" => mime_type,
-                      "uuid" => entry.uuid
-                    })
+                      # TODO: Optimize with a Repo.all() query?
+                      Timeline.create_media(current_user, post, %{
+                        "path_to_original" => image.path,
+                        "path_to_compressed" => compressed_path,
+                        "path_to_thumbnail" => thumbnail_path,
+                        "mime_type" => mime_type,
+                        "uuid" => entry.uuid
+                      })
+                    else
+                      # TODO: Optimize with a Repo.all() query?
+                      Timeline.create_media(current_user, post, %{
+                        "path_to_original" => path_to_original,
+                        "path_to_compressed" => compressed_path,
+                        "path_to_thumbnail" => thumbnail_path,
+                        "mime_type" => mime_type,
+                        "uuid" => entry.uuid
+                      })
+                    end
                   else
+                    # Generate a compressed version of the image.
+                    compressed_path =
+                      Path.join(media_path, "compressed-#{entry.uuid}.mp4") |> Path.absname()
+
+                    thumbnail_path =
+                      Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
+
+                    System.cmd("ffmpeg", [
+                      "-i",
+                      dest,
+                      "-c:v",
+                      "libx264",
+                      "-maxrate",
+                      "2M",
+                      "-bufsize",
+                      "2M",
+                      "-crf",
+                      "23",
+                      "-pix_fmt",
+                      "yuv420p",
+                      "-movflags",
+                      "+faststart",
+                      compressed_path
+                    ])
+
+                    System.cmd("magick", [
+                      "convert",
+                      "#{compressed_path}[1]",
+                      "-resize",
+                      "700",
+                      thumbnail_path
+                    ])
+
                     # TODO: Optimize with a Repo.all() query?
                     Timeline.create_media(current_user, post, %{
                       "path_to_original" => path_to_original,
                       "path_to_compressed" => compressed_path,
                       "path_to_thumbnail" => thumbnail_path,
-                      "mime_type" => mime_type,
+                      "mime_type" => entry.client_type,
                       "uuid" => entry.uuid
                     })
                   end
-                else
-                  # Generate a compressed version of the image.
-                  compressed_path =
-                    Path.join(media_path, "compressed-#{entry.uuid}.mp4") |> Path.absname()
-
-                  thumbnail_path =
-                    Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
-
-                  System.cmd("ffmpeg", [
-                    "-i",
-                    dest,
-                    "-c:v",
-                    "libx264",
-                    "-maxrate",
-                    "2M",
-                    "-bufsize",
-                    "2M",
-                    "-crf",
-                    "23",
-                    "-pix_fmt",
-                    "yuv420p",
-                    "-movflags",
-                    "+faststart",
-                    compressed_path
-                  ])
-
-                  System.cmd("magick", [
-                    "convert",
-                    "#{compressed_path}[1]",
-                    "-resize",
-                    "700",
-                    thumbnail_path
-                  ])
-
-                  # TODO: Optimize with a Repo.all() query?
-                  Timeline.create_media(current_user, post, %{
-                    "path_to_original" => path_to_original,
-                    "path_to_compressed" => compressed_path,
-                    "path_to_thumbnail" => thumbnail_path,
-                    "mime_type" => entry.client_type,
-                    "uuid" => entry.uuid
-                  })
-                end
+                end)
               end)
 
               socket
