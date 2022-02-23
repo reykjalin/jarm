@@ -115,10 +115,12 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                         else: entry.client_type
 
                     if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
+                      png_path = Path.join(media_path, "#{entry.uuid}.png")
+
                       image =
                         Mogrify.open(dest)
                         |> Mogrify.format("png")
-                        |> Mogrify.save(in_place: true)
+                        |> Mogrify.save(path: png_path)
 
                       # We delete the original HEIC/HEIF file.
                       File.rm!(dest)
