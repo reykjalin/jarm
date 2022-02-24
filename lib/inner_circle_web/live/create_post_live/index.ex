@@ -109,28 +109,24 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     ])
 
                     # Convert HEIC and HEIF files to PNG.
-                    mime_type =
-                      if entry.client_type == "image/heic" or entry.client_type == "image/heif",
-                        do: "image/png",
-                        else: entry.client_type
-
                     if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
                       png_path = Path.join(media_path, "#{entry.uuid}.png")
 
-                      image =
-                        Mogrify.open(dest)
-                        |> Mogrify.format("png")
-                        |> Mogrify.save(path: png_path)
+                      System.cmd("magick", [
+                        "convert",
+                        dest,
+                        png_path
+                      ])
 
                       # We delete the original HEIC/HEIF file.
                       File.rm!(dest)
 
                       # TODO: Optimize with a Repo.all() query?
                       Timeline.create_media(current_user, post, %{
-                        "path_to_original" => image.path,
+                        "path_to_original" => png_path,
                         "path_to_compressed" => compressed_path,
                         "path_to_thumbnail" => thumbnail_path,
-                        "mime_type" => mime_type,
+                        "mime_type" => "image/png",
                         "uuid" => entry.uuid
                       })
                     else
@@ -139,7 +135,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                         "path_to_original" => path_to_original,
                         "path_to_compressed" => compressed_path,
                         "path_to_thumbnail" => thumbnail_path,
-                        "mime_type" => mime_type,
+                        "mime_type" => entry.client_type,
                         "uuid" => entry.uuid
                       })
                     end
