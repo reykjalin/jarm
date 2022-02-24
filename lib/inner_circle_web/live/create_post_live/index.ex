@@ -103,6 +103,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                     System.cmd("magick", [
                       "convert",
                       "#{compressed_path}",
+                      "-strip",
+                      "-auto-orient",
                       "-resize",
                       "700",
                       thumbnail_path
@@ -115,6 +117,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                       System.cmd("magick", [
                         "convert",
                         dest,
+                        "-strip",
+                        "-auto-orient",
                         png_path
                       ])
 
