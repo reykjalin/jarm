@@ -111,6 +111,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
     =========
 
     #{posts}
+
     """
   end
 
@@ -133,8 +134,8 @@ defmodule InnerCircle.Accounts.UserNotifier do
     """
     Your posts with new comments
     ============================
-
     #{posts_with_new_comments}
+
     """
   end
 
@@ -157,8 +158,8 @@ defmodule InnerCircle.Accounts.UserNotifier do
     """
     Posts you commented on that have new comments
     =============================================
-
     #{new_comments}
+
     """
   end
 end

@@ -44,6 +44,14 @@ config :ecto_sqlite3, uuid_type: :binary, binary_id_type: :binary
 
 config :inner_circle, env: config_env()
 
+config :inner_circle, InnerCircle.Scheduler,
+  jobs: [
+    new_post_and_comment_notifications: [
+      schedule: "@daily",
+      task: {InnerCircle.Notifications, :send_notifications, []}
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

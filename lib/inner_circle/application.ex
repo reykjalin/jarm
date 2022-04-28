@@ -20,7 +20,9 @@ defmodule InnerCircle.Application do
       # Start a worker by calling: InnerCircle.Worker.start_link(arg)
       # {InnerCircle.Worker, arg}
       # Start the supervision tree under the OTP Application.
-      {Task.Supervisor, name: FireAndForget.TaskSupervisor}
+      {Task.Supervisor, name: FireAndForget.TaskSupervisor},
+      # Scheduler for notifications.
+      InnerCircle.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

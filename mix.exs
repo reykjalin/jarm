@@ -55,7 +55,8 @@ defmodule InnerCircle.MixProject do
       {:decorator, "~> 1.4"},
       {:mogrify, "~> 0.9.1"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:quantum, "~> 3.0"}
     ]
   end
 
