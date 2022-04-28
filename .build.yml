@@ -1,4 +1,4 @@
-image: ubuntu/lts
+image: ubuntu/focal
 secrets:
   - b2452f2e-0188-49c2-abce-25634fa37505 # sr.ht ssh key
 sources:
