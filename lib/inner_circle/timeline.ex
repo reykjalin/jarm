@@ -43,6 +43,49 @@ defmodule InnerCircle.Timeline do
     |> Repo.preload(comments: [:user])
   end
 
+  def list_posts_from_yesterday_not_made_by_user(%User{id: id}) do
+    today = get_start_of_today()
+    yesterday = get_start_of_yesterday()
+
+    from(p in Post,
+      where:
+        p.user_id != ^id and p.inserted_at >= ^yesterday and
+          p.inserted_at <
+            ^today
+    )
+    |> Repo.all()
+  end
+
+  def list_posts_with_new_comments_that_user_commented_on(%User{id: id}) do
+    today = get_start_of_today()
+    yesterday = get_start_of_yesterday()
+
+    posts_user_commented_on = from c in Comment, where: c.user_id == ^id, select: c.post_id
+
+    from(p in Post,
+      join: c in Comment,
+      on: c.post_id == p.id,
+      where:
+        p.id in subquery(posts_user_commented_on) and c.user_id != ^id and
+          c.inserted_at >= ^yesterday and c.inserted_at < ^today
+    )
+    |> Repo.all()
+  end
+
+  def list_posts_made_by_user_with_new_comments(%User{id: id}) do
+    today = get_start_of_today()
+    yesterday = get_start_of_yesterday()
+
+    from(p in Post,
+      join: c in Comment,
+      on: c.post_id == p.id,
+      where:
+        p.user_id == ^id and c.user_id != ^id and c.inserted_at >= ^yesterday and
+          c.inserted_at < ^today
+    )
+    |> Repo.all()
+  end
+
   def count_posts() do
     Repo.aggregate(Post, :count, :id)
   end
@@ -180,5 +223,26 @@ defmodule InnerCircle.Timeline do
   defp broadcast({:ok, comment}, :comment_created) do
     Phoenix.PubSub.broadcast(InnerCircle.PubSub, "comments", {:comment_created, comment})
     {:ok, comment}
+  end
+
+  defp get_start_of_today() do
+    today_precise = NaiveDateTime.utc_now()
+    NaiveDateTime.new!(today_precise.year, today_precise.month, today_precise.day, 0, 0, 0)
+  end
+
+  defp get_start_of_yesterday() do
+    # 24 hr/day * 60 min/hr * 60 sec/min = 86_400 seconds.
+    one_day_in_seconds = 172_800
+    today_precise = NaiveDateTime.utc_now()
+    yesterday_precise = NaiveDateTime.add(today_precise, -one_day_in_seconds, :second)
+
+    NaiveDateTime.new!(
+      yesterday_precise.year,
+      yesterday_precise.month,
+      yesterday_precise.day,
+      0,
+      0,
+      0
+    )
   end
 end

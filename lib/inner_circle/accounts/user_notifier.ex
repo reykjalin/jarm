@@ -64,4 +64,101 @@ defmodule InnerCircle.Accounts.UserNotifier do
     If you didn't request this change, please ignore this.
     """)
   end
+
+  def deliver_notification(_user, [], [], []) do
+    :ok
+  end
+
+  @doc """
+  Delivers notifications to the specified user based on the list of posts and comments.
+  """
+  def deliver_notification(
+        user,
+        new_posts,
+        your_posts_with_new_comments,
+        posts_with_new_comments_where_you_commented
+      ) do
+    email =
+      prepare_new_posts(new_posts) <>
+        prepare_posts_with_new_comments(your_posts_with_new_comments) <>
+        prepare_posts_commented_on_with_new_comments(posts_with_new_comments_where_you_commented)
+
+    deliver(user.email, "New posts and comments on Inner Circle", email)
+  end
+
+  defp prepare_new_posts([]), do: ""
+
+  defp prepare_new_posts(new_posts) do
+    posts =
+      List.foldl(new_posts, "", fn p, accumulator ->
+        route =
+          InnerCircleWeb.Endpoint.url() <>
+            InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, p.id)
+
+        text = """
+        URL: #{route}
+
+        #{p.body}
+
+        ---
+        """
+
+        accumulator <> text
+      end)
+
+    """
+    New posts
+    =========
+
+    #{posts}
+    """
+  end
+
+  defp prepare_posts_with_new_comments([]), do: ""
+
+  defp prepare_posts_with_new_comments(your_posts_with_new_comments) do
+    posts_with_new_comments =
+      Enum.map(your_posts_with_new_comments, fn p ->
+        InnerCircleWeb.Endpoint.url() <>
+          InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, p.id)
+      end)
+      |> Enum.uniq()
+      |> Enum.reduce("", fn p_url, accumulator ->
+        """
+        #{accumulator}
+        #{p_url}
+        """
+      end)
+
+    """
+    Your posts with new comments
+    ============================
+
+    #{posts_with_new_comments}
+    """
+  end
+
+  defp prepare_posts_commented_on_with_new_comments([]), do: ""
+
+  defp prepare_posts_commented_on_with_new_comments(posts_with_new_comments_where_you_commented) do
+    new_comments =
+      Enum.map(posts_with_new_comments_where_you_commented, fn p ->
+        InnerCircleWeb.Endpoint.url() <>
+          InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, p.id)
+      end)
+      |> Enum.uniq()
+      |> Enum.reduce("", fn p_url, accumulator ->
+        """
+        #{accumulator}
+        #{p_url}
+        """
+      end)
+
+    """
+    Posts you commented on that have new comments
+    =============================================
+
+    #{new_comments}
+    """
+  end
 end
