@@ -11,7 +11,12 @@
     >
 
     <%= label f, :body, class: "font-bold" %>
-    <%= textarea f, :body, autofocus: true, class: "border px-4 py-3 mb-5" %>
+    <%= textarea f,
+      :body,
+      autofocus: true,
+      class: "border px-4 py-3 mb-5",
+      rows: max(String.split(Map.get(@changeset.changes, :body, ""), "\n") |> length(), 5) |> Integer.to_string()
+    %>
     <%= error_tag f, :body %>
 
     <p class="my-5">
