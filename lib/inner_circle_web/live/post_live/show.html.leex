@@ -1,15 +1,5 @@
 <h1 class="text-3xl">Post by <%= @post.user.display_name %></h1>
 
-<%= if @live_action in [:edit] do %>
-  <%= live_modal InnerCircleWeb.PostLive.FormComponent,
-    id: @post.id,
-    title: @page_title,
-    action: @live_action,
-    post: @post,
-    current_user: @current_user,
-    return_to: Routes.post_show_path(@socket, :show, @post) %>
-<% end %>
-
 <section id="post-<%= @post.id %>">
   <%= live_component InnerCircleWeb.PostLive.PostComponent,
     id: @post.id,

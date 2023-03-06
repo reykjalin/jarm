@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tag() %>
+    <.live_title>
+      <%= assigns[:page_title] || "Inner Circle" %>
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
+    <script
+      defer
+      phx-track-static
+      type="text/javascript"
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    >
+    </script>
+  </head>
+  <body class="bg-gray-100">
+    <header class="border-b p-5 mb-5 bg-white">
+      <section class="text-center">
+        <p class="pb-5">
+          <%= live_patch("Home", to: "/", class: "link") %>
+        </p>
+
+        <%= _user_menu(assigns) %>
+      </section>
+    </header>
+    <%= @inner_content %>
+  </body>
+</html>

@@ -41,3 +41,6 @@ npm-debug.log
 
 # SSL certificate files
 tmp/
+
+# Nova configurations
+.nova

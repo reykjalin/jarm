@@ -7,7 +7,6 @@ defmodule InnerCircle.MixProject do
       version: "0.7.0",
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -33,15 +32,15 @@ defmodule InnerCircle.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 2.3"},
-      {:phoenix, "~> 1.6"},
+      {:bcrypt_elixir, "~> 3.0"},
+      {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sqlite3, "~> 0.7.0"},
-      {:phoenix_live_view, "~> 0.17.5"},
+      {:ecto_sqlite3, "~> 0.9.1"},
+      {:phoenix_live_view, "~> 0.18.16"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_html, "~> 3.1"},
-      {:phoenix_live_reload, "~> 1.3", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.6"},
+      {:phoenix_html, "~> 3.3"},
+      {:phoenix_live_reload, "~> 1.4", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.7.2"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},

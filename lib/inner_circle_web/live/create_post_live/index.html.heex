@@ -1,30 +1,32 @@
-<div
-  class="my-5 p-5 md:p-10 border rounded-md bg-white"
->
+<div class="my-5 p-5 md:p-10 border rounded-md bg-white">
   <h2 class="text-2xl mb-5">New Post</h2>
 
-  <.form let={f} for={@changeset} url="#"
+  <.form
+    :let={f}
+    for={@changeset}
     id="post-form"
     class="flex flex-col bg-white"
     phx-change="validate"
     phx-submit="save"
-    >
-
-    <%= label f, :body, class: "font-bold" %>
-    <%= textarea f,
+  >
+    <%= label(f, :body, class: "font-bold") %>
+    <%= textarea(
+      f,
       :body,
       autofocus: true,
       class: "border px-4 py-3 mb-5",
-      rows: max(String.split(Map.get(@changeset.changes, :body, ""), "\n") |> length(), 5) |> Integer.to_string()
-    %>
-    <%= error_tag f, :body %>
+      rows:
+        max(String.split(Map.get(@changeset.changes, :body, ""), "\n") |> length(), 5)
+        |> Integer.to_string()
+    ) %>
+    <%= error_tag(f, :body) %>
 
     <p class="my-5">
       You're allowed to upload up to <%= @uploads.media.max_entries %> items
       (max <%= @uploads.media.max_file_size / 1_000_000_000 %> GB each).
     </p>
 
-    <%= live_file_input @uploads.media, class: "my-5" %>
+    <%= live_file_input(@uploads.media, class: "my-5") %>
 
     <%= for {_ref, error} <- @uploads.media.errors do %>
       <p class="my-5 text-red-700">
@@ -32,23 +34,27 @@
       </p>
     <% end %>
 
-    <section id="uploads" phx-drop-target={ @uploads.media.ref }>
-      <hr class="my-5">
+    <section id="uploads" phx-drop-target={@uploads.media.ref}>
+      <hr class="my-5" />
       <%= for entry <- @uploads.media.entries do %>
         <div class="flex flex-col md:flex-row items-center justify-between">
           <div class="w-2/12">
             <%= if String.starts_with?(entry.client_type, "image") do %>
-              <%= live_img_preview entry, width: 100 %>
+              <%= live_img_preview(entry, width: 100) %>
             <% end %>
             <%= if String.starts_with?(entry.client_type, "video") do %>
               <p><%= entry.client_name %></p>
             <% end %>
           </div>
 
-
           <div class="w-6/12">
             <label for={ "media-#{ entry.ref }" }><%= entry.progress %>%</label>
-            <progress class="w-full" name={ "media-#{ entry.ref }" } max="100" value={ entry.progress } >
+            <progress
+              class="w-full"
+              name={ "media-#{ entry.ref }" }
+              max="100"
+              value={entry.progress}
+            >
               <%= entry.progress %>%
             </progress>
           </div>
@@ -58,7 +64,8 @@
               href="#cancel-media-upload"
               class="link"
               phx-click="cancel"
-              phx-value-ref={ entry.ref } >
+              phx-value-ref={entry.ref}
+            >
               Remove
             </a>
           </div>
@@ -77,10 +84,13 @@
           </div>
         </div>
 
-        <hr class="my-5">
+        <hr class="my-5" />
       <% end %>
     </section>
 
-    <%= submit "Save", phx_disable_with: "Saving...", class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500" %>
+    <%= submit("Save",
+      phx_disable_with: "Saving...",
+      class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+    ) %>
   </.form>
 </div>

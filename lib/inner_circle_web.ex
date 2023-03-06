@@ -29,9 +29,7 @@ defmodule InnerCircleWeb do
 
   def view do
     quote do
-      use Phoenix.View,
-        root: "lib/inner_circle_web/templates",
-        namespace: InnerCircleWeb
+      use Phoenix.Component
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,7 +43,7 @@ defmodule InnerCircleWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {InnerCircleWeb.LayoutView, "live.html"}
+        layout: {InnerCircleWeb.LayoutView, :live}
 
       import InnerCircleWeb.LiveHelpers
 
@@ -84,11 +82,8 @@ defmodule InnerCircleWeb do
       use Phoenix.HTML
 
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
-      import Phoenix.LiveView.Helpers
+      # import Phoenix.Component
       import InnerCircleWeb.LiveHelpers
-
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
 
       import InnerCircleWeb.ErrorHelpers
       import InnerCircleWeb.Gettext
