@@ -30,13 +30,20 @@
       <%= if String.starts_with?(media.mime_type, "image") do %>
         <figure class="w-full">
           <a class="link" href={Routes.media_path(@socket, :show, media.uuid)}>
-            <!-- Assume for now that image size is 700x700 until it's loaded. -->
+            <canvas
+                id={"canvas-#{media.uuid}"}
+                class="w-full shadow-md border border-lightgray border-[1px]"\
+                data-blurhash={media.blurhash}
+                width="30"
+                height="30"
+                phx-hook="BlurHash"
+            >
+            </canvas>
+
             <img
               id={media.uuid}
-              class="bg-gray-200"
-              width="700"
-              height="700"
-              src={Routes.media_path(@socket, :show_compressed, media.uuid)}
+              class="lazy shadow-md border border-lightgray border-[1px]"
+              data-src={Routes.media_path(@socket, :show_compressed, media.uuid)}
               loading="lazy"
             />
           </a>

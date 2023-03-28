@@ -110,6 +110,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                       thumbnail_path
                     ])
 
+                    {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
+
                     # Convert HEIC and HEIF files to PNG.
                     if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
                       png_path = Path.join(media_path, "#{entry.uuid}.png")
@@ -131,7 +133,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                         "path_to_compressed" => compressed_path,
                         "path_to_thumbnail" => thumbnail_path,
                         "mime_type" => "image/png",
-                        "uuid" => entry.uuid
+                        "uuid" => entry.uuid,
+                        "blurhash" => hash
                       })
                     else
                       # TODO: Optimize with a Repo.all() query?
@@ -140,7 +143,8 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                         "path_to_compressed" => compressed_path,
                         "path_to_thumbnail" => thumbnail_path,
                         "mime_type" => entry.client_type,
-                        "uuid" => entry.uuid
+                        "uuid" => entry.uuid,
+                        "blurhash" => hash
                       })
                     end
                   else
@@ -177,13 +181,16 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                       thumbnail_path
                     ])
 
+                    {:ok, hash} = BlurHash.downscale_and_encode(thumbnail_path, 30, 30, 4, 3)
+
                     # TODO: Optimize with a Repo.all() query?
                     Timeline.create_media(current_user, post, %{
                       "path_to_original" => path_to_original,
                       "path_to_compressed" => compressed_path,
                       "path_to_thumbnail" => thumbnail_path,
                       "mime_type" => entry.client_type,
-                      "uuid" => entry.uuid
+                      "uuid" => entry.uuid,
+                      "blurhash" => hash
                     })
                   end
                 end)

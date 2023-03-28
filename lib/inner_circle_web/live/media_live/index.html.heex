@@ -3,12 +3,20 @@
 <div class="my-5 p-5 border rounded-md bg-white flex flex-wrap gap-5 justify-around">
   <%= for m <- @media do %>
     <figure class="max-w-[200px]">
+        <canvas
+            id={"canvas-#{m.uuid}"}
+            class="min-w-[200px] shadow-md border border-lightgray border-[1px]"\
+            data-blurhash={m.blurhash}
+            width="30"
+            height="30"
+            phx-hook="BlurHash"
+        >
+        </canvas>
+
       <img
         id={m.uuid}
-        class="bg-gray-200 shadow-md border border-lightgray border-[1px]"
-        width="700"
-        height="700"
-        src={Routes.media_path(@socket, :show_compressed, m.uuid)}
+        class="lazy shadow-md border border-lightgray border-[1px]"
+        data-src={Routes.media_path(@socket, :show_compressed, m.uuid)}
         loading="lazy"
       />
     </figure>

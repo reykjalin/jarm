@@ -3,13 +3,14 @@ defmodule InnerCircle.Timeline.Media do
   import Ecto.Changeset
 
   schema "media" do
-    field :path_to_original, :string
-    field :path_to_compressed, :string
-    field :path_to_thumbnail, :string
-    field :mime_type, :string
-    field :uuid, Ecto.UUID
-    belongs_to :user, InnerCircle.Accounts.User
-    belongs_to :post, InnerCircle.Timeline.Post
+    field(:path_to_original, :string)
+    field(:path_to_compressed, :string)
+    field(:path_to_thumbnail, :string)
+    field(:mime_type, :string)
+    field(:uuid, Ecto.UUID)
+    field(:blurhash, :string)
+    belongs_to(:user, InnerCircle.Accounts.User)
+    belongs_to(:post, InnerCircle.Timeline.Post)
 
     timestamps()
   end
@@ -17,13 +18,21 @@ defmodule InnerCircle.Timeline.Media do
   @doc false
   def changeset(media, attrs) do
     media
-    |> cast(attrs, [:path_to_original, :path_to_compressed, :path_to_thumbnail, :uuid, :mime_type])
+    |> cast(attrs, [
+      :path_to_original,
+      :path_to_compressed,
+      :path_to_thumbnail,
+      :uuid,
+      :mime_type,
+      :blurhash
+    ])
     |> validate_required([
       :path_to_original,
       :path_to_compressed,
       :path_to_thumbnail,
       :uuid,
-      :mime_type
+      :mime_type,
+      :blurhash
     ])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:post_id)

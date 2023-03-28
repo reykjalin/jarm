@@ -21,7 +21,7 @@
     <header class="border-b p-5 mb-5 bg-white">
       <section class="text-center">
         <p class="pb-5">
-          <%= live_patch("Home", to: "/", class: "link") %>
+          <%= live_redirect("Home", to: "/", class: "link") %>
         </p>
 
         <%= _user_menu(assigns) %>
