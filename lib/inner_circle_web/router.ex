@@ -89,6 +89,8 @@ defmodule InnerCircleWeb.Router do
 
     live "/posts/:id", PostLive.Show, :show
     live "/posts/:id/edit", EditPostLive.Index, :index
+
+    live "/media", MediaLive.Index, :index
   end
 
   scope "/", InnerCircleWeb do

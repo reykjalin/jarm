@@ -54,7 +54,7 @@ defmodule InnerCircle.MixProject do
       {:decorator, "~> 1.4"},
       {:mogrify, "~> 0.9.1"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:quantum, "~> 3.0"}
     ]
   end
@@ -67,10 +67,11 @@ defmodule InnerCircle.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "ecto.setup", "assets.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.setup": ["tailwind.install --if-missing"],
       "assets.deploy": [
         "tailwind default --minify",
         "esbuild default --minify",

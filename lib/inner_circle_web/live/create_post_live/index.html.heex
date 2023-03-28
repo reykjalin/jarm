@@ -26,7 +26,7 @@
       (max <%= @uploads.media.max_file_size / 1_000_000_000 %> GB each).
     </p>
 
-    <%= live_file_input(@uploads.media, class: "my-5") %>
+    <.live_file_input upload={@uploads.media} class="my-5" />
 
     <%= for {_ref, error} <- @uploads.media.errors do %>
       <p class="my-5 text-red-700">
@@ -40,7 +40,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between">
           <div class="w-2/12">
             <%= if String.starts_with?(entry.client_type, "image") do %>
-              <%= live_img_preview(entry, width: 100) %>
+              <.live_img_preview entry={entry} width={100} />
             <% end %>
             <%= if String.starts_with?(entry.client_type, "video") do %>
               <p><%= entry.client_name %></p>

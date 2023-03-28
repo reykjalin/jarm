@@ -7,7 +7,8 @@
         <li class="px-5 link"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
       <% end %>
 
-      <li class="px-5 link"><%= link "Send Invitation", to: Routes.user_invitation_path(@conn, :new) %>
+      <li class="px-5 link"><%= link "My Media", to: Routes.media_index_path(@conn, :index) %></li>
+      <li class="px-5 link"><%= link "Send Invitation", to: Routes.user_invitation_path(@conn, :new) %></li>
       <li class="px-5 link"><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
       <li class="px-5 link"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
     <% else %>
