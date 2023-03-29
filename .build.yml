@@ -10,7 +10,7 @@ repositories:
 packages:
   - esl-erlang
   - elixir
-  - nodejs
+  - node
 tasks:
   - setup: |
       cd inner_circle/assets
