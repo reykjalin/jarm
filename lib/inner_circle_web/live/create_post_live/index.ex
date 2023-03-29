@@ -181,7 +181,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
                       thumbnail_path
                     ])
 
-                    {:ok, hash} = BlurHash.downscale_and_encode(thumbnail_path, 30, 30, 4, 3)
+                    {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
 
                     # TODO: Optimize with a Repo.all() query?
                     Timeline.create_media(current_user, post, %{

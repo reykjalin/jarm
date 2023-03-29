@@ -3,9 +3,6 @@ defmodule InnerCircleWeb.MediaLive.Index do
 
   alias InnerCircle.MediaManagement
   alias InnerCircle.Timeline
-  alias InnerCircle.Timeline.Post
-
-  import Canada, only: [can?: 2]
 
   @impl true
   def mount(_params, session, socket) do
