@@ -10,9 +10,12 @@ repositories:
 packages:
   - esl-erlang
   - elixir
+  - nodejs
 tasks:
   - setup: |
-      cd inner_circle
+      cd inner_circle/assets
+      npm ci
+      cd ..
       mix local.hex --force
       mix local.rebar --force
       mix deps.get --only prod
