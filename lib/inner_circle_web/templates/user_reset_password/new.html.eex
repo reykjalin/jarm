@@ -2,7 +2,7 @@
 
 <%= form_for :user,
   Routes.user_reset_password_path(@conn, :create),
-  [class: "flex flex-col border rounded-md p-10 my-10 bg-white"],
+  [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= label f, :email, class: "font-bold" %>
   <%= email_input f, :email, required: true, class: "border px-4 py-3 mb-5" %>

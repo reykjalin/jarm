@@ -4,7 +4,7 @@
 
 <%= form_for @display_name_changeset,
   Routes.user_settings_path(@conn, :update),
-  [class: "flex flex-col border rounded-md p-10 my-10 bg-white"],
+  [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @display_name_changeset.action do %>
     <div class="alert alert-danger">
@@ -40,7 +40,7 @@
 
 <%= form_for @email_changeset,
   Routes.user_settings_path(@conn, :update),
-  [class: "flex flex-col border rounded-md p-10 my-10 bg-white"],
+  [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @email_changeset.action do %>
     <div class="alert alert-danger">
@@ -76,7 +76,7 @@
 
 <%= form_for @password_changeset,
   Routes.user_settings_path(@conn, :update),
-  [class: "flex flex-col border rounded-md p-10 my-10 bg-white"],
+  [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @password_changeset.action do %>
     <div class="alert alert-danger">

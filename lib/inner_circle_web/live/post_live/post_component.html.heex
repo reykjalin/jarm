@@ -1,6 +1,6 @@
 <div
   id={ "post-#{ @id }" }
-  class="my-5 border rounded-md bg-white"
+  class="my-5 border rounded-md bg-slate-800 light:bg-white"
   style={
     if @post.__meta__.state == :deleted do
       "display: none;"
@@ -83,7 +83,7 @@
       :let={f}
       for={@changeset}
       id="comment-form"
-      class="flex flex-col bg-white"
+      class="flex flex-col light:bg-white"
       phx-change="validate"
       phx-submit="save"
     >

@@ -1,6 +1,6 @@
 <div
   id={ "post-#{ @id }" }
-  class="my-5 border rounded-md bg-white"
+  class="my-5 border rounded-md bg-slate-800 light:bg-white"
   style={
     if @post.__meta__.state == :deleted do
       "display: none;"
@@ -12,7 +12,7 @@
 
     <p>
       <%= if can?(@current_user, read(@post)) do %>
-        <%= live_patch(
+        <%= live_redirect(
           "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}",
           to: Routes.post_show_path(@socket, :show, @post),
           class: "link"
@@ -31,12 +31,13 @@
         <figure class="w-full">
           <a class="link" href={Routes.media_path(@socket, :show, media.uuid)}>
             <canvas
-                id={"canvas-#{media.uuid}"}
-                class="w-full shadow-md border border-lightgray border-[1px]"\
-                data-blurhash={media.blurhash}
-                width="30"
-                height="30"
-                phx-hook="BlurHash"
+              id={"canvas-#{media.uuid}"}
+              class="w-full shadow-md border border-lightgray border-[1px]"
+              \
+              data-blurhash={media.blurhash}
+              width="30"
+              height="30"
+              phx-hook="BlurHash"
             >
             </canvas>
 

@@ -1,17 +1,18 @@
 <h1 class="text-3xl pb-5">All Media</h1>
 
-<div class="my-5 p-5 border rounded-md bg-white flex flex-wrap gap-5 justify-around">
+<div class="my-5 p-5 border rounded-md bg-slate-800 light:bg-white flex flex-wrap gap-5 justify-around">
   <%= for m <- @media do %>
     <figure class="max-w-[200px]">
-        <canvas
-            id={"canvas-#{m.uuid}"}
-            class="min-w-[200px] shadow-md border border-lightgray border-[1px]"\
-            data-blurhash={m.blurhash}
-            width="30"
-            height="30"
-            phx-hook="BlurHash"
-        >
-        </canvas>
+      <canvas
+        id={"canvas-#{m.uuid}"}
+        class="min-w-[200px] shadow-md border border-lightgray border-[1px]"
+        \
+        data-blurhash={m.blurhash}
+        width="30"
+        height="30"
+        phx-hook="BlurHash"
+      >
+      </canvas>
 
       <img
         id={m.uuid}

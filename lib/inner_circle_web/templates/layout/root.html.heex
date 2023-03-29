@@ -17,13 +17,9 @@
     >
     </script>
   </head>
-  <body class="bg-gray-100">
-    <header class="border-b p-5 mb-5 bg-white">
+  <body class="bg-slate-900 text-slate-100 light:bg-gray-100 light:text-black">
+    <header class="border-b p-5 mb-5 bg-slate-800 light:bg-white">
       <section class="text-center">
-        <p class="pb-5">
-          <%= live_redirect("Home", to: "/", class: "link") %>
-        </p>
-
         <%= _user_menu(assigns) %>
       </section>
     </header>

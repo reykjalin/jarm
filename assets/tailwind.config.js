@@ -6,7 +6,12 @@ module.exports = {
     container: {
       center: true,
     },
-    extend: {},
+    extend: {
+      screens: {
+        light: { raw: "(prefers-color-scheme: light)" },
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
+  darkMode: "class",
 };

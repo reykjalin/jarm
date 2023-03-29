@@ -3,8 +3,16 @@
 @import "tailwindcss/utilities";
 
 @layer components {
+  input, textarea {
+    @apply bg-gray-800 light:bg-white !important;
+  }
+
+  .border-b, .border {
+    @apply border-slate-600;
+  }
+
   .link {
-    @apply text-blue-600 underline hover:text-blue-400 hover:no-underline;
+    @apply text-blue-500 underline hover:text-blue-300 hover:no-underline;
   }
 
   .phx-modal {
