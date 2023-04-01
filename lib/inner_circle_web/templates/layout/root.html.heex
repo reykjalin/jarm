@@ -18,10 +18,22 @@
     </script>
   </head>
   <body class="bg-slate-900 text-slate-100 light:bg-gray-100 light:text-black">
-    <header class="border-b p-5 mb-5 bg-slate-800 light:bg-white">
+    <header class="border-b p-5 mb-5 bg-slate-800 light:bg-white flex justify-between">
+      <h1 class="text-3xl">
+        <%= live_redirect("Jarm", to: Routes.post_index_path(@conn, :index)) %>
+      </h1>
+
       <section class="text-center">
         <%= _user_menu(assigns) %>
       </section>
+
+      <p class="px-5">
+        <%= link("Log out",
+          to: Routes.user_session_path(@conn, :delete),
+          method: :delete,
+          class: "link"
+        ) %>
+      </p>
     </header>
     <%= @inner_content %>
   </body>
