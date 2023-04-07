@@ -7,7 +7,7 @@
         <li class="px-5 link"><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
       <% end %>
 
-      <li class="px-5 link"><%= live_redirect "My Media", to: Routes.media_index_path(@conn, :index), class: "link" %></li>
+      <li class="px-5 link"><%= live_redirect "🛖 The Barn", to: Routes.media_index_path(@conn, :index), class: "link" %></li>
       <li class="px-5 link"><%= link "Send Invitation", to: Routes.user_invitation_path(@conn, :new) %></li>
       <li class="px-5 link"><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
     <% else %>
