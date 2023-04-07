@@ -33,11 +33,14 @@
           poster={Routes.media_path(@socket, :show_thumbnail, m.uuid)}
           controls
           preload="metadata"
-          class="bg-gray-200"
+          class="lazy bg-gray-200"
           width="700"
           height="700"
         >
-          <source src={Routes.media_path(@socket, :show_compressed, m.uuid)} type="video/mp4" />
+          <source
+            data-src={Routes.media_path(@socket, :show_compressed, m.uuid)}
+            type="video/mp4"
+          />
         </video>
       </div>
     <% end %>

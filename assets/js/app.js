@@ -92,8 +92,8 @@ window.addEventListener("phx:page-loading-stop", () => {
     ) {
       entries.forEach(function (video) {
         if (video.isIntersecting) {
-          for (var source in video.target.children) {
-            var videoSource = video.target.children[source];
+          for (const source in video.target.children) {
+            const videoSource = video.target.children[source];
             if (
               typeof videoSource.tagName === "string" &&
               videoSource.tagName === "SOURCE"
