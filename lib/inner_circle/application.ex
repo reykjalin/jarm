@@ -16,7 +16,7 @@ defmodule InnerCircle.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: InnerCircle.PubSub},
       # Start the Endpoint (http/https)
-      {SiteEncrypt.Phoenix, InnerCircleWeb.Endpoint},
+      InnerCircleWeb.Endpoint,
       # Start a worker by calling: InnerCircle.Worker.start_link(arg)
       # {InnerCircle.Worker, arg}
       # Start the supervision tree under the OTP Application.

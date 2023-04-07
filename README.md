@@ -40,8 +40,6 @@ To illustrate what this might look like let's assume you store your runtime file
 DATABASE_PATH="/opt/inner_circle/inner_circle.db"
 URL="example.com"
 ADMIN_EMAIL="admin@example.com"
-SITE_ENCRYPT_DB="/opt/inner_circle/site_encrypt_db"
-CERT_MODE="production"
 SMTP_USERNAME="admin@example.com"
 SMTP_PASSWORD="<email_password>"
 SMTP_SERVER="smtp.example.com"
@@ -72,6 +70,8 @@ Running the release directly:
 ```sh
 inner_circle start
 ```
+
+This will run a bare HTTP server on port 4000. It's recommended that you run a reverse proxy via a webserver like Apache, Nginx, or Caddy in front of the application.
 
 ### Send an invitation
 

@@ -131,15 +131,10 @@ live_view_signing_salt =
 # which you should run after static files are built and
 # before starting your production server.
 config :inner_circle, InnerCircleWeb.Endpoint,
-  url: [host: url, scheme: "https", port: String.to_integer(System.get_env("PORT") || "443")],
+  url: [host: url, port: String.to_integer(System.get_env("PORT") || "4000")],
   cache_static_manifest: "priv/static/cache_manifest.json",
   http: [
-    port: String.to_integer(System.get_env("HTTP_PORT") || "80"),
-    transport_options: [socket_opts: [:inet6]]
-  ],
-  https: [
-    port: String.to_integer(System.get_env("PORT") || "443"),
-    cipher_suite: :strong,
+    port: String.to_integer(System.get_env("PORT") || "4000"),
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: secret_key_base,

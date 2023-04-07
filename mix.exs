@@ -48,7 +48,6 @@ defmodule InnerCircle.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:bamboo, "~> 2.2.0"},
       {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
-      {:site_encrypt, "~> 0.4"},
       {:canada, github: "jarednorman/canada"},
       {:nebulex, "~> 2.3"},
       {:decorator, "~> 1.4"},

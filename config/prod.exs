@@ -36,7 +36,7 @@ config :logger, level: :info
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
-config :inner_circle, InnerCircleWeb.Endpoint, force_ssl: [hsts: true]
+# config :inner_circle, InnerCircleWeb.Endpoint, force_ssl: [hsts: true]
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
