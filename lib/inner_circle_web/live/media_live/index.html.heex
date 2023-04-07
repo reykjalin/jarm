@@ -2,24 +2,44 @@
 
 <div class="my-5 p-5 border rounded-md bg-slate-800 light:bg-white flex flex-wrap gap-5 justify-around">
   <%= for m <- @media do %>
-    <figure class="max-w-[200px]">
-      <canvas
-        id={"canvas-#{m.uuid}"}
-        class="min-w-[200px] shadow-md border border-lightgray border-[1px]"
-        \
-        data-blurhash={m.blurhash}
-        width="30"
-        height="30"
-        phx-hook="BlurHash"
-      >
-      </canvas>
+    <%= if String.starts_with?(m.mime_type, "image") do %>
+      <figure class="max-w-[200px]">
+        <canvas
+          id={"canvas-#{m.uuid}"}
+          class="min-w-[200px] shadow-md border border-lightgray"
+          \
+          data-blurhash={m.blurhash}
+          width="30"
+          height="30"
+          phx-hook="BlurHash"
+        >
+        </canvas>
 
-      <img
-        id={m.uuid}
-        class="lazy shadow-md border border-lightgray border-[1px]"
-        data-src={Routes.media_path(@socket, :show_compressed, m.uuid)}
-        loading="lazy"
-      />
-    </figure>
+        <img
+          id={m.uuid}
+          class="lazy shadow-md border border-lightgray"
+          data-src={Routes.media_path(@socket, :show_compressed, m.uuid)}
+          loading="lazy"
+        />
+      </figure>
+    <% end %>
+
+    <%= if String.starts_with?(m.mime_type, "video") do %>
+      <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
+      <div class="max-w-[200px]">
+        <!-- Assume for now that video size is 700x700 until it's loaded. -->
+        <video
+          id={m.uuid}
+          poster={Routes.media_path(@socket, :show_thumbnail, m.uuid)}
+          controls
+          preload="metadata"
+          class="bg-gray-200"
+          width="700"
+          height="700"
+        >
+          <source src={Routes.media_path(@socket, :show_compressed, m.uuid)} type="video/mp4" />
+        </video>
+      </div>
+    <% end %>
   <% end %>
 </div>
