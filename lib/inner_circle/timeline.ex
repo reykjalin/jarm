@@ -28,6 +28,7 @@ defmodule InnerCircle.Timeline do
     |> Repo.preload(:user)
     |> Repo.preload(:media)
     |> Repo.preload(comments: [:user])
+    |> Repo.preload(translations: [:user])
   end
 
   @decorate cacheable(cache: Cache, key: {Post, post.id})
@@ -41,6 +42,7 @@ defmodule InnerCircle.Timeline do
     |> Repo.preload(:user)
     |> Repo.preload(:media)
     |> Repo.preload(comments: [:user])
+    |> Repo.preload(:translations)
   end
 
   def list_posts_from_yesterday_not_made_by_user(%User{id: id}) do
@@ -110,6 +112,7 @@ defmodule InnerCircle.Timeline do
       |> Repo.preload(:user)
       |> Repo.preload(:media)
       |> Repo.preload(comments: [:user])
+      |> Repo.preload(:translations)
 
   @decorate cacheable(cache: Cache, key: uuid)
   def get_media(uuid) do

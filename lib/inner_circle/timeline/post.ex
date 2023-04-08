@@ -4,8 +4,10 @@ defmodule InnerCircle.Timeline.Post do
 
   schema "posts" do
     field :body, :string
+    field :locale, :string
     has_many :media, InnerCircle.Timeline.Media
     has_many :comments, InnerCircle.Timeline.Comment
+    has_many :translations, InnerCircle.Timeline.Translation
     belongs_to :user, InnerCircle.Accounts.User
 
     timestamps()
