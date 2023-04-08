@@ -12,76 +12,76 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n%10 != 1||n%100==11);\n"
 
 msgid "can't be blank"
-msgstr ""
+msgstr "má ekki vera autt"
 
 msgid "has already been taken"
-msgstr ""
+msgstr "er upptekið"
 
 msgid "is invalid"
-msgstr ""
+msgstr "er ógilt"
 
 msgid "must be accepted"
-msgstr ""
+msgstr "þar að vera samþykkt"
 
 msgid "has invalid format"
-msgstr ""
+msgstr "vitlaust format"
 
 msgid "has an invalid entry"
-msgstr ""
+msgstr "inniheldur ógilda færslu"
 
 msgid "is reserved"
-msgstr ""
+msgstr "er frátekið"
 
 msgid "does not match confirmation"
-msgstr ""
+msgstr "passar ekki við staðfestingu"
 
 msgid "is still associated with this entry"
-msgstr ""
+msgstr "er enn tengt við þessa færslu"
 
 msgid "are still associated with this entry"
-msgstr ""
+msgstr "eru enn tengd við þessa færslu"
 
 msgid "should be %{count} character(s)"
 msgid_plural "should be %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ætti að vera %{count} stafur"
+msgstr[1] "ættu að vera %{count} stafir"
 
 msgid "should have %{count} item(s)"
 msgid_plural "should have %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ætti að innihalda %{count} hlut"
+msgstr[1] "ætti að innihalda %{count} hluti"
 
 msgid "should be at least %{count} character(s)"
 msgid_plural "should be at least %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ætti að innihalda a.m.k. %{count} staf"
+msgstr[1] "ætti að innihalda a.m.k. %{count} stafi"
 
 msgid "should have at least %{count} item(s)"
 msgid_plural "should have at least %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ætti að innihalda a.m.k. %{count} hlut"
+msgstr[1] "ætti að innihalda a.m.k. %{count} hluti"
 
 msgid "should be at most %{count} character(s)"
 msgid_plural "should be at most %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ætti að innihalda í mesta lagi %{count} staf"
+msgstr[1] "ætti að innihalda í mesta lagi %{count} stafi"
 
 msgid "should have at most %{count} item(s)"
 msgid_plural "should have at most %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ætti að innihalda í mesta lagi %{count} hlut"
+msgstr[1] "ætti að innihalda í mesta lagi %{count} hluti"
 
 msgid "must be less than %{number}"
-msgstr ""
+msgstr "þarf að vera minna en %{number}"
 
 msgid "must be greater than %{number}"
-msgstr ""
+msgstr "þarf að vera meira en %{number}"
 
 msgid "must be less than or equal to %{number}"
-msgstr ""
+msgstr "þarf að vera minna en eða jafnt og %{number}"
 
 msgid "must be greater than or equal to %{number}"
-msgstr ""
+msgstr "þarf að vera meira en eða jafnt og %{number}"
 
 msgid "must be equal to %{number}"
-msgstr ""
+msgstr "þarf að vera jafnt og %{number}"
