@@ -168,8 +168,8 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 **V3 - activity digest**
 
-- [ ] Comments on posts
-- Daily/weekly digest email
+- [x] Comments on posts
+- [x] Daily/weekly digest email
   - Comments on your posts
   - Comments on posts you commented on
   - Summary of new posts
@@ -221,13 +221,14 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 **V9 - translations**
 
-- Support translations for in-app strings
+- [x] Support translations for in-app strings
 - Support custom translations for posts/comments
-- Add Icelandic translations
+- [x] Add Icelandic translations
+- [x] Add Filipino translations
 
 **V10 - timelines**
 
-- Timeline for “follow only”
+- Timeline for “follow only” / Timeline for "non-muted"
 - Timeline for everyone on instance
 - Change new post notifications to have 2 sections; one per timeline
 
