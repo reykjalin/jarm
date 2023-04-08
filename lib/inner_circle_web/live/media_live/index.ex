@@ -16,7 +16,7 @@ defmodule InnerCircleWeb.MediaLive.Index do
     socket =
       assign(socket,
         media: media,
-        page_title: "🛖 The Barn"
+        page_title: gettext("🛖 The Barn")
       )
 
     {:ok, socket}

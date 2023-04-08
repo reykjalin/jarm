@@ -1,6 +1,6 @@
-<h1 class="text-3xl pb-5">Settings</h1>
+<h1 class="text-3xl pb-5"><%= gettext("Settings") %></h1>
 
-<h2 class="text-2xl">Change display name</h2>
+<h2 class="text-2xl"><%= gettext("Change display name") %></h2>
 
 <%= form_for @display_name_changeset,
   Routes.user_settings_path(@conn, :update),
@@ -8,17 +8,20 @@
   fn f -> %>
   <%= if @display_name_changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
     </div>
   <% end %>
 
   <%= hidden_input(f, :action, name: "action", value: "update_password") %>
 
-  <%= label(f, :display_name, "New display name", class: "font-bold") %>
+  <%= label(f, :display_name, gettext("New display name"), class: "font-bold") %>
   <%= text_input(f, :display_name, required: true, class: "border px-4 py-3 mb-5") %>
   <%= error_tag(f, :display_name) %>
 
-  <%= label(f, :current_password, for: "current_password_for_display_name", class: "font-bold") %>
+  <%= label(f, :current_password, gettext("Current password"),
+    for: "current_password_for_display_name",
+    class: "font-bold"
+  ) %>
   <%= password_input(
     f,
     :current_password,
@@ -30,13 +33,13 @@
   <%= error_tag(f, :current_password) %>
 
   <div class="text-center">
-    <%= submit("Change display name",
+    <%= submit(gettext("Change display name"),
       class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
     ) %>
   </div>
 <% end %>
 
-<h2 class="text-2xl">Change email</h2>
+<h2 class="text-2xl"><%= gettext("Change email") %></h2>
 
 <%= form_for @email_changeset,
   Routes.user_settings_path(@conn, :update),
@@ -50,11 +53,14 @@
 
   <%= hidden_input(f, :action, name: "action", value: "update_email") %>
 
-  <%= label(f, :email, class: "font-bold") %>
+  <%= label(f, :email, gettext("Email"), class: "font-bold") %>
   <%= email_input(f, :email, required: true, class: "border px-4 py-3 mb-5") %>
   <%= error_tag(f, :email) %>
 
-  <%= label(f, :current_password, for: "current_password_for_email", class: "font-bold") %>
+  <%= label(f, :current_password, gettext("Current password"),
+    for: "current_password_for_email",
+    class: "font-bold"
+  ) %>
   <%= password_input(
     f,
     :current_password,
@@ -66,13 +72,13 @@
   <%= error_tag(f, :current_password) %>
 
   <div class="text-center">
-    <%= submit("Change email",
+    <%= submit(gettext("Change email"),
       class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
     ) %>
   </div>
 <% end %>
 
-<h2 class="text-2xl">Change password</h2>
+<h2 class="text-2xl"><%= gettext("Change password") %></h2>
 
 <%= form_for @password_changeset,
   Routes.user_settings_path(@conn, :update),
@@ -86,15 +92,18 @@
 
   <%= hidden_input(f, :action, name: "action", value: "update_password") %>
 
-  <%= label(f, :password, "New password", class: "font-bold") %>
+  <%= label(f, :password, gettext("New password"), class: "font-bold") %>
   <%= password_input(f, :password, required: true, class: "border px-4 py-3 mb-5") %>
   <%= error_tag(f, :password) %>
 
-  <%= label(f, :password_confirmation, "Confirm new password", class: "font-bold") %>
+  <%= label(f, :password_confirmation, gettext("Confirm new password"), class: "font-bold") %>
   <%= password_input(f, :password_confirmation, required: true, class: "border px-4 py-3 mb-5") %>
   <%= error_tag(f, :password_confirmation) %>
 
-  <%= label(f, :current_password, for: "current_password_for_password", class: "font-bold") %>
+  <%= label(f, :current_password, gettext("Current password"),
+    for: "current_password_for_password",
+    class: "font-bold"
+  ) %>
   <%= password_input(
     f,
     :current_password,
@@ -106,7 +115,7 @@
   <%= error_tag(f, :current_password) %>
 
   <div class="text-center">
-    <%= submit("Change password",
+    <%= submit(gettext("Change password"),
       class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
     ) %>
   </div>

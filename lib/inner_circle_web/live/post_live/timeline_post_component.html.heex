@@ -32,7 +32,7 @@
           <a class="link" href={Routes.media_path(@socket, :show, media.uuid)}>
             <canvas
               id={"canvas-#{media.uuid}"}
-              class="w-full shadow-md border border-lightgray border-[1px]"
+              class="w-full shadow-md border border-lightgray"
               \
               data-blurhash={media.blurhash}
               width="30"
@@ -43,7 +43,7 @@
 
             <img
               id={media.uuid}
-              class="lazy shadow-md border border-lightgray border-[1px]"
+              class="lazy shadow-md border border-lightgray"
               data-src={Routes.media_path(@socket, :show_compressed, media.uuid)}
               loading="lazy"
             />

@@ -1,4 +1,4 @@
-<h1 class="text-3xl pb-5">Log in</h1>
+<h1 class="text-3xl pb-5"><%= gettext("Log in") %></h1>
 
 <%= form_for @conn,
   Routes.user_session_path(@conn, :create),
@@ -10,26 +10,26 @@
     </p>
   <% end %>
 
-  <%= label(f, :email, class: "mr-5 font-bold") %>
+  <%= label(f, :email, gettext("Email"), class: "mr-5 font-bold") %>
   <%= email_input(f, :email, required: true, autofocus: true, class: "border px-4 py-3 mb-5") %>
 
-  <%= label(f, :password, class: "mr-5 font-bold") %>
+  <%= label(f, :password, gettext("Password"), class: "mr-5 font-bold") %>
   <%= password_input(f, :password, required: true, class: "border px-4 py-3 mb-5") %>
 
   <div class="flex items-center mx-auto">
     <%= checkbox(f, :remember_me, class: "mx-2 my-5") %>
-    <%= label(f, :remember_me, "Keep me logged in for 60 days") %>
+    <%= label(f, :remember_me, gettext("Keep me logged in for 60 days")) %>
   </div>
 
   <div class="text-center">
-    <%= submit("Log in",
+    <%= submit(gettext("Log in"),
       class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
     ) %>
   </div>
 <% end %>
 
 <p class="text-center">
-  <%= link("Forgot your password?",
+  <%= link(gettext("Forgot your password?"),
     to: Routes.user_reset_password_path(@conn, :new),
     class: "link"
   ) %>

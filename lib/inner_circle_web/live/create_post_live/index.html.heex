@@ -1,5 +1,5 @@
 <div class="my-5 p-5 md:p-10 border rounded-md bg-slate-800 light:bg-white">
-  <h2 class="text-2xl mb-5">New Jarm</h2>
+  <h2 class="text-2xl mb-5"><%= gettext("New Jarm") %></h2>
 
   <.form
     :let={f}
@@ -22,8 +22,11 @@
     <%= error_tag(f, :body) %>
 
     <p class="my-5">
-      You're allowed to upload up to <%= @uploads.media.max_entries %> items
-      (max <%= @uploads.media.max_file_size / 1_000_000_000 %> GB each).
+      <%= gettext(
+        "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each).",
+        max_number_of_media_entries: @uploads.media.max_entries,
+        max_file_size: @uploads.media.max_file_size / 1_000_000_000
+      ) %>
     </p>
 
     <.live_file_input upload={@uploads.media} class="my-5" />
@@ -66,7 +69,7 @@
               phx-click="cancel"
               phx-value-ref={entry.ref}
             >
-              Remove
+              <%= gettext("Remove") %>
             </a>
           </div>
 
