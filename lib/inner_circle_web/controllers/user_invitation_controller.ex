@@ -11,7 +11,7 @@ defmodule InnerCircleWeb.UserInvitationController do
   def create(conn, %{"user" => %{"email" => email}}) do
     Accounts.deliver_user_invitation(
       email,
-      &Routes.user_registration_url(conn, :new, &1)
+      &Routes.user_registration_url(conn, :new, conn.params["locale"], &1)
     )
 
     # Regardless of the outcome, show an impartial success/error message.

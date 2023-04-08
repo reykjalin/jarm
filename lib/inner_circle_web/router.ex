@@ -13,6 +13,14 @@ defmodule InnerCircleWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :set_locale do
+    plug(SetLocale,
+      gettext: InnerCircleWeb.Gettext,
+      default_locale: "en",
+      cookie_key: "project_locale"
+    )
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -59,9 +67,16 @@ defmodule InnerCircleWeb.Router do
     end
   end
 
+  # Required for localization, apparently never called as per set_locale plug documentation.
+  scope "/", InnerCircleWeb do
+    pipe_through [:browser, :set_locale, :require_authenticated_user]
+    live "/", PostLive.Index, :index
+  end
+
   ## Authentication routes
 
-  scope "/", InnerCircleWeb do
+  scope "/:locale", InnerCircleWeb do
+    pipe_through :set_locale
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
     get "/users/register/:token", UserRegistrationController, :new
@@ -74,8 +89,8 @@ defmodule InnerCircleWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
-  scope "/", InnerCircleWeb do
-    pipe_through [:browser, :require_authenticated_user]
+  scope "/:locale", InnerCircleWeb do
+    pipe_through [:browser, :set_locale, :require_authenticated_user]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
@@ -102,8 +117,8 @@ defmodule InnerCircleWeb.Router do
     get "/thumbnail/:id", MediaController, :show_thumbnail
   end
 
-  scope "/", InnerCircleWeb do
-    pipe_through [:browser]
+  scope "/:locale", InnerCircleWeb do
+    pipe_through [:browser, :set_locale]
 
     delete "/users/log_out", UserSessionController, :delete
   end

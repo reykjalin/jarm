@@ -9,18 +9,22 @@
     post={@post}
     current_user={@current_user}
     changeset={@changeset}
+    locale={@locale}
   />
 </section>
 
 <div class="flex flex-row justify-between my-5">
   <p>
-    <%= live_redirect(gettext("Back"), to: Routes.post_index_path(@socket, :index), class: "link") %>
+    <%= live_redirect(gettext("Back"),
+      to: Routes.post_index_path(@socket, :index, @locale),
+      class: "link"
+    ) %>
   </p>
 
   <p>
     <%= if can?(@current_user, edit(@post)) do %>
       <%= live_patch(gettext("Edit"),
-        to: Routes.edit_post_index_path(@socket, :index, @post),
+        to: Routes.edit_post_index_path(@socket, :index, @locale, @post),
         class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
       ) %>
     <% end %>

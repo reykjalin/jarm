@@ -11,19 +11,22 @@
 
       <li class="px-5 link">
         <%= live_redirect(gettext("🛖 The Barn"),
-          to: Routes.media_index_path(@conn, :index),
+          to: Routes.media_index_path(@conn, :index, @locale),
           class: "link"
         ) %>
       </li>
       <li class="px-5 link">
-        <%= link(gettext("Send Invitation"), to: Routes.user_invitation_path(@conn, :new)) %>
+        <%= link(gettext("Send Invitation"), to: Routes.user_invitation_path(@conn, :new, @locale)) %>
       </li>
       <li class="px-5 link">
-        <%= link(gettext("Settings"), to: Routes.user_settings_path(@conn, :edit)) %>
+        <%= link(gettext("Settings"), to: Routes.user_settings_path(@conn, :edit, @locale)) %>
       </li>
     <% else %>
       <li>
-        <%= link(gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "link") %>
+        <%= link(gettext("Log in"),
+          to: Routes.user_session_path(@conn, :new, @locale),
+          class: "link"
+        ) %>
       </li>
     <% end %>
   </ul>

@@ -7,7 +7,7 @@ defmodule InnerCircleWeb.PostLive.Index do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(%{"locale" => locale}, session, socket) do
     if connected?(socket), do: Timeline.subscribe()
 
     socket = assign_current_user(socket, session)
@@ -20,7 +20,8 @@ defmodule InnerCircleWeb.PostLive.Index do
       assign(socket,
         posts: posts,
         first_post: first_post,
-        last_post: last_post
+        last_post: last_post,
+        locale: locale
       )
 
     {:ok, socket, temporary_assigns: [posts: []]}

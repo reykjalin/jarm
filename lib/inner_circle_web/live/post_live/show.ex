@@ -6,11 +6,11 @@ defmodule InnerCircleWeb.PostLive.Show do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(%{"locale" => locale}, session, socket) do
     Timeline.subscribe()
     socket = assign_current_user(socket, session)
 
-    {:ok, socket}
+    {:ok, assign(socket, locale: locale)}
   end
 
   @impl true

@@ -81,7 +81,7 @@ defmodule InnerCircleWeb.UserAuth do
     conn
     |> renew_session()
     |> delete_resp_cookie(@remember_me_cookie)
-    |> redirect(to: "/")
+    |> redirect(to: Routes.user_session_path(conn, :new, conn.params["locale"]))
   end
 
   @doc """
@@ -134,7 +134,7 @@ defmodule InnerCircleWeb.UserAuth do
       conn
       |> put_flash(:error, "You must log in to access this page.")
       |> maybe_store_return_to()
-      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> redirect(to: Routes.user_session_path(conn, :new, conn.params["locale"]))
       |> halt()
     end
   end
@@ -145,7 +145,7 @@ defmodule InnerCircleWeb.UserAuth do
 
   defp maybe_store_return_to(conn), do: conn
 
-  defp signed_in_path(_conn), do: "/"
+  defp signed_in_path(conn), do: Routes.post_index_path(conn, :index, conn.params["locale"])
 
   def require_authenticated_media_request(conn, _opts) do
     if conn.assigns[:current_user] do

@@ -13,7 +13,7 @@ defmodule InnerCircleWeb.UserResetPasswordController do
     if user = Accounts.get_user_by_email(email) do
       Accounts.deliver_user_reset_password_instructions(
         user,
-        &Routes.user_reset_password_url(conn, :edit, &1)
+        &Routes.user_reset_password_url(conn, :edit, conn.params["locale"], &1)
       )
     end
 
@@ -23,7 +23,7 @@ defmodule InnerCircleWeb.UserResetPasswordController do
       :info,
       "If your email is in our system, you will receive instructions to reset your password shortly."
     )
-    |> redirect(to: "/")
+    |> redirect(to: Routes.user_session_path(conn, :new, conn.params["locale"]))
   end
 
   def edit(conn, _params) do
@@ -37,7 +37,7 @@ defmodule InnerCircleWeb.UserResetPasswordController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Password reset successfully.")
-        |> redirect(to: Routes.user_session_path(conn, :new))
+        |> redirect(to: Routes.user_session_path(conn, :new, conn.params["locale"]))
 
       {:error, changeset} ->
         render(conn, "edit.html", changeset: changeset)
@@ -52,7 +52,7 @@ defmodule InnerCircleWeb.UserResetPasswordController do
     else
       conn
       |> put_flash(:error, "Reset password link is invalid or it has expired.")
-      |> redirect(to: "/")
+      |> redirect(to: Routes.user_session_path(conn, :new, conn.params["locale"]))
       |> halt()
     end
   end

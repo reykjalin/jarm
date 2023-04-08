@@ -4,7 +4,7 @@
   <%= if can?(@current_user, create(Post)) do %>
     <p>
       <%= live_redirect(gettext("🐑 New Jarm"),
-        to: Routes.create_post_index_path(@socket, :new),
+        to: Routes.create_post_index_path(@socket, :new, @locale),
         class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
       ) %>
     </p>
@@ -16,7 +16,8 @@
     <%= live_component(InnerCircleWeb.PostLive.TimelinePostComponent,
       id: post.id,
       post: post,
-      current_user: @current_user
+      current_user: @current_user,
+      locale: @locale
     ) %>
   <% end %>
 </section>

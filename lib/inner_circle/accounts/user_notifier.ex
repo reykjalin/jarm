@@ -93,7 +93,12 @@ defmodule InnerCircle.Accounts.UserNotifier do
       List.foldl(new_posts, "", fn p, accumulator ->
         route =
           InnerCircleWeb.Endpoint.url() <>
-            InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, p.id)
+            InnerCircleWeb.Router.Helpers.post_show_path(
+              InnerCircleWeb.Endpoint,
+              :show,
+              "en",
+              p.id
+            )
 
         text = """
         URL: #{route}
@@ -121,7 +126,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
     posts_with_new_comments =
       Enum.map(your_posts_with_new_comments, fn p ->
         InnerCircleWeb.Endpoint.url() <>
-          InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, p.id)
+          InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, "en", p.id)
       end)
       |> Enum.uniq()
       |> Enum.reduce("", fn p_url, accumulator ->
@@ -145,7 +150,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
     new_comments =
       Enum.map(posts_with_new_comments_where_you_commented, fn p ->
         InnerCircleWeb.Endpoint.url() <>
-          InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, p.id)
+          InnerCircleWeb.Router.Helpers.post_show_path(InnerCircleWeb.Endpoint, :show, "en", p.id)
       end)
       |> Enum.uniq()
       |> Enum.reduce("", fn p_url, accumulator ->

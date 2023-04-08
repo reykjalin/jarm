@@ -15,6 +15,9 @@ config :inner_circle, InnerCircleWeb.Endpoint,
   render_errors: [view: InnerCircleWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: InnerCircle.PubSub
 
+# Configure locales
+config :inner_circle, InnerCircleWeb.Gettext, default_locale: "en", locales: ~w(en is)
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

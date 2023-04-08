@@ -14,7 +14,7 @@
       <%= if can?(@current_user, read(@post)) do %>
         <%= live_redirect(
           "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}",
-          to: Routes.post_show_path(@socket, :show, @post),
+          to: Routes.post_show_path(@socket, :show, @locale, @post),
           class: "link"
         ) %>
       <% else %>
@@ -76,7 +76,7 @@
 
   <p class="text-center py-3 md:py-5">
     <%= live_patch("#{ngettext("%{count} comment", "%{count} comments", length(@post.comments))}",
-      to: Routes.post_show_path(@socket, :show, @post),
+      to: Routes.post_show_path(@socket, :show, @locale, @post),
       class: "link"
     ) %>
   </p>

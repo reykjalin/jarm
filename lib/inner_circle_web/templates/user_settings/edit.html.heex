@@ -3,7 +3,7 @@
 <h2 class="text-2xl"><%= gettext("Change display name") %></h2>
 
 <%= form_for @display_name_changeset,
-  Routes.user_settings_path(@conn, :update),
+  Routes.user_settings_path(@conn, :update, @locale),
   [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @display_name_changeset.action do %>
@@ -42,7 +42,7 @@
 <h2 class="text-2xl"><%= gettext("Change email") %></h2>
 
 <%= form_for @email_changeset,
-  Routes.user_settings_path(@conn, :update),
+  Routes.user_settings_path(@conn, :update, @locale),
   [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @email_changeset.action do %>
@@ -81,7 +81,7 @@
 <h2 class="text-2xl"><%= gettext("Change password") %></h2>
 
 <%= form_for @password_changeset,
-  Routes.user_settings_path(@conn, :update),
+  Routes.user_settings_path(@conn, :update, @locale),
   [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @password_changeset.action do %>

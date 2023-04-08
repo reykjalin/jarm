@@ -54,7 +54,8 @@ defmodule InnerCircle.MixProject do
       {:mogrify, "~> 0.9.1"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
-      {:quantum, "~> 3.0"}
+      {:quantum, "~> 3.0"},
+      {:set_locale, "~> 0.2"}
     ]
   end
 

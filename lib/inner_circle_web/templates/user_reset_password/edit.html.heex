@@ -1,7 +1,7 @@
 <h1><%= gettext("Reset password") %></h1>
 
 <%= form_for @changeset,
-  Routes.user_reset_password_path(@conn, :update, @token),
+  Routes.user_reset_password_path(@conn, :update, @locale, @token),
   [class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @changeset.action do %>
@@ -26,5 +26,5 @@
 <% end %>
 
 <p class="text-center">
-  <%= link(gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "link") %>
+  <%= link(gettext("Log in"), to: Routes.user_session_path(@conn, :new, @locale), class: "link") %>
 </p>

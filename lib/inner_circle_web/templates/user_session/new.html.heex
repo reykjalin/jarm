@@ -1,7 +1,7 @@
 <h1 class="text-3xl pb-5"><%= gettext("Log in") %></h1>
 
 <%= form_for @conn,
-  Routes.user_session_path(@conn, :create),
+  Routes.user_session_path(@conn, :create, @locale),
   [as: :user, class: "flex flex-col border rounded-md p-10 my-10 bg-slate-800 light:bg-white"],
   fn f -> %>
   <%= if @error_message do %>
@@ -30,7 +30,7 @@
 
 <p class="text-center">
   <%= link(gettext("Forgot your password?"),
-    to: Routes.user_reset_password_path(@conn, :new),
+    to: Routes.user_reset_password_path(@conn, :new, @locale),
     class: "link"
   ) %>
 </p>
