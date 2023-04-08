@@ -28,7 +28,7 @@ defmodule InnerCircleWeb.EditPostLive.Index do
         max_file_size: String.to_integer(System.get_env("MAX_FILE_SIZE", "1000000000"))
       )
 
-    socket = assign(socket, :page_title, "Edit Post")
+    socket = assign(socket, :page_title, gettext("Edit jarm"))
 
     {:ok,
      socket

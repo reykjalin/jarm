@@ -39,7 +39,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Post")
+    |> assign(:page_title, gettext("New jarm"))
     |> assign(:post, %Post{})
     |> assign(:current_user, socket.assigns.current_user)
   end
@@ -198,7 +198,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
 
               socket
               |> put_flash(:info, "Post created successfully")
-              |> push_redirect(to: Routes.post_index_path(socket, :index))
+              |> push_redirect(to: Routes.post_index_path(socket, :index, socket.assigns.locale))
 
             {:error, %Ecto.Changeset{} = changeset} ->
               assign(socket, changeset: changeset)
@@ -207,7 +207,7 @@ defmodule InnerCircleWeb.CreatePostLive.Index do
         false ->
           socket
           |> put_flash(:error, "You're not allowed to create new posts")
-          |> push_redirect(to: Routes.post_index_path(socket, :index))
+          |> push_redirect(to: Routes.post_index_path(socket, :index, socket.assigns.locale))
       end
 
     {:noreply, socket}

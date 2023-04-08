@@ -14,11 +14,17 @@ defmodule InnerCircleWeb.UserSettingsController do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
 
+    IO.inspect(user_params, label: "updated display name")
+    IO.inspect(user, label: "current user")
+
     case Accounts.update_user_display_name(user, password, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Display name updated successfully.")
-        |> put_session(:user_return_to, Routes.user_settings_path(conn, :edit))
+        |> put_session(
+          :user_return_to,
+          Routes.user_settings_path(conn, :edit, conn.params["locale"])
+        )
         |> UserAuth.log_in_user(user)
 
       {:error, changeset} ->
@@ -30,12 +36,14 @@ defmodule InnerCircleWeb.UserSettingsController do
     %{"current_password" => password, "user" => user_params} = params
     %Accounts.User{} = user = conn.assigns.current_user
 
+    IO.inspect(user_params, label: "updated email")
+
     case Accounts.apply_user_email(user, password, user_params) do
       {:ok, applied_user} ->
         Accounts.deliver_update_email_instructions(
           applied_user,
           user.email,
-          &Routes.user_settings_url(conn, :confirm_email, &1)
+          &Routes.user_settings_url(conn, :confirm_email, conn.params["locale"], &1)
         )
 
         conn
@@ -43,7 +51,7 @@ defmodule InnerCircleWeb.UserSettingsController do
           :info,
           "A link to confirm your email change has been sent to the new address."
         )
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
+        |> redirect(to: Routes.user_settings_path(conn, :edit, conn.params["locale"]))
 
       {:error, changeset} ->
         render(conn, "edit.html", email_changeset: changeset)
@@ -54,11 +62,16 @@ defmodule InnerCircleWeb.UserSettingsController do
     %{"current_password" => password, "user" => user_params} = params
     user = conn.assigns.current_user
 
+    IO.inspect(user_params, label: "updated password")
+
     case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Password updated successfully.")
-        |> put_session(:user_return_to, Routes.user_settings_path(conn, :edit))
+        |> put_session(
+          :user_return_to,
+          Routes.user_settings_path(conn, :edit, conn.params["locale"])
+        )
         |> UserAuth.log_in_user(user)
 
       {:error, changeset} ->
@@ -71,12 +84,12 @@ defmodule InnerCircleWeb.UserSettingsController do
       :ok ->
         conn
         |> put_flash(:info, "Email changed successfully.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
+        |> redirect(to: Routes.user_settings_path(conn, :edit, conn.params["locale"]))
 
       :error ->
         conn
         |> put_flash(:error, "Email change link is invalid or it has expired.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
+        |> redirect(to: Routes.user_settings_path(conn, :edit, conn.params["locale"]))
     end
   end
 

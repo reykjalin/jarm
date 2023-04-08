@@ -25,7 +25,7 @@ defmodule InnerCircleWeb.PostLive.Show do
           changeset = Timeline.Comment.changeset(comment, %{})
 
           socket
-          |> assign(:page_title, "Post details")
+          |> assign(:page_title, gettext("Jarm details"))
           |> assign(:post, Timeline.get_post!(id))
           |> assign(:changeset, changeset)
 

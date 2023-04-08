@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <%= hidden_input(f, :action, name: "action", value: "update_password") %>
+  <%= hidden_input(f, :action, name: "action", value: "update_display_name") %>
 
   <%= label(f, :display_name, gettext("New display name"), class: "font-bold") %>
   <%= text_input(f, :display_name, required: true, class: "border px-4 py-3 mb-5") %>

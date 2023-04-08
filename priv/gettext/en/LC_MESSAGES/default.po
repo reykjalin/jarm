@@ -18,17 +18,12 @@ msgid_plural "%{count} comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
-#, elixir-autogen, elixir-format
-msgid "%{display_name} says:"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/show.html.heex:33
+#: lib/inner_circle_web/live/post_live/show.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "Are you sure?"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:17
+#: lib/inner_circle_web/live/post_live/show.html.heex:18
 #, elixir-autogen, elixir-format
 msgid "Back"
 msgstr ""
@@ -69,7 +64,7 @@ msgstr ""
 msgid "Current password"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:29
+#: lib/inner_circle_web/live/post_live/show.html.heex:33
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr ""
@@ -79,7 +74,7 @@ msgstr ""
 msgid "Display Name"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:22
+#: lib/inner_circle_web/live/post_live/show.html.heex:26
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr ""
@@ -115,7 +110,7 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/layout/root.html.heex:31
+#: lib/inner_circle_web/views/../templates/layout/root.html.heex:32
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr ""
@@ -123,11 +118,6 @@ msgstr ""
 #: lib/inner_circle_web/live/create_post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "New Jarm"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:92
-#, elixir-autogen, elixir-format
-msgid "New comment"
 msgstr ""
 
 #: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:17
@@ -139,11 +129,6 @@ msgstr ""
 #: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:95
 #, elixir-autogen, elixir-format
 msgid "New password"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/index.html.heex:26
-#, elixir-autogen, elixir-format
-msgid "Older Posts"
 msgstr ""
 
 #: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:9
@@ -161,16 +146,6 @@ msgstr ""
 #: lib/inner_circle_web/live/post_live/post_component.html.heex:96
 #, elixir-autogen, elixir-format
 msgid "Post Comment"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/show.html.heex:2
-#, elixir-autogen, elixir-format
-msgid "Post by %{display_name}"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:97
-#, elixir-autogen, elixir-format
-msgid "Posting..."
 msgstr ""
 
 #: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:1
@@ -221,14 +196,10 @@ msgstr ""
 msgid "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each)."
 msgstr ""
 
+#: lib/inner_circle_web/live/post_live/index.ex:56
 #: lib/inner_circle_web/live/post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "🌾 The Pasture"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/index.html.heex:6
-#, elixir-autogen, elixir-format
-msgid "🐑 New Jarm"
 msgstr ""
 
 #: lib/inner_circle_web/live/media_live/index.ex:19
@@ -236,4 +207,64 @@ msgstr ""
 #: lib/inner_circle_web/views/../templates/layout/_user_menu.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "🛖 The Barn"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
+#, elixir-autogen, elixir-format, fuzzy
+msgid "%{display_name} said:"
+msgstr ""
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:12
+#, elixir-autogen, elixir-format
+msgid "Jarm"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:92
+#, elixir-autogen, elixir-format, fuzzy
+msgid "New comment:"
+msgstr ""
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:94
+#, elixir-autogen, elixir-format
+msgid "🐑 Baa"
+msgstr ""
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:95
+#, elixir-autogen, elixir-format
+msgid "🐑 Baaaa…"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:97
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Posting comment…"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/show.html.heex:2
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Jarm from %{display_name}"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/index.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "Older jarms"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/index.html.heex:6
+#, elixir-autogen, elixir-format, fuzzy
+msgid "🐑 New jarm"
+msgstr ""
+
+#: lib/inner_circle_web/live/edit_post_live/index.ex:31
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Edit jarm"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/show.ex:28
+#, elixir-autogen, elixir-format
+msgid "Jarm details"
+msgstr ""
+
+#: lib/inner_circle_web/live/create_post_live/index.ex:42
+#, elixir-autogen, elixir-format, fuzzy
+msgid "New jarm"
 msgstr ""
