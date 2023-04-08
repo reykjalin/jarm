@@ -3,7 +3,7 @@
 
   <%= if can?(@current_user, create(Post)) do %>
     <p>
-      <%= live_redirect(gettext("🐑 New Jarm"),
+      <%= live_redirect(gettext("🐑 New jarm"),
         to: Routes.create_post_index_path(@socket, :new, @locale),
         class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
       ) %>
@@ -24,8 +24,8 @@
 
 <section id="pagination" class="text-center p-5">
   <%= if @last_post != nil do %>
-    <%= live_patch(gettext("Older Posts"),
-      to: Routes.post_index_path(@socket, :index, older_than: @last_post),
+    <%= live_patch(gettext("Older jarms"),
+      to: Routes.post_index_path(@socket, :index, @locale, older_than: @last_post),
       class: "link"
     ) %>
   <% else %>

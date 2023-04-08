@@ -68,7 +68,7 @@
       <div class="my-5">
         <div class="py-3">
           <strong>
-            <%= gettext("%{display_name} says:", display_name: comment.user.display_name) %>
+            <%= gettext("%{display_name} said:", display_name: comment.user.display_name) %>
           </strong>
           <p>
             <%= "#{Date.to_string(NaiveDateTime.to_date(comment.inserted_at))} at #{Time.to_string(NaiveDateTime.to_time(comment.inserted_at))}" %>
@@ -89,12 +89,12 @@
       phx-change="validate"
       phx-submit="save"
     >
-      <%= label(f, :body, gettext("New comment"), class: "font-bold") %>
+      <%= label(f, :body, gettext("New comment:"), class: "font-bold") %>
       <%= textarea(f, :body, class: "border px-4 py-3 mb-5") %>
       <%= error_tag(f, :body) %>
 
       <%= submit(gettext("Post Comment"),
-        phx_disable_with: gettext("Posting..."),
+        phx_disable_with: gettext("Posting comment…"),
         class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
       ) %>
     </.form>

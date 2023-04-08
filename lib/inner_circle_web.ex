@@ -47,6 +47,8 @@ defmodule InnerCircleWeb do
 
       import InnerCircleWeb.LiveHelpers
 
+      on_mount InnerCircleWeb.RestoreLocale
+
       unquote(view_helpers())
     end
   end

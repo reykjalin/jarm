@@ -53,7 +53,7 @@ defmodule InnerCircleWeb.PostLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "🌾 The Pasture")
+    |> assign(:page_title, gettext("🌾 The Pasture"))
     |> assign(:post, nil)
   end
 

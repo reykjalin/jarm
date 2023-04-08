@@ -1,15 +1,15 @@
-## This file is a PO Template file.
-##
-## "msgid"s here are often extracted from source code.
-## Add new messages manually only if they're dynamic
-## messages that can't be statically extracted.
-##
-## Run "mix gettext.extract" to bring this file up to
-## date. Leave "msgstr"s empty as changing them here has no
-## effect: edit them in PO (.po) files instead.
-#
+## "msgid"s in this file come from POT (.pot) files.
+###
+### Do not add, change, or remove "msgid"s manually here as
+### they're tied to the ones in the corresponding POT file
+### (with the same domain).
+###
+### Use "mix gettext.extract --merge" or "mix gettext.merge"
+### to merge POT files into PO files.
 msgid ""
 msgstr ""
+"Language: fil\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
 
 #: lib/inner_circle_web/live/post_live/timeline_post_component.html.heex:78
 #, elixir-autogen, elixir-format
@@ -131,6 +131,11 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
+#: lib/inner_circle_web/live/post_live/index.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "Older Posts"
+msgstr ""
+
 #: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:9
 #: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:11
 #, elixir-autogen, elixir-format
@@ -146,6 +151,11 @@ msgstr ""
 #: lib/inner_circle_web/live/post_live/post_component.html.heex:96
 #, elixir-autogen, elixir-format
 msgid "Post Comment"
+msgstr ""
+
+#: lib/inner_circle_web/live/post_live/show.html.heex:2
+#, elixir-autogen, elixir-format
+msgid "Post by %{display_name}"
 msgstr ""
 
 #: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:1
@@ -202,6 +212,11 @@ msgstr ""
 msgid "🌾 The Pasture"
 msgstr ""
 
+#: lib/inner_circle_web/live/post_live/index.html.heex:6
+#, elixir-autogen, elixir-format
+msgid "🐑 New Jarm"
+msgstr ""
+
 #: lib/inner_circle_web/live/media_live/index.ex:19
 #: lib/inner_circle_web/live/media_live/index.html.heex:1
 #: lib/inner_circle_web/views/../templates/layout/_user_menu.html.heex:13
@@ -210,7 +225,7 @@ msgid "🛖 The Barn"
 msgstr ""
 
 #: lib/inner_circle_web/live/post_live/post_component.html.heex:71
-#, elixir-autogen, elixir-format
+#, elixir-autogen, elixir-format, fuzzy
 msgid "%{display_name} said:"
 msgstr ""
 
@@ -220,7 +235,7 @@ msgid "Jarm"
 msgstr ""
 
 #: lib/inner_circle_web/live/post_live/post_component.html.heex:92
-#, elixir-autogen, elixir-format
+#, elixir-autogen, elixir-format, fuzzy
 msgid "New comment:"
 msgstr ""
 
@@ -230,26 +245,11 @@ msgid "🐑 Baa"
 msgstr ""
 
 #: lib/inner_circle_web/live/create_post_live/index.html.heex:95
-#, elixir-autogen, elixir-format
+#, elixir-autogen, elixir-format, fuzzy
 msgid "🐑 Baaaa…"
 msgstr ""
 
 #: lib/inner_circle_web/live/post_live/post_component.html.heex:97
-#, elixir-autogen, elixir-format
+#, elixir-autogen, elixir-format, fuzzy
 msgid "Posting comment…"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/show.html.heex:2
-#, elixir-autogen, elixir-format
-msgid "Jarm from %{display_name}"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/index.html.heex:27
-#, elixir-autogen, elixir-format
-msgid "Older jarms"
-msgstr ""
-
-#: lib/inner_circle_web/live/post_live/index.html.heex:6
-#, elixir-autogen, elixir-format
-msgid "🐑 New jarm"
 msgstr ""
