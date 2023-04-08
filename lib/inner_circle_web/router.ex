@@ -70,7 +70,8 @@ defmodule InnerCircleWeb.Router do
   # Required for localization, apparently never called as per set_locale plug documentation.
   scope "/", InnerCircleWeb do
     pipe_through [:browser, :set_locale, :require_authenticated_user]
-    live "/", PostLive.Index, :index
+    live "/", PostLive.Index, :dummy
+    live "/posts/:id", PostLive.Show, :dummy
   end
 
   ## Authentication routes
