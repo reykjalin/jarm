@@ -30,4 +30,34 @@
       </li>
     <% end %>
   </ul>
+
+  <div class="flex flex-row flex-nowrap gap-5 p-5 text-center justify-center">
+    <.link
+      href={
+        URI.parse(@conn.request_path).path
+        |> String.replace_prefix("/#{@locale}", "/en")
+      }
+      class="link"
+    >
+      🇺🇸 English
+    </.link>
+    <.link
+      href={
+        URI.parse(@conn.request_path).path
+        |> String.replace_prefix("/#{@locale}", "/is")
+      }
+      class="link"
+    >
+      🇮🇸 Íslenska
+    </.link>
+    <.link
+      href={
+        URI.parse(@conn.request_path).path
+        |> String.replace_prefix("/#{@locale}", "/fil")
+      }
+      class="link"
+    >
+      🇵🇭 Filipino
+    </.link>
+  </div>
 </nav>
