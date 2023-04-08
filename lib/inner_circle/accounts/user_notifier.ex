@@ -91,18 +91,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
   defp prepare_new_posts(new_posts) do
     posts =
       List.foldl(new_posts, "", fn p, accumulator ->
-        route =
-          InnerCircleWeb.Endpoint.url() <>
-            String.replace(
-              InnerCircleWeb.Router.Helpers.post_show_path(
-                InnerCircleWeb.Endpoint,
-                :show,
-                "en",
-                p.id
-              ),
-              "/en/",
-              "/"
-            )
+        route = get_url_without_port() <> get_post_url(p)
 
         text = """
         URL: #{route}
@@ -129,17 +118,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
   defp prepare_posts_with_new_comments(your_posts_with_new_comments) do
     posts_with_new_comments =
       Enum.map(your_posts_with_new_comments, fn p ->
-        InnerCircleWeb.Endpoint.url() <>
-          String.replace(
-            InnerCircleWeb.Router.Helpers.post_show_path(
-              InnerCircleWeb.Endpoint,
-              :show,
-              "en",
-              p.id
-            ),
-            "/en/",
-            "/"
-          )
+        get_url_without_port() <> get_post_url(p)
       end)
       |> Enum.uniq()
       |> Enum.reduce("", fn p_url, accumulator ->
@@ -162,17 +141,7 @@ defmodule InnerCircle.Accounts.UserNotifier do
   defp prepare_posts_commented_on_with_new_comments(posts_with_new_comments_where_you_commented) do
     new_comments =
       Enum.map(posts_with_new_comments_where_you_commented, fn p ->
-        InnerCircleWeb.Endpoint.url() <>
-          String.replace(
-            InnerCircleWeb.Router.Helpers.post_show_path(
-              InnerCircleWeb.Endpoint,
-              :show,
-              "en",
-              p.id
-            ),
-            "/en/",
-            "/"
-          )
+        get_url_without_port() <> get_post_url(p)
       end)
       |> Enum.uniq()
       |> Enum.reduce("", fn p_url, accumulator ->
@@ -188,5 +157,24 @@ defmodule InnerCircle.Accounts.UserNotifier do
     #{new_comments}
 
     """
+  end
+
+  defp get_post_url(post) do
+    String.replace(
+      InnerCircleWeb.Router.Helpers.post_show_path(
+        InnerCircleWeb.Endpoint,
+        :show,
+        "en",
+        post.id
+      ),
+      "/en/",
+      "/"
+    )
+  end
+
+  defp get_url_without_port() do
+    full_url = InnerCircleWeb.Endpoint.struct_url()
+
+    "#{full_url.scheme}://#{full_url.host}"
   end
 end
