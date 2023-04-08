@@ -2,6 +2,7 @@ defmodule InnerCircleWeb.Router do
   use InnerCircleWeb, :router
 
   import InnerCircleWeb.UserAuth
+  import InnerCircleWeb.Locale
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -17,8 +18,10 @@ defmodule InnerCircleWeb.Router do
     plug(SetLocale,
       gettext: InnerCircleWeb.Gettext,
       default_locale: "en",
-      cookie_key: "project_locale"
+      cookie_key: "jarm_locale"
     )
+
+    plug(:set_locale_cookie, gettext: InnerCircleWeb.Gettext)
   end
 
   pipeline :api do
