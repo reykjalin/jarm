@@ -12,28 +12,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 
 msgid "can't be blank"
-msgstr ""
+msgstr "Hindi pedeng empty"
 
 msgid "has already been taken"
-msgstr ""
+msgstr "Nagamit na"
 
 msgid "is invalid"
-msgstr ""
+msgstr "Hindi pede"
 
 msgid "must be accepted"
-msgstr ""
+msgstr "Kailangan I-accept"
 
 msgid "has invalid format"
-msgstr ""
+msgstr "May maling format"
 
 msgid "has an invalid entry"
-msgstr ""
+msgstr "May maling entry"
 
 msgid "is reserved"
-msgstr ""
+msgstr "Nagamit na ito"
 
 msgid "does not match confirmation"
-msgstr ""
+msgstr "Hindi nag-match ang impormasyon"
 
 msgid "is still associated with this entry"
 msgstr ""
@@ -43,45 +43,45 @@ msgstr ""
 
 msgid "should be %{count} character(s)"
 msgid_plural "should be %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dapat ay %{count} character(s)"
+msgstr[1] "Dapat ay %{count} character(s)"
 
 msgid "should have %{count} item(s)"
 msgid_plural "should have %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dapat ay %{count} item(s)"
+msgstr[1] "Dapat ay %{count} item(s)"
 
 msgid "should be at least %{count} character(s)"
 msgid_plural "should be at least %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dapat ay at least %{count} character(s)"
+msgstr[1] "Dapat ay at least %{count} character(s)"
 
 msgid "should have at least %{count} item(s)"
 msgid_plural "should have at least %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dapat ay at least %{count} item(s)"
+msgstr[1] "Dapat ay at least %{count} item(s)"
 
 msgid "should be at most %{count} character(s)"
 msgid_plural "should be at most %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dapat ay maximum ng %{count} character(s)"
+msgstr[1] "Dapat ay maximum ng %{count} character(s)"
 
 msgid "should have at most %{count} item(s)"
 msgid_plural "should have at most %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dapat ay maximum ng %{count} item(s)"
+msgstr[1] "Dapat ay maximum ng %{count} item(s)"
 
 msgid "must be less than %{number}"
-msgstr ""
+msgstr "Dapat ay less than %{number}"
 
 msgid "must be greater than %{number}"
-msgstr ""
+msgstr "Dapat ay mas madami sa %{number}"
 
 msgid "must be less than or equal to %{number}"
-msgstr ""
+msgstr "Dapat ay mas maunti or equal sa %{number}"
 
 msgid "must be greater than or equal to %{number}"
-msgstr ""
+msgstr "Dapat ay mas madami or equal sa %{number}"
 
 msgid "must be equal to %{number}"
-msgstr ""
+msgstr "Dapat ay equal sa %{number}"
