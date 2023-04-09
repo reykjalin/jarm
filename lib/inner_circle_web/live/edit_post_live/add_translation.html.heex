@@ -1,0 +1,43 @@
+<div class="my-5 p-5 md:p-10 border rounded-md bg-slate-800 light:bg-white">
+  <h1 class="text-2xl mb-5"><%= gettext("Add translation") %></h1>
+
+  <.form
+    :let={f}
+    for={@changeset}
+    id="add-translation-form"
+    class="flex flex-col bg-slate-800 light:bg-white"
+    phx-change="validate"
+    phx-submit="save"
+  >
+    <div class="my-5">
+      <label for="original-jarm" class="font-bold"><%= gettext("Original jarm") %></label>
+      <div name="original-jarm" class="border p-5">
+        <%= text_to_html(@post.body) %>
+      </div>
+    </div>
+
+    <%= label(f, :body, gettext("Jarm"), class: "font-bold") %>
+    <%= textarea(f, :body, autofocus: true, class: "border px-4 py-3") %>
+    <p class="text-red-500 mb-5"><%= error_tag(f, :body) %></p>
+
+    <%= label(f, :locale, gettext("Language"), class: "font-bold") %>
+    <%= select(f, :locale, ["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"],
+      prompt: gettext("Choose language")
+    ) %>
+    <p class="text-red-500 mb-5"><%= error_tag(f, :locale) %></p>
+
+    <%= hidden_input(f, :post_id, value: @post.id) %>
+
+    <%= submit(gettext("Save"),
+      phx_disable_with: gettext("Saving…"),
+      class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+    ) %>
+  </.form>
+</div>
+
+<p>
+  <%= live_redirect(gettext("Back"),
+    to: Routes.post_show_path(@socket, :show, @locale, @post),
+    class: "link"
+  ) %>
+</p>

@@ -11,7 +11,6 @@ defmodule InnerCircleWeb.EditPostLive.Index do
     socket = assign_current_user(socket, session)
 
     post = Timeline.get_post!(params["id"])
-    IO.inspect(post, label: "EDIT params:")
     socket = assign(socket, :post, post)
 
     changeset = Post.changeset(post, %{})
@@ -46,7 +45,6 @@ defmodule InnerCircleWeb.EditPostLive.Index do
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
-    IO.inspect(socket.assigns, label: "assigns")
     save_post(socket, :edit, post_params)
   end
 

@@ -24,10 +24,10 @@
           <% end %>
         </p>
 
-        <%= text_to_html(@post.body, attributes: [class: "my-5"]) %>
+        <%= text_to_html(get_post_body_for_locale(@post, @locale), attributes: [class: "my-5"]) %>
       </div>
 
-      <p><%= get_post_locale(@post) %></p>
+      <p><%= get_locale_for_translated_post(@post, @locale) %></p>
     </div>
   </div>
 

@@ -4,6 +4,7 @@ defmodule InnerCircle.Timeline do
   """
 
   import Ecto.Query, warn: false
+  alias InnerCircle.Timeline.Translation
   alias InnerCircle.Repo
 
   use Nebulex.Caching
@@ -155,6 +156,14 @@ defmodule InnerCircle.Timeline do
     |> broadcast(:comment_created)
   end
 
+  @decorate cache_evict(cache: Cache, key: {Post, post_id})
+  def create_translation(%User{id: user_id}, %Post{id: post_id}, attrs \\ %{}) do
+    %Translation{post_id: post_id, user_id: user_id}
+    |> Translation.changeset(attrs)
+    |> Repo.insert()
+    |> broadcast(:translation_created)
+  end
+
   @doc """
   Updates a post.
 
@@ -226,6 +235,16 @@ defmodule InnerCircle.Timeline do
   defp broadcast({:ok, comment}, :comment_created) do
     Phoenix.PubSub.broadcast(InnerCircle.PubSub, "comments", {:comment_created, comment})
     {:ok, comment}
+  end
+
+  defp broadcast({:ok, translation}, :translation_created) do
+    Phoenix.PubSub.broadcast(
+      InnerCircle.PubSub,
+      "translations",
+      {:translation_created, translation}
+    )
+
+    {:ok, translation}
   end
 
   defp get_start_of_today() do
