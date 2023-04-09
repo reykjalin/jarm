@@ -35,14 +35,16 @@ defmodule InnerCircleWeb.EditPostLive.AddTranslation do
 
     case Timeline.create_translation(current_user, post, translation_params) do
       {:ok, _translation} ->
-        socket
-        |> put_flash(:info, gettext("Translation created successfully"))
-        |> push_redirect(to: Routes.post_index_path(socket, :index, socket.assigns.locale))
+        {:noreply,
+         socket
+         |> put_flash(:info, gettext("Translation created successfully"))
+         |> push_redirect(to: Routes.post_index_path(socket, :index, socket.assigns.locale))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        assign(socket, :changeset, changeset)
-    end
+        {:noreply, assign(socket, :changeset, changeset)}
 
-    {:noreply, socket}
+      _ ->
+        {:noreply, socket}
+    end
   end
 end
