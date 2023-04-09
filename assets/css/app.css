@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 @layer components {
-  input, textarea {
+  input, textarea, select {
     @apply bg-gray-800 light:bg-white !important;
   }
 
