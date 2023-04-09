@@ -21,6 +21,13 @@
     ) %>
     <%= error_tag(f, :body) %>
 
+    <%= label(f, :locale, gettext("Language"), class: "font-bold") %>
+    <%= select(f, :locale, ["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"],
+      selected: @locale,
+      prompt: gettext("Choose language")
+    ) %>
+    <p class="text-red-500 mb-5"><%= error_tag(f, :locale) %></p>
+
     <p class="my-5">
       <%= gettext(
         "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each).",
