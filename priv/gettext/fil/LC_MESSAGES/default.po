@@ -11,18 +11,19 @@ msgstr ""
 "Language: fil\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 
-#: lib/inner_circle_web/live/post_live/timeline_post_component.html.heex:78
+#: lib/inner_circle_web/live/post_live/timeline_post_component.html.heex:84
 #, elixir-autogen, elixir-format
 msgid "%{count} comment"
 msgid_plural "%{count} comments"
 msgstr[0] "%{count} comment"
 msgstr[1] "%{count} comments"
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:37
+#: lib/inner_circle_web/live/post_live/show.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "Are you sure?"
 msgstr "Sure ka ba?"
 
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:39
 #: lib/inner_circle_web/live/post_live/show.html.heex:18
 #, elixir-autogen, elixir-format
 msgid "Back"
@@ -46,7 +47,7 @@ msgstr "Palit ng email"
 msgid "Change password"
 msgstr "Palit ng password"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:65
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
 #, elixir-autogen, elixir-format
 msgid "Comments"
 msgstr "Comments"
@@ -64,7 +65,7 @@ msgstr "Confirm ang bagong password"
 msgid "Current password"
 msgstr "Kasalukuyang password"
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:33
+#: lib/inner_circle_web/live/post_live/show.html.heex:38
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr "Delete"
@@ -74,7 +75,7 @@ msgstr "Delete"
 msgid "Display Name"
 msgstr "Pangalan"
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:26
+#: lib/inner_circle_web/live/post_live/show.html.heex:31
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr "Palitan"
@@ -143,7 +144,7 @@ msgstr "Oops, may mali! Check kung anong mali."
 msgid "Password"
 msgstr "Password"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:96
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:102
 #, elixir-autogen, elixir-format
 msgid "Post Comment"
 msgstr "I-post ang comment"
@@ -154,7 +155,8 @@ msgstr "I-post ang comment"
 msgid "Register"
 msgstr "Register"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:72
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:79
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:65
 #, elixir-autogen, elixir-format
 msgid "Remove"
 msgstr "Tanggalin"
@@ -191,12 +193,13 @@ msgstr "I-send ang instruction para baguhin ang password"
 msgid "Settings"
 msgstr "Settings"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:25
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:32
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:17
 #, elixir-autogen, elixir-format
 msgid "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each)."
 msgstr "Pede ka mag-upload up to %{max_number_of_media_entries} (up to %{max_file_size} GB each)."
 
-#: lib/inner_circle_web/live/post_live/index.ex:56
+#: lib/inner_circle_web/live/post_live/index.ex:58
 #: lib/inner_circle_web/live/post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "🌾 The Pasture"
@@ -209,32 +212,34 @@ msgstr "🌾 Pastulan"
 msgid "🛖 The Barn"
 msgstr "🛖 Kamalig"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:77
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{display_name} said:"
 msgstr "Sabi ni %{display_name}:"
 
 #: lib/inner_circle_web/live/create_post_live/index.html.heex:12
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:19
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "Jarm"
 msgstr "Jarm"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:92
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:98
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New comment:"
 msgstr "Bagong comment"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:94
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:101
 #, elixir-autogen, elixir-format
 msgid "🐑 Baa"
 msgstr "🐑 Mee"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:95
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:102
 #, elixir-autogen, elixir-format, fuzzy
 msgid "🐑 Baaaa…"
 msgstr "🐑 Meeee…"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:97
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:103
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Posting comment…"
 msgstr "Posting comment…"
@@ -254,7 +259,7 @@ msgstr "Lumang jarm"
 msgid "🐑 New jarm"
 msgstr "🐑 Bagong jarm"
 
-#: lib/inner_circle_web/live/edit_post_live/index.ex:31
+#: lib/inner_circle_web/live/edit_post_live/index.ex:30
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit jarm"
 msgstr "Edit jarm"
@@ -268,3 +273,52 @@ msgstr "Jarm"
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New jarm"
 msgstr "Bagong jarm"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:2
+#, elixir-autogen, elixir-format
+msgid "Add translation"
+msgstr "Bæta við þýðingu"
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:27
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Choose language"
+msgstr "Veldu tungumál"
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:24
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Language"
+msgstr "Tungumál"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "Original jarm"
+msgstr "Upprunalega jarmið"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:31
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:82
+#, elixir-autogen, elixir-format
+msgid "Save"
+msgstr "Vista"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:32
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:83
+#, elixir-autogen, elixir-format
+msgid "Saving…"
+msgstr "Vista…"
+
+#: lib/inner_circle_web/live/post_live/show.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Translate"
+msgstr "Þýða"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.ex:10
+#, elixir-autogen, elixir-format
+msgid "Translate jarm"
+msgstr "Þýða jarm"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.ex:40
+#, elixir-autogen, elixir-format
+msgid "Translation created successfully"
+msgstr "Þýðingin heppnaðist"

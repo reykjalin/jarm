@@ -11,18 +11,19 @@ msgstr ""
 "Language: is\n"
 "Plural-Forms: nplurals=2; plural=(n%10 != 1||n%100==11);\n"
 
-#: lib/inner_circle_web/live/post_live/timeline_post_component.html.heex:78
+#: lib/inner_circle_web/live/post_live/timeline_post_component.html.heex:84
 #, elixir-autogen, elixir-format
 msgid "%{count} comment"
 msgid_plural "%{count} comments"
 msgstr[0] "%{count} athugasemd"
 msgstr[1] "%{count} athugasemdir"
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:37
+#: lib/inner_circle_web/live/post_live/show.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "Are you sure?"
 msgstr "Ertu viss?"
 
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:39
 #: lib/inner_circle_web/live/post_live/show.html.heex:18
 #, elixir-autogen, elixir-format
 msgid "Back"
@@ -46,7 +47,7 @@ msgstr "Breyta netfangi"
 msgid "Change password"
 msgstr "Breyta lykilorði"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:65
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
 #, elixir-autogen, elixir-format
 msgid "Comments"
 msgstr "Athugasemdir"
@@ -64,7 +65,7 @@ msgstr "Staðfesta nýtt lykilorð"
 msgid "Current password"
 msgstr "Núverandi lykilorð"
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:33
+#: lib/inner_circle_web/live/post_live/show.html.heex:38
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr "Eyða"
@@ -74,7 +75,7 @@ msgstr "Eyða"
 msgid "Display Name"
 msgstr "Nafn"
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:26
+#: lib/inner_circle_web/live/post_live/show.html.heex:31
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr "Breyta"
@@ -143,7 +144,7 @@ msgstr "Úps, það fór eitthvað úrskeiðis! Vinsamlegast skoðaðu villurnar
 msgid "Password"
 msgstr "Lykilorð"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:96
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:102
 #, elixir-autogen, elixir-format
 msgid "Post Comment"
 msgstr "Gera athugasemd"
@@ -154,7 +155,8 @@ msgstr "Gera athugasemd"
 msgid "Register"
 msgstr "Skrá"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:72
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:79
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:65
 #, elixir-autogen, elixir-format
 msgid "Remove"
 msgstr "Eyða"
@@ -191,12 +193,13 @@ msgstr "Senda leiðbeiningur til að endursetja lykilorð"
 msgid "Settings"
 msgstr "Stillingar"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:25
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:32
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:17
 #, elixir-autogen, elixir-format
 msgid "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each)."
 msgstr "Þú mátt hlaða upp allt að %{max_number_of_media_entries} hlutum (hámark %{max_file_size} GB hver hlutur)."
 
-#: lib/inner_circle_web/live/post_live/index.ex:56
+#: lib/inner_circle_web/live/post_live/index.ex:58
 #: lib/inner_circle_web/live/post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "🌾 The Pasture"
@@ -209,32 +212,34 @@ msgstr "🌾 Túnið"
 msgid "🛖 The Barn"
 msgstr "🛖 Hlaðan"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:77
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{display_name} said:"
 msgstr "%{display_name} sagði:"
 
 #: lib/inner_circle_web/live/create_post_live/index.html.heex:12
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:19
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "Jarm"
 msgstr "Jarm"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:92
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:98
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New comment:"
 msgstr "Ný athugasemd:"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:94
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:101
 #, elixir-autogen, elixir-format
 msgid "🐑 Baa"
 msgstr "🐑 Mee"
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:95
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:102
 #, elixir-autogen, elixir-format, fuzzy
 msgid "🐑 Baaaa…"
 msgstr "🐑 Mee…"
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:97
+#: lib/inner_circle_web/live/post_live/post_component.html.heex:103
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Posting comment…"
 msgstr "Vista athugasemd…"
@@ -254,7 +259,7 @@ msgstr "Eldri jörm"
 msgid "🐑 New jarm"
 msgstr "🐑 Nýtt jarm"
 
-#: lib/inner_circle_web/live/edit_post_live/index.ex:31
+#: lib/inner_circle_web/live/edit_post_live/index.ex:30
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit jarm"
 msgstr "Breyta jarmi"
@@ -268,3 +273,52 @@ msgstr "Jarm"
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New jarm"
 msgstr "Nýtt jarm"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:2
+#, elixir-autogen, elixir-format
+msgid "Add translation"
+msgstr "Add translation"
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:27
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Choose language"
+msgstr "Pili ng language"
+
+#: lib/inner_circle_web/live/create_post_live/index.html.heex:24
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Language"
+msgstr "Language"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "Original jarm"
+msgstr "Original jarm"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:31
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:82
+#, elixir-autogen, elixir-format
+msgid "Save"
+msgstr "Save"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:32
+#: lib/inner_circle_web/live/edit_post_live/index.html.heex:83
+#, elixir-autogen, elixir-format
+msgid "Saving…"
+msgstr "Saving…"
+
+#: lib/inner_circle_web/live/post_live/show.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Translate"
+msgstr "Translate"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.ex:10
+#, elixir-autogen, elixir-format
+msgid "Translate jarm"
+msgstr "Translate jarm"
+
+#: lib/inner_circle_web/live/edit_post_live/add_translation.ex:40
+#, elixir-autogen, elixir-format
+msgid "Translation created successfully"
+msgstr "Successfull na translation"
