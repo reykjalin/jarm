@@ -277,48 +277,48 @@ msgstr "Nýtt jarm"
 #: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "Add translation"
-msgstr "Add translation"
+msgstr "Bæta við þýðingu"
 
 #: lib/inner_circle_web/live/create_post_live/index.html.heex:27
 #: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Choose language"
-msgstr "Pili ng language"
+msgstr "Veldu tungumál"
 
 #: lib/inner_circle_web/live/create_post_live/index.html.heex:24
 #: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:23
 #, elixir-autogen, elixir-format
 msgid "Language"
-msgstr "Language"
+msgstr "Tungumál"
 
 #: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "Original jarm"
-msgstr "Original jarm"
+msgstr "Upprunalega jarmið"
 
 #: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:31
 #: lib/inner_circle_web/live/edit_post_live/index.html.heex:82
 #, elixir-autogen, elixir-format
 msgid "Save"
-msgstr "Save"
+msgstr "Vista"
 
 #: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:32
 #: lib/inner_circle_web/live/edit_post_live/index.html.heex:83
 #, elixir-autogen, elixir-format
 msgid "Saving…"
-msgstr "Saving…"
+msgstr "Vista…"
 
 #: lib/inner_circle_web/live/post_live/show.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Translate"
-msgstr "Translate"
+msgstr "Þýða"
 
 #: lib/inner_circle_web/live/edit_post_live/add_translation.ex:10
 #, elixir-autogen, elixir-format
 msgid "Translate jarm"
-msgstr "Translate jarm"
+msgstr "Þýða jarm"
 
 #: lib/inner_circle_web/live/edit_post_live/add_translation.ex:40
 #, elixir-autogen, elixir-format
 msgid "Translation created successfully"
-msgstr "Successfull na translation"
+msgstr "Þýðingin heppnaðist"
