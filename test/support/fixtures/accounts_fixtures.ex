@@ -1,7 +1,7 @@
-defmodule InnerCircle.AccountsFixtures do
+defmodule Jarm.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `InnerCircle.Accounts` context.
+  entities via the `Jarm.Accounts` context.
   """
 
   def unique_display_name, do: "user#{System.unique_integer()}"
@@ -20,7 +20,7 @@ defmodule InnerCircle.AccountsFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> InnerCircle.Accounts.register_user()
+      |> Jarm.Accounts.register_user()
 
     user
   end

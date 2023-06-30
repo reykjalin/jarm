@@ -1,0 +1,17 @@
+[Unit]
+Description=Jarm
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=<YOUR_USERNAME>
+
+EnvironmentFile=/path/to/jarm_env
+
+ExecStart=/bin/bash -c '/path/to/jarm/bin/jarm start'
+
+[Install]
+WantedBy=multi-user.target

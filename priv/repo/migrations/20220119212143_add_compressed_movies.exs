@@ -1,7 +1,7 @@
-defmodule InnerCircle.Repo.Migrations.AddCompressedMovies do
+defmodule Jarm.Repo.Migrations.AddCompressedMovies do
   use Ecto.Migration
 
-  alias InnerCircle.Repo
+  alias Jarm.Repo
 
   def up do
     import Ecto.Query, only: [from: 2]

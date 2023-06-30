@@ -1,4 +1,4 @@
-defmodule InnerCircleWeb.ChannelCase do
+defmodule JarmWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule InnerCircleWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use InnerCircleWeb.ChannelCase, async: true`, although
+  by setting `use JarmWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,18 +21,18 @@ defmodule InnerCircleWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import InnerCircleWeb.ChannelCase
+      import JarmWeb.ChannelCase
 
       # The default endpoint for testing
-      @endpoint InnerCircleWeb.Endpoint
+      @endpoint JarmWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(InnerCircle.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Jarm.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(InnerCircle.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Jarm.Repo, {:shared, self()})
     end
 
     :ok

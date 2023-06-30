@@ -1,7 +1,7 @@
-defmodule InnerCircle.Repo.Migrations.RemoveUrlFromMedia do
+defmodule Jarm.Repo.Migrations.RemoveUrlFromMedia do
   use Ecto.Migration
 
-  alias InnerCircle.Repo
+  alias Jarm.Repo
 
   def up do
     alter table(:media) do

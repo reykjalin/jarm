@@ -1,7 +1,7 @@
-defmodule InnerCircle.Repo.Migrations.AddMediaBlurhash do
+defmodule Jarm.Repo.Migrations.AddMediaBlurhash do
   use Ecto.Migration
 
-  alias InnerCircle.Repo
+  alias Jarm.Repo
 
   def up do
     alter table(:media) do

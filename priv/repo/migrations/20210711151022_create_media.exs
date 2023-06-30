@@ -1,4 +1,4 @@
-defmodule InnerCircle.Repo.Migrations.CreateMedia do
+defmodule Jarm.Repo.Migrations.CreateMedia do
   use Ecto.Migration
 
   def change do

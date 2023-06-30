@@ -1,4 +1,4 @@
-defmodule InnerCircle.Repo.Migrations.CreateUsersAuthTables do
+defmodule Jarm.Repo.Migrations.CreateUsersAuthTables do
   use Ecto.Migration
 
   def change do

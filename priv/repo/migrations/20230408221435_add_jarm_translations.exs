@@ -1,4 +1,4 @@
-defmodule InnerCircle.Repo.Migrations.AddJarmTranslations do
+defmodule Jarm.Repo.Migrations.AddJarmTranslations do
   use Ecto.Migration
 
   def up do

@@ -4,7 +4,7 @@ import Config
 System.put_env("SMTP_USERNAME", "admin@example.com")
 
 # Configure your database
-config :inner_circle, InnerCircle.Repo, database: "./database.sqlite3"
+config :jarm, Jarm.Repo, database: "./database.sqlite3"
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -12,7 +12,7 @@ config :inner_circle, InnerCircle.Repo, database: "./database.sqlite3"
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :inner_circle, InnerCircleWeb.Endpoint,
+config :jarm, JarmWeb.Endpoint,
   http: [port: 4000],
   secret_key_base: "HIMQEPTD+LljCRQVpb3hcS2+bzTtZC3XxfGPmbcD4+qOXJsCclD5KQuIv+rvs3W8",
   live_view: [signing_salt: "TK/x3uS6"],
@@ -26,7 +26,7 @@ config :inner_circle, InnerCircleWeb.Endpoint,
   ]
 
 ## Email support
-config :inner_circle, InnerCircle.Mailer, adapter: Bamboo.LocalAdapter
+config :jarm, Jarm.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support
 #
@@ -53,13 +53,13 @@ config :inner_circle, InnerCircle.Mailer, adapter: Bamboo.LocalAdapter
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :inner_circle, InnerCircleWeb.Endpoint,
+config :jarm, JarmWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!media).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/inner_circle_web/(live|views)/.*(ex)$",
-      ~r"lib/inner_circle_web/templates/.*(eex)$"
+      ~r"lib/jarm_web/(live|views)/.*(ex)$",
+      ~r"lib/jarm_web/templates/.*(eex)$"
     ]
   ]
 

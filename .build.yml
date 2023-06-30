@@ -2,9 +2,9 @@ image: ubuntu/focal
 secrets:
   - b2452f2e-0188-49c2-abce-25634fa37505 # sr.ht ssh key
 sources:
-  - git@git.sr.ht:~reykjalin/inner_circle
+  - git@git.sr.ht:~reykjalin/jarm
 artifacts:
-  - inner_circle.tar.gz
+  - jarm.tar.gz
 repositories:
   erlang-solutions: https://packages.erlang-solutions.com/ubuntu focal contrib D208507CA14F4FCA
 packages:
@@ -13,7 +13,7 @@ packages:
   - npm
 tasks:
   - setup: |
-      cd inner_circle/assets
+      cd jarm/assets
       npm ci
       cd ..
       mix local.hex --force
@@ -23,9 +23,9 @@ tasks:
   - build: |
       export LANG="en_US.UTF-8"
       export LC_ALL="en_US.UTF-8"
-      cd inner_circle
+      cd jarm
       MIX_ENV=prod mix assets.deploy
       MIX_ENV=prod mix phx.digest
       MIX_ENV=prod mix release
   - bundle: |
-      tar -czvf inner_circle.tar.gz -C inner_circle/_build/prod/rel/ inner_circle
+      tar -czvf jarm.tar.gz -C jarm/_build/prod/rel/ jarm

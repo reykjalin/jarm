@@ -8,7 +8,7 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-#     config :inner_circle, InnerCircleWeb.Endpoint,
+#     config :jarm, JarmWeb.Endpoint,
 #       ...
 #       url: [host: "example.com", port: 443],
 #       https: [
@@ -32,11 +32,11 @@ config :logger, level: :info
 # We also recommend setting `force_ssl` in your endpoint, ensuring
 # no data is ever sent via http, always redirecting to https:
 #
-#     config :inner_circle, InnerCircleWeb.Endpoint,
+#     config :jarm, JarmWeb.Endpoint,
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
-# config :inner_circle, InnerCircleWeb.Endpoint, force_ssl: [hsts: true]
+# config :jarm, JarmWeb.Endpoint, force_ssl: [hsts: true]
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.

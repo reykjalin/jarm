@@ -11,314 +11,314 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/inner_circle_web/live/post_live/timeline_post_component.html.heex:84
+#: lib/jarm_web/live/post_live/timeline_post_component.html.heex:84
 #, elixir-autogen, elixir-format
 msgid "%{count} comment"
 msgid_plural "%{count} comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:42
+#: lib/jarm_web/live/post_live/show.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "Are you sure?"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:39
-#: lib/inner_circle_web/live/post_live/show.html.heex:18
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:39
+#: lib/jarm_web/live/post_live/show.html.heex:18
 #, elixir-autogen, elixir-format
 msgid "Back"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:3
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:36
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:3
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:36
 #, elixir-autogen, elixir-format
 msgid "Change display name"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:42
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:75
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:42
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:75
 #, elixir-autogen, elixir-format
 msgid "Change email"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:81
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:118
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:81
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:118
 #, elixir-autogen, elixir-format
 msgid "Change password"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:71
+#: lib/jarm_web/live/post_live/post_component.html.heex:71
 #, elixir-autogen, elixir-format
 msgid "Comments"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:17
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:99
+#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:17
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:99
 #, elixir-autogen, elixir-format
 msgid "Confirm new password"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:21
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:60
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:103
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:21
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:60
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:103
 #, elixir-autogen, elixir-format
 msgid "Current password"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:38
+#: lib/jarm_web/live/post_live/show.html.heex:38
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:13
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "Display Name"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:31
+#: lib/jarm_web/live/post_live/show.html.heex:31
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_invitation/new.html.heex:7
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:17
-#: lib/inner_circle_web/views/../templates/user_reset_password/new.html.heex:7
-#: lib/inner_circle_web/views/../templates/user_session/new.html.heex:13
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:56
+#: lib/jarm_web/views/../templates/user_invitation/new.html.heex:7
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:17
+#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:7
+#: lib/jarm_web/views/../templates/user_session/new.html.heex:13
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:56
 #, elixir-autogen, elixir-format
 msgid "Email"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:36
-#: lib/inner_circle_web/views/../templates/user_reset_password/new.html.heex:1
-#: lib/inner_circle_web/views/../templates/user_session/new.html.heex:32
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:36
+#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:1
+#: lib/jarm_web/views/../templates/user_session/new.html.heex:32
 #, elixir-autogen, elixir-format
 msgid "Forgot your password?"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_session/new.html.heex:21
+#: lib/jarm_web/views/../templates/user_session/new.html.heex:21
 #, elixir-autogen, elixir-format
 msgid "Keep me logged in for 60 days"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/layout/_user_menu.html.heex:26
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:35
-#: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:29
-#: lib/inner_circle_web/views/../templates/user_reset_password/new.html.heex:18
-#: lib/inner_circle_web/views/../templates/user_session/new.html.heex:1
-#: lib/inner_circle_web/views/../templates/user_session/new.html.heex:25
+#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:26
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:35
+#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:29
+#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:18
+#: lib/jarm_web/views/../templates/user_session/new.html.heex:1
+#: lib/jarm_web/views/../templates/user_session/new.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Log in"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/layout/root.html.heex:32
+#: lib/jarm_web/views/../templates/layout/root.html.heex:32
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:2
+#: lib/jarm_web/live/create_post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "New Jarm"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:17
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:17
 #, elixir-autogen, elixir-format
 msgid "New display name"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:13
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:95
+#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:13
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:95
 #, elixir-autogen, elixir-format
 msgid "New password"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:9
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:11
+#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:9
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:11
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:21
-#: lib/inner_circle_web/views/../templates/user_session/new.html.heex:16
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:21
+#: lib/jarm_web/views/../templates/user_session/new.html.heex:16
 #, elixir-autogen, elixir-format
 msgid "Password"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:102
+#: lib/jarm_web/live/post_live/post_component.html.heex:102
 #, elixir-autogen, elixir-format
 msgid "Post Comment"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:1
-#: lib/inner_circle_web/views/../templates/user_registration/new.html.heex:28
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:1
+#: lib/jarm_web/views/../templates/user_registration/new.html.heex:28
 #, elixir-autogen, elixir-format
 msgid "Register"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:79
-#: lib/inner_circle_web/live/edit_post_live/index.html.heex:65
+#: lib/jarm_web/live/create_post_live/index.html.heex:79
+#: lib/jarm_web/live/edit_post_live/index.html.heex:65
 #, elixir-autogen, elixir-format
 msgid "Remove"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:1
-#: lib/inner_circle_web/views/../templates/user_reset_password/edit.html.heex:22
+#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:1
+#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:22
 #, elixir-autogen, elixir-format
 msgid "Reset password"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/layout/_user_menu.html.heex:19
+#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:19
 #, elixir-autogen, elixir-format
 msgid "Send Invitation"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_invitation/new.html.heex:11
+#: lib/jarm_web/views/../templates/user_invitation/new.html.heex:11
 #, elixir-autogen, elixir-format
 msgid "Send Invite"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_invitation/new.html.heex:1
+#: lib/jarm_web/views/../templates/user_invitation/new.html.heex:1
 #, elixir-autogen, elixir-format
 msgid "Send an invitation"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/user_reset_password/new.html.heex:11
+#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:11
 #, elixir-autogen, elixir-format
 msgid "Send instructions to reset password"
 msgstr ""
 
-#: lib/inner_circle_web/views/../templates/layout/_user_menu.html.heex:22
-#: lib/inner_circle_web/views/../templates/user_settings/edit.html.heex:1
+#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:22
+#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:1
 #, elixir-autogen, elixir-format
 msgid "Settings"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:32
-#: lib/inner_circle_web/live/edit_post_live/index.html.heex:17
+#: lib/jarm_web/live/create_post_live/index.html.heex:32
+#: lib/jarm_web/live/edit_post_live/index.html.heex:17
 #, elixir-autogen, elixir-format
 msgid "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each)."
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/index.ex:58
-#: lib/inner_circle_web/live/post_live/index.html.heex:2
+#: lib/jarm_web/live/post_live/index.ex:58
+#: lib/jarm_web/live/post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "🌾 The Pasture"
 msgstr ""
 
-#: lib/inner_circle_web/live/media_live/index.ex:19
-#: lib/inner_circle_web/live/media_live/index.html.heex:1
-#: lib/inner_circle_web/views/../templates/layout/_user_menu.html.heex:13
+#: lib/jarm_web/live/media_live/index.ex:19
+#: lib/jarm_web/live/media_live/index.html.heex:1
+#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "🛖 The Barn"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:77
+#: lib/jarm_web/live/post_live/post_component.html.heex:77
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{display_name} said:"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:12
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:19
-#: lib/inner_circle_web/live/edit_post_live/index.html.heex:12
+#: lib/jarm_web/live/create_post_live/index.html.heex:12
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:19
+#: lib/jarm_web/live/edit_post_live/index.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "Jarm"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:98
+#: lib/jarm_web/live/post_live/post_component.html.heex:98
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New comment:"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:101
+#: lib/jarm_web/live/create_post_live/index.html.heex:101
 #, elixir-autogen, elixir-format
 msgid "🐑 Baa"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:102
+#: lib/jarm_web/live/create_post_live/index.html.heex:102
 #, elixir-autogen, elixir-format
 msgid "🐑 Baaaa…"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/post_component.html.heex:103
+#: lib/jarm_web/live/post_live/post_component.html.heex:103
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Posting comment…"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:2
+#: lib/jarm_web/live/post_live/show.html.heex:2
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Jarm from %{display_name}"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/index.html.heex:27
+#: lib/jarm_web/live/post_live/index.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "Older jarms"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/index.html.heex:6
+#: lib/jarm_web/live/post_live/index.html.heex:6
 #, elixir-autogen, elixir-format, fuzzy
 msgid "🐑 New jarm"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/index.ex:30
+#: lib/jarm_web/live/edit_post_live/index.ex:30
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit jarm"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.ex:28
+#: lib/jarm_web/live/post_live/show.ex:28
 #, elixir-autogen, elixir-format
 msgid "Jarm details"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.ex:42
+#: lib/jarm_web/live/create_post_live/index.ex:42
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New jarm"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:2
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "Add translation"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:27
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:25
+#: lib/jarm_web/live/create_post_live/index.html.heex:27
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Choose language"
 msgstr ""
 
-#: lib/inner_circle_web/live/create_post_live/index.html.heex:24
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:23
+#: lib/jarm_web/live/create_post_live/index.html.heex:24
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:23
 #, elixir-autogen, elixir-format
 msgid "Language"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:13
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "Original jarm"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:31
-#: lib/inner_circle_web/live/edit_post_live/index.html.heex:82
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:31
+#: lib/jarm_web/live/edit_post_live/index.html.heex:82
 #, elixir-autogen, elixir-format
 msgid "Save"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.html.heex:32
-#: lib/inner_circle_web/live/edit_post_live/index.html.heex:83
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:32
+#: lib/jarm_web/live/edit_post_live/index.html.heex:83
 #, elixir-autogen, elixir-format
 msgid "Saving…"
 msgstr ""
 
-#: lib/inner_circle_web/live/post_live/show.html.heex:25
+#: lib/jarm_web/live/post_live/show.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Translate"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.ex:10
+#: lib/jarm_web/live/edit_post_live/add_translation.ex:10
 #, elixir-autogen, elixir-format
 msgid "Translate jarm"
 msgstr ""
 
-#: lib/inner_circle_web/live/edit_post_live/add_translation.ex:40
+#: lib/jarm_web/live/edit_post_live/add_translation.ex:40
 #, elixir-autogen, elixir-format
 msgid "Translation created successfully"
 msgstr ""

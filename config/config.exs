@@ -7,16 +7,16 @@
 # General application configuration
 import Config
 
-config :inner_circle,
-  ecto_repos: [InnerCircle.Repo]
+config :jarm,
+  ecto_repos: [Jarm.Repo]
 
 # Configures the endpoint
-config :inner_circle, InnerCircleWeb.Endpoint,
-  render_errors: [view: InnerCircleWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: InnerCircle.PubSub
+config :jarm, JarmWeb.Endpoint,
+  render_errors: [view: JarmWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Jarm.PubSub
 
 # Configure locales
-config :inner_circle, InnerCircleWeb.Gettext, default_locale: "en", locales: ~w(en is)
+config :jarm, JarmWeb.Gettext, default_locale: "en", locales: ~w(en is)
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
@@ -45,13 +45,13 @@ config :tailwind,
 # to ecto_sqlite3 0.7.0.
 config :ecto_sqlite3, uuid_type: :binary, binary_id_type: :binary
 
-config :inner_circle, env: config_env()
+config :jarm, env: config_env()
 
-config :inner_circle, InnerCircle.Scheduler,
+config :jarm, Jarm.Scheduler,
   jobs: [
     new_post_and_comment_notifications: [
       schedule: "@daily",
-      task: {InnerCircle.Notifications, :send_notifications, []}
+      task: {Jarm.Notifications, :send_notifications, []}
     ]
   ]
 

@@ -1,4 +1,4 @@
-defmodule InnerCircle.DataCase do
+defmodule Jarm.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule InnerCircle.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use InnerCircle.DataCase, async: true`, although
+  by setting `use Jarm.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule InnerCircle.DataCase do
 
   using do
     quote do
-      alias InnerCircle.Repo
+      alias Jarm.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import InnerCircle.DataCase
+      import Jarm.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(InnerCircle.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Jarm.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(InnerCircle.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Jarm.Repo, {:shared, self()})
     end
 
     :ok

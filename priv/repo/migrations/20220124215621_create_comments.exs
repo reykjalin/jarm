@@ -1,4 +1,4 @@
-defmodule InnerCircle.Repo.Migrations.CreateComments do
+defmodule Jarm.Repo.Migrations.CreateComments do
   use Ecto.Migration
 
   def change do

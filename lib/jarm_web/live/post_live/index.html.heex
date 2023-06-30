@@ -1,0 +1,34 @@
+<div class="flex justify-between items-center">
+  <h1 class="text-3xl pb-5"><%= gettext("🌾 The Pasture") %></h1>
+
+  <%= if can?(@current_user, create(Post)) do %>
+    <p>
+      <%= live_redirect(gettext("🐑 New jarm"),
+        to: Routes.create_post_index_path(@socket, :new, @locale),
+        class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+      ) %>
+    </p>
+  <% end %>
+</div>
+
+<section id="posts" phx-update="append">
+  <%= for post <- @posts do %>
+    <%= live_component(JarmWeb.PostLive.TimelinePostComponent,
+      id: post.id,
+      post: post,
+      current_user: @current_user,
+      locale: @locale
+    ) %>
+  <% end %>
+</section>
+
+<section id="pagination" class="text-center p-5">
+  <%= if @last_post != nil do %>
+    <%= live_patch(gettext("Older jarms"),
+      to: Routes.post_index_path(@socket, :index, @locale, older_than: @last_post),
+      class: "link"
+    ) %>
+  <% else %>
+    <p>No more posts</p>
+  <% end %>
+</section>

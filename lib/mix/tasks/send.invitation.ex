@@ -1,9 +1,9 @@
 defmodule Mix.Tasks.Send.Invitation do
   use Mix.Task
 
-  alias InnerCircle.Accounts
+  alias Jarm.Accounts
 
-  @shortdoc "Send an invitation that will allow someone to join Inner Circle"
+  @shortdoc "Send an invitation that will allow someone to join Jarm"
 
   @moduledoc """
   Usage: mix send.invitation <email>

@@ -1,8 +1,8 @@
-# Inner Circle
+# Jarm
 
-[![builds.sr.ht status](https://builds.sr.ht/~reykjalin/inner_circle.svg)](https://builds.sr.ht/~reykjalin/inner_circle?)
+[![builds.sr.ht status](https://builds.sr.ht/~reykjalin/jarm.svg)](https://builds.sr.ht/~reykjalin/jarm?)
 
-Inner Circle provides an easy and simple way to share updates with family and friends in the form of photos, videos, and text updates.
+Jarm provides an easy and simple way to share updates with family and friends in the form of photos, videos, and text updates.
 
 ## Goals
 
@@ -34,10 +34,10 @@ MIX_ENV=prod mix release
 
 This will be used by systemd to set up the environment.
 
-To illustrate what this might look like let's assume you store your runtime files, like the database, in `/opt/inner_circle/`:
+To illustrate what this might look like let's assume you store your runtime files, like the database, in `/opt/jarm/`:
 
 ```sh
-DATABASE_PATH="/opt/inner_circle/inner_circle.db"
+DATABASE_PATH="/opt/jarm/jarm.db"
 URL="example.com"
 ADMIN_EMAIL="admin@example.com"
 SMTP_USERNAME="admin@example.com"
@@ -52,23 +52,23 @@ LIVE_VIEW_SIGNING_SALT="<secret_signing_salt>"
 
 ```sh
 # First, source your environment variables
-source /opt/inner_circle/inner_circle_env
-export $(cut -d= -f1 /opt/inner_circle/inner_circle_env )
-inner_circle eval 'InnerCircle.Release.migrate()'
+source /opt/jarm/jarm_env
+export $(cut -d= -f1 /opt/jarm/jarm_env )
+jarm eval 'Jarm.Release.migrate()'
 ```
 
-### Start Inner Circle
+### Start Jarm
 
-Using the provided systemctl script from `scripts/inner-circle.service`:
+Using the provided systemctl script from `scripts/jarm.service`:
 
 ```sh
-systemctl start inner-circle
+systemctl start jarm
 ```
 
 Running the release directly:
 
 ```sh
-inner_circle start
+jarm start
 ```
 
 This will run a bare HTTP server on port 4000. It's recommended that you run a reverse proxy via a webserver like Apache, Nginx, or Caddy in front of the application.
@@ -76,7 +76,7 @@ This will run a bare HTTP server on port 4000. It's recommended that you run a r
 ### Send an invitation
 
 ```sh
-inner_circle rpc 'InnerCircle.Release.send_invitation("<email>")'
+jarm rpc 'Jarm.Release.send_invitation("<email>")'
 ```
 
 or, if you already have an account set up, navigate to /users/invite on your site.
@@ -97,7 +97,7 @@ or, if you already have an account set up, navigate to /users/invite on your sit
 
 - Deployment
   - [x] Move build-time configurations into runtime configurations
-  - [x] Build manifest for generating releases and build artifacts on [Sourcehut](https://builds.sr.ht/~reykjalin/inner_circle)
+  - [x] Build manifest for generating releases and build artifacts on [Sourcehut](https://builds.sr.ht/~reykjalin/jarm)
   - [x] Automatic HTTPS via [SiteEncrypt](https://github.com/sasa1977/site_encrypt)
   - [x] Example `systemd` scripts
 

@@ -1,10 +1,10 @@
-defmodule InnerCircle.MixProject do
+defmodule Jarm.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :inner_circle,
-      version: "0.7.0",
+      app: :jarm,
+      version: "1.0.0",
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -18,7 +18,7 @@ defmodule InnerCircle.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {InnerCircle.Application, []},
+      mod: {Jarm.Application, []},
       extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp]
     ]
   end
