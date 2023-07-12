@@ -8,6 +8,7 @@ defmodule Jarm.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
+    field :is_admin, :boolean, default: false
 
     timestamps()
   end
@@ -127,6 +128,18 @@ defmodule Jarm.Accounts.User do
   end
 
   @doc """
+  A user changeset for granting elevated privileges.
+  """
+  def grant_administrator_privileges_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:is_admin])
+    |> case do
+      %{changes: %{is_admin: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :is_admin, "did not change")
+    end
+  end
+
+  @doc """
   Verifies the password.
 
   If there is no user or the user doesn't have a password, we call
@@ -152,6 +165,11 @@ defmodule Jarm.Accounts.User do
       add_error(changeset, :current_password, "is not valid")
     end
   end
+
+  @doc """
+  Returns true when user has admin privileges, false otherwise.
+  """
+  def has_admin_privileges(%Jarm.Accounts.User{is_admin: is_admin}), do: is_admin
 end
 
 defimpl Canada.Can, for: Jarm.Accounts.User do
