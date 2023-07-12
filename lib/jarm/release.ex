@@ -17,7 +17,7 @@ defmodule Jarm.Release do
   end
 
   def send_invitation(email) do
-    url_func = &"/users/register/#{&1}"
+    url_func = &"/en/users/register/#{&1}"
     Accounts.deliver_user_invitation(email, url_func)
   end
 
