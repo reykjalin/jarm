@@ -2,6 +2,7 @@ defmodule JarmWeb.UserListLive.Index do
   use JarmWeb, :live_view
 
   alias Jarm.Accounts
+  alias Jarm.Accounts.User
 
   @impl true
   def mount(%{"locale" => locale}, session, socket) do

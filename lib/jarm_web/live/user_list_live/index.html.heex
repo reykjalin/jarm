@@ -8,6 +8,7 @@
                 <th class="border text-start p-2">Display Name</th>
                 <th class="border text-start p-2">Email</th>
                 <th class="border text-start p-2">Date created</th>
+                <th class="border text-start p-2">Role</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
                 <td class="border text-start p-2"><%= user.display_name %></td>
                 <td class="border text-start p-2"><%= user.email %></td>
                 <td class="border text-start p-2"><%= "#{Date.to_string(NaiveDateTime.to_date(user.inserted_at))} @ #{Time.to_string(NaiveDateTime.to_time(user.inserted_at))}" %></td>
+                <td class="border text-start p-2"><%= if User.has_admin_privileges(user), do: "Administrator", else: "User" %></td>
             </tr>
             <% end %>
         </tbody>
