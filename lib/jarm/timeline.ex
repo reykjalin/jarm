@@ -157,7 +157,7 @@ defmodule Jarm.Timeline do
   @decorate cache_evict(cache: Cache, key: {Post, post_id})
   def create_comment(%User{id: user_id}, %Post{id: post_id}, attrs \\ %{}) do
     %Comment{post_id: post_id, user_id: user_id}
-    |> Post.changeset(attrs)
+    |> Comment.changeset(attrs)
     |> Repo.insert()
     |> broadcast(:comment_created)
   end
