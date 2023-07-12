@@ -93,6 +93,8 @@ defmodule JarmWeb.Router do
     put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
+  ## App routes.
+
   scope "/:locale", JarmWeb do
     pipe_through [:browser, :set_locale, :require_authenticated_user]
 
@@ -113,6 +115,8 @@ defmodule JarmWeb.Router do
     live "/media", MediaLive.Index, :index
   end
 
+  ## Static media routes.
+
   scope "/", JarmWeb do
     pipe_through :media
 
@@ -120,6 +124,14 @@ defmodule JarmWeb.Router do
     get "/media/:id", MediaController, :show
     get "/compressed-media/:id", MediaController, :show_compressed
     get "/thumbnail/:id", MediaController, :show_thumbnail
+  end
+
+  ## Admin rotues.
+
+  scope "/:locale", JarmWeb do
+    pipe_through [:browser, :set_locale, :require_authenticated_user]
+
+    live "/admin/users/list", UserListLive.Index, :index
   end
 
   scope "/:locale", JarmWeb do

@@ -31,6 +31,15 @@
     <% end %>
   </ul>
 
+  <div class="flex flex-row flex-nowrap gap-5 pt-5 text-center justify-center">
+    <.link
+      href={Routes.user_list_index_path(@conn, :index, @locale)}
+      class="link"
+    >
+      User List
+    </.link>
+  </div>
+
   <div class="flex flex-row flex-nowrap gap-5 p-5 text-center justify-center">
     <.link
       href={

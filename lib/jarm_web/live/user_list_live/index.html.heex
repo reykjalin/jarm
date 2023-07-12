@@ -1,0 +1,24 @@
+<h1 class="text-3xl pb-5"><%= gettext("All Users") %></h1>
+
+<section class="my-5 p-5 border rounded-md bg-slate-800 light:bg-white">
+    <table class="w-full min-w-[200px] table-auto border-collapse border">
+        <thead>
+            <tr>
+                <th class="border text-center p-2">ID</th>
+                <th class="border text-start p-2">Display Name</th>
+                <th class="border text-start p-2">Email</th>
+                <th class="border text-start p-2">Date created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= for user <- @users do %>
+            <tr>
+                <td class="border text-center p-2"><%= user.id %></td>
+                <td class="border text-start p-2"><%= user.display_name %></td>
+                <td class="border text-start p-2"><%= user.email %></td>
+                <td class="border text-start p-2"><%= "#{Date.to_string(NaiveDateTime.to_date(user.inserted_at))} @ #{Time.to_string(NaiveDateTime.to_time(user.inserted_at))}" %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</section>
