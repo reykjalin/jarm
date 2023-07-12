@@ -81,6 +81,14 @@ jarm rpc 'Jarm.Release.send_invitation("<email>")'
 
 or, if you already have an account set up, navigate to /users/invite on your site.
 
+### Grant administrator privileges to an account
+
+```sh
+jarm rpc 'Jarm.Release.grant_administrator_privileges_to("<email_for_existing_account>")'
+```
+
+Currently the CLI method is the only supported way to promote someone to an administrator.
+
 ---
 
 ## Roadmap
