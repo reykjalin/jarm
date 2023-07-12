@@ -6,7 +6,7 @@ defmodule Jarm.Administrator do
   import Ecto.Query, warn: false
   alias Jarm.Repo
 
-  alias Jarm.Accounts.{User}
+  alias Jarm.Accounts.{User, UserToken}
 
   def grant_administrator_privileges_to(user) do
     changeset =
@@ -20,6 +20,10 @@ defmodule Jarm.Administrator do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  def get_all_invitations() do
+    Repo.all(UserToken.all_invitations_query())
   end
 
 end

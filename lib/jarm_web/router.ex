@@ -132,6 +132,7 @@ defmodule JarmWeb.Router do
     pipe_through [:browser, :set_locale, :require_admin_user]
 
     live "/admin/users/list", UserListLive.Index, :index
+    live "/admin/invitations/list", InvitationsListLive.Index, :index
   end
 
   scope "/:locale", JarmWeb do

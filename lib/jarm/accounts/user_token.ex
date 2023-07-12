@@ -163,4 +163,8 @@ defmodule Jarm.Accounts.UserToken do
     from t in Jarm.Accounts.UserToken,
       where: t.user_id == ^user.id and t.context in ^contexts
   end
+
+  def all_invitations_query() do
+    from t in Jarm.Accounts.UserToken, where: t.context == "invite"
+  end
 end
