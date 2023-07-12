@@ -170,6 +170,7 @@ defmodule Jarm.Accounts.User do
   Returns true when user has admin privileges, false otherwise.
   """
   def has_admin_privileges(%Jarm.Accounts.User{is_admin: is_admin}), do: is_admin
+  def has_admin_privileges(_), do: false
 end
 
 defimpl Canada.Can, for: Jarm.Accounts.User do
