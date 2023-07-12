@@ -1,17 +1,18 @@
-defmodule JarmWeb.InvitationsListLive.Index do
+defmodule JarmWeb.AdminLive.UserList do
   use JarmWeb, :live_view
 
-  alias Jarm.Administrator
+  alias Jarm.Accounts
+  alias Jarm.Accounts.User
 
   @impl true
   def mount(%{"locale" => locale}, session, socket) do
     socket = assign_current_user(socket, session)
 
-    invitations = Administrator.get_all_invitations()
+    users = Accounts.get_all_users()
 
     socket =
       assign(socket,
-        invitations: (if invitations, do: invitations, else: []),
+        users: users,
         locale: locale
       )
 

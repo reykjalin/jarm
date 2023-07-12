@@ -34,13 +34,13 @@
   <%= if Jarm.Accounts.User.has_admin_privileges(@current_user) do %>
   <div class="flex flex-row flex-nowrap gap-5 pt-5 text-center justify-center">
     <.link
-      href={Routes.user_list_index_path(@conn, :index, @locale)}
+      href={Routes.admin_user_list_path(@conn, :index, @locale)}
       class="link"
     >
       User List
     </.link>
     <.link
-      href={Routes.invitations_list_index_path(@conn, :index, @locale)}
+      href={Routes.admin_invitations_list_path(@conn, :index, @locale)}
       class="link"
     >
       Invitations
