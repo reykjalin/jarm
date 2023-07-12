@@ -17,7 +17,15 @@
     </div>
 
     <%= label(f, :body, gettext("Jarm"), class: "font-bold") %>
-    <%= textarea(f, :body, autofocus: true, class: "border px-4 py-3") %>
+    <%= textarea(
+      f,
+      :body,
+      autofocus: true,
+      class: "border px-4 py-3",
+      rows:
+        max(String.split(Map.get(@changeset.changes, :body, ""), "\n") |> length(), 5)
+        |> Integer.to_string()
+      ) %>
     <p class="text-red-500 mb-5"><%= error_tag(f, :body) %></p>
 
     <%= label(f, :locale, gettext("Language"), class: "font-bold") %>
