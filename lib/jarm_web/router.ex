@@ -129,7 +129,7 @@ defmodule JarmWeb.Router do
   ## Admin rotues.
 
   scope "/:locale", JarmWeb do
-    pipe_through [:browser, :set_locale, :require_authenticated_user]
+    pipe_through [:browser, :set_locale, :require_admin_user]
 
     live "/admin/users/list", UserListLive.Index, :index
   end

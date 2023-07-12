@@ -2,6 +2,9 @@ defmodule JarmWeb.UserAuth do
   import Plug.Conn
   import Phoenix.Controller
 
+  import JarmWeb.Gettext
+
+  alias Jarm.Accounts.User
   alias Jarm.Accounts
   alias JarmWeb.Router.Helpers, as: Routes
 
@@ -135,6 +138,21 @@ defmodule JarmWeb.UserAuth do
       |> put_flash(:error, "You must log in to access this page.")
       |> maybe_store_return_to()
       |> redirect(to: Routes.user_session_path(conn, :new, conn.params["locale"]))
+      |> halt()
+    end
+  end
+
+  @doc """
+  Used for routes that require the user to be an admin.
+  """
+  def require_admin_user(conn, _opts) do
+    if conn.assigns[:current_user] != nil and User.has_admin_privileges(conn.assigns[:current_user]) do
+      conn
+    else
+      conn
+      |> put_flash(:error, gettext("You must have elevated priveleges to access this page."))
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.post_index_path(conn, :index, conn.params["locale"]))
       |> halt()
     end
   end
