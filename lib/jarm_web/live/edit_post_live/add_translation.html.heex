@@ -11,8 +11,8 @@
   >
     <div class="my-5">
       <label for="original-jarm" class="font-bold"><%= gettext("Original jarm") %></label>
-      <div name="original-jarm" class="border p-5">
-        <%= text_to_html(@post.body) %>
+      <div name="original-jarm" class="border px-5">
+        <%= text_to_html(@post.body, attributes: [class: "my-5"]) %>
       </div>
     </div>
 
