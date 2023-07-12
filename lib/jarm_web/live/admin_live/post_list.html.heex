@@ -18,7 +18,21 @@
                 <td class="border text-start p-2"><%= post.user.display_name %></td>
                 <td class="border text-start p-2"><%= "#{Date.to_string(NaiveDateTime.to_date(post.inserted_at))} @ #{Time.to_string(NaiveDateTime.to_time(post.inserted_at))}" %></td>
                 <td class="border text-start p-2"><%= post.body %></td>
-                <td class="border text-start p-2"><%= post.locale %></td>
+                <td class="border text-start p-2">
+                    <.form
+                        :let={f}
+                        for={Post.changeset(post, %{})}
+                        id={"post-#{post.id}-form"}
+                        class=""
+                        phx-change="save"
+                    >
+                        <%= hidden_input(f, :id, value: post.id) %>
+                        <%= select(f, :locale, ["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"],
+                            selected: post.locale,
+                            prompt: gettext("Choose language")
+                        ) %>
+                    </.form>
+                </td>
             </tr>
             <% end %>
         </tbody>
