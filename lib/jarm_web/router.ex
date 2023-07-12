@@ -133,6 +133,7 @@ defmodule JarmWeb.Router do
 
     live "/admin/users/list", AdminLive.UserList, :index
     live "/admin/invitations/list", AdminLive.InvitationsList, :index
+    live "/admin/posts/list", AdminLive.PostList, :index
   end
 
   scope "/:locale", JarmWeb do

@@ -1,0 +1,26 @@
+<h1 class="text-3xl pb-5"><%= gettext("Posts") %></h1>
+
+<section class="my-5 p-5 border rounded-md bg-slate-800 light:bg-white">
+    <table class="w-full min-w-[200px] table-auto border-collapse border">
+        <thead>
+            <tr>
+                <th class="border text-center p-2">ID</th>
+                <th class="border text-start p-2">Display Name</th>
+                <th class="border text-start p-2">Date created</th>
+                <th class="border text-start p-2">Body</th>
+                <th class="border text-start p-2">Language</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= for post <- @posts do %>
+            <tr>
+                <td class="border text-center p-2"><%= post.id %></td>
+                <td class="border text-start p-2"><%= post.user.display_name %></td>
+                <td class="border text-start p-2"><%= "#{Date.to_string(NaiveDateTime.to_date(post.inserted_at))} @ #{Time.to_string(NaiveDateTime.to_time(post.inserted_at))}" %></td>
+                <td class="border text-start p-2"><%= post.body %></td>
+                <td class="border text-start p-2"><%= post.locale %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</section>

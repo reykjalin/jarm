@@ -32,6 +32,12 @@ defmodule Jarm.Timeline do
     |> Repo.preload(translations: [:user])
   end
 
+  def list_all_posts() do
+    Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id])
+    |> Repo.preload(:user)
+    |> Repo.preload(comments: [:user])
+  end
+
   @decorate cacheable(cache: Cache, key: {Post, post.id})
   def list_posts_older_than(%Post{} = post, number \\ 10) do
     from(p in Post,
