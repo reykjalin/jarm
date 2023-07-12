@@ -31,6 +31,7 @@
     <% end %>
   </ul>
 
+  <%= if Jarm.Accounts.User.has_admin_privileges(@current_user) do %>
   <div class="flex flex-row flex-nowrap gap-5 pt-5 text-center justify-center">
     <.link
       href={Routes.user_list_index_path(@conn, :index, @locale)}
@@ -39,6 +40,7 @@
       User List
     </.link>
   </div>
+  <% end %>
 
   <div class="flex flex-row flex-nowrap gap-5 p-5 text-center justify-center">
     <.link
