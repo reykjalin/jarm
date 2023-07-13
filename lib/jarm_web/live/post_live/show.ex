@@ -33,7 +33,7 @@ defmodule JarmWeb.PostLive.Show do
           socket
           |> put_flash(:error, "You're not allowed to view this post")
           |> push_redirect(
-            to: Routes.post_index_path(socket, :index),
+            to: Routes.post_index_path(socket, :index, socket.assigns.locale),
             replace: true
           )
       end
