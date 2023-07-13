@@ -146,7 +146,8 @@ defmodule JarmWeb.UserAuth do
   Used for routes that require the user to be an admin.
   """
   def require_admin_user(conn, _opts) do
-    if conn.assigns[:current_user] != nil and User.has_admin_privileges(conn.assigns[:current_user]) do
+    if conn.assigns[:current_user] != nil and
+         User.has_admin_privileges(conn.assigns[:current_user]) do
       conn
     else
       conn

@@ -14,13 +14,12 @@ defmodule JarmWeb.AdminLive.PostList do
 
     socket =
       assign(socket,
-        posts: (if posts, do: posts, else: []),
+        posts: if(posts, do: posts, else: []),
         locale: locale
       )
 
     {:ok, socket}
   end
-
 
   def handle_event("save", %{"post" => post_params}, socket) do
     save_post(socket, :edit, post_params)
@@ -41,7 +40,9 @@ defmodule JarmWeb.AdminLive.PostList do
             {:error, %Ecto.Changeset{} = changeset} ->
               socket
               |> put_flash(:error, "Failed to update post")
-              |> push_redirect(to: Routes.admin_post_list_path(socket, :index, socket.assigns.locale))
+              |> push_redirect(
+                to: Routes.admin_post_list_path(socket, :index, socket.assigns.locale)
+              )
           end
 
         false ->
@@ -52,5 +53,4 @@ defmodule JarmWeb.AdminLive.PostList do
 
     {:noreply, socket}
   end
-
 end

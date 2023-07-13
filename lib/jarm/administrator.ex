@@ -25,5 +25,4 @@ defmodule Jarm.Administrator do
   def get_all_invitations() do
     Repo.all(UserToken.all_invitations_query())
   end
-
 end

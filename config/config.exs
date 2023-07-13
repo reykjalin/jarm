@@ -38,7 +38,7 @@ config :tailwind,
     --input=css/app.css
     --output=../priv/static/assets/app.css
   ),
-    cd: Path.expand('../assets', __DIR__)
+    cd: Path.expand(~c"../assets", __DIR__)
   ]
 
 # Set the UUID type to binary to fix the default representation after updating

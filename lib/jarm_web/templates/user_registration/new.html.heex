@@ -11,7 +11,11 @@
   <% end %>
 
   <%= label(f, :display_name, gettext("Display Name"), class: "font-bold") %>
-  <%= text_input(f, :display_name, required: true, autofocus: true, class: "border px-4 py-3 mb-5") %>
+  <%= text_input(f, :display_name,
+    required: true,
+    autofocus: true,
+    class: "border px-4 py-3 mb-5"
+  ) %>
   <%= error_tag(f, :display_name) %>
 
   <%= label(f, :email, gettext("Email"), class: "font-bold") %>

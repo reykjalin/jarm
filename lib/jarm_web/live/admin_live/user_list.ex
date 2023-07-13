@@ -18,5 +18,4 @@ defmodule JarmWeb.AdminLive.UserList do
 
     {:ok, socket}
   end
-
 end

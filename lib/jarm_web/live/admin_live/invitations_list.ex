@@ -11,11 +11,10 @@ defmodule JarmWeb.AdminLive.InvitationsList do
 
     socket =
       assign(socket,
-        invitations: (if invitations, do: invitations, else: []),
+        invitations: if(invitations, do: invitations, else: []),
         locale: locale
       )
 
     {:ok, socket}
   end
-
 end

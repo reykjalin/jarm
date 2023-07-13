@@ -16,7 +16,9 @@
         ) %>
       </li>
       <li class="px-5 link">
-        <%= link(gettext("Send Invitation"), to: Routes.user_invitation_path(@conn, :new, @locale)) %>
+        <%= link(gettext("Send Invitation"),
+          to: Routes.user_invitation_path(@conn, :new, @locale)
+        ) %>
       </li>
       <li class="px-5 link">
         <%= link(gettext("Settings"), to: Routes.user_settings_path(@conn, :edit, @locale)) %>
@@ -32,26 +34,17 @@
   </ul>
 
   <%= if Jarm.Accounts.User.has_admin_privileges(@current_user) do %>
-  <div class="flex flex-row flex-nowrap gap-5 pt-5 text-center justify-center">
-    <.link
-      href={Routes.admin_user_list_path(@conn, :index, @locale)}
-      class="link"
-    >
-      User List
-    </.link>
-    <.link
-      href={Routes.admin_invitations_list_path(@conn, :index, @locale)}
-      class="link"
-    >
-      Invitations
-    </.link>
-    <.link
-      href={Routes.admin_post_list_path(@conn, :index, @locale)}
-      class="link"
-    >
-      Posts
-    </.link>
-  </div>
+    <div class="flex flex-row flex-nowrap gap-5 pt-5 text-center justify-center">
+      <.link href={Routes.admin_user_list_path(@conn, :index, @locale)} class="link">
+        User List
+      </.link>
+      <.link href={Routes.admin_invitations_list_path(@conn, :index, @locale)} class="link">
+        Invitations
+      </.link>
+      <.link href={Routes.admin_post_list_path(@conn, :index, @locale)} class="link">
+        Posts
+      </.link>
+    </div>
   <% end %>
 
   <div class="flex flex-row flex-nowrap gap-5 p-5 text-center justify-center">

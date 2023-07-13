@@ -1,5 +1,6 @@
 defmodule Blurhash.Base83 do
-  alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~'
+  alphabet =
+    ~c"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~"
 
   for {encoded, value} <- Enum.with_index(alphabet) do
     def encode_char(unquote(value)) do
