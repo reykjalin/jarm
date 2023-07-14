@@ -36,7 +36,7 @@ defmodule JarmWeb.AdminLive.PostList do
               socket
               |> put_flash(:info, "Post updated successfully")
 
-            {:error, %Ecto.Changeset{} = _changeset} ->
+            {:error, %Ecto.Changeset{}} ->
               socket
               |> put_flash(:error, "Failed to update post")
               |> push_redirect(to: ~p"/#{socket.assigns.locale}/admin/posts/list")

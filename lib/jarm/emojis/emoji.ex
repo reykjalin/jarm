@@ -1,6 +1,5 @@
 defmodule Jarm.Emojis.Emoji do
   use Ecto.Schema
-  import Ecto.Changeset
 
   @primary_key {:id, :id, autogenerate: true, source: :rowid}
   schema "emojis" do
