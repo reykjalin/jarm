@@ -3,6 +3,7 @@ defmodule JarmWeb.PostLive.Index do
 
   alias Jarm.Timeline
   alias Jarm.Timeline.Post
+  alias Jarm.Emojis
 
   import Canada, only: [can?: 2]
 
@@ -19,7 +20,8 @@ defmodule JarmWeb.PostLive.Index do
         posts: posts,
         first_post: first_post,
         last_post: last_post,
-        locale: locale
+        locale: locale,
+        emojis: Emojis.all_emojis()
       )
 
     {:ok, socket, temporary_assigns: [posts: []]}
