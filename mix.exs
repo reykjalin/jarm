@@ -35,7 +35,7 @@ defmodule Jarm.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sqlite3, "~> 0.9.1"},
+      {:ecto_sqlite3, "~> 0.10.3"},
       {:phoenix_live_view, "~> 0.19"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_html, "~> 3.3"},
