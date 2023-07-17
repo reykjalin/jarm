@@ -29,7 +29,7 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
         socket
       ) do
     case post_id
-         |> Reactions.add_reaction(emoji_id, user_id) do
+         |> Reactions.toggle_reaction(emoji_id, user_id) do
       {:ok, reaction} ->
         IO.inspect(reaction, label: "inserted reaction")
 

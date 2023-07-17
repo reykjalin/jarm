@@ -18,5 +18,4 @@ defmodule Jarm.Repo.Migrations.AddEmojiTable do
       """
     )
   end
-
 end

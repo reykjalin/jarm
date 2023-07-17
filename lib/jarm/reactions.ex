@@ -18,8 +18,28 @@ defmodule Jarm.Reactions do
     from(e in Emoji) |> Repo.all()
   end
 
-  def add_reaction(post_id, emoji_id, user_id) do
+  def toggle_reaction(post_id, emoji_id, user_id) do
+    case get_reaction(post_id, emoji_id, user_id) do
+      nil ->
+        add_reaction(post_id, emoji_id, user_id)
+
+      reaction ->
+        IO.inspect(reaction, label: "reaction to delete")
+
+        delete_reaction(reaction)
+    end
+  end
+
+  defp add_reaction(post_id, emoji_id, user_id) do
     PostReaction.changeset(%PostReaction{post_id: post_id, emoji_id: emoji_id, user_id: user_id})
     |> Repo.insert()
+  end
+
+  defp delete_reaction(%PostReaction{} = reaction) do
+    Repo.delete(reaction)
+  end
+
+  defp get_reaction(post_id, emoji_id, user_id) do
+    Repo.get_by(PostReaction, post_id: post_id, emoji_id: emoji_id, user_id: user_id)
   end
 end
