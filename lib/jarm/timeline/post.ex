@@ -8,6 +8,7 @@ defmodule Jarm.Timeline.Post do
     has_many :media, Jarm.Timeline.Media
     has_many :comments, Jarm.Timeline.Comment
     has_many :translations, Jarm.Timeline.Translation
+    has_many :reactions, Jarm.Reactions.PostReaction
     belongs_to :user, Jarm.Accounts.User
 
     timestamps()

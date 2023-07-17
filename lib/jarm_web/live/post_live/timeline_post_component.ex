@@ -23,8 +23,19 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
   end
 
   @impl true
-  def handle_event("add_reaction", params, socket) do
-    IO.inspect(params, label: "Reaction to add")
+  def handle_event(
+        "add_reaction",
+        %{"post" => post_id, "emoji" => emoji_id, "user" => user_id},
+        socket
+      ) do
+    case post_id
+         |> Reactions.add_reaction(emoji_id, user_id) do
+      {:ok, reaction} ->
+        IO.inspect(reaction, label: "inserted reaction")
+
+      {:error, changeset} ->
+        IO.inspect(changeset, label: "failed changeset")
+    end
 
     {:noreply, socket}
   end

@@ -30,12 +30,14 @@ defmodule Jarm.Timeline do
     |> Repo.preload(:media)
     |> Repo.preload(comments: [:user])
     |> Repo.preload(translations: [:user])
+    |> Repo.preload(reactions: [:user, :emoji])
   end
 
   def list_all_posts() do
     Repo.all(from p in Post, order_by: [desc: :inserted_at, desc: :id])
     |> Repo.preload(:user)
     |> Repo.preload(comments: [:user])
+    |> Repo.preload(reactions: [:user, :emoji])
   end
 
   @decorate cacheable(cache: Cache, key: {Post, post.id})
@@ -50,6 +52,7 @@ defmodule Jarm.Timeline do
     |> Repo.preload(:media)
     |> Repo.preload(comments: [:user])
     |> Repo.preload(:translations)
+    |> Repo.preload(reactions: [:user, :emoji])
   end
 
   def list_posts_from_yesterday_not_made_by_user(%User{id: id}) do
@@ -120,6 +123,7 @@ defmodule Jarm.Timeline do
       |> Repo.preload(:media)
       |> Repo.preload(comments: [:user])
       |> Repo.preload(:translations)
+      |> Repo.preload(reactions: [:user, :emoji])
 
   @decorate cacheable(cache: Cache, key: uuid)
   def get_media(uuid) do

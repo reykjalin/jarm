@@ -2,7 +2,7 @@ defmodule Jarm.Reactions do
   import Ecto.Query, warn: false
   alias Jarm.Repo
 
-  alias Jarm.Reactions.Emoji
+  alias Jarm.Reactions.{Emoji, PostReaction}
 
   def search_emojis(q) do
     from(
@@ -16,5 +16,10 @@ defmodule Jarm.Reactions do
 
   def all_emojis() do
     from(e in Emoji) |> Repo.all()
+  end
+
+  def add_reaction(post_id, emoji_id, user_id) do
+    PostReaction.changeset(%PostReaction{post_id: post_id, emoji_id: emoji_id, user_id: user_id})
+    |> Repo.insert()
   end
 end
