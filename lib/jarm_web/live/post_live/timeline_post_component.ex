@@ -8,11 +8,12 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
   import Canada, only: [can?: 2]
 
   @impl true
-  def handle_event("search_emoji", %{"query" => query}, socket) do
-    emojis = case query do
-      "" -> Emojis.all_emojis()
-      query -> Emojis.search_emojis(query)
-    end
+  def handle_event("search_emoji", %{"query" => query} = params, socket) do
+    emojis =
+      case query do
+        "" -> Emojis.all_emojis()
+        query -> Emojis.search_emojis(query)
+      end
 
     socket =
       socket
@@ -21,4 +22,10 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
     {:noreply, socket}
   end
 
+  @impl true
+  def handle_event("add_reaction", params, socket) do
+    IO.inspect(params, label: "Reaction to add")
+
+    {:noreply, socket}
+  end
 end
