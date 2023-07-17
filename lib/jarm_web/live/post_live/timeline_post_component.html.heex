@@ -110,6 +110,38 @@
       </.form>
     </div>
 
+    <button
+      class="mx-5 md:mx-10 py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded border hover:border-slate-400 text-xl"
+      phx-click={JS.toggle(to: "#post-#{@id}-reactions")}
+    >
+      ❤️+
+    </button>
+    <div
+      class="relative hidden"
+      id={"post-#{@id}-reactions"}
+      phx-click-away={JS.hide(to: "#post-#{@id}-reactions")}
+    >
+      <.form :let={f} phx-change="search_emoji" phx-debounce="100" phx-target={@myself}>
+        <div class="fixed z-50 bottom-0 left-0 right-0 md:bottom-12 md:absolute border-t md:border border-black rounded-t md:rounded shadow-[0_0_6px_-1px_rgb(0,0,0,0.1),0_0_4px_-2px_rgb(0,0,0,0.1)] shadow-black bg-slate-800 light:bg-white w-full h-[50vh] md:max-w-[600px] md:max-h-[300px] overflow-auto">
+          <div class="sticky w-full top-0 p-3 md:p-5 z-50 bg-slate-800 light:bg-white border-b">
+            <%= text_input(
+              f,
+              :query,
+              class: "w-full",
+              placeholder: gettext("Search…")
+            ) %>
+          </div>
+          <div class="text-center">
+            <%= for emoji <- @emojis do %>
+              <button class="m-1 py-2 px-3 rounded light:hover:bg-slate-100 hover:bg-slate-600 text-3xl">
+                <%= emoji.emoji %>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </.form>
+    </div>
+
     <p class="text-center py-3 md:py-5">
       <%= live_patch(
         "#{ngettext("%{count} comment", "%{count} comments", length(@post.comments))}",
