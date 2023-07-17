@@ -29,9 +29,21 @@ defmodule JarmWeb.LiveHelpers do
         %Post{:locale => post_locale, :translations => translations},
         user_locale
       ) do
+    # Try to find a matching translation for the current user's locale.
     case Enum.find(translations, fn t -> t.locale == user_locale end) do
       nil ->
-        get_locale_representation(post_locale)
+        # If translation in current user's locale doesn't exist, use the english locale if it exists.
+        if post_locale == "en" do
+          get_locale_representation(post_locale)
+        else
+          case Enum.find(translations, fn t -> t.locale == "en" end) do
+            nil ->
+              get_locale_representation("en")
+
+            translation ->
+              get_locale_representation(translation.locale)
+          end
+        end
 
       translation ->
         get_locale_representation(translation.locale)
@@ -43,9 +55,21 @@ defmodule JarmWeb.LiveHelpers do
       do: body
 
   def get_post_body_for_locale(%Post{:body => body, :translations => translations}, locale) do
+    # Try to find a matching translation for the current user's locale.
     case Enum.find(translations, fn t -> t.locale == locale end) do
       nil ->
-        body
+        # If translation in current user's locale doesn't exist, use the english translation if it exists.
+        if locale == "en" do
+          body
+        else
+          case Enum.find(translations, fn t -> t.locale == "en" end) do
+            nil ->
+              body
+
+            translation ->
+              translation.body
+          end
+        end
 
       translation ->
         translation.body
