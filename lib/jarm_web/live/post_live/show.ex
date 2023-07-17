@@ -90,11 +90,11 @@ defmodule JarmWeb.PostLive.Show do
     if socket.assigns.post.id != comment.post_id do
       {:noreply, socket}
     else
-    # Reset the changeset to clear the comment.
-    socket = assign(socket, changeset: Timeline.Comment.changeset(%Timeline.Comment{}, %{}))
+      # Reset the changeset to clear the comment.
+      socket = assign(socket, changeset: Timeline.Comment.changeset(%Timeline.Comment{}, %{}))
 
-    new_post = Timeline.get_post!(comment.post_id)
-    {:noreply, update(socket, :post, fn _post -> new_post end)}
+      new_post = Timeline.get_post!(comment.post_id)
+      {:noreply, update(socket, :post, fn _post -> new_post end)}
     end
   end
 end
