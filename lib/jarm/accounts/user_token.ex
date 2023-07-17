@@ -167,4 +167,14 @@ defmodule Jarm.Accounts.UserToken do
   def all_invitations_query() do
     from t in Jarm.Accounts.UserToken, where: t.context == "invite"
   end
+
+  def expired_invitations_query() do
+    from t in Jarm.Accounts.UserToken,
+      where: t.context == "invite" and t.inserted_at <= ago(@invitation_validity_in_days, "day")
+  end
+
+  def valid_invitations_query() do
+    from t in Jarm.Accounts.UserToken,
+      where: t.context == "invite" and t.inserted_at > ago(@invitation_validity_in_days, "day")
+  end
 end

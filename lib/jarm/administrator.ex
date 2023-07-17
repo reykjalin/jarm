@@ -25,4 +25,12 @@ defmodule Jarm.Administrator do
   def get_all_invitations() do
     Repo.all(UserToken.all_invitations_query())
   end
+
+  def get_valid_invitations() do
+    Repo.all(UserToken.valid_invitations_query())
+  end
+
+  def get_expired_invitations() do
+    Repo.all(UserToken.expired_invitations_query())
+  end
 end

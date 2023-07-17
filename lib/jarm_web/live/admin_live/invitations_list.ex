@@ -8,10 +8,14 @@ defmodule JarmWeb.AdminLive.InvitationsList do
     socket = assign_current_user(socket, session)
 
     invitations = Administrator.get_all_invitations()
+    valid_invitations = Administrator.get_valid_invitations()
+    expired_invitations = Administrator.get_expired_invitations()
 
     socket =
       assign(socket,
         invitations: if(invitations, do: invitations, else: []),
+        valid_invitations: if(valid_invitations, do: valid_invitations, else: []),
+        expired_invitations: if(expired_invitations, do: expired_invitations, else: []),
         locale: locale
       )
 
