@@ -110,19 +110,16 @@
             ) %>
           </div>
           <div class="text-center">
-            <%= for emoji <- @emojis do %>
+            <%= for {emoji, reactions} <- @post.reactions |> Enum.group_by(fn r -> r.emoji.emoji end, fn r -> r end) do %>
               <button
-                type="button"
-                class="m-1 py-2 px-3 rounded light:hover:bg-slate-100 hover:bg-slate-600 text-3xl"
-                phx-click={
-                  JS.push("add_reaction",
-                    value: %{emoji: emoji.id, post: @id, user: @current_user.id},
-                    target: @myself
-                  )
-                  |> JS.hide(to: "#post-#{@id}-reactions")
+                class="py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400"
+                title={
+                  reactions
+                  |> Enum.map(fn r -> r.user.display_name end)
+                  |> Enum.reduce(fn n, acc -> "#{acc}, #{n}" end)
                 }
               >
-                <%= emoji.emoji %>
+                <%= emoji %> <%= length(reactions) %>
               </button>
             <% end %>
           </div>
