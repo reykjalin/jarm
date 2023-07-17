@@ -86,9 +86,23 @@
       </button>
 
       <div>
-        <%= for {emoji, count} <- @post.reactions |> Enum.frequencies_by(fn r -> r.emoji.emoji end) do %>
-          <button class="py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400">
-            <%= emoji %> <%= count %>
+        <%= for {emoji, reactions} <- @post.reactions |> Enum.group_by(fn r -> r.emoji.emoji end, fn r -> r end) do %>
+          <button
+            class="py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400"
+            title={
+              reactions
+              |> Enum.map(fn r -> r.user.display_name end)
+              |> Enum.reduce(fn n, acc -> "#{acc}, #{n}" end)
+            }
+            phx-click={
+              JS.push("toggle_reaction",
+                value: %{emoji: List.first(reactions).emoji.id, post: @id, user: @current_user.id},
+                target: @myself
+              )
+              |> JS.hide(to: "#post-#{@id}-reactions")
+            }
+          >
+            <%= emoji %> <%= length(reactions) %>
           </button>
         <% end %>
       </div>
@@ -110,16 +124,19 @@
             ) %>
           </div>
           <div class="text-center">
-            <%= for {emoji, reactions} <- @post.reactions |> Enum.group_by(fn r -> r.emoji.emoji end, fn r -> r end) do %>
+            <%= for emoji <- @emojis do %>
               <button
-                class="py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400"
-                title={
-                  reactions
-                  |> Enum.map(fn r -> r.user.display_name end)
-                  |> Enum.reduce(fn n, acc -> "#{acc}, #{n}" end)
+                type="button"
+                class="m-1 py-2 px-3 rounded light:hover:bg-slate-100 hover:bg-slate-600 text-3xl"
+                phx-click={
+                  JS.push("toggle_reaction",
+                    value: %{emoji: emoji.id, post: @id, user: @current_user.id},
+                    target: @myself
+                  )
+                  |> JS.hide(to: "#post-#{@id}-reactions")
                 }
               >
-                <%= emoji %> <%= length(reactions) %>
+                <%= emoji.emoji %>
               </button>
             <% end %>
           </div>

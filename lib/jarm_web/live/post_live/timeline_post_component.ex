@@ -24,7 +24,7 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
 
   @impl true
   def handle_event(
-        "add_reaction",
+        "toggle_reaction",
         %{"post" => post_id, "emoji" => emoji_id, "user" => user_id},
         socket
       ) do
