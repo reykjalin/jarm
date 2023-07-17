@@ -21,7 +21,7 @@ defmodule JarmWeb.PostLive.Index do
         first_post: first_post,
         last_post: last_post,
         locale: locale,
-        emojis: Emojis.all_emojis()
+        emojis: Reactions.all_emojis()
       )
 
     {:ok, socket, temporary_assigns: [posts: []]}

@@ -11,8 +11,8 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
   def handle_event("search_emoji", %{"query" => query} = params, socket) do
     emojis =
       case query do
-        "" -> Emojis.all_emojis()
-        query -> Emojis.search_emojis(query)
+        "" -> Reactions.all_emojis()
+        query -> Reactions.search_emojis(query)
       end
 
     socket =
