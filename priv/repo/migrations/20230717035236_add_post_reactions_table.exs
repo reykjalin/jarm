@@ -9,5 +9,7 @@ defmodule Jarm.Repo.Migrations.AddPostReactionsTable do
 
       timestamps()
     end
+
+    create(unique_index(:post_reactions, [:user_id, :post_id, :emoji_id]))
   end
 end

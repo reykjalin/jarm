@@ -16,5 +16,6 @@ defmodule Jarm.Reactions.PostReaction do
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:post_id)
     |> foreign_key_constraint(:emoji_id)
+    |> unique_constraint([:user_id, :post_id, :emoji_id])
   end
 end
