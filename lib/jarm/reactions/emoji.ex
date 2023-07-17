@@ -1,4 +1,4 @@
-defmodule Jarm.Emojis.Emoji do
+defmodule Jarm.Reactions.Emoji do
   use Ecto.Schema
 
   @primary_key {:id, :id, autogenerate: true, source: :rowid}

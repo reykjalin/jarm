@@ -3,7 +3,7 @@ defmodule JarmWeb.PostLive.Index do
 
   alias Jarm.Timeline
   alias Jarm.Timeline.Post
-  alias Jarm.Emojis
+  alias Jarm.Reactions
 
   import Canada, only: [can?: 2]
 

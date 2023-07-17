@@ -1,8 +1,8 @@
-defmodule Jarm.Emojis do
+defmodule Jarm.Reactions do
   import Ecto.Query, warn: false
   alias Jarm.Repo
 
-  alias Jarm.Emojis.Emoji
+  alias Jarm.Reactions.Emoji
 
   def search_emojis(q) do
     from(
@@ -17,5 +17,4 @@ defmodule Jarm.Emojis do
   def all_emojis() do
     from(e in Emoji) |> Repo.all()
   end
-
 end

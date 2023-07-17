@@ -3,7 +3,7 @@ defmodule JarmWeb.PostLive.TimelinePostComponent do
 
   alias Phoenix.LiveView.JS
 
-  alias Jarm.Emojis
+  alias Jarm.Reactions
 
   import Canada, only: [can?: 2]
 
