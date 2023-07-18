@@ -7,7 +7,8 @@ defmodule JarmWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_jarm_key",
-    signing_salt: "SHotYGC7"
+    signing_salt: "SHotYGC7",
+    same_site: "Lax"
   ]
 
   socket "/socket", JarmWeb.UserSocket,
@@ -24,7 +25,7 @@ defmodule JarmWeb.Endpoint do
     at: "/",
     from: :jarm,
     gzip: true,
-    only: ~w(assets css fonts images js favicon.ico robots.txt)
+    only: JarmWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

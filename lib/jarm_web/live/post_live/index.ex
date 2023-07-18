@@ -10,8 +10,6 @@ defmodule JarmWeb.PostLive.Index do
   def mount(%{"locale" => locale}, session, socket) do
     if connected?(socket), do: Timeline.subscribe()
 
-    socket = assign_current_user(socket, session)
-
     posts = Timeline.list_posts()
     first_post = List.first(posts, nil)
     last_post = List.last(posts, nil)

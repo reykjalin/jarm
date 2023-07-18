@@ -28,11 +28,13 @@
               class=""
               phx-change="save"
             >
-              <%= hidden_input(f, :id, value: post.id) %>
-              <%= select(f, :locale, ["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"],
-                selected: post.locale,
-                prompt: gettext("Choose language")
-              ) %>
+              <.input field={f[:id]} type="hidden" value={post.id} />
+              <.input
+                field={f[:locale]}
+                type="select"
+                options={["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"]}
+                prompt={gettext("Choose language")}
+              />
             </.form>
           </td>
         </tr>

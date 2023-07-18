@@ -18,7 +18,7 @@
         <img
           id={m.uuid}
           class="lazy shadow-md border border-lightgray"
-          data-src={Routes.media_path(@socket, :show_compressed, m.uuid)}
+          data-src={~p"/compressed-media/#{m.uuid}"}
           loading="lazy"
         />
       </figure>
@@ -30,17 +30,14 @@
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
         <video
           id={m.uuid}
-          poster={Routes.media_path(@socket, :show_thumbnail, m.uuid)}
+          poster={~p"/thumbnail/#{m.uuid}"}
           controls
           preload="metadata"
           class="lazy bg-gray-200"
           width="700"
           height="700"
         >
-          <source
-            data-src={Routes.media_path(@socket, :show_compressed, m.uuid)}
-            type="video/mp4"
-          />
+          <source data-src={~p"/compressed-media/#{m.uuid}"} type="video/mp4" />
         </video>
       </div>
     <% end %>

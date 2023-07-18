@@ -3,28 +3,11 @@
 @import "tailwindcss/utilities";
 
 @layer components {
-  input, textarea, select {
-    @apply bg-gray-800 light:bg-white !important;
-  }
-
-  .border-b, .border {
-    @apply border-slate-600;
-  }
-
-  .link {
+  a:not(.button, .site-title) {
     @apply text-blue-500 underline hover:text-blue-300 hover:no-underline;
   }
 
-  .phx-modal {
-    @apply opacity-100 fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-black;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .phx-modal-content {
-    @apply bg-white my-10 mx-auto p-5 border rounded-md w-10/12;
-  }
-
-  .phx-modal-close {
-    @apply text-gray-400 float-right text-2xl font-bold cursor-pointer hover:text-black hover:no-underline focus:text-black focus:no-underline;
+  .button {
+    @apply rounded-md bg-blue-600 hover:bg-blue-500 py-2 px-3 font-semibold leading-6 text-zinc-200 active:text-zinc-200/80;
   }
 }

@@ -2,12 +2,9 @@
   <h1 class="text-3xl pb-5"><%= gettext("🌾 The Pasture") %></h1>
 
   <%= if can?(@current_user, create(Post)) do %>
-    <p>
-      <%= live_redirect(gettext("🐑 New jarm"),
-        to: Routes.create_post_index_path(@socket, :new, @locale),
-        class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
-      ) %>
-    </p>
+    <.link href={~p"/#{@locale}/posts/new"} class="button px-4 py-3">
+      <%= gettext("🐑 New jarm") %>
+    </.link>
   <% end %>
 </div>
 
@@ -25,7 +22,7 @@
 <section id="pagination" class="text-center p-5">
   <%= if @last_post != nil do %>
     <%= live_patch(gettext("Older jarms"),
-      to: Routes.post_index_path(@socket, :index, @locale, older_than: @last_post),
+      to: ~p"/#{@locale}?older_than=#{@last_post.id}",
       class: "link"
     ) %>
   <% else %>

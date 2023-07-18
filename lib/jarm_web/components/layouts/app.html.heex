@@ -1,0 +1,23 @@
+<header class="border-b border-zinc-500 light:border-zinc-300 p-5 mb-5 bg-slate-800 light:bg-white flex flex-col justify-center items-center text-center md:justify-between md:flex-row md:items-start">
+  <h1 class="text-3xl p-5 md:p-1">
+    <.link class="site-title hover:text-zinc-400" href={~p"/#{@locale}"}>🐑 Jarm</.link>
+  </h1>
+
+  <section class="text-center">
+    <%= _user_menu(assigns) %>
+  </section>
+
+  <p class="p-5 md:p-1">
+    <%= if @current_user != nil do %>
+      <%= link(gettext("Log out"),
+        to: ~p"/#{@locale}/users/log_out",
+        method: :delete,
+        class: "link"
+      ) %>
+    <% end %>
+  </p>
+</header>
+<main class="container max-w-4xl p-2 md:p-0">
+  <.flash_group flash={@flash} />
+  <%= @inner_content %>
+</main>

@@ -6,8 +6,8 @@ defmodule Jarm.Accounts.User do
   schema "users" do
     field :display_name, :string
     field :email, :string
-    field :password, :string, virtual: true
-    field :hashed_password, :string
+    field :password, :string, virtual: true, redact: true
+    field :hashed_password, :string, redact: true
     field :is_admin, :boolean, default: false
 
     timestamps()
@@ -71,6 +71,10 @@ defmodule Jarm.Accounts.User do
 
     if hash_password? && password && changeset.valid? do
       changeset
+      # If using Bcrypt, then further validate it is at most 72 bytes long
+      |> validate_length(:password, max: 80, count: :bytes)
+      # Hashing could be done with `Ecto.Changeset.prepare_changes/2`, but that
+      # would keep the database transaction open longer and hurt performance.
       |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
       |> delete_change(:password)
     else

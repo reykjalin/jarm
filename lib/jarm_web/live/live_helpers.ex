@@ -4,14 +4,6 @@ defmodule JarmWeb.LiveHelpers do
   alias Jarm.Accounts
   alias Jarm.Timeline.Post
 
-  def assign_current_user(socket, session) do
-    assign_new(
-      socket,
-      :current_user,
-      fn -> Accounts.get_user_by_session_token(session["user_token"]) end
-    )
-  end
-
   def get_locale_representation(locale) do
     case locale do
       "en" -> "🇺🇸 English"

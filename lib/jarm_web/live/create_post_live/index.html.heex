@@ -9,24 +9,24 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :body, gettext("Jarm"), class: "font-bold") %>
-    <%= textarea(
-      f,
-      :body,
-      autofocus: true,
-      class: "border px-4 py-3 mb-5",
-      rows:
+    <.input
+      field={f[:body]}
+      type="textarea"
+      label={gettext("Jarm")}
+      autofocus={true}
+      rows={
         max(String.split(Map.get(@changeset.changes, :body, ""), "\n") |> length(), 5)
         |> Integer.to_string()
-    ) %>
-    <%= error_tag(f, :body) %>
+      }
+    />
 
-    <%= label(f, :locale, gettext("Language"), class: "font-bold") %>
-    <%= select(f, :locale, ["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"],
-      selected: @locale,
-      prompt: gettext("Choose language")
-    ) %>
-    <p class="text-red-500 mb-5"><%= error_tag(f, :locale) %></p>
+    <.input
+      field={f[:locale]}
+      type="select"
+      label={gettext("Language")}
+      options={["🇺🇸 English": "en", "🇮🇸 Íslenska": "is", "🇵🇭 Filipino": "fil"]}
+      prompt={gettext("Choose language")}
+    />
 
     <p class="my-5">
       <%= gettext(
@@ -100,7 +100,7 @@
 
     <%= submit(gettext("🐑 Baa"),
       phx_disable_with: gettext("🐑 Baaaa…"),
-      class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+      class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
     ) %>
   </.form>
 </div>

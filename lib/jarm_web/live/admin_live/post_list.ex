@@ -8,8 +8,6 @@ defmodule JarmWeb.AdminLive.PostList do
 
   @impl true
   def mount(%{"locale" => locale}, session, socket) do
-    socket = assign_current_user(socket, session)
-
     posts = Timeline.list_all_posts()
 
     socket =
@@ -37,18 +35,16 @@ defmodule JarmWeb.AdminLive.PostList do
               socket
               |> put_flash(:info, "Post updated successfully")
 
-            {:error, %Ecto.Changeset{} = changeset} ->
+            {:error, %Ecto.Changeset{} = _changeset} ->
               socket
               |> put_flash(:error, "Failed to update post")
-              |> push_redirect(
-                to: Routes.admin_post_list_path(socket, :index, socket.assigns.locale)
-              )
+              |> push_redirect(to: ~p"/#{socket.assigns.locale}/admin/posts/list")
           end
 
         false ->
           socket
           |> put_flash(:error, "You're not allowed to modify this post")
-          |> push_redirect(to: Routes.admin_post_list_path(socket, :index, socket.assigns.locale))
+          |> push_redirect(to: ~p"/#{socket.assigns.locale}/admin/posts/list")
       end
 
     {:noreply, socket}

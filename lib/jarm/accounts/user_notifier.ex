@@ -1,4 +1,5 @@
 defmodule Jarm.Accounts.UserNotifier do
+  use JarmWeb, :verified_routes
   import Bamboo.Email
 
   # For simplicity, this module simply logs messages to the terminal.
@@ -161,12 +162,7 @@ defmodule Jarm.Accounts.UserNotifier do
 
   defp get_post_url(post) do
     String.replace(
-      JarmWeb.Router.Helpers.post_show_path(
-        JarmWeb.Endpoint,
-        :show,
-        "en",
-        post.id
-      ),
+      ~p"/en/posts/#{post.id}",
       "/en/",
       "/"
     )

@@ -8,7 +8,6 @@ defmodule JarmWeb.PostLive.Show do
   @impl true
   def mount(%{"locale" => locale}, session, socket) do
     Timeline.subscribe()
-    socket = assign_current_user(socket, session)
 
     {:ok, assign(socket, locale: locale)}
   end
@@ -33,7 +32,7 @@ defmodule JarmWeb.PostLive.Show do
           socket
           |> put_flash(:error, "You're not allowed to view this post")
           |> push_redirect(
-            to: Routes.post_index_path(socket, :index, socket.assigns.locale),
+            to: ~p"/#{socket.assigns.locale}",
             replace: true
           )
       end
@@ -54,14 +53,14 @@ defmodule JarmWeb.PostLive.Show do
           socket
           |> put_flash(:info, "Post deleted")
           |> push_redirect(
-            to: Routes.post_index_path(socket, :index),
+            to: ~p"/#{socket.assigns.locale}",
             replace: true
           )
 
         false ->
           socket
           |> put_flash(:error, "You're not allowed to delete this post")
-          |> push_patch(to: Routes.post_show_path(socket, :show, id))
+          |> push_patch(to: ~p"/#{socket.assigns.locale}/posts/#{id}")
       end
 
     {

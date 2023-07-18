@@ -1,89 +1,89 @@
 <div
   id={ "post-#{ @id }" }
-  class="my-5 border rounded-md bg-slate-800 light:bg-white"
+  class=""
   style={
     if @post.__meta__.state == :deleted do
       "display: none;"
     end
   }
 >
-  <div class="p-5 md:p-10">
-    <div class="flex justify-between">
-      <div>
-        <strong><%= @post.user.display_name %></strong>
+  <.card>
+    <div>
+      <div class="flex justify-between">
+        <div>
+          <strong><%= @post.user.display_name %></strong>
 
-        <p>
-          <%= if can?(@current_user, read(@post)) do %>
-            <%= live_redirect(
-              "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}",
-              to: Routes.post_show_path(@socket, :show, @locale, @post),
-              class: "link"
-            ) %>
-          <% else %>
-            <%= "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}" %>
-          <% end %>
-        </p>
+          <p>
+            <%= if can?(@current_user, read(@post)) do %>
+              <%= live_redirect(
+                "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}",
+                to: ~p"/#{@locale}/posts/#{@post.id}",
+                class: "link"
+              ) %>
+            <% else %>
+              <%= "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}" %>
+            <% end %>
+          </p>
+        </div>
+
+        <p><%= get_locale_for_translated_post(@post, @locale) %></p>
       </div>
 
-      <p><%= get_locale_for_translated_post(@post, @locale) %></p>
+      <%= text_to_html(get_post_body_for_locale(@post, @locale), attributes: [class: "my-5"]) %>
     </div>
 
-    <%= text_to_html(get_post_body_for_locale(@post, @locale), attributes: [class: "my-5"]) %>
-  </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense gap-1">
+      <%= for media <- @post.media do %>
+        <%= if String.starts_with?(media.mime_type, "image") do %>
+          <figure class="w-full">
+            <a class="link" href={~p"/media/#{media.uuid}"}>
+              <canvas
+                id={"canvas-#{media.uuid}"}
+                class="w-full shadow-md border border-lightgray"
+                \
+                data-blurhash={media.blurhash}
+                width="30"
+                height="30"
+                phx-hook="BlurHash"
+              >
+              </canvas>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense gap-1">
-    <%= for media <- @post.media do %>
-      <%= if String.starts_with?(media.mime_type, "image") do %>
-        <figure class="w-full">
-          <a class="link" href={Routes.media_path(@socket, :show, media.uuid)}>
-            <canvas
-              id={"canvas-#{media.uuid}"}
-              class="w-full shadow-md border border-lightgray"
-              \
-              data-blurhash={media.blurhash}
-              width="30"
-              height="30"
-              phx-hook="BlurHash"
-            >
-            </canvas>
+              <img
+                id={media.uuid}
+                class="lazy shadow-md border border-lightgray"
+                data-src={~p"/compressed-media/#{media.uuid}"}
+                loading="lazy"
+              />
+            </a>
+          </figure>
+        <% end %>
 
-            <img
+        <%= if String.starts_with?(media.mime_type, "video") do %>
+          <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
+          <div class="w-full">
+            <!-- Assume for now that video size is 700x700 until it's loaded. -->
+            <video
               id={media.uuid}
-              class="lazy shadow-md border border-lightgray"
-              data-src={Routes.media_path(@socket, :show_compressed, media.uuid)}
-              loading="lazy"
-            />
-          </a>
-        </figure>
+              poster={~p"/thumbnail/#{media.uuid}"}
+              controls
+              preload="metadata"
+              class="bg-gray-200"
+              width="700"
+              height="700"
+            >
+              <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
+            </video>
+          </div>
+        <% end %>
       <% end %>
+    </div>
 
-      <%= if String.starts_with?(media.mime_type, "video") do %>
-        <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
-        <div class="w-full">
-          <!-- Assume for now that video size is 700x700 until it's loaded. -->
-          <video
-            id={media.uuid}
-            poster={Routes.media_path(@socket, :show_thumbnail, media.uuid)}
-            controls
-            preload="metadata"
-            class="bg-gray-200"
-            width="700"
-            height="700"
-          >
-            <source
-              src={Routes.media_path(@socket, :show_compressed, media.uuid)}
-              type="video/mp4"
-            />
-          </video>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <p class="text-center py-3 md:py-5">
-    <%= live_patch("#{ngettext("%{count} comment", "%{count} comments", length(@post.comments))}",
-      to: Routes.post_show_path(@socket, :show, @locale, @post),
-      class: "link"
-    ) %>
-  </p>
+    <p class="text-center">
+      <%= live_patch(
+        "#{ngettext("%{count} comment", "%{count} comments", length(@post.comments))}",
+        to: ~p"/#{@locale}/posts/#{@post.id}",
+        class: "link"
+      ) %>
+    </p>
+  </.card>
 </div>

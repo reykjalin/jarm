@@ -16,7 +16,7 @@
           <%= if can?(@current_user, read(@post)) do %>
             <%= live_patch(
               "#{Date.to_string(NaiveDateTime.to_date(@post.inserted_at))} #{Time.to_string(NaiveDateTime.to_time(@post.inserted_at))}",
-              to: Routes.post_show_path(@socket, :show, @locale, @post),
+              to: ~p"/#{@locale}/posts/#{@post.id}",
               class: "link"
             ) %>
           <% else %>
@@ -34,14 +34,14 @@
   <%= for media <- @post.media do %>
     <%= if String.starts_with?(media.mime_type, "image") do %>
       <figure class="py-3 md:py-5 my-5">
-        <a class="link" href={Routes.media_path(@socket, :show, media.uuid)}>
+        <a class="link" href={~p"/media/#{media.uuid}"}>
           <!-- Assume for now that image size is 700x700 until it's loaded. -->
           <img
             id={media.uuid}
             class="bg-gray-200"
             width="700"
             height="700"
-            src={Routes.media_path(@socket, :show_compressed, media.uuid)}
+            src={~p"/compressed-media/#{media.uuid}"}
             loading="lazy"
           />
         </a>
@@ -54,14 +54,14 @@
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
         <video
           id={media.uuid}
-          poster={Routes.media_path(@socket, :show_thumbnail, media.uuid)}
+          poster={~p"/thumbnail/#{media.uuid}"}
           controls
           preload="metadata"
           class="bg-gray-200"
           width="700"
           height="700"
         >
-          <source src={Routes.media_path(@socket, :show_compressed, media.uuid)} type="video/mp4" />
+          <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
         </video>
       </div>
     <% end %>
@@ -95,13 +95,11 @@
       phx-change="validate"
       phx-submit="save"
     >
-      <%= label(f, :body, gettext("New comment:"), class: "font-bold") %>
-      <%= textarea(f, :body, class: "border px-4 py-3 mb-5") %>
-      <%= error_tag(f, :body) %>
+      <.input field={f[:body]} type="textarea" label={gettext("New comment:")} />
 
       <%= submit(gettext("Post Comment"),
         phx_disable_with: gettext("Posting comment…"),
-        class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+        class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
       ) %>
     </.form>
   </div>

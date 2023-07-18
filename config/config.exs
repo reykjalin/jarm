@@ -12,26 +12,31 @@ config :jarm,
 
 # Configures the endpoint
 config :jarm, JarmWeb.Endpoint,
-  render_errors: [view: JarmWeb.ErrorView, accepts: ~w(html json), layout: false],
+  url: [host: "localhost"],
+  render_errors: [
+    formats: [html: JarmWeb.ErrorHTML, json: JarmWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: Jarm.PubSub
 
 # Configure locales
-config :jarm, JarmWeb.Gettext, default_locale: "en", locales: ~w(en is)
+config :jarm, JarmWeb.Gettext, default_locale: "en", locales: ~w(en is fil)
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.12.18",
+  version: "0.17.11",
   default: [
-    args: ~w(js/app.js --bundle --target=es2016 --outdir=../priv/static/assets),
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
 config :tailwind,
-  version: "3.2.4",
+  version: "3.3.2",
   default: [
     args: ~w(
     --config=tailwind.config.js

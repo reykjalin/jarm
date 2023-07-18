@@ -6,7 +6,6 @@ defmodule JarmWeb.EditPostLive.AddTranslation do
 
   @impl true
   def mount(params, session, socket) do
-    socket = assign_current_user(socket, session)
     socket = assign(socket, :page_title, gettext("Translate jarm"))
 
     post = Timeline.get_post!(params["id"])
@@ -38,7 +37,7 @@ defmodule JarmWeb.EditPostLive.AddTranslation do
         {:noreply,
          socket
          |> put_flash(:info, gettext("Translation created successfully"))
-         |> push_redirect(to: Routes.post_index_path(socket, :index, socket.assigns.locale))}
+         |> push_redirect(to: ~p"/#{socket.assigns.locale}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}

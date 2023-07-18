@@ -16,21 +16,21 @@
 <div class="flex flex-row justify-between my-5">
   <p>
     <%= live_redirect(gettext("Back"),
-      to: Routes.post_index_path(@socket, :index, @locale),
+      to: ~p"/#{@locale}",
       class: "link"
     ) %>
   </p>
 
   <p>
     <%= live_patch(gettext("Translate"),
-      to: Routes.edit_post_add_translation_path(@socket, :index, @locale, @post),
-      class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+      to: ~p"/#{@locale}/posts/#{@post.id}/add_translation",
+      class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
     ) %>
 
     <%= if can?(@current_user, edit(@post)) do %>
       <%= live_patch(gettext("Edit"),
-        to: Routes.edit_post_index_path(@socket, :index, @locale, @post),
-        class: "border rounded-md px-4 py-3 bg-blue-600 text-white hover:bg-blue-500"
+        to: ~p"/#{@locale}/posts/#{@post.id}/edit",
+        class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
       ) %>
     <% end %>
 
@@ -40,7 +40,7 @@
         phx_click: "delete",
         phx_value_id: @post.id,
         data: [confirm: gettext("Are you sure?")],
-        class: "border rounded-md px-4 py-3 bg-red-600 text-white hover:bg-red-500"
+        class: "border rounded-md px-4 py-3 bg-red-600 text-zinc-200 hover:bg-red-500"
       ) %>
     <% end %>
   </p>

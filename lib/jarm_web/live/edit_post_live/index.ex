@@ -8,8 +8,6 @@ defmodule JarmWeb.EditPostLive.Index do
 
   @impl true
   def mount(params, session, socket) do
-    socket = assign_current_user(socket, session)
-
     post = Timeline.get_post!(params["id"])
     socket = assign(socket, :post, post)
 
@@ -59,7 +57,7 @@ defmodule JarmWeb.EditPostLive.Index do
             {:ok, _post} ->
               socket
               |> put_flash(:info, "Post updated successfully")
-              |> push_redirect(to: Routes.post_index_path(socket, :index))
+              |> push_redirect(to: ~p"/#{socket.assigns.locale}")
 
             {:error, %Ecto.Changeset{} = changeset} ->
               assign(socket, :changeset, changeset)
@@ -68,7 +66,7 @@ defmodule JarmWeb.EditPostLive.Index do
         false ->
           socket
           |> put_flash(:error, "You're not allowed to modify this post")
-          |> push_redirect(to: Routes.post_index_path(socket, :index))
+          |> push_redirect(to: ~p"/#{socket.assigns.locale}")
       end
 
     {:noreply, socket}
