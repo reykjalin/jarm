@@ -4,6 +4,10 @@ defmodule Jarm.Reactions do
 
   alias Jarm.Reactions.{Emoji, PostReaction}
 
+  def subscribe() do
+    Phoenix.PubSub.subscribe(Jarm.PubSub, "post_reactions")
+  end
+
   def search_emojis(q) do
     from(
       e in Emoji,
@@ -22,11 +26,13 @@ defmodule Jarm.Reactions do
     case get_reaction(post_id, emoji_id, user_id) do
       nil ->
         add_reaction(post_id, emoji_id, user_id)
+        |> broadcast(:reaction_added)
 
       reaction ->
         IO.inspect(reaction, label: "reaction to delete")
 
         delete_reaction(reaction)
+        |> broadcast(:reaction_deleted)
     end
   end
 
@@ -41,5 +47,12 @@ defmodule Jarm.Reactions do
 
   defp get_reaction(post_id, emoji_id, user_id) do
     Repo.get_by(PostReaction, post_id: post_id, emoji_id: emoji_id, user_id: user_id)
+  end
+
+  defp broadcast({:error, _reason} = error, _event), do: error
+
+  defp broadcast({:ok, %PostReaction{} = reaction}, event) do
+    Phoenix.PubSub.broadcast(Jarm.PubSub, "post_reactions", {event, reaction})
+    {:ok, reaction}
   end
 end
