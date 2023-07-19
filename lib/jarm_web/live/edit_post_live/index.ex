@@ -7,7 +7,7 @@ defmodule JarmWeb.EditPostLive.Index do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(params, _session, socket) do
     post = Timeline.get_post!(params["id"])
     socket = assign(socket, :post, post)
 

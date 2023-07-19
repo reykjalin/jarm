@@ -6,7 +6,7 @@ defmodule JarmWeb.PostLive.Show do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(%{"locale" => locale}, session, socket) do
+  def mount(%{"locale" => locale}, _session, socket) do
     Timeline.subscribe()
 
     {:ok, assign(socket, locale: locale)}

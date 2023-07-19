@@ -7,7 +7,7 @@ defmodule JarmWeb.CreatePostLive.Index do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(_params, _session, socket) do
     changeset = Post.changeset(%Post{}, %{})
 
     socket =

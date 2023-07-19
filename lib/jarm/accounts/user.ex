@@ -181,7 +181,7 @@ defimpl Canada.Can, for: Jarm.Accounts.User do
   alias Jarm.Accounts.User
   alias Jarm.Timeline.Post
 
-  def can?(%User{is_admin: true}, action, %Post{}), do: true
+  def can?(%User{is_admin: true}, _action, %Post{}), do: true
 
   def can?(%User{id: user_id}, action, %Post{user_id: user_id})
       when action in [:edit, :delete],

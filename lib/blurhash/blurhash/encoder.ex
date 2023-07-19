@@ -28,7 +28,7 @@ defmodule Blurhash.Encoder do
          component_y,
          width,
          height,
-         {{acc_r, acc_g, acc_b}, index} = acc
+         {{acc_r, acc_g, acc_b}, index} = _acc
        ) do
     pixel_x = rem(index, width)
     pixel_y = floor(index / width)

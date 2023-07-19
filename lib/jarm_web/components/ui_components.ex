@@ -1,9 +1,6 @@
 defmodule JarmWeb.UiComponents do
   use Phoenix.Component
 
-  alias Phoenix.LiveView.JS
-  import JarmWeb.Gettext
-
   attr :class, :string, default: nil
 
   slot :inner_block, required: true

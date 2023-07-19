@@ -5,7 +5,7 @@ defmodule JarmWeb.AdminLive.UserList do
   alias Jarm.Accounts.User
 
   @impl true
-  def mount(%{"locale" => locale}, session, socket) do
+  def mount(%{"locale" => locale}, _session, socket) do
     users = Accounts.get_all_users()
 
     socket =

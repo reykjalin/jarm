@@ -4,7 +4,7 @@ defmodule JarmWeb.AdminLive.InvitationsList do
   alias Jarm.Administrator
 
   @impl true
-  def mount(%{"locale" => locale}, session, socket) do
+  def mount(%{"locale" => locale}, _session, socket) do
     invitations = Administrator.get_all_invitations()
     valid_invitations = Administrator.get_valid_invitations()
     expired_invitations = Administrator.get_expired_invitations()

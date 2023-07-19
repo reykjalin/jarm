@@ -1,7 +1,4 @@
 defmodule JarmWeb.LiveHelpers do
-  import Phoenix.Component
-
-  alias Jarm.Accounts
   alias Jarm.Timeline.Post
 
   def get_locale_representation(locale) do

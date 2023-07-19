@@ -126,7 +126,7 @@ defmodule JarmWeb.UserSettingsLive do
           put_flash(socket, :error, "Email change link is invalid or it has expired.")
       end
 
-    {:ok, push_navigate(socket, to: ~p"/users/settings")}
+    {:ok, push_navigate(socket, to: ~p"/#{socket.assigns.locale}/users/settings")}
   end
 
   def mount(_params, _session, socket) do
@@ -170,7 +170,7 @@ defmodule JarmWeb.UserSettingsLive do
     user = socket.assigns.current_user
 
     case Accounts.update_user_display_name(user, password, user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         info = gettext("Display name successfully updated.")
         {:noreply, socket |> put_flash(:info, info) |> assign(display_name_current_password: nil)}
 

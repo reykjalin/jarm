@@ -7,7 +7,7 @@ defmodule JarmWeb.AdminLive.PostList do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(%{"locale" => locale}, session, socket) do
+  def mount(%{"locale" => locale}, _session, socket) do
     posts = Timeline.list_all_posts()
 
     socket =
@@ -19,6 +19,7 @@ defmodule JarmWeb.AdminLive.PostList do
     {:ok, socket}
   end
 
+  @impl true
   def handle_event("save", %{"post" => post_params}, socket) do
     save_post(socket, :edit, post_params)
   end

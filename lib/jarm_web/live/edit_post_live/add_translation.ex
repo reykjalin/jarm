@@ -5,7 +5,7 @@ defmodule JarmWeb.EditPostLive.AddTranslation do
   alias Jarm.Timeline.Translation
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(params, _session, socket) do
     socket = assign(socket, :page_title, gettext("Translate jarm"))
 
     post = Timeline.get_post!(params["id"])

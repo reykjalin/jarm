@@ -11,7 +11,10 @@ defmodule JarmWeb.UserRegistrationLive do
         <%= gettext("Register for an account") %>
         <:subtitle>
           Already registered?
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
+          <.link
+            navigate={~p"/#{@locale}/users/log_in"}
+            class="font-semibold text-brand hover:underline"
+          >
             Sign in
           </.link>
           to your account now.

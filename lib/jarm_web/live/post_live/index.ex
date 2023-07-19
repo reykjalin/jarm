@@ -7,7 +7,7 @@ defmodule JarmWeb.PostLive.Index do
   import Canada, only: [can?: 2]
 
   @impl true
-  def mount(%{"locale" => locale}, session, socket) do
+  def mount(%{"locale" => locale}, _session, socket) do
     if connected?(socket), do: Timeline.subscribe()
 
     posts = Timeline.list_posts()

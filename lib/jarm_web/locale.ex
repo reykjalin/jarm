@@ -1,7 +1,6 @@
 defmodule JarmWeb.Locale do
   alias Plug.Conn
 
-  @locales Gettext.known_locales(JarmWeb.Gettext)
   @cookie "jarm_locale"
   @ten_days 10 * 24 * 60 * 60
 
