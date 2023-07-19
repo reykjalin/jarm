@@ -47,33 +47,15 @@
     </div>
   <% end %>
 
-  <%!-- <div class="flex flex-row flex-nowrap gap-5 p-5 text-center justify-center">
-    <.link
-      href={
-        URI.parse(@conn.request_path).path
-        |> String.replace_prefix("/#{@locale}", "/en")
-      }
-      class="link"
-    >
+  <div class="flex flex-row flex-nowrap gap-5 p-5 text-center justify-center">
+    <.link href={~p"/en"}>
       🇺🇸 English
     </.link>
-    <.link
-      href={
-        URI.parse(@conn.request_path).path
-        |> String.replace_prefix("/#{@locale}", "/is")
-      }
-      class="link"
-    >
+    <.link href={~p"/is"}>
       🇮🇸 Íslenska
     </.link>
-    <.link
-      href={
-        URI.parse(@conn.request_path).path
-        |> String.replace_prefix("/#{@locale}", "/fil")
-      }
-      class="link"
-    >
+    <.link href={~p"/fil"}>
       🇵🇭 Filipino
     </.link>
-  </div> --%>
+  </div>
 </nav>
