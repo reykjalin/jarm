@@ -27,7 +27,8 @@ defmodule JarmWeb.LiveHelpers do
         else
           case Enum.find(translations, fn t -> t.locale == "en" end) do
             nil ->
-              get_locale_representation("en")
+              # No English translation so we use the post locale representation.
+              get_locale_representation(post_locale)
 
             translation ->
               get_locale_representation(translation.locale)
