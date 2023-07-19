@@ -196,7 +196,7 @@ defmodule JarmWeb.CreatePostLive.Index do
 
               socket
               |> put_flash(:info, "Post created successfully")
-              |> push_redirect(to: ~p"/#{socket.assigns.locale}")
+              |> redirect(to: ~p"/#{socket.assigns.locale}")
 
             {:error, %Ecto.Changeset{} = changeset} ->
               assign(socket, changeset: changeset)
@@ -205,7 +205,7 @@ defmodule JarmWeb.CreatePostLive.Index do
         false ->
           socket
           |> put_flash(:error, "You're not allowed to create new posts")
-          |> push_redirect(to: ~p"/#{socket.assigns.locale}")
+          |> redirect(to: ~p"/#{socket.assigns.locale}")
       end
 
     {:noreply, socket}
