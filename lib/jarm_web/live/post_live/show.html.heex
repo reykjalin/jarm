@@ -22,16 +22,14 @@
   </p>
 
   <p>
-    <%= live_patch(gettext("Translate"),
-      to: ~p"/#{@locale}/posts/#{@post.id}/add_translation",
-      class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
-    ) %>
+    <.link href={~p"/#{@locale}/posts/#{@post.id}/add_translation"} class="button mx-1">
+      <%= gettext("Translate") %>
+    </.link>
 
     <%= if can?(@current_user, edit(@post)) do %>
-      <%= live_patch(gettext("Edit"),
-        to: ~p"/#{@locale}/posts/#{@post.id}/edit",
-        class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
-      ) %>
+      <.link href={~p"/#{@locale}/posts/#{@post.id}/edit"} class="button mx-1">
+        <%= gettext("Edit") %>
+      </.link>
     <% end %>
 
     <%= if can?(@current_user, delete(@post)) do %>
@@ -40,7 +38,7 @@
         phx_click: "delete",
         phx_value_id: @post.id,
         data: [confirm: gettext("Are you sure?")],
-        class: "border rounded-md px-4 py-3 bg-red-600 text-zinc-200 hover:bg-red-500"
+        class: "button bg-red-600 hover:bg-red-500 mx-1"
       ) %>
     <% end %>
   </p>
