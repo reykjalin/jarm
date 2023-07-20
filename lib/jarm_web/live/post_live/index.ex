@@ -55,7 +55,7 @@ defmodule JarmWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_event("search_emoji", %{"query" => query} = params, socket) do
+  def handle_event("search_emoji", %{"query" => query, "post_id" => post_id}, socket) do
     emojis =
       case query do
         "" -> Reactions.all_emojis()
@@ -65,6 +65,11 @@ defmodule JarmWeb.PostLive.Index do
     socket =
       socket
       |> assign(emojis: emojis)
+
+    send_update(JarmWeb.PostLive.TimelinePostComponent,
+      id: post_id |> String.to_integer(),
+      emojis: emojis
+    )
 
     {:noreply, socket}
   end
@@ -131,10 +136,7 @@ defmodule JarmWeb.PostLive.Index do
 
     send_update(JarmWeb.PostLive.TimelinePostComponent,
       id: reaction.post_id,
-      post: post,
-      current_user: socket.assigns.current_user,
-      locale: socket.assigns.locale,
-      emojis: socket.assigns.emojis
+      post: post
     )
 
     {:noreply, socket}
