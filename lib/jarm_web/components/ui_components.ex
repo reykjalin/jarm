@@ -40,7 +40,10 @@ defmodule JarmWeb.UiComponents do
       <div>
         <%= for {emoji, reactions} <- @post.reactions |> Enum.group_by(fn r -> r.emoji.emoji end, fn r -> r end) do %>
           <button
-            class="py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400"
+            class={[
+              "py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400",
+              "#{if Enum.find(reactions, fn r -> r.user_id == @current_user.id end), do: "bg-sky-800"}"
+            ]}
             title={
               reactions
               |> Enum.map(fn r -> r.user.display_name end)
