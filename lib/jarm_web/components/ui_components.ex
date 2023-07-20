@@ -49,7 +49,7 @@ defmodule JarmWeb.UiComponents do
           <button
             class={[
               "py-2 px-2 md:py-2 md:px-3 light:hover:bg-slate-100 hover:bg-slate-600 rounded-full border hover:border-slate-400",
-              "#{if Enum.find(reactions, fn r -> r.user_id == @current_user.id end), do: "bg-sky-800"}"
+              "#{if Enum.find(reactions, fn r -> r.user_id == @current_user.id end), do: "bg-sky-800 light:bg-sky-200"}"
             ]}
             title={
               reactions
