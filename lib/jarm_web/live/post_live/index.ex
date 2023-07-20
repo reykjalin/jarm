@@ -9,7 +9,10 @@ defmodule JarmWeb.PostLive.Index do
 
   @impl true
   def mount(%{"locale" => locale}, _session, socket) do
-    if connected?(socket), do: Timeline.subscribe()
+    if connected?(socket) do
+      Timeline.subscribe()
+      Reactions.subscribe()
+    end
 
     posts = Timeline.list_posts()
     first_post = List.first(posts, nil)
@@ -105,5 +108,35 @@ defmodule JarmWeb.PostLive.Index do
   @impl true
   def handle_info({:post_deleted, post}, socket) do
     {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
+  end
+
+  @impl true
+  def handle_info({:reaction_added, reaction}, socket) do
+    post = Timeline.get_post!(reaction.post_id)
+
+    send_update(JarmWeb.PostLive.TimelinePostComponent,
+      id: reaction.post_id,
+      post: post,
+      current_user: socket.assigns.current_user,
+      locale: socket.assigns.locale,
+      emojis: socket.assigns.emojis
+    )
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:reaction_deleted, reaction}, socket) do
+    post = Timeline.get_post!(reaction.post_id)
+
+    send_update(JarmWeb.PostLive.TimelinePostComponent,
+      id: reaction.post_id,
+      post: post,
+      current_user: socket.assigns.current_user,
+      locale: socket.assigns.locale,
+      emojis: socket.assigns.emojis
+    )
+
+    {:noreply, socket}
   end
 end

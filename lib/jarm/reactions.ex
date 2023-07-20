@@ -29,8 +29,6 @@ defmodule Jarm.Reactions do
         |> broadcast(:reaction_added)
 
       reaction ->
-        IO.inspect(reaction, label: "reaction to delete")
-
         delete_reaction(reaction)
         |> broadcast(:reaction_deleted)
     end
