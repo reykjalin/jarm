@@ -43,7 +43,11 @@ defmodule JarmWeb.LiveComponents.ReactionsLive do
                     value: %{emoji: emoji.id, post: @post_id, user: @current_user.id},
                     target: @myself
                   )
-                  |> JS.hide(to: "#post-#{@post_id}-reactions")
+                  |> JS.hide(
+                    to: "#post-#{@post_id}-reactions",
+                    transition: {"ease-out duration-75", "opacity-100", "opacity-0"}
+                  )
+                  |> JS.add_class("hidden", to: "#post-#{@post_id}-reactions")
                 }
               >
                 <%= emoji.emoji %>
