@@ -10,9 +10,6 @@ config :jarm, JarmWeb.Endpoint, cache_static_manifest: "priv/static/cache_manife
 # Do not print debug messages in production
 config :logger, level: :info
 
-# Set mode flag for runtime.exs
-config :jarm, :mode, :prod
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

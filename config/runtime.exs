@@ -5,7 +5,7 @@
 import Config
 
 # We only run these checks in the production environment.
-if Application.fetch_env(:jarm, :mode) == :prod do
+if config_env() == :prod do
   database_path = System.get_env("DATABASE_PATH") || "./prod.sqlite3"
 
   url = System.get_env("URL") || "localhost"

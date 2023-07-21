@@ -65,9 +65,6 @@ config :jarm, JarmWeb.Endpoint,
 # Enable dev routes for dashboard and mailbox
 config :jarm, dev_routes: true
 
-# Set mode flag for runtime.exs
-config :jarm, :mode, :dev
-
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
