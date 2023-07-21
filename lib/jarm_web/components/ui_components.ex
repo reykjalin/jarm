@@ -1,14 +1,6 @@
 defmodule JarmWeb.UiComponents do
   use Phoenix.Component
 
-  alias Phoenix.LiveView.JS
-
-  import JarmWeb.Gettext
-  import JarmWeb.CoreComponents
-
-  alias Jarm.Timeline.Post
-  alias Jarm.Reactions.Emoji
-
   attr :class, :string, default: nil
   slot :inner_block, required: true
 
