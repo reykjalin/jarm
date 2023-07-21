@@ -10,7 +10,7 @@ tasks:
       if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then complete-build; fi
   - setup: |
       curl -L https://fly.io/install.sh | sh
-  - run: |
+  - deploy: |
       cd jarm
       {
         set +x
@@ -19,4 +19,12 @@ tasks:
       }
       export FLY_API_TOKEN
       /home/build/.fly/bin/flyctl deploy --remote-only
+  - create-demo-user: |
+      cd jarm
+      {
+        set +x
+        . ~/.buildsecrets
+        set -x
+      }
+      export FLY_API_TOKEN
       /home/build/.fly/bin/flyctl ssh console --pty -C '/app/bin/jarm rpc "Jarm.Accounts.register_user(%{display_name: \"Demo\", email: \"demo@example.com\", password: \"RDJ.uzt9bmg!zxa9gkh\"})"'
