@@ -27,5 +27,5 @@ tasks:
         set -x
       }
       export FLY_API_TOKEN
-      /home/build/.fly/bin/flyctl ssh console ssh issue --agent
+      /home/build/.fly/bin/flyctl ssh issue --agent
       /home/build/.fly/bin/flyctl ssh console -C '/app/bin/jarm rpc "Jarm.Accounts.register_user(%{display_name: \"Demo\", email: \"demo@example.com\", password: \"RDJ.uzt9bmg!zxa9gkh\"})"'
