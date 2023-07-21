@@ -7,7 +7,7 @@ sources:
 tasks:
   - only-run-on-main-branch: |
       cd jarm
-      git diff --exit-code origin/main || complete-build
+      if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then complete-build; fi
   - setup: |
       curl -L https://fly.io/install.sh | sh
   - run: |
