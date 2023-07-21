@@ -11,107 +11,95 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: lib/jarm_web/live/post_live/timeline_post_component.html.heex:84
+#: lib/jarm_web/live/post_live/timeline_post_component.html.heex:92
 #, elixir-autogen, elixir-format
 msgid "%{count} comment"
 msgid_plural "%{count} comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/jarm_web/live/post_live/show.html.heex:42
+#: lib/jarm_web/live/post_live/show.html.heex:41
 #, elixir-autogen, elixir-format
 msgid "Are you sure?"
 msgstr ""
 
-#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:39
-#: lib/jarm_web/live/post_live/show.html.heex:18
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:48
+#: lib/jarm_web/live/post_live/show.html.heex:19
 #, elixir-autogen, elixir-format
 msgid "Back"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:3
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:36
+#: lib/jarm_web/live/user_settings_live.ex:40
 #, elixir-autogen, elixir-format
 msgid "Change display name"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:42
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:75
+#: lib/jarm_web/live/user_settings_live.ex:66
 #, elixir-autogen, elixir-format
 msgid "Change email"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:81
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:118
+#: lib/jarm_web/live/user_settings_live.ex:111
 #, elixir-autogen, elixir-format
 msgid "Change password"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/post_component.html.heex:71
+#: lib/jarm_web/live/post_live/post_component.html.heex:78
 #, elixir-autogen, elixir-format
 msgid "Comments"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:17
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:99
+#: lib/jarm_web/live/user_reset_password_live.ex:25
+#: lib/jarm_web/live/user_settings_live.ex:98
 #, elixir-autogen, elixir-format
 msgid "Confirm new password"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:21
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:60
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:103
+#: lib/jarm_web/live/user_settings_live.ex:34
+#: lib/jarm_web/live/user_settings_live.ex:61
+#: lib/jarm_web/live/user_settings_live.ex:104
 #, elixir-autogen, elixir-format
 msgid "Current password"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/show.html.heex:38
+#: lib/jarm_web/live/post_live/show.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:13
+#: lib/jarm_web/live/user_registration_live.ex:40
 #, elixir-autogen, elixir-format
 msgid "Display Name"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/show.html.heex:31
+#: lib/jarm_web/live/post_live/show.html.heex:32
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_invitation/new.html.heex:7
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:17
-#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:7
-#: lib/jarm_web/views/../templates/user_session/new.html.heex:13
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:56
+#: lib/jarm_web/live/user_forgot_password_live.ex:15
+#: lib/jarm_web/live/user_invitations_live.ex:23
+#: lib/jarm_web/live/user_login_live.ex:17
+#: lib/jarm_web/live/user_registration_live.ex:44
+#: lib/jarm_web/live/user_settings_live.ex:55
 #, elixir-autogen, elixir-format
 msgid "Email"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:36
-#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:1
-#: lib/jarm_web/views/../templates/user_session/new.html.heex:32
+#: lib/jarm_web/live/user_forgot_password_live.ex:10
+#: lib/jarm_web/live/user_login_live.ex:23
 #, elixir-autogen, elixir-format
 msgid "Forgot your password?"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_session/new.html.heex:21
-#, elixir-autogen, elixir-format
-msgid "Keep me logged in for 60 days"
-msgstr ""
-
-#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:26
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:35
-#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:29
-#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:18
-#: lib/jarm_web/views/../templates/user_session/new.html.heex:1
-#: lib/jarm_web/views/../templates/user_session/new.html.heex:25
+#: lib/jarm_web/components/layouts/_user_menu.html.heex:28
+#: lib/jarm_web/live/user_forgot_password_live.ex:23
+#: lib/jarm_web/live/user_reset_password_live.ex:36
 #, elixir-autogen, elixir-format
 msgid "Log in"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/layout/root.html.heex:32
+#: lib/jarm_web/components/layouts/app.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr ""
@@ -121,115 +109,93 @@ msgstr ""
 msgid "New Jarm"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:17
+#: lib/jarm_web/live/user_settings_live.ex:27
 #, elixir-autogen, elixir-format
 msgid "New display name"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:13
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:95
+#: lib/jarm_web/live/user_reset_password_live.ex:21
+#: lib/jarm_web/live/user_settings_live.ex:92
 #, elixir-autogen, elixir-format
 msgid "New password"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:9
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:11
+#: lib/jarm_web/live/user_registration_live.ex:34
+#: lib/jarm_web/live/user_reset_password_live.ex:18
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:21
-#: lib/jarm_web/views/../templates/user_session/new.html.heex:16
+#: lib/jarm_web/live/user_login_live.ex:18
+#: lib/jarm_web/live/user_registration_live.ex:45
 #, elixir-autogen, elixir-format
 msgid "Password"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/post_component.html.heex:102
+#: lib/jarm_web/live/post_live/post_component.html.heex:107
 #, elixir-autogen, elixir-format
 msgid "Post Comment"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:1
-#: lib/jarm_web/views/../templates/user_registration/new.html.heex:28
-#, elixir-autogen, elixir-format
-msgid "Register"
-msgstr ""
-
-#: lib/jarm_web/live/create_post_live/index.html.heex:79
-#: lib/jarm_web/live/edit_post_live/index.html.heex:65
+#: lib/jarm_web/live/create_post_live/index.html.heex:80
+#: lib/jarm_web/live/edit_post_live/index.html.heex:63
 #, elixir-autogen, elixir-format
 msgid "Remove"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:1
-#: lib/jarm_web/views/../templates/user_reset_password/edit.html.heex:22
-#, elixir-autogen, elixir-format
-msgid "Reset password"
-msgstr ""
-
-#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:19
+#: lib/jarm_web/components/layouts/_user_menu.html.heex:19
 #, elixir-autogen, elixir-format
 msgid "Send Invitation"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_invitation/new.html.heex:11
-#, elixir-autogen, elixir-format
-msgid "Send Invite"
-msgstr ""
-
-#: lib/jarm_web/views/../templates/user_invitation/new.html.heex:1
+#: lib/jarm_web/live/user_invitations_live.ex:9
+#: lib/jarm_web/live/user_invitations_live.ex:13
 #, elixir-autogen, elixir-format
 msgid "Send an invitation"
 msgstr ""
 
-#: lib/jarm_web/views/../templates/user_reset_password/new.html.heex:11
-#, elixir-autogen, elixir-format
-msgid "Send instructions to reset password"
-msgstr ""
-
-#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:22
-#: lib/jarm_web/views/../templates/user_settings/edit.html.heex:1
+#: lib/jarm_web/components/layouts/_user_menu.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "Settings"
 msgstr ""
 
-#: lib/jarm_web/live/create_post_live/index.html.heex:32
-#: lib/jarm_web/live/edit_post_live/index.html.heex:17
+#: lib/jarm_web/live/create_post_live/index.html.heex:33
+#: lib/jarm_web/live/edit_post_live/index.html.heex:15
 #, elixir-autogen, elixir-format
 msgid "You're allowed to upload up to %{max_number_of_media_entries} items (max %{max_file_size} GB each)."
 msgstr ""
 
-#: lib/jarm_web/live/post_live/index.ex:58
+#: lib/jarm_web/live/post_live/index.ex:59
 #: lib/jarm_web/live/post_live/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "🌾 The Pasture"
 msgstr ""
 
-#: lib/jarm_web/live/media_live/index.ex:19
+#: lib/jarm_web/components/layouts/_user_menu.html.heex:13
+#: lib/jarm_web/live/media_live/index.ex:18
 #: lib/jarm_web/live/media_live/index.html.heex:1
-#: lib/jarm_web/views/../templates/layout/_user_menu.html.heex:13
 #, elixir-autogen, elixir-format
 msgid "🛖 The Barn"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/post_component.html.heex:77
+#: lib/jarm_web/live/post_live/post_component.html.heex:84
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{display_name} said:"
 msgstr ""
 
-#: lib/jarm_web/live/create_post_live/index.html.heex:12
-#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:19
+#: lib/jarm_web/live/create_post_live/index.html.heex:15
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:22
 #: lib/jarm_web/live/edit_post_live/index.html.heex:12
 #, elixir-autogen, elixir-format
 msgid "Jarm"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/post_component.html.heex:98
+#: lib/jarm_web/live/post_live/post_component.html.heex:105
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New comment:"
 msgstr ""
 
-#: lib/jarm_web/live/create_post_live/index.html.heex:101
+#: lib/jarm_web/live/create_post_live/index.html.heex:102
 #, elixir-autogen, elixir-format
 msgid "🐑 Baa"
 msgstr ""
@@ -239,7 +205,7 @@ msgstr ""
 msgid "🐑 Baaaa…"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/post_component.html.heex:103
+#: lib/jarm_web/live/post_live/post_component.html.heex:108
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Posting comment…"
 msgstr ""
@@ -249,7 +215,7 @@ msgstr ""
 msgid "Jarm from %{display_name}"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/index.html.heex:27
+#: lib/jarm_web/live/post_live/index.html.heex:25
 #, elixir-autogen, elixir-format
 msgid "Older jarms"
 msgstr ""
@@ -259,17 +225,17 @@ msgstr ""
 msgid "🐑 New jarm"
 msgstr ""
 
-#: lib/jarm_web/live/edit_post_live/index.ex:30
+#: lib/jarm_web/live/edit_post_live/index.ex:28
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit jarm"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/show.ex:28
+#: lib/jarm_web/live/post_live/show.ex:35
 #, elixir-autogen, elixir-format
 msgid "Jarm details"
 msgstr ""
 
-#: lib/jarm_web/live/create_post_live/index.ex:42
+#: lib/jarm_web/live/create_post_live/index.ex:40
 #, elixir-autogen, elixir-format, fuzzy
 msgid "New jarm"
 msgstr ""
@@ -279,14 +245,15 @@ msgstr ""
 msgid "Add translation"
 msgstr ""
 
-#: lib/jarm_web/live/create_post_live/index.html.heex:27
-#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:25
+#: lib/jarm_web/live/admin_live/post_list.html.heex:36
+#: lib/jarm_web/live/create_post_live/index.html.heex:28
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:35
 #, elixir-autogen, elixir-format
 msgid "Choose language"
 msgstr ""
 
-#: lib/jarm_web/live/create_post_live/index.html.heex:24
-#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:23
+#: lib/jarm_web/live/create_post_live/index.html.heex:26
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:33
 #, elixir-autogen, elixir-format
 msgid "Language"
 msgstr ""
@@ -296,29 +263,249 @@ msgstr ""
 msgid "Original jarm"
 msgstr ""
 
-#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:31
-#: lib/jarm_web/live/edit_post_live/index.html.heex:82
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:40
+#: lib/jarm_web/live/edit_post_live/index.html.heex:80
 #, elixir-autogen, elixir-format
 msgid "Save"
 msgstr ""
 
-#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:32
-#: lib/jarm_web/live/edit_post_live/index.html.heex:83
+#: lib/jarm_web/live/edit_post_live/add_translation.html.heex:41
+#: lib/jarm_web/live/edit_post_live/index.html.heex:81
 #, elixir-autogen, elixir-format
 msgid "Saving…"
 msgstr ""
 
-#: lib/jarm_web/live/post_live/show.html.heex:25
+#: lib/jarm_web/live/post_live/show.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "Translate"
 msgstr ""
 
-#: lib/jarm_web/live/edit_post_live/add_translation.ex:10
+#: lib/jarm_web/live/edit_post_live/add_translation.ex:9
 #, elixir-autogen, elixir-format
 msgid "Translate jarm"
 msgstr ""
 
-#: lib/jarm_web/live/edit_post_live/add_translation.ex:40
+#: lib/jarm_web/live/edit_post_live/add_translation.ex:39
 #, elixir-autogen, elixir-format
 msgid "Translation created successfully"
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:207
+#, elixir-autogen, elixir-format
+msgid "A link to confirm your email change has been sent to the new address."
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:9
+#, elixir-autogen, elixir-format
+msgid "Account Settings"
+msgstr ""
+
+#: lib/jarm_web/controllers/user_session_controller.ex:8
+#, elixir-autogen, elixir-format
+msgid "Account created successfully!"
+msgstr ""
+
+#: lib/jarm_web/components/core_components.ex:475
+#, elixir-autogen, elixir-format
+msgid "Actions"
+msgstr ""
+
+#: lib/jarm_web/live/admin_live/user_list.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "All Users"
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:16
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Change your display name"
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:47
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Change your email"
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:72
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Change your password"
+msgstr ""
+
+#: lib/jarm_web/live/user_registration_live.ex:50
+#, elixir-autogen, elixir-format
+msgid "Create an account"
+msgstr ""
+
+#: lib/jarm_web/live/user_registration_live.ex:49
+#, elixir-autogen, elixir-format
+msgid "Creating account…"
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:174
+#, elixir-autogen, elixir-format
+msgid "Display name successfully updated."
+msgstr ""
+
+#: lib/jarm_web/live/admin_live/invitations_list.html.heex:26
+#, elixir-autogen, elixir-format
+msgid "Expired Invitations"
+msgstr ""
+
+#: lib/jarm_web/live/user_invitations_live.ex:66
+#, elixir-autogen, elixir-format
+msgid "Failed to send inviation:"
+msgstr ""
+
+#: lib/jarm_web/live/user_forgot_password_live.ex:42
+#, elixir-autogen, elixir-format
+msgid "If your email is in our system, you will receive instructions to reset your password shortly."
+msgstr ""
+
+#: lib/jarm_web/controllers/user_session_controller.ex:31
+#, elixir-autogen, elixir-format
+msgid "Invalid email or password"
+msgstr ""
+
+#: lib/jarm_web/live/user_invitations_live.ex:60
+#, elixir-autogen, elixir-format
+msgid "Invitation sent successfully."
+msgstr ""
+
+#: lib/jarm_web/live/admin_live/invitations_list.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "Invitations"
+msgstr ""
+
+#: lib/jarm_web/live/user_login_live.ex:21
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Keep me logged in"
+msgstr ""
+
+#: lib/jarm_web/controllers/user_session_controller.ex:39
+#, elixir-autogen, elixir-format
+msgid "Logged out successfully."
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:11
+#, elixir-autogen, elixir-format
+msgid "Manage your account display name, email address, and password settings"
+msgstr ""
+
+#: lib/jarm_web/live/admin_live/invitations_list.html.heex:4
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Open Invitations"
+msgstr ""
+
+#: lib/jarm_web/live/user_reset_password_live.ex:64
+#, elixir-autogen, elixir-format
+msgid "Password reset successfully."
+msgstr ""
+
+#: lib/jarm_web/controllers/user_session_controller.ex:14
+#, elixir-autogen, elixir-format
+msgid "Password updated successfully!"
+msgstr ""
+
+#: lib/jarm_web/live/admin_live/post_list.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "Posts"
+msgstr ""
+
+#: lib/jarm_web/live/user_registration_live.ex:11
+#, elixir-autogen, elixir-format
+msgid "Register for an account"
+msgstr ""
+
+#: lib/jarm_web/live/user_reset_password_live.ex:30
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Reset Password"
+msgstr ""
+
+#: lib/jarm_web/live/user_reset_password_live.ex:82
+#, elixir-autogen, elixir-format
+msgid "Reset password link is invalid or it has expired."
+msgstr ""
+
+#: lib/jarm_web/live/user_reset_password_live.ex:29
+#, elixir-autogen, elixir-format
+msgid "Resetting…"
+msgstr ""
+
+#: lib/jarm_web/live/components/reactions_live.ex:29
+#, elixir-autogen, elixir-format
+msgid "Search…"
+msgstr ""
+
+#: lib/jarm_web/live/user_invitations_live.ex:27
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Send invite"
+msgstr ""
+
+#: lib/jarm_web/live/user_forgot_password_live.ex:18
+#, elixir-autogen, elixir-format
+msgid "Send password reset instructions"
+msgstr ""
+
+#: lib/jarm_web/live/user_invitations_live.ex:26
+#, elixir-autogen, elixir-format
+msgid "Sending invite…"
+msgstr ""
+
+#: lib/jarm_web/live/user_forgot_password_live.ex:17
+#, elixir-autogen, elixir-format
+msgid "Sending…"
+msgstr ""
+
+#: lib/jarm_web/live/user_login_live.ex:28
+#, elixir-autogen, elixir-format
+msgid "Sign in"
+msgstr ""
+
+#: lib/jarm_web/live/user_login_live.ex:8
+#, elixir-autogen, elixir-format
+msgid "Sign in to account"
+msgstr ""
+
+#: lib/jarm_web/live/user_login_live.ex:27
+#, elixir-autogen, elixir-format
+msgid "Signing in…"
+msgstr ""
+
+#: lib/jarm_web/live/user_registration_live.ex:74
+#: lib/jarm_web/live/user_registration_live.ex:104
+#, elixir-autogen, elixir-format
+msgid "User invitation link is invalid or it has expired."
+msgstr ""
+
+#: lib/jarm_web/live/user_forgot_password_live.ex:11
+#, elixir-autogen, elixir-format
+msgid "We'll send a password reset link to your inbox"
+msgstr ""
+
+#: lib/jarm_web/controllers/user_session_controller.ex:18
+#, elixir-autogen, elixir-format
+msgid "Welcome back!"
+msgstr ""
+
+#: lib/jarm_web/user_auth.ex:179
+#: lib/jarm_web/user_auth.ex:245
+#, elixir-autogen, elixir-format
+msgid "You must have elevated privileges to access this page."
+msgstr ""
+
+#: lib/jarm_web/user_auth.ex:229
+#, elixir-autogen, elixir-format
+msgid "You must log in to access this page."
+msgstr ""
+
+#: lib/jarm_web/components/core_components.ex:76
+#: lib/jarm_web/components/core_components.ex:128
+#, elixir-autogen, elixir-format
+msgid "close"
+msgstr ""
+
+#: lib/jarm_web/live/user_settings_live.ex:39
+#: lib/jarm_web/live/user_settings_live.ex:66
+#: lib/jarm_web/live/user_settings_live.ex:110
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Changing…"
 msgstr ""

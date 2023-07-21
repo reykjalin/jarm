@@ -36,7 +36,7 @@ defmodule JarmWeb.UserSettingsLive do
           required
         />
         <:actions>
-          <.button phx-disable-with={gettext("Changing...")}>
+          <.button phx-disable-with={gettext("Changing…")}>
             <%= gettext("Change display name") %>
           </.button>
         </:actions>
@@ -63,7 +63,7 @@ defmodule JarmWeb.UserSettingsLive do
           required
         />
         <:actions>
-          <.button phx-disable-with={gettext("Changing...")}><%= gettext("Change email") %></.button>
+          <.button phx-disable-with={gettext("Changing…")}><%= gettext("Change email") %></.button>
         </:actions>
       </.simple_form>
     </.card>
@@ -107,7 +107,7 @@ defmodule JarmWeb.UserSettingsLive do
           required
         />
         <:actions>
-          <.button phx-disable-with={gettext("Changing...")}>
+          <.button phx-disable-with={gettext("Changing…")}>
             <%= gettext("Change password") %>
           </.button>
         </:actions>
