@@ -23,3 +23,6 @@ config :jarm, JarmWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Set mode flag for runtime.exs
+config :jarm, :mode, :test

@@ -4,8 +4,8 @@
 # remember to add this file to your .gitignore.
 import Config
 
-# We don't run this setup in the dev environment.
-unless Application.fetch_env(:jarm, :dev) do
+# We only run these checks in the production environment.
+if Application.fetch_env(:jarm, :mode) == :prod do
   database_path = System.get_env("DATABASE_PATH") || "./prod.sqlite3"
 
   url = System.get_env("URL") || "localhost"
