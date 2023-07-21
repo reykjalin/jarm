@@ -78,7 +78,14 @@
       <% end %>
     </div>
 
-    <.emoji_selector post={@post} emojis={@emojis} current_user={@current_user} />
+    <.live_component
+      module={ReactionsLive}
+      id={"post-#{@post.id}-reactions-component"}
+      emojis={@emojis}
+      reactions={@post.reactions}
+      post_id={@post.id}
+      current_user={@current_user}
+    />
 
     <p class="text-center py-3 md:py-5">
       <%= live_patch(

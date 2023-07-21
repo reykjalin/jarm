@@ -66,8 +66,8 @@ defmodule JarmWeb.PostLive.Index do
       socket
       |> assign(emojis: emojis)
 
-    send_update(JarmWeb.PostLive.TimelinePostComponent,
-      id: post_id |> String.to_integer(),
+    send_update(JarmWeb.LiveComponents.ReactionsLive,
+      id: "post-#{post_id}-reactions-component",
       emojis: emojis
     )
 
@@ -119,12 +119,9 @@ defmodule JarmWeb.PostLive.Index do
   def handle_info({:reaction_added, reaction}, socket) do
     post = Timeline.get_post!(reaction.post_id)
 
-    send_update(JarmWeb.PostLive.TimelinePostComponent,
-      id: reaction.post_id,
-      post: post,
-      current_user: socket.assigns.current_user,
-      locale: socket.assigns.locale,
-      emojis: socket.assigns.emojis
+    send_update(JarmWeb.LiveComponents.ReactionsLive,
+      id: "post-#{post.id}-reactions-component",
+      reactions: post.reactions
     )
 
     {:noreply, socket}
@@ -134,9 +131,9 @@ defmodule JarmWeb.PostLive.Index do
   def handle_info({:reaction_deleted, reaction}, socket) do
     post = Timeline.get_post!(reaction.post_id)
 
-    send_update(JarmWeb.PostLive.TimelinePostComponent,
-      id: reaction.post_id,
-      post: post
+    send_update(JarmWeb.LiveComponents.ReactionsLive,
+      id: "post-#{post.id}-reactions-component",
+      reactions: post.reactions
     )
 
     {:noreply, socket}
