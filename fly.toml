@@ -7,12 +7,12 @@ app = "jarm"
 primary_region = "yyz"
 kill_signal = "SIGTERM"
 
-[deploy]
-  release_command = "/app/bin/migrate"
-
 [env]
   PHX_HOST = "jarm.fly.dev"
   PORT = "8080"
+  DATABASE_PATH = "/jarm.db"
+  URL = ""
+  # ADMIN_EMAIL, SMTP_USERNAME, SMTP_PASSWORD, SMTP_SERVER, SMTP_PORT, SECRET_KEY_BASE, LIVE_VIEW_SIGNING_SALT should all be set via fly CLI/dashboard.
 
 [http_service]
   internal_port = 8080

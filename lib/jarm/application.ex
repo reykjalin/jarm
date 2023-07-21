@@ -6,6 +6,8 @@ defmodule Jarm.Application do
   use Application
 
   def start(_type, _args) do
+    Jarm.Release.migrate()
+
     children = [
       # Start the cache
       Jarm.Cache,
