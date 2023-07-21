@@ -2,14 +2,22 @@ defmodule JarmWeb.PostLive.Show do
   use JarmWeb, :live_view
 
   alias Jarm.Timeline
+  alias Jarm.Reactions
 
   import Canada, only: [can?: 2]
 
   @impl true
   def mount(%{"locale" => locale}, _session, socket) do
-    Timeline.subscribe()
+    if connected?(socket) do
+      Timeline.subscribe()
+      Reactions.subscribe()
+    end
 
-    {:ok, assign(socket, locale: locale)}
+    {:ok,
+     assign(socket,
+       locale: locale,
+       emojis: Reactions.all_emojis()
+     )}
   end
 
   @impl true
@@ -95,5 +103,29 @@ defmodule JarmWeb.PostLive.Show do
       new_post = Timeline.get_post!(comment.post_id)
       {:noreply, update(socket, :post, fn _post -> new_post end)}
     end
+  end
+
+  @impl true
+  def handle_info({:reaction_added, reaction}, socket) do
+    post = Timeline.get_post!(reaction.post_id)
+
+    send_update(JarmWeb.LiveComponents.ReactionsLive,
+      id: "post-#{post.id}-reactions-component",
+      reactions: post.reactions
+    )
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:reaction_deleted, reaction}, socket) do
+    post = Timeline.get_post!(reaction.post_id)
+
+    send_update(JarmWeb.LiveComponents.ReactionsLive,
+      id: "post-#{post.id}-reactions-component",
+      reactions: post.reactions
+    )
+
+    {:noreply, socket}
   end
 end

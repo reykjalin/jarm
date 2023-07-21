@@ -67,6 +67,17 @@
     <% end %>
   <% end %>
 
+  <div class="px-5 md:px-10">
+    <.live_component
+      module={ReactionsLive}
+      id={"post-#{@post.id}-reactions-component"}
+      emojis={@emojis}
+      reactions={@post.reactions}
+      post_id={@post.id}
+      current_user={@current_user}
+    />
+  </div>
+
   <div id={ "post-#{ @id }-comments" } class="px-5 md:px-10">
     <h2 class="text-xl"><%= gettext("Comments") %></h2>
     <br />
