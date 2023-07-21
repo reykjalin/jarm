@@ -19,7 +19,7 @@ defmodule Jarm.MixProject do
   def application do
     [
       mod: {Jarm.Application, []},
-      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :bamboo_smtp, :os_mon]
     ]
   end
 
@@ -37,6 +37,7 @@ defmodule Jarm.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
       {:ecto_sqlite3, "~> 0.10.3"},
+      {:ecto_sqlite3_extras, "~> 1.1.7"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.4", only: :dev},
       {:phoenix_live_view, "~> 0.19.4"},

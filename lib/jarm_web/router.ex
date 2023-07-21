@@ -1,6 +1,8 @@
 defmodule JarmWeb.Router do
   use JarmWeb, :router
 
+  import Phoenix.LiveDashboard.Router
+
   import JarmWeb.UserAuth
   import JarmWeb.Locale
 
@@ -61,12 +63,9 @@ defmodule JarmWeb.Router do
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
   if Application.compile_env(:jarm, :dev_routes) do
-    import Phoenix.LiveDashboard.Router
-
     scope "/" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: JarmWeb.Telemetry
       forward "/sent_emails", Bamboo.SentEmailViewerPlug
     end
   end
@@ -93,15 +92,6 @@ defmodule JarmWeb.Router do
     end
 
     post "/users/log_in", UserSessionController, :create
-
-    # get "/users/register/:token", UserRegistrationController, :new
-    # post "/users/register/:token", UserRegistrationController, :create
-    # get "/users/log_in", UserSessionController, :new
-    # post "/users/log_in", UserSessionController, :create
-    # get "/users/reset_password", UserResetPasswordController, :new
-    # post "/users/reset_password", UserResetPasswordController, :create
-    # get "/users/reset_password/:token", UserResetPasswordController, :edit
-    # put "/users/reset_password/:token", UserResetPasswordController, :update
   end
 
   ## App routes.
@@ -129,12 +119,6 @@ defmodule JarmWeb.Router do
 
     # TODO: make this a live view?
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-
-    # get "/users/settings", UserSettingsController, :edit
-    # put "/users/settings", UserSettingsController, :update
-    # get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-    # get "/users/invite", UserInvitationController, :new
-    # post "/users/invite", UserInvitationController, :create
   end
 
   ## Static media routes.
@@ -159,6 +143,13 @@ defmodule JarmWeb.Router do
       live "/admin/invitations/list", AdminLive.InvitationsList, :index
       live "/admin/posts/list", AdminLive.PostList, :index
     end
+  end
+
+  scope "/", JarmWeb do
+    pipe_through [:browser, :require_admin_user]
+
+    # Allow admin to see live dashboard.
+    live_dashboard "/dashboard", metrics: JarmWeb.Telemetry
   end
 
   scope "/:locale", JarmWeb do
