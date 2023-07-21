@@ -1,7 +1,4 @@
 defmodule Blurhash do
-  @external_resource "README.md"
-  @moduledoc File.read!("README.md")
-
   @type blurhash :: String.t()
   @type pixels :: <<_::8>>
   @type color :: {0..255, 0..255, 0..255}

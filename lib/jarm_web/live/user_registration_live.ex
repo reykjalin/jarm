@@ -106,21 +106,6 @@ defmodule JarmWeb.UserRegistrationLive do
       end
 
     {:noreply, socket}
-
-    # case Accounts.register_user(user_params) do
-    #   {:ok, user} ->
-    #     {:ok, _} =
-    #       Accounts.deliver_user_confirmation_instructions(
-    #         user,
-    #         &url(~p"/#{socket.assigns.locale}/users/confirm/#{&1}")
-    #       )
-
-    #     changeset = Accounts.change_user_registration(user)
-    #     {:noreply, socket |> assign(trigger_submit: true) |> assign_form(changeset)}
-
-    #   {:error, %Ecto.Changeset{} = changeset} ->
-    #     {:noreply, socket |> assign(check_errors: true) |> assign_form(changeset)}
-    # end
   end
 
   def handle_event("validate", %{"user" => user_params}, socket) do

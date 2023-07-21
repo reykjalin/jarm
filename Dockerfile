@@ -51,6 +51,19 @@ COPY lib lib
 
 COPY assets assets
 
+# install node
+RUN apt-get update -y && apt-get install -y curl \
+    && curl -fsSL https://deb.nodesource.com/setup_19.x | bash - \
+    && apt-get install -y nodejs
+
+# prepare JS
+WORKDIR /app/assets
+
+RUN npm ci
+
+# switch back to build dir
+WORKDIR /app
+
 # compile assets
 RUN mix assets.deploy
 
@@ -85,6 +98,15 @@ ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/jarm ./
+
+# Make sure ffmpeg is available on container, install wget to setup imagemagick.
+RUN apt-get update -y && apt-get install -y ffmpeg wget
+
+# Install imagemagick via oneliner from https://github.com/SoftCreatR/imei.
+RUN t=$(mktemp) \
+    && wget 'https://dist.1-2.dev/imei.sh' -qO "$t" \
+    && bash "$t" \
+    && rm "$t"
 
 USER nobody
 

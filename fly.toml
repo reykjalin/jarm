@@ -8,11 +8,18 @@ primary_region = "yyz"
 kill_signal = "SIGTERM"
 
 [env]
+  # ADMIN_EMAIL, SMTP_USERNAME, SMTP_PASSWORD, SMTP_SERVER, SMTP_PORT, SECRET_KEY_BASE, LIVE_VIEW_SIGNING_SALT should all be set via fly CLI/dashboard.
   PHX_HOST = "jarm.fly.dev"
   PORT = "8080"
-  DATABASE_PATH = "/jarm.db"
-  URL = ""
-  # ADMIN_EMAIL, SMTP_USERNAME, SMTP_PASSWORD, SMTP_SERVER, SMTP_PORT, SECRET_KEY_BASE, LIVE_VIEW_SIGNING_SALT should all be set via fly CLI/dashboard.
+  # URL should match PHX_HOST.
+  URL = "jarm.fly.dev"
+  DATABASE_PATH = "/app/production.db"
+  MAX_FILE_SIZE = "10000000"
+  MEDIA_FILE_STORAGE = "/app/uploaded-media/"
+  MAX_MEDIA_PER_POST = "5"
+  # Set maximum imagemagick memory limit if necessary.
+  # Ran into out of memory issues on hobby plan, this helped.
+  MAGICK_MEMORY_LIMIT = "100000000"
 
 [http_service]
   internal_port = 8080
