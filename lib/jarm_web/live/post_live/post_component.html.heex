@@ -1,13 +1,12 @@
 <div
   id={ "post-#{ @id }" }
-  class="my-5 border rounded-md bg-slate-800 light:bg-white"
   style={
     if @post.__meta__.state == :deleted do
       "display: none;"
     end
   }
 >
-  <div class="p-5 md:p-10">
+  <.card>
     <div class="flex justify-between">
       <div>
         <strong><%= @post.user.display_name %></strong>
@@ -29,45 +28,43 @@
 
       <p><%= get_locale_for_translated_post(@post, @locale) %></p>
     </div>
-  </div>
 
-  <%= for media <- @post.media do %>
-    <%= if String.starts_with?(media.mime_type, "image") do %>
-      <figure class="py-3 md:py-5 my-5">
-        <a class="link" href={~p"/media/#{media.uuid}"}>
-          <!-- Assume for now that image size is 700x700 until it's loaded. -->
-          <img
+    <%= for media <- @post.media do %>
+      <%= if String.starts_with?(media.mime_type, "image") do %>
+        <figure class="py-3 md:py-5 my-5">
+          <a class="link" href={~p"/media/#{media.uuid}"}>
+            <!-- Assume for now that image size is 700x700 until it's loaded. -->
+            <img
+              id={media.uuid}
+              class="bg-gray-200"
+              width="700"
+              height="700"
+              src={~p"/compressed-media/#{media.uuid}"}
+              loading="lazy"
+            />
+          </a>
+        </figure>
+      <% end %>
+
+      <%= if String.starts_with?(media.mime_type, "video") do %>
+        <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
+        <div class="py-3 md:py-5 my-5">
+          <!-- Assume for now that video size is 700x700 until it's loaded. -->
+          <video
             id={media.uuid}
+            poster={~p"/thumbnail/#{media.uuid}"}
+            controls
+            preload="metadata"
             class="bg-gray-200"
             width="700"
             height="700"
-            src={~p"/compressed-media/#{media.uuid}"}
-            loading="lazy"
-          />
-        </a>
-      </figure>
+          >
+            <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
+          </video>
+        </div>
+      <% end %>
     <% end %>
 
-    <%= if String.starts_with?(media.mime_type, "video") do %>
-      <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
-      <div class="py-3 md:py-5 my-5">
-        <!-- Assume for now that video size is 700x700 until it's loaded. -->
-        <video
-          id={media.uuid}
-          poster={~p"/thumbnail/#{media.uuid}"}
-          controls
-          preload="metadata"
-          class="bg-gray-200"
-          width="700"
-          height="700"
-        >
-          <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
-        </video>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div class="px-5 md:px-10">
     <.live_component
       module={ReactionsLive}
       id={"post-#{@post.id}-reactions-component"}
@@ -76,42 +73,42 @@
       post_id={@post.id}
       current_user={@current_user}
     />
-  </div>
 
-  <div id={ "post-#{ @id }-comments" } class="px-5 md:px-10">
-    <h2 class="text-xl"><%= gettext("Comments") %></h2>
-    <br />
-    <%= for comment <- @post.comments do %>
-      <div class="my-5">
-        <div class="py-3">
-          <strong>
-            <%= gettext("%{display_name} said:", display_name: comment.user.display_name) %>
-          </strong>
-          <p>
-            <%= "#{Date.to_string(NaiveDateTime.to_date(comment.inserted_at))} at #{Time.to_string(NaiveDateTime.to_time(comment.inserted_at))}" %>
-          </p>
+    <div id={ "post-#{ @id }-comments" }>
+      <h2 class="text-xl"><%= gettext("Comments") %></h2>
+      <br />
+      <%= for comment <- @post.comments do %>
+        <div class="my-5">
+          <div class="py-3">
+            <strong>
+              <%= gettext("%{display_name} said:", display_name: comment.user.display_name) %>
+            </strong>
+            <p>
+              <%= "#{Date.to_string(NaiveDateTime.to_date(comment.inserted_at))} at #{Time.to_string(NaiveDateTime.to_time(comment.inserted_at))}" %>
+            </p>
+          </div>
+          <%= text_to_html(comment.body, attributes: [class: "my-5"]) %>
+          <hr />
         </div>
-        <%= text_to_html(comment.body, attributes: [class: "my-5"]) %>
-        <hr />
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
-  <div class="my-5 p-5 md:p-10">
-    <.form
-      :let={f}
-      for={@changeset}
-      id="comment-form"
-      class="flex flex-col light:bg-white gap-5"
-      phx-change="validate"
-      phx-submit="save"
-    >
-      <.input field={f[:body]} type="textarea" label={gettext("New comment:")} />
+    <div class="my-5">
+      <.form
+        :let={f}
+        for={@changeset}
+        id="comment-form"
+        class="flex flex-col light:bg-white gap-5"
+        phx-change="validate"
+        phx-submit="save"
+      >
+        <.input field={f[:body]} type="textarea" label={gettext("New comment:")} />
 
-      <%= submit(gettext("Post Comment"),
-        phx_disable_with: gettext("Posting comment…"),
-        class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
-      ) %>
-    </.form>
-  </div>
+        <%= submit(gettext("Post Comment"),
+          phx_disable_with: gettext("Posting comment…"),
+          class: "border rounded-md px-4 py-3 bg-blue-600 text-zinc-200 hover:bg-blue-500"
+        ) %>
+      </.form>
+    </div>
+  </.card>
 </div>
