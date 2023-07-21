@@ -1,0 +1,19 @@
+image: ubuntu/focal
+secrets:
+  - b2452f2e-0188-49c2-abce-25634fa37505 # sr.ht ssh key
+  - c1faa6dc-11bf-43a5-b3b0-aff57b6e6d7b # Fly.io API key
+sources:
+  - git@git.sr.ht:~reykjalin/jarm#main
+tasks:
+  - setup: |
+      curl -L https://fly.io/install.sh | sh
+  - run: |
+      cd jarm
+      {
+        set +x
+        . ~/.buildsecrets
+        set -x
+      }
+      export FLY_API_TOKEN
+      /home/build/.fly/bin/flyctl deploy --remote-only
+      /home/build/.fly/bin/flyctl ssh console --pty -C '/app/bin/jarm rpc "Jarm.Accounts.register_user(%{display_name: \"Demo\", email: \"demo@example.com\", password: \"RDJ.uzt9bmg!zxa9gkh\"})"'
