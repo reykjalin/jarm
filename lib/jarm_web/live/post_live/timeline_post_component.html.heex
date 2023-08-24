@@ -32,12 +32,12 @@
       <%= text_to_html(get_post_body_for_locale(@post, @locale), attributes: [class: "my-5"]) %>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense gap-1">
+    <div class="md:grid md:grid-cols-2 md:grid-flow-row-dense md:gap-1">
       <%= for media <- @post.media do %>
         <%= if String.starts_with?(media.mime_type, "image") do %>
           <figure class={[
-            "w-full",
-            "#{if length(@post.media) |> rem(2) != 0, do: "last:col-span-2 flex justify-center"}"
+            "w-full my-1",
+            "#{if length(@post.media) |> rem(2) != 0, do: "md:last:col-span-2 md:flex md:justify-center"}"
           ]}>
             <a class="link" href={~p"/media/#{media.uuid}"}>
               <canvas
@@ -64,8 +64,8 @@
         <%= if String.starts_with?(media.mime_type, "video") do %>
           <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
           <div class={[
-            "w-full last:col-span-2",
-            "#{if length(@post.media) |> rem(2) != 0, do: "last:col-span-2 flex justify-center"}"
+            "w-full my-1",
+            "#{if length(@post.media) |> rem(2) != 0, do: "md:last:col-span-2 md:flex md:justify-center"}"
           ]}>
             <!-- Assume for now that video size is 700x700 until it's loaded. -->
             <video
