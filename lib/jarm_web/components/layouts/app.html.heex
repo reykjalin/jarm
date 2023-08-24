@@ -1,8 +1,18 @@
 <header class="border-b border-zinc-500 light:border-zinc-300 p-5 mb-5 bg-slate-800 light:bg-white flex flex-col justify-center items-center text-center md:justify-between md:flex-row md:items-start">
   <h1 class="text-3xl p-5 md:p-1">
-    <.link class="site-title hover:text-zinc-400" href={~p"/#{@locale}"}>🐑 Jarm</.link>
+    <.link class="site-title hover:text-zinc-400 flex items-center gap-3" href={~p"/#{@locale}"}>
+      <span>
+        <img
+          class={[
+            "max-w-[50px] max-h-[50px] md:max-w-[75px] md:max-h-[75px]",
+            "border-2 border-zinc-500 light:border-zinc-300 rounded-md"
+          ]}
+          src={~p"/images/jarm-logo.webp"}
+        />
+      </span>
+      Jarm
+    </.link>
   </h1>
-
   <section class="text-center">
     <%= _user_menu(assigns) %>
   </section>
