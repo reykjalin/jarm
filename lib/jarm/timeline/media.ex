@@ -9,6 +9,8 @@ defmodule Jarm.Timeline.Media do
     field(:mime_type, :string)
     field(:uuid, Ecto.UUID)
     field(:blurhash, :string)
+    field(:width, :integer)
+    field(:height, :integer)
     belongs_to(:user, Jarm.Accounts.User)
     belongs_to(:post, Jarm.Timeline.Post)
 
