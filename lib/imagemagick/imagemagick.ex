@@ -14,7 +14,7 @@ defmodule ImageMagick do
       if exit_status !== 0 do
         {:error, "Failed to identify image."}
       else
-        [width, height] = String.split(output, ":")
+        [width, height] = output |> String.trim() |> String.split(":")
 
         {:ok, %{path: path_to_image, width: width, height: height}}
       end
