@@ -91,22 +91,8 @@ defmodule JarmWeb.CreatePostLive.Index do
                     thumbnail_path =
                       Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
 
-                    Mogrify.open(dest)
-                    |> Mogrify.resize("700")
-                    |> Mogrify.custom("strip")
-                    |> Mogrify.custom("auto-orient")
-                    |> Mogrify.format("webp")
-                    |> Mogrify.save(path: compressed_path)
-
-                    System.cmd("magick", [
-                      "convert",
-                      "#{compressed_path}",
-                      "-strip",
-                      "-auto-orient",
-                      "-resize",
-                      "700",
-                      thumbnail_path
-                    ])
+                    ImageMagick.generate_compressed_image(dest, compressed_path)
+                    ImageMagick.generate_thumbnail(dest, thumbnail_path)
 
                     {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
 
@@ -114,13 +100,7 @@ defmodule JarmWeb.CreatePostLive.Index do
                     if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
                       png_path = Path.join(media_path, "#{entry.uuid}.png")
 
-                      System.cmd("magick", [
-                        "convert",
-                        dest,
-                        "-strip",
-                        "-auto-orient",
-                        png_path
-                      ])
+                      ImageMagick.convert_without_resize(dest, png_path)
 
                       # We delete the original HEIC/HEIF file.
                       File.rm!(dest)
@@ -153,31 +133,8 @@ defmodule JarmWeb.CreatePostLive.Index do
                     thumbnail_path =
                       Path.join(media_path, "thumbnail-#{entry.uuid}.webp") |> Path.absname()
 
-                    System.cmd("ffmpeg", [
-                      "-i",
-                      dest,
-                      "-c:v",
-                      "libx264",
-                      "-maxrate",
-                      "2M",
-                      "-bufsize",
-                      "2M",
-                      "-crf",
-                      "23",
-                      "-pix_fmt",
-                      "yuv420p",
-                      "-movflags",
-                      "+faststart",
-                      compressed_path
-                    ])
-
-                    System.cmd("magick", [
-                      "convert",
-                      "#{compressed_path}[1]",
-                      "-resize",
-                      "700",
-                      thumbnail_path
-                    ])
+                    Ffmpeg.compress_video_and_convert_to_mp4(dest, compressed_path)
+                    Ffmpeg.generate_video_thumbnail(dest, thumbnail_path)
 
                     {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
 
