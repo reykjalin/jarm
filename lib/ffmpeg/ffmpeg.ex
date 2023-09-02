@@ -20,7 +20,12 @@ defmodule Ffmpeg do
         0 ->
           [width, height] = output |> String.trim() |> String.trim("x") |> String.split("x")
 
-          {:ok, %{path: path_to_video, width: width, height: height}}
+          {:ok,
+           %{
+             path: path_to_video,
+             width: String.to_integer(width),
+             height: String.to_integer(height)
+           }}
 
         _ ->
           {:error, "Failed to get video dimensions"}

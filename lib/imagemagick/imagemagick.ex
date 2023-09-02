@@ -16,7 +16,12 @@ defmodule ImageMagick do
       else
         [width, height] = output |> String.trim() |> String.split(":")
 
-        {:ok, %{path: path_to_image, width: width, height: height}}
+        {:ok,
+         %{
+           path: path_to_image,
+           width: String.to_integer(width),
+           height: String.to_integer(height)
+         }}
       end
     end
   end
