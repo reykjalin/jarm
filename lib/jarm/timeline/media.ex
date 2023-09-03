@@ -28,7 +28,7 @@ defmodule Jarm.Timeline.Media do
       :height,
       :uuid,
       :mime_type,
-      :blurhash
+      :lqip
     ])
     |> validate_required([
       :path_to_original,
@@ -36,7 +36,7 @@ defmodule Jarm.Timeline.Media do
       :path_to_thumbnail,
       :uuid,
       :mime_type,
-      :blurhash
+      :lqip
     ])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:post_id)

@@ -108,6 +108,7 @@ defmodule JarmWeb.CreatePostLive.Index do
                     lqip =
                       case Sqip.generate_svg_data_uri(compressed_path) do
                         {:ok, result} ->
+                          File.rm!(result.output_file)
                           result.data_uri
 
                         _ ->
@@ -171,8 +172,9 @@ defmodule JarmWeb.CreatePostLive.Index do
                       end
 
                     lqip =
-                      case Sqip.generate_svg_data_uri(compressed_path) do
+                      case Sqip.generate_svg_data_uri(thumbnail_path) do
                         {:ok, result} ->
+                          File.rm!(result.output_file)
                           result.data_uri
 
                         _ ->
