@@ -18,7 +18,6 @@ defmodule Jarm.Repo.Migrations.RemoveBlurhashFromMedia do
     flush()
 
     import Ecto.Query, only: [from: 2]
-    import Mogrify
 
     from("media", select: [:id, :path_to_thumbnail])
     |> Repo.all()
