@@ -3,17 +3,14 @@
 <div class="my-5 p-5 border rounded-md bg-slate-800 light:bg-white flex flex-wrap gap-5 justify-around">
   <%= for m <- @media do %>
     <%= if String.starts_with?(m.mime_type, "image") do %>
-      <figure class="max-w-[200px]">
-        <canvas
-          id={"canvas-#{m.uuid}"}
-          class="min-w-[200px] shadow-md border border-lightgray"
-          \
-          data-blurhash={m.blurhash}
-          width="30"
-          height="30"
-          phx-hook="BlurHash"
-        >
-        </canvas>
+      <figure class="max-w-[200px] relative">
+        <img
+          id={"lqip-#{m.uuid}"}
+          class="max-w-full max-h-screen md:max-h-[75vh] shadow-md border border-lightgray transition-all duration-500"
+          src={m.lqip}
+          width={m.width}
+          height={m.height}
+        />
 
         <img
           id={m.uuid}
@@ -30,12 +27,12 @@
         <!-- Assume for now that video size is 700x700 until it's loaded. -->
         <video
           id={m.uuid}
-          poster={~p"/thumbnail/#{m.uuid}"}
+          poster={m.lqip}
           controls
           preload="metadata"
           class="lazy bg-gray-200"
-          width="700"
-          height="700"
+          width={m.width}
+          height={m.height}
         >
           <source data-src={~p"/compressed-media/#{m.uuid}"} type="video/mp4" />
         </video>
