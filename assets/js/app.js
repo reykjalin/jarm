@@ -29,12 +29,18 @@ const blurhashHook = {
     const blurhash = this.el.getAttribute("data-blurhash");
     const pixels = decode(blurhash, 30, 30);
 
-    const ctx = this.el.getContext("2d");
-    const imageData = ctx.createImageData(30, 30);
-
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+    const imageData = tempCtx.createImageData(30, 30);
     imageData.data.set(pixels);
-    ctx.putImageData(imageData, 0, 0);
-    ctx.scale(7, 7);
+    tempCtx.putImageData(imageData, 0, 0);
+
+    const scaleX = this.el.width / 30;
+    const scaleY = this.el.height / 30;
+
+    const ctx = this.el.getContext("2d");
+    ctx.scale(scaleX, scaleY);
+    ctx.drawImage(tempCanvas, 0, 0);
   },
 };
 
@@ -73,15 +79,44 @@ window.addEventListener("phx:page-loading-stop", () => {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           const lazyImage = entry.target;
-          lazyImage.src = lazyImage.dataset.src;
+
+          const canvasElement = document.getElementById(
+            `canvas-${lazyImage.id}`
+          );
+
+          // First we set the image position to absolute and set the width and height so it
+          // floats over the canvas, using the canvas size to get the proper position.
+          if (canvasElement) {
+            const rect = canvasElement.getBoundingClientRect();
+            lazyImage.style.top = 0;
+            lazyImage.style.left = 0;
+            lazyImage.style.height = `${rect.height}px`;
+            lazyImage.style.width = `${rect.width}px`;
+            lazyImage.style.position = "absolute";
+          }
+
+          // Then we load the image.
           lazyImage.classList.remove("lazy");
+          lazyImage.src = lazyImage.dataset.src;
           lazyImageObserver.unobserve(lazyImage);
 
+          // When the image is loaded we cross fade the image and canvas.
           lazyImage.addEventListener("load", () => {
-            const canvasElement = document.getElementById(
-              `canvas-${lazyImage.id}`
-            );
-            canvasElement?.remove();
+            // Once the image has transitioned in we remove the canvas and set the
+            // image position back to normal.
+            lazyImage.addEventListener("transitionend", () => {
+              canvasElement?.remove();
+              lazyImage.style.removeProperty("top");
+              lazyImage.style.removeProperty("left");
+              lazyImage.style.removeProperty("height");
+              lazyImage.style.removeProperty("width");
+              lazyImage.style.removeProperty("position");
+            });
+
+            lazyImage.classList.remove("opacity-0");
+            if (canvasElement) {
+              canvasElement.style.opacity = 0;
+            }
           });
         }
       });

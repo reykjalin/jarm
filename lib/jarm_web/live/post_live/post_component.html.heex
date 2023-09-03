@@ -33,12 +33,11 @@
       <%= if String.starts_with?(media.mime_type, "image") do %>
         <figure class="w-full py-3 md:py-5 my-5">
           <a class="link" href={~p"/media/#{media.uuid}"}>
-            <!-- Assume for now that image size is 700x700 until it's loaded. -->
             <img
               id={media.uuid}
-              class="bg-gray-200 m-auto"
-              width="700"
-              height="700"
+              class="max-w-full max-h-screen md:max-h-[75vh] bg-gray-200 m-auto border border-lightgray"
+              width={media.width}
+              height={media.height}
               src={~p"/compressed-media/#{media.uuid}"}
               loading="lazy"
             />
@@ -48,16 +47,15 @@
 
       <%= if String.starts_with?(media.mime_type, "video") do %>
         <!-- We set preload="metadata" to only load length; video preloading is probably a bit too much. -->
-        <div class="w-full py-3 md:py-5 my-5">
-          <!-- Assume for now that video size is 700x700 until it's loaded. -->
+        <div class="w-full my-5">
           <video
             id={media.uuid}
             poster={~p"/thumbnail/#{media.uuid}"}
             controls
             preload="metadata"
-            class="bg-gray-200 m-auto"
-            width="700"
-            height="700"
+            class="max-w-full max-h-screen md:max-h-[75vh] m-auto bg-gray-200 border border-lightgray"
+            width={media.width}
+            height={media.height}
           >
             <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
           </video>

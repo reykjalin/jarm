@@ -39,21 +39,21 @@
             "w-full my-1",
             "#{if length(@post.media) |> rem(2) != 0, do: "md:last:col-span-2 md:flex md:justify-center"}"
           ]}>
-            <a class="link" href={~p"/media/#{media.uuid}"}>
+            <a class="link relative" href={~p"/media/#{media.uuid}"}>
               <canvas
                 id={"canvas-#{media.uuid}"}
-                class="w-full shadow-md border border-lightgray"
+                class="max-w-full max-h-screen md:max-h-[75vh] shadow-md border border-lightgray bg-zinc-600 transition-all duration-500"
                 \
                 data-blurhash={media.blurhash}
-                width="30"
-                height="30"
+                width={media.width}
+                height={media.height}
                 phx-hook="BlurHash"
               >
               </canvas>
 
               <img
                 id={media.uuid}
-                class="lazy shadow-md border border-lightgray"
+                class="lazy max-w-full max-h-screen md:max-h-[75vh] shadow-md border border-lightgray opacity-0 transition-all duration-500"
                 data-src={~p"/compressed-media/#{media.uuid}"}
                 loading="lazy"
               />
@@ -73,9 +73,9 @@
               poster={~p"/thumbnail/#{media.uuid}"}
               controls
               preload="metadata"
-              class="bg-gray-200"
-              width="700"
-              height="700"
+              class="m-auto max-w-full max-h-screen md:max-h-[75vh] bg-slate-900 light:bg-slate-200 border border-lightgray"
+              width={media.width}
+              height={media.height}
             >
               <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
             </video>

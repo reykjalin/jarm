@@ -96,6 +96,17 @@ defmodule JarmWeb.CreatePostLive.Index do
 
                     {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
 
+                    # It makes the most sense to get the compressed dimensions here since
+                    # that's the one that will actually be displayed on the timeline.
+                    [width, height] =
+                      case ImageMagick.get_image_dimensions(compressed_path) do
+                        {:ok, results} ->
+                          [results.width, results.height]
+
+                        _ ->
+                          [0, 0]
+                      end
+
                     # Convert HEIC and HEIF files to PNG.
                     if entry.client_type == "image/heic" or entry.client_type == "image/heif" do
                       png_path = Path.join(media_path, "#{entry.uuid}.png")
@@ -110,6 +121,8 @@ defmodule JarmWeb.CreatePostLive.Index do
                         "path_to_original" => png_path,
                         "path_to_compressed" => compressed_path,
                         "path_to_thumbnail" => thumbnail_path,
+                        "width" => width,
+                        "height" => height,
                         "mime_type" => "image/png",
                         "uuid" => entry.uuid,
                         "blurhash" => hash
@@ -120,6 +133,8 @@ defmodule JarmWeb.CreatePostLive.Index do
                         "path_to_original" => path_to_original,
                         "path_to_compressed" => compressed_path,
                         "path_to_thumbnail" => thumbnail_path,
+                        "width" => width,
+                        "height" => height,
                         "mime_type" => entry.client_type,
                         "uuid" => entry.uuid,
                         "blurhash" => hash
@@ -138,11 +153,24 @@ defmodule JarmWeb.CreatePostLive.Index do
 
                     {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
 
+                    # It makes the most sense to get the compressed dimensions here since
+                    # that's the one that will actually be displayed on the timeline.
+                    [width, height] =
+                      case Ffmpeg.get_video_dimensions(compressed_path) do
+                        {:ok, results} ->
+                          [results.width, results.height]
+
+                        _ ->
+                          [0, 0]
+                      end
+
                     # TODO: Optimize with a Repo.all() query?
                     Timeline.create_media(current_user, post, %{
                       "path_to_original" => path_to_original,
                       "path_to_compressed" => compressed_path,
                       "path_to_thumbnail" => thumbnail_path,
+                      "width" => width,
+                      "height" => height,
                       "mime_type" => entry.client_type,
                       "uuid" => entry.uuid,
                       "blurhash" => hash
