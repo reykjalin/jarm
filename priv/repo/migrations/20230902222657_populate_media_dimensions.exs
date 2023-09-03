@@ -6,20 +6,19 @@ defmodule Jarm.Repo.Migrations.PopulateMediaDimensions do
   def up do
     import Ecto.Query, only: [from: 2]
 
-    from("media", select: [:id, :mime_type, :path_to_original])
+    from("media", select: [:id, :mime_type, :path_to_compressed])
     |> Repo.all()
     |> Enum.map(fn m ->
       dimensions =
         if m.mime_type |> String.starts_with?("image") do
-          get_image_dimensions(m.path_to_original)
+          get_image_dimensions(m.path_to_compressed)
         else
-          get_video_dimensions(m.path_to_original)
+          get_video_dimensions(m.path_to_compressed)
         end
 
       [width, height] =
         case dimensions do
           {:ok, result} ->
-            IO.inspect(result)
             [result.width, result.height]
 
           _ ->

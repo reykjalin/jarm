@@ -24,6 +24,8 @@ defmodule Jarm.Timeline.Media do
       :path_to_original,
       :path_to_compressed,
       :path_to_thumbnail,
+      :width,
+      :height,
       :uuid,
       :mime_type,
       :blurhash
