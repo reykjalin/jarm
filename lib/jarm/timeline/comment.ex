@@ -4,6 +4,7 @@ defmodule Jarm.Timeline.Comment do
 
   schema "comments" do
     field :body, :string
+    field :notification_sent, :boolean, default: false
     belongs_to :user, Jarm.Accounts.User
     belongs_to :post, Jarm.Timeline.Post
 

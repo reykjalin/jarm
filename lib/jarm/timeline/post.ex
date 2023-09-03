@@ -5,6 +5,7 @@ defmodule Jarm.Timeline.Post do
   schema "posts" do
     field :body, :string
     field :locale, :string
+    field :notification_sent, :boolean, default: false
     has_many :media, Jarm.Timeline.Media
     has_many :comments, Jarm.Timeline.Comment
     has_many :translations, Jarm.Timeline.Translation
