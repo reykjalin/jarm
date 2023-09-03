@@ -94,8 +94,6 @@ defmodule JarmWeb.CreatePostLive.Index do
                     ImageMagick.generate_compressed_image(dest, compressed_path)
                     ImageMagick.generate_thumbnail(dest, thumbnail_path)
 
-                    {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
-
                     # It makes the most sense to get the compressed dimensions here since
                     # that's the one that will actually be displayed on the timeline.
                     [width, height] =
@@ -105,6 +103,16 @@ defmodule JarmWeb.CreatePostLive.Index do
 
                         _ ->
                           [0, 0]
+                      end
+
+                    lqip =
+                      case Sqip.generate_svg_data_uri(compressed_path) do
+                        {:ok, result} ->
+                          result.data_uri
+
+                        _ ->
+                          # TODO: handle failure more gracefully.
+                          ""
                       end
 
                     # Convert HEIC and HEIF files to PNG.
@@ -125,7 +133,7 @@ defmodule JarmWeb.CreatePostLive.Index do
                         "height" => height,
                         "mime_type" => "image/png",
                         "uuid" => entry.uuid,
-                        "blurhash" => hash
+                        "lqip" => lqip
                       })
                     else
                       # TODO: Optimize with a Repo.all() query?
@@ -137,7 +145,7 @@ defmodule JarmWeb.CreatePostLive.Index do
                         "height" => height,
                         "mime_type" => entry.client_type,
                         "uuid" => entry.uuid,
-                        "blurhash" => hash
+                        "lqip" => lqip
                       })
                     end
                   else
@@ -151,8 +159,6 @@ defmodule JarmWeb.CreatePostLive.Index do
                     Ffmpeg.compress_video_and_convert_to_mp4(dest, compressed_path)
                     Ffmpeg.generate_video_thumbnail(dest, thumbnail_path)
 
-                    {:ok, hash} = Blurhash.downscale_and_encode(thumbnail_path, 4, 3)
-
                     # It makes the most sense to get the compressed dimensions here since
                     # that's the one that will actually be displayed on the timeline.
                     [width, height] =
@@ -164,6 +170,16 @@ defmodule JarmWeb.CreatePostLive.Index do
                           [0, 0]
                       end
 
+                    lqip =
+                      case Sqip.generate_svg_data_uri(compressed_path) do
+                        {:ok, result} ->
+                          result.data_uri
+
+                        _ ->
+                          # TODO: handle failure more gracefully.
+                          ""
+                      end
+
                     # TODO: Optimize with a Repo.all() query?
                     Timeline.create_media(current_user, post, %{
                       "path_to_original" => path_to_original,
@@ -173,7 +189,7 @@ defmodule JarmWeb.CreatePostLive.Index do
                       "height" => height,
                       "mime_type" => entry.client_type,
                       "uuid" => entry.uuid,
-                      "blurhash" => hash
+                      "lqip" => lqip
                     })
                   end
                 end)

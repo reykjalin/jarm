@@ -21,35 +21,12 @@ import "phoenix_html";
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
-import { decode } from "blurhash";
-
-const blurhashHook = {
-  mounted() {
-    // this.el is a canvas element.
-    const blurhash = this.el.getAttribute("data-blurhash");
-    const pixels = decode(blurhash, 30, 30);
-
-    const tempCanvas = document.createElement("canvas");
-    const tempCtx = tempCanvas.getContext("2d");
-    const imageData = tempCtx.createImageData(30, 30);
-    imageData.data.set(pixels);
-    tempCtx.putImageData(imageData, 0, 0);
-
-    const scaleX = this.el.width / 30;
-    const scaleY = this.el.height / 30;
-
-    const ctx = this.el.getContext("2d");
-    ctx.scale(scaleX, scaleY);
-    ctx.drawImage(tempCanvas, 0, 0);
-  },
-};
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute("content");
 let liveSocket = new LiveSocket("/live", Socket, {
   params: { _csrf_token: csrfToken },
-  hooks: { BlurHash: blurhashHook },
 });
 
 // Show progress bar on live navigation and form submits
@@ -80,14 +57,12 @@ window.addEventListener("phx:page-loading-stop", () => {
         if (entry.isIntersecting) {
           const lazyImage = entry.target;
 
-          const canvasElement = document.getElementById(
-            `canvas-${lazyImage.id}`
-          );
+          const lqipElement = document.getElementById(`lqip-${lazyImage.id}`);
 
           // First we set the image position to absolute and set the width and height so it
           // floats over the canvas, using the canvas size to get the proper position.
-          if (canvasElement) {
-            const rect = canvasElement.getBoundingClientRect();
+          if (lqipElement) {
+            const rect = lqipElement.getBoundingClientRect();
             lazyImage.style.top = 0;
             lazyImage.style.left = 0;
             lazyImage.style.height = `${rect.height}px`;
@@ -105,7 +80,7 @@ window.addEventListener("phx:page-loading-stop", () => {
             // Once the image has transitioned in we remove the canvas and set the
             // image position back to normal.
             lazyImage.addEventListener("transitionend", () => {
-              canvasElement?.remove();
+              lqipElement?.remove();
               lazyImage.style.removeProperty("top");
               lazyImage.style.removeProperty("left");
               lazyImage.style.removeProperty("height");
@@ -114,8 +89,8 @@ window.addEventListener("phx:page-loading-stop", () => {
             });
 
             lazyImage.classList.remove("opacity-0");
-            if (canvasElement) {
-              canvasElement.style.opacity = 0;
+            if (lqipElement) {
+              lqipElement.style.opacity = 0;
             }
           });
         }
