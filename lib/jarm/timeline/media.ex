@@ -8,7 +8,7 @@ defmodule Jarm.Timeline.Media do
     field(:path_to_thumbnail, :string)
     field(:mime_type, :string)
     field(:uuid, Ecto.UUID)
-    field(:blurhash, :string)
+    field(:lqip, :string)
     field(:width, :integer)
     field(:height, :integer)
     belongs_to(:user, Jarm.Accounts.User)
