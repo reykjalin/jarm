@@ -15,19 +15,24 @@ defmodule Jarm.Repo.Migrations.RemoveBlurhashFromMedia do
       add(:blurhash, :string)
     end
 
-    flush()
+    # ========
+    # The rest is commented out due to the Blurhash library being removed.
+    # Uncomment if you need it.
+    # ========
 
-    import Ecto.Query, only: [from: 2]
+    # flush()
 
-    from("media", select: [:id, :path_to_thumbnail])
-    |> Repo.all()
-    |> Enum.map(fn m ->
-      # Generate blurhash
-      {:ok, hash} = Blurhash.downscale_and_encode(m.path_to_thumbnail, 4, 3)
+    # import Ecto.Query, only: [from: 2]
 
-      # Add blurhash to db.
-      from(me in "media", where: me.id == ^m.id)
-      |> Repo.update_all(set: [blurhash: hash])
-    end)
+    # from("media", select: [:id, :path_to_thumbnail])
+    # |> Repo.all()
+    # |> Enum.map(fn m ->
+    #   # Generate blurhash
+    #   {:ok, hash} = Blurhash.downscale_and_encode(m.path_to_thumbnail, 4, 3)
+
+    #   # Add blurhash to db.
+    #   from(me in "media", where: me.id == ^m.id)
+    #   |> Repo.update_all(set: [blurhash: hash])
+    # end)
   end
 end
