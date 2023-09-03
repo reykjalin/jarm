@@ -19,6 +19,19 @@ Jarm provides an easy and simple way to share updates with family and friends in
 
 ## Server setup
 
+### Dependencies
+
+Jarm depends on several external executables being available in your environment:
+
+- `ffmpeg` via [FFMPEG](https://ffmpeg.org/).
+- `ffprobe` via [FFMPEG](https://ffmpeg.org/).
+- `magick` via [ImageMagick](https://imagemagick.org/).
+- `convert` via [ImageMagick](https://imagemagick.org/).
+- `identify` via [ImageMagick](https://imagemagick.org/).
+- `sqip` via [SQIP](https://github.com/axe312ger/sqip).
+  - Jarm currently depends on the v1 alpha installed via `npm install --global sqip-cli@canary`.
+  - SQIP is an npm packages and depends on Node >= v8.
+
 ### Build a release
 
 ```sh
