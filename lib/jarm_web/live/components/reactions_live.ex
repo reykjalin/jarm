@@ -13,9 +13,9 @@ defmodule JarmWeb.LiveComponents.ReactionsLive do
         phx-click-away={
           JS.hide(
             to: "#post-#{@post_id}-reactions",
-            transition: {"ease-out duration-75", "opacity-100", "opacity-0"}
+            transition: {"ease-out duration-200", "opacity-100", "opacity-0"},
+            time: 100
           )
-          |> JS.add_class("hidden", to: "#post-#{@post_id}-reactions")
         }
       >
         <div class="z-50 fixed md:absolute bottom-0 left-0 right-0 md:bottom-1 border-t md:border border-zinc-400 rounded-t md:rounded shadow-[0_0_20px_0_rgb(0,0,0,0.3)] bg-slate-800 light:bg-white w-full h-[50vh] md:max-w-[600px] md:max-h-[300px] overflow-auto">
@@ -45,9 +45,9 @@ defmodule JarmWeb.LiveComponents.ReactionsLive do
                   )
                   |> JS.hide(
                     to: "#post-#{@post_id}-reactions",
-                    transition: {"ease-out duration-75", "opacity-100", "opacity-0"}
+                    transition: {"ease-out duration-200", "opacity-100", "opacity-0"},
+                    time: 100
                   )
-                  |> JS.add_class("hidden", to: "#post-#{@post_id}-reactions")
                 }
               >
                 <%= emoji.emoji %>
@@ -63,9 +63,10 @@ defmodule JarmWeb.LiveComponents.ReactionsLive do
           phx-click={
             JS.toggle(
               to: "#post-#{@post_id}-reactions",
-              in: {"ease-out duration-75", "opacity-0", "opacity-100"}
+              in: {"ease-out duration-200", "opacity-0", "opacity-100"},
+              out: {"ease-out duration-200", "opacity-100", "opacity-0"},
+              time: 100
             )
-            |> JS.remove_class("hidden", to: "#post-#{@post_id}-reactions")
             |> JS.focus(to: "#post-#{@post_id}-reactions-search-bar")
           }
         >
@@ -93,7 +94,11 @@ defmodule JarmWeb.LiveComponents.ReactionsLive do
                   },
                   target: @myself
                 )
-                |> JS.hide(to: "#post-#{@post_id}-reactions")
+                |> JS.hide(
+                  to: "#post-#{@post_id}-reactions",
+                  transition: {"ease-out duration-200", "opacity-100", "opacity-0"},
+                  time: 100
+                )
               }
             >
               <%= emoji %> <%= length(reactions) %>
