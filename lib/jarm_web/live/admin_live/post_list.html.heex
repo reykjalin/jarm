@@ -5,9 +5,10 @@
     <thead>
       <tr>
         <th class="border text-center p-2">ID</th>
-        <th class="border text-start p-2">Display Name</th>
+        <th class="border text-start p-2">Display name</th>
         <th class="border text-start p-2">Date created</th>
         <th class="border text-start p-2">Body</th>
+        <th class="border text-start p-2">Notification sent?</th>
         <th class="border text-start p-2">Language</th>
       </tr>
     </thead>
@@ -20,6 +21,9 @@
             <%= "#{Date.to_string(NaiveDateTime.to_date(post.inserted_at))} @ #{Time.to_string(NaiveDateTime.to_time(post.inserted_at))}" %>
           </td>
           <td class="border text-start p-2"><%= post.body %></td>
+          <td class="border text-start p-2">
+            <%= if post.notification_sent, do: "Yes", else: "No" %>
+          </td>
           <td class="border text-start p-2">
             <.form
               :let={f}
