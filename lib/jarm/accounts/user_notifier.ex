@@ -8,13 +8,13 @@ defmodule Jarm.Accounts.UserNotifier do
   #   * Swoosh - https://hexdocs.pm/swoosh
   #   * Bamboo - https://hexdocs.pm/bamboo
   #
-  defp deliver(to, subject, body) do
+  defp deliver(to, subject, body_txt, body_html \\ "") do
     new_email(
       to: to,
       from: {"Jarm", System.fetch_env!("SMTP_USERNAME")},
       subject: subject,
-      text_body: body,
-      html_body: nil
+      text_body: body_txt,
+      html_body: body_html
     )
     |> Jarm.Mailer.deliver_later()
   end
@@ -79,12 +79,54 @@ defmodule Jarm.Accounts.UserNotifier do
         your_posts_with_new_comments,
         posts_with_new_comments_where_you_commented
       ) do
-    email =
+    email_txt =
       prepare_new_posts(new_posts) <>
         prepare_posts_with_new_comments(your_posts_with_new_comments) <>
         prepare_posts_commented_on_with_new_comments(posts_with_new_comments_where_you_commented)
 
-    deliver(user.email, "New posts and comments on Jarm", email)
+    email_html = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <style>
+    html {
+      font-family: sans-serif;
+    }
+    </style>
+    </head>
+    <body>
+    #{prepare_new_posts_html(new_posts)}
+    #{prepare_posts_with_new_comments_html(new_posts)}
+    #{prepare_posts_commented_on_with_new_comments_html(new_posts)}
+    </body>
+    </html>
+    """
+
+    deliver(user.email, "New posts and comments on Jarm", email_txt, email_html)
+  end
+
+  defp prepare_new_posts_html([]), do: ""
+
+  defp prepare_new_posts_html(new_posts) do
+    posts =
+      List.foldl(new_posts, "", fn p, accumulator ->
+        route = get_url_without_port() <> get_post_url(p)
+
+        text = """
+        <p><a href="#{route}">#{route}</a><p>
+        #{Phoenix.HTML.Format.text_to_html(p.body) |> Phoenix.HTML.safe_to_string()}
+        <hr>
+        """
+
+        accumulator <> text
+      end)
+
+    """
+    <h2>New posts</h2>
+
+    #{posts}
+
+    """
   end
 
   defp prepare_new_posts([]), do: ""
@@ -114,6 +156,30 @@ defmodule Jarm.Accounts.UserNotifier do
     """
   end
 
+  defp prepare_posts_with_new_comments_html([]), do: ""
+
+  defp prepare_posts_with_new_comments_html(your_posts_with_new_comments) do
+    posts_with_new_comments =
+      Enum.map(your_posts_with_new_comments, fn p ->
+        get_url_without_port() <> get_post_url(p)
+      end)
+      |> Enum.uniq()
+      |> Enum.reduce("", fn p_url, accumulator ->
+        """
+        #{accumulator}
+        <li><a href="#{p_url}">#{p_url}</a></li>
+        """
+      end)
+
+    """
+    <h2>Your posts with new comments</h2>
+    <ul>
+    #{posts_with_new_comments}
+    </ul>
+
+    """
+  end
+
   defp prepare_posts_with_new_comments([]), do: ""
 
   defp prepare_posts_with_new_comments(your_posts_with_new_comments) do
@@ -133,6 +199,32 @@ defmodule Jarm.Accounts.UserNotifier do
     Your posts with new comments
     ============================
     #{posts_with_new_comments}
+
+    """
+  end
+
+  defp prepare_posts_commented_on_with_new_comments_html([]), do: ""
+
+  defp prepare_posts_commented_on_with_new_comments_html(
+         posts_with_new_comments_where_you_commented
+       ) do
+    new_comments =
+      Enum.map(posts_with_new_comments_where_you_commented, fn p ->
+        get_url_without_port() <> get_post_url(p)
+      end)
+      |> Enum.uniq()
+      |> Enum.reduce("", fn p_url, accumulator ->
+        """
+        #{accumulator}
+        <li><a href="#{p_url}">#{p_url}</a></li>
+        """
+      end)
+
+    """
+    <h2>Posts you commented on that have new comments</h2>
+    <ul>
+    #{new_comments}
+    </ul>
 
     """
   end
