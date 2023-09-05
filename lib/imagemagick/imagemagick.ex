@@ -98,24 +98,27 @@ defmodule ImageMagick do
     end
   end
 
-  def layer_images_on_top_of_each_other(image_paths, output, size) do
+  def generate_avatar_from_parts(image_paths, output, size) do
     image_params =
       image_paths
       |> Enum.map(fn i ->
         Path.join([:code.priv_dir(:jarm), "avatar-generators", "cat", i])
       end)
       |> Enum.reduce([], fn i, acc ->
-        acc ++ ["-page"] ++ ["+0+0"] ++ [i]
+        # Initial canvas is 300x300, all parts are 256x256 images so we offset by
+        # (300 - 256) / 2 = 22 to center the final generated avatar.
+        acc ++ ["-page"] ++ ["+22+22"] ++ [i]
       end)
-
-    IO.inspect(image_params ++ ["-layers", "flatten", "-resize", "#{size}x#{size}", output],
-      label: "params"
-    )
 
     {_output, exit_status} =
       System.cmd(
         "magick",
-        image_params ++ ["-layers", "flatten", "-resize", "#{size}x#{size}", output]
+        # Initial canvas is 300x300, all parts are 256x256 images. We add the extra
+        # space so there is room to apply effects via CSS later, such as a fully rounded
+        # profile picture. The background color is set to white.
+        ["-size", "300x300", "xc:white"] ++
+          image_params ++
+          ["-layers", "flatten", "-resize", "#{size}x#{size}", output]
       )
 
     case exit_status do
