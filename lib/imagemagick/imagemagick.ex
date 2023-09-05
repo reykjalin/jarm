@@ -97,4 +97,33 @@ defmodule ImageMagick do
       end
     end
   end
+
+  def layer_images_on_top_of_each_other(image_paths, output, size) do
+    image_params =
+      image_paths
+      |> Enum.map(fn i ->
+        Path.join([:code.priv_dir(:jarm), "avatar-generators", "cat", i])
+      end)
+      |> Enum.reduce([], fn i, acc ->
+        acc ++ ["-page"] ++ ["+0+0"] ++ [i]
+      end)
+
+    IO.inspect(image_params ++ ["-layers", "flatten", "-resize", "#{size}x#{size}", output],
+      label: "params"
+    )
+
+    {_output, exit_status} =
+      System.cmd(
+        "magick",
+        image_params ++ ["-layers", "flatten", "-resize", "#{size}x#{size}", output]
+      )
+
+    case exit_status do
+      0 ->
+        :ok
+
+      _ ->
+        :error
+    end
+  end
 end
