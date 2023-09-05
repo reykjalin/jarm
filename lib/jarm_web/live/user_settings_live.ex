@@ -13,6 +13,78 @@ defmodule JarmWeb.UserSettingsLive do
     </.header>
 
     <.card>
+      <h2 class="text-lg text-center mb-5"><%= gettext("Change your profile picture") %></h2>
+
+      <h3 calss="my-5 text-md"><%= gettext("Upload your own") %></h3>
+
+      <.button class="m-auto" phx-disable-with={gettext("Generating…")}>
+        <%= gettext("Upload") %>
+      </.button>
+
+      <h3 calss="my-5 text-md"><%= gettext("Gravatar") %></h3>
+
+      <div class="flex gap-5 justify-center">
+        <img
+          class="border border-zinc-400"
+          src={ "https://gravatar.com/avatar/#{@email_hash}?d=mp" }
+          width="100"
+          height="100"
+        />
+        <img
+          class="border border-zinc-400"
+          src={ "https://gravatar.com/avatar/#{@email_hash}?d=identicon&f=y&s=100" }
+          width="100"
+          height="100"
+        />
+        <img
+          class="border border-zinc-400"
+          src={ "https://gravatar.com/avatar/#{@email_hash}?d=monsterid&f=y&s=100" }
+          width="100"
+          height="100"
+        />
+        <img
+          class="border border-zinc-400"
+          src={ "https://gravatar.com/avatar/#{@email_hash}?d=wavatar&f=y&s=100" }
+          width="100"
+          height="100"
+        />
+        <img
+          class="border border-zinc-400"
+          src={ "https://gravatar.com/avatar/#{@email_hash}?d=retro&f=y&s=100" }
+          width="100"
+          height="100"
+        />
+        <img
+          class="border border-zinc-400"
+          src={ "https://gravatar.com/avatar/#{@email_hash}?d=robohash&f=y&s=100" }
+          width="100"
+          height="100"
+        />
+      </div>
+
+      <h3 calss="my-5 text-md"><%= gettext("Your cat avatars") %></h3>
+
+      <div class="flex gap-5 justify-center">
+        <img
+          class="border border-zinc-400"
+          src={~p"/users/#{@current_user.id}/avatar/email_cat"}
+          width="100"
+          height="100"
+        />
+        <img
+          class="border border-zinc-400"
+          src={~p"/users/#{@current_user.id}/avatar/name_cat"}
+          width="100"
+          height="100"
+        />
+      </div>
+
+      <.button class="m-auto" phx-disable-with={gettext("Generating…")}>
+        <%= gettext("Generate your own cat 😻") %>
+      </.button>
+    </.card>
+
+    <.card>
       <h2 class="text-lg text-center"><%= gettext("Change your display name") %></h2>
 
       <.simple_form
@@ -145,6 +217,11 @@ defmodule JarmWeb.UserSettingsLive do
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:display_name_form, to_form(display_name_changeset))
       |> assign(:trigger_submit, false)
+      |> assign(:generated_avatar, nil)
+      |> assign(
+        :email_hash,
+        :crypto.hash(:md5, user.email) |> Base.encode16() |> String.downcase()
+      )
 
     {:ok, socket}
   end
