@@ -163,7 +163,6 @@ defmodule Jarm.Accounts.UserNotifier do
       Enum.map(your_posts_with_new_comments, fn p ->
         get_url_without_port() <> get_post_url(p)
       end)
-      |> Enum.uniq()
       |> Enum.reduce("", fn p_url, accumulator ->
         """
         #{accumulator}
@@ -212,7 +211,6 @@ defmodule Jarm.Accounts.UserNotifier do
       Enum.map(posts_with_new_comments_where_you_commented, fn p ->
         get_url_without_port() <> get_post_url(p)
       end)
-      |> Enum.uniq()
       |> Enum.reduce("", fn p_url, accumulator ->
         """
         #{accumulator}
