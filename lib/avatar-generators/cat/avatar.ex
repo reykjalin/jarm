@@ -19,6 +19,6 @@ defmodule AvatarGenerators.Cat do
       "accessorie_#{:rand.uniform(20)}.png"
     ]
 
-    ImageMagick.generate_avatar_from_parts(parts, output, size)
+    ImageMagick.layer_images_on_top_of_each_other(parts, output, size)
   end
 end
