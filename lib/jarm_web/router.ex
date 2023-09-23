@@ -130,9 +130,6 @@ defmodule JarmWeb.Router do
     get "/media/:id", MediaController, :show
     get "/compressed-media/:id", MediaController, :show_compressed
     get "/thumbnail/:id", MediaController, :show_thumbnail
-
-    # Avatars
-    get "/users/:user_id/avatar/:avatar", AvatarController, :show
   end
 
   ## Admin rotues.
