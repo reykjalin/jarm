@@ -54,7 +54,7 @@ defmodule ImageMagick do
     if not File.exists?(path_to_image) do
       {:error, "Provided image does not exist"}
     else
-      {_output, exit_status} =
+      {output, exit_status} =
         System.cmd("magick", [
           "convert",
           path_to_image,
@@ -70,7 +70,7 @@ defmodule ImageMagick do
           {:ok, output_path}
 
         _ ->
-          {:error, "Failed to compress image"}
+          {:error, "Failed to compress image", output}
       end
     end
   end
