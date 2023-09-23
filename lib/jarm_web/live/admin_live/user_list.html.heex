@@ -5,7 +5,6 @@
     <thead>
       <tr>
         <th class="border text-center p-2">ID</th>
-        <th class="border text-center p-2">Avatar</th>
         <th class="border text-start p-2">Display Name</th>
         <th class="border text-start p-2">Email</th>
         <th class="border text-start p-2">Date created</th>
@@ -16,14 +15,6 @@
       <%= for user <- @users do %>
         <tr>
           <td class="border text-center p-2"><%= user.id %></td>
-          <td class="border text-center p-2">
-            <img
-              class="border border-zinc-400"
-              src={~p"/users/#{user.id}/avatar/email_cat"}
-              width="80"
-              height="80"
-            />
-          </td>
           <td class="border text-start p-2"><%= user.display_name %></td>
           <td class="border text-start p-2"><%= user.email %></td>
           <td class="border text-start p-2">
