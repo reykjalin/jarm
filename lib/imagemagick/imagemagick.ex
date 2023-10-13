@@ -1,4 +1,7 @@
 defmodule ImageMagick do
+  def get_image_dimensions(nil), do: {:error, "No image provided", nil}
+  def get_image_dimensions(""), do: {:error, "No image provided", nil}
+
   def get_image_dimensions(path_to_image) do
     if not File.exists?(path_to_image) do
       {:error, "Provided image does not exist"}
@@ -26,6 +29,11 @@ defmodule ImageMagick do
     end
   end
 
+  def generate_thumbnail(nil, _), do: {:error, "No input image provided", nil}
+  def generate_thumbnail("", _), do: {:error, "No input image provided", nil}
+  def generate_thumbnail(_, nil), do: {:error, "No output path provided", nil}
+  def generate_thumbnail(_, ""), do: {:error, "No output path provided", nil}
+
   def generate_thumbnail(path_to_image, output_path) do
     if not File.exists?(path_to_image) do
       {:error, "Provided image does not exist"}
@@ -49,6 +57,11 @@ defmodule ImageMagick do
       end
     end
   end
+
+  def generate_compressed_image(nil, _), do: {:error, "No input image provided", nil}
+  def generate_compressed_image("", _), do: {:error, "No input image provided", nil}
+  def generate_compressed_image(_, nil), do: {:error, "No output path provided", nil}
+  def generate_compressed_image(_, ""), do: {:error, "No output path provided", nil}
 
   def generate_compressed_image(path_to_image, output_path) do
     if not File.exists?(path_to_image) do
@@ -74,6 +87,11 @@ defmodule ImageMagick do
       end
     end
   end
+
+  def convert_without_resize(nil, _), do: {:error, "No input image provided", nil}
+  def convert_without_resize("", _), do: {:error, "No input image provided", nil}
+  def convert_without_resize(_, nil), do: {:error, "No output path provided", nil}
+  def convert_without_resize(_, ""), do: {:error, "No output path provided", nil}
 
   def convert_without_resize(path_to_image, output_path) do
     if not File.exists?(path_to_image) do
