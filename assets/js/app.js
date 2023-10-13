@@ -129,3 +129,27 @@ window.addEventListener("phx:page-loading-stop", () => {
     // TODO: Possibly fall back to event handlers here
   }
 });
+
+// Wake lock for mobile on the upload page.
+if ("wakeLock" in navigator) {
+  const requestWakeLock = async () => {
+    try {
+      await navigator.wakeLock.request("screen");
+    } catch (e) {
+      console.error(`${e.name}, ${e.message}`);
+    }
+  };
+
+  const handleVisibilityChange = () => {
+    requestWakeLock();
+  };
+
+  const postButton = document.getElementById("post-button");
+  if (postButton) {
+    postButton.addEventListener("click", (_) => requestWakeLock());
+  }
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+} else {
+  console.log("no wake lock");
+}
