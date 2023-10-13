@@ -81,7 +81,16 @@ defmodule JarmWeb.CreatePostLive.Index do
               end
 
               # Move file to media path.
-              File.rename!(meta.path, dest)
+              mime_type =
+                if not String.starts_with?(entry.client_type, "image") and
+                     entry.client_type != "video/mp4" do
+                  Ffmpeg.compress_video_and_convert_to_mp4(meta.path, dest)
+                  "video/mp4"
+                else
+                  Logger.info("client type: #{entry.client_type}")
+                  File.rename!(meta.path, dest)
+                  entry.client_type
+                end
 
               [width, height] =
                 if entry.client_type |> String.starts_with?("image") do
@@ -108,7 +117,7 @@ defmodule JarmWeb.CreatePostLive.Index do
                 "path_to_original" => dest,
                 "width" => width,
                 "height" => height,
-                "mime_type" => entry.client_type,
+                "mime_type" => mime_type,
                 "uuid" => entry.uuid
               })
             end)
@@ -351,8 +360,12 @@ defmodule JarmWeb.CreatePostLive.Index do
   end
 
   defp file_name(entry) do
-    [ext | _] = MIME.extensions(entry.client_type)
-    "#{entry.uuid}.#{ext}"
+    if String.starts_with?(entry.client_type, "video") do
+      "#{entry.uuid}.mp4"
+    else
+      [ext | _] = MIME.extensions(entry.client_type)
+      "#{entry.uuid}.#{ext}"
+    end
   end
 
   @impl true
