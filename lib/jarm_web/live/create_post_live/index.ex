@@ -70,56 +70,14 @@ defmodule JarmWeb.CreatePostLive.Index do
         case Timeline.create_post(current_user, post_params) do
           {:ok, post} ->
             consume_uploaded_entries(socket, :media, fn meta, entry ->
-              media_path = System.get_env("MEDIA_FILE_STORAGE", "priv/static/media")
-              dest = Path.join(media_path, file_name(entry))
-
-              # Create static folder if it doesn't exist, then copy file.
-              if not File.exists?(media_path) do
-                Logger.log(:info, "Media storage path did not exist, creating…")
-                File.mkdir_p!(media_path)
-                Logger.log(:info, "Media storage path created.")
-              end
-
-              # Move file to media path.
-              mime_type =
-                if not String.starts_with?(entry.client_type, "image") and
-                     entry.client_type != "video/mp4" do
-                  Ffmpeg.compress_video_and_convert_to_mp4(meta.path, dest)
-                  "video/mp4"
-                else
-                  Logger.info("client type: #{entry.client_type}")
-                  File.rename!(meta.path, dest)
-                  entry.client_type
-                end
-
-              [width, height] =
-                if entry.client_type |> String.starts_with?("image") do
-                  case ImageMagick.get_image_dimensions(dest) do
-                    {:ok, results} ->
-                      [results.width, results.height]
-
-                    _ ->
-                      Logger.error("Failed to detect image dimensions for image #{entry.uuid}")
-
-                      [0, 0]
-                  end
-                else
-                  case Ffmpeg.get_video_dimensions(dest) do
-                    {:ok, results} ->
-                      [results.width, results.height]
-
-                    _ ->
-                      [0, 0]
-                  end
-                end
-
-              Timeline.create_media(current_user, post, %{
-                "path_to_original" => dest,
-                "width" => width,
-                "height" => height,
-                "mime_type" => mime_type,
-                "uuid" => entry.uuid
-              })
+              Timeline.create_media(
+                current_user,
+                post,
+                if(String.starts_with?(entry.client_type, "image"),
+                  do: consume_image(meta, entry),
+                  else: consume_video(meta, entry)
+                )
+              )
             end)
 
             socket
@@ -136,6 +94,105 @@ defmodule JarmWeb.CreatePostLive.Index do
       end
 
     {:noreply, socket}
+  end
+
+  defp consume_video(meta, entry) do
+    media_path = System.get_env("MEDIA_FILE_STORAGE", "priv/static/media")
+    dest = Path.join(media_path, file_name(entry))
+
+    # Create static folder if it doesn't exist, then copy file.
+    if not File.exists?(media_path) do
+      Logger.log(:info, "Media storage path did not exist, creating…")
+      File.mkdir_p!(media_path)
+      Logger.log(:info, "Media storage path created.")
+    end
+
+    # Move file to media path.
+    File.rename!(meta.path, dest)
+
+    # Generate a compressed version of the video if required.
+    path_to_compressed =
+      if entry.client_type != "video/mp4" do
+        path = Path.join(media_path, "compressed-#{entry.uuid}.mp4") |> Path.absname()
+        Ffmpeg.compress_video_and_convert_to_mp4(dest, path)
+        path
+      else
+        nil
+      end
+
+    [width, height] =
+      if entry.client_type |> String.starts_with?("image") do
+        case ImageMagick.get_image_dimensions(dest) do
+          {:ok, results} ->
+            [results.width, results.height]
+
+          _ ->
+            Logger.error("Failed to detect image dimensions for image #{entry.uuid}")
+
+            [0, 0]
+        end
+      else
+        case Ffmpeg.get_video_dimensions(dest) do
+          {:ok, results} ->
+            [results.width, results.height]
+
+          _ ->
+            [0, 0]
+        end
+      end
+
+    %{
+      "path_to_original" => dest,
+      "path_to_compressed" => path_to_compressed,
+      "width" => width,
+      "height" => height,
+      "mime_type" => entry.client_type,
+      "uuid" => entry.uuid
+    }
+  end
+
+  defp consume_image(meta, entry) do
+    media_path = System.get_env("MEDIA_FILE_STORAGE", "priv/static/media")
+    dest = Path.join(media_path, file_name(entry))
+
+    # Create static folder if it doesn't exist, then copy file.
+    if not File.exists?(media_path) do
+      Logger.log(:info, "Media storage path did not exist, creating…")
+      File.mkdir_p!(media_path)
+      Logger.log(:info, "Media storage path created.")
+    end
+
+    # Move file to media path.
+    File.rename!(meta.path, dest)
+
+    [width, height] =
+      if entry.client_type |> String.starts_with?("image") do
+        case ImageMagick.get_image_dimensions(dest) do
+          {:ok, results} ->
+            [results.width, results.height]
+
+          _ ->
+            Logger.error("Failed to detect image dimensions for image #{entry.uuid}")
+
+            [0, 0]
+        end
+      else
+        case Ffmpeg.get_video_dimensions(dest) do
+          {:ok, results} ->
+            [results.width, results.height]
+
+          _ ->
+            [0, 0]
+        end
+      end
+
+    %{
+      "path_to_original" => dest,
+      "width" => width,
+      "height" => height,
+      "mime_type" => entry.client_type,
+      "uuid" => entry.uuid
+    }
   end
 
   defp save_post_old(socket, :new, post_params) do
@@ -360,12 +417,8 @@ defmodule JarmWeb.CreatePostLive.Index do
   end
 
   defp file_name(entry) do
-    if String.starts_with?(entry.client_type, "video") do
-      "#{entry.uuid}.mp4"
-    else
-      [ext | _] = MIME.extensions(entry.client_type)
-      "#{entry.uuid}.#{ext}"
-    end
+    [ext | _] = MIME.extensions(entry.client_type)
+    "#{entry.uuid}.#{ext}"
   end
 
   @impl true
