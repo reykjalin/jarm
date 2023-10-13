@@ -7,6 +7,7 @@ defmodule Jarm.Administrator do
   alias Jarm.Repo
 
   alias Jarm.Accounts.{User, UserToken}
+  alias Jarm.Timeline.{Media}
 
   def grant_administrator_privileges_to(user) do
     changeset =
@@ -32,5 +33,9 @@ defmodule Jarm.Administrator do
 
   def get_expired_invitations() do
     Repo.all(UserToken.expired_invitations_query())
+  end
+
+  def get_all_media() do
+    Repo.all(Media)
   end
 end

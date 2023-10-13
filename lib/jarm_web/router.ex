@@ -142,6 +142,7 @@ defmodule JarmWeb.Router do
       live "/admin/users/list", AdminLive.UserList, :index
       live "/admin/invitations/list", AdminLive.InvitationsList, :index
       live "/admin/posts/list", AdminLive.PostList, :index
+      live "/admin/media/list", AdminLive.MediaList, :index
     end
   end
 
