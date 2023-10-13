@@ -125,6 +125,13 @@ defmodule Jarm.Timeline do
     |> Repo.insert()
   end
 
+  @decorate cache_evict(cache: Cache, key: media.uuid)
+  def update_media(media, attrs \\ %{}) do
+    media
+    |> Media.update_changeset(attrs)
+    |> Repo.update()
+  end
+
   @decorate cache_evict(cache: Cache, key: {Post, post_id})
   def create_comment(%User{id: user_id}, %Post{id: post_id}, attrs \\ %{}) do
     %Comment{post_id: post_id, user_id: user_id}

@@ -33,9 +33,14 @@ defmodule Jarm.Timeline.Media do
     |> validate_required([
       :path_to_original,
       :uuid,
-      :mime_type,
+      :mime_type
     ])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:post_id)
+  end
+
+  def update_changeset(media, attrs) do
+    media
+    |> change(attrs)
   end
 end

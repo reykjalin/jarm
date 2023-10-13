@@ -29,6 +29,7 @@ defmodule JarmWeb.MediaController do
         |> text("File not found")
 
       %Media{} = media ->
+        IO.inspect(media, label: "found media:")
         # We need to do some special handling.
         if media.mime_type |> String.starts_with?("video") do
           show_video(conn, media, true)
@@ -57,10 +58,18 @@ defmodule JarmWeb.MediaController do
     media_path = if compressed, do: media.path_to_compressed, else: media.path_to_original
     mime_type = if compressed, do: "image/webp", else: media.mime_type
 
-    conn
-    |> Plug.Conn.put_resp_header("content-type", mime_type)
-    |> Plug.Conn.put_resp_header("cache-control", "private,max-age=31536000,immutable")
-    |> Plug.Conn.send_file(200, media_path)
+    IO.inspect(media, label: "found media:")
+
+    if media_path != nil and media_path != "" and File.exists?(media_path) do
+      conn
+      |> Plug.Conn.put_resp_content_type(mime_type)
+      |> Plug.Conn.put_resp_header("cache-control", "private,max-age=31536000,immutable")
+      |> Plug.Conn.send_file(200, media_path)
+    else
+      conn
+      |> put_status(404)
+      |> text("File not found")
+    end
   end
 
   defp show_video(conn, media, compressed \\ false) do

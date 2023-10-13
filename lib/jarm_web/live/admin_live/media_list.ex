@@ -32,7 +32,9 @@ defmodule JarmWeb.AdminLive.MediaList do
         <:col :let={m} label={gettext("Path to original")}>
           <.icon :if={not File.exists?(m.path_to_original)} name="hero-x-mark" class="text-red-500" />
           <.icon :if={File.exists?(m.path_to_original)} name="hero-check" class="text-green-500" />
-          <%= m.path_to_original %>
+          <code>
+            <%= m.path_to_original %>
+          </code>
         </:col>
         <:col :let={m} label={gettext("Path to compressed")}>
           <.icon
@@ -51,9 +53,11 @@ defmodule JarmWeb.AdminLive.MediaList do
             name="hero-check"
             class="text-green-500"
           />
-          <%= if m.path_to_compressed == nil or m.path_to_compressed == "",
-            do: "-",
-            else: m.path_to_compressed %>
+          <code>
+            <%= if m.path_to_compressed == nil or m.path_to_compressed == "",
+              do: "-",
+              else: m.path_to_compressed %>
+          </code>
         </:col>
         <:col :let={m} label={gettext("Path to thumbnail")}>
           <.icon
@@ -72,11 +76,16 @@ defmodule JarmWeb.AdminLive.MediaList do
             name="hero-check"
             class="text-green-500"
           />
-          <%= if m.path_to_thumbnail == nil or m.path_to_thumbnail == "",
-            do: "-",
-            else: m.path_to_thumbnail %>
+          <code>
+            <%= if m.path_to_thumbnail == nil or m.path_to_thumbnail == "",
+              do: "-",
+              else: m.path_to_thumbnail %>
+          </code>
         </:col>
-        <:col :let={m} label={gettext("LQIP")}><%= if m.lqip == "", do: "-", else: m.lqip %></:col>
+        <:col :let={m} label={gettext("LQIP")}>
+          <.icon :if={m.lqip == nil or m.lqip == ""} name="hero-x-mark" class="text-red-500" />
+          <.icon :if={m.lqip != nil and m.lqip != ""} name="hero-check" class="text-green-500" />
+        </:col>
       </.table>
     </.card>
     """

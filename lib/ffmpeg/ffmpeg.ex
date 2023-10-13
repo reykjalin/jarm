@@ -37,7 +37,7 @@ defmodule Ffmpeg do
     if not File.exists?(path_to_video) do
       {:error, "Provided video does not exist"}
     else
-      {_output, exit_status} =
+      {output, exit_status} =
         System.cmd("ffmpeg", [
           "-i",
           path_to_video,
@@ -61,7 +61,7 @@ defmodule Ffmpeg do
           {:ok, output_path}
 
         _ ->
-          {:error, "Failed to compress video"}
+          {:error, "Failed to compress video", output}
       end
     end
   end
