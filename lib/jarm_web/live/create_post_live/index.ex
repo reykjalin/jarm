@@ -66,6 +66,73 @@ defmodule JarmWeb.CreatePostLive.Index do
     current_user = socket.assigns.current_user
 
     socket =
+      if current_user |> can?(create(Jarm.Timeline.Post)) do
+        case Timeline.create_post(current_user, post_params) do
+          {:ok, post} ->
+            consume_uploaded_entries(socket, :media, fn meta, entry ->
+              media_path = System.get_env("MEDIA_FILE_STORAGE", "priv/static/media")
+              dest = Path.join(media_path, file_name(entry))
+
+              # Create static folder if it doesn't exist, then copy file.
+              if not File.exists?(media_path) do
+                Logger.log(:info, "Media storage path did not exist, creating…")
+                File.mkdir_p!(media_path)
+                Logger.log(:info, "Media storage path created.")
+              end
+
+              # Move file to media path.
+              File.rename!(meta.path, dest)
+
+              [width, height] =
+                if entry.client_type |> String.starts_with?("image") do
+                  case ImageMagick.get_image_dimensions(dest) do
+                    {:ok, results} ->
+                      [results.width, results.height]
+
+                    _ ->
+                      Logger.error("Failed to detect image dimensions for image #{entry.uuid}")
+
+                      [0, 0]
+                  end
+                else
+                  case Ffmpeg.get_video_dimensions(dest) do
+                    {:ok, results} ->
+                      [results.width, results.height]
+
+                    _ ->
+                      [0, 0]
+                  end
+                end
+
+              Timeline.create_media(current_user, post, %{
+                "path_to_original" => dest,
+                "width" => width,
+                "height" => height,
+                "mime_type" => entry.client_type,
+                "uuid" => entry.uuid
+              })
+            end)
+
+            socket
+            |> put_flash(:info, "Post created successfully")
+            |> redirect(to: ~p"/#{socket.assigns.locale}")
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            assign(socket, changeset: changeset)
+        end
+      else
+        socket
+        |> put_flash(:error, "You're not allowed to create new posts")
+        |> redirect(to: ~p"/#{socket.assigns.locale}")
+      end
+
+    {:noreply, socket}
+  end
+
+  defp save_post_old(socket, :new, post_params) do
+    current_user = socket.assigns.current_user
+
+    socket =
       case current_user |> can?(create(Jarm.Timeline.Post)) do
         true ->
           case Timeline.create_post(current_user, post_params) do

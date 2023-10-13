@@ -38,7 +38,12 @@
               class="max-w-full max-h-screen md:max-h-[75vh] bg-gray-200 m-auto border border-lightgray"
               width={media.width}
               height={media.height}
-              src={~p"/compressed-media/#{media.uuid}"}
+              src={
+                if media.path_to_compressed != nil and media.path_to_compressed != "" and
+                     File.exists?(media.path_to_compressed),
+                   do: ~p"/compressed-media/#{media.uuid}",
+                   else: ~p"/media/#{media.uuid}"
+              }
               loading="lazy"
             />
           </a>
@@ -50,14 +55,27 @@
         <div class="w-full my-5">
           <video
             id={media.uuid}
-            poster={~p"/thumbnail/#{media.uuid}"}
+            poster={
+              if media.path_to_thumbnail != nil and media.path_to_thumbnail != "" and
+                   File.exists?(media.path_to_thumbnail),
+                 do: ~p"/thumbnail/#{media.uuid}",
+                 else: ""
+            }
             controls
             preload="metadata"
             class="max-w-full max-h-screen md:max-h-[75vh] m-auto bg-gray-200 border border-lightgray"
             width={media.width}
             height={media.height}
           >
-            <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
+            <source
+              src={
+                if media.path_to_compressed != nil and media.path_to_compressed != "" and
+                     File.exists?(media.path_to_compressed),
+                   do: ~p"/compressed-media/#{media.uuid}",
+                   else: ~p"/media/#{media.uuid}"
+              }
+              type="video/mp4"
+            />
           </video>
         </div>
       <% end %>

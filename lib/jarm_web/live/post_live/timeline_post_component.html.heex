@@ -41,6 +41,11 @@
           ]}>
             <a class="link relative" href={~p"/media/#{media.uuid}"}>
               <img
+                :if={
+                  media.lqip != "" and media.lqip != nil and media.path_to_compressed != "" and
+                    media.path_to_compressed != nil and
+                    File.exists?(media.path_to_compressed)
+                }
                 id={"lqip-#{media.uuid}"}
                 class="max-w-full max-h-screen md:max-h-[75vh] shadow-md border border-lightgray transition-all duration-500"
                 src={media.lqip}
@@ -50,8 +55,19 @@
 
               <img
                 id={media.uuid}
-                class="lazy max-w-full max-h-screen md:max-h-[75vh] shadow-md border border-lightgray opacity-0 transition-all duration-500"
-                data-src={~p"/compressed-media/#{media.uuid}"}
+                class={
+                  [
+                    "lazy max-w-full max-h-screen md:max-h-[75vh] shadow-md border border-lightgray opacity-0 transition-all duration-500"
+                    # Only do lazy loading when the compressed media and LQIP actually exist.
+                    # "#{if File.exists?(media.path_to_compressed) and File.exists?(media.lqip), do: "lazy"}"
+                  ]
+                }
+                data-src={
+                  if media.path_to_compressed != nil and media.path_to_compressed != "" and
+                       File.exists?(media.path_to_compressed),
+                     do: ~p"/compressed-media/#{media.uuid}",
+                     else: ~p"/media/#{media.uuid}"
+                }
                 loading="lazy"
               />
             </a>
@@ -64,17 +80,28 @@
             "w-full my-1",
             "#{if length(@post.media) |> rem(2) != 0, do: "md:last:col-span-2 md:flex md:justify-center"}"
           ]}>
-            <!-- Assume for now that video size is 700x700 until it's loaded. -->
             <video
               id={media.uuid}
-              poster={media.lqip}
+              poster={
+                if media.lqip != nil and media.lqip != "",
+                  do: media.lqip,
+                  else: ""
+              }
               controls
               preload="metadata"
               class="m-auto max-w-full max-h-screen md:max-h-[75vh] bg-slate-900 light:bg-slate-200 border border-lightgray"
               width={media.width}
               height={media.height}
             >
-              <source src={~p"/compressed-media/#{media.uuid}"} type="video/mp4" />
+              <source
+                src={
+                  if media.path_to_compressed != nil and media.path_to_compressed != "" and
+                       File.exists?(media.path_to_compressed),
+                     do: ~p"/compressed-media/#{media.uuid}",
+                     else: ~p"/media/#{media.uuid}"
+                }
+                type="video/mp4"
+              />
             </video>
           </div>
         <% end %>

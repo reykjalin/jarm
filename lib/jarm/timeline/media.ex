@@ -32,11 +32,8 @@ defmodule Jarm.Timeline.Media do
     ])
     |> validate_required([
       :path_to_original,
-      :path_to_compressed,
-      :path_to_thumbnail,
       :uuid,
       :mime_type,
-      :lqip
     ])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:post_id)
