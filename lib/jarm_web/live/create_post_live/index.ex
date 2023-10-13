@@ -132,7 +132,9 @@ defmodule JarmWeb.CreatePostLive.Index do
     end
 
     # Move file to media path.
-    File.rename!(meta.path, dest)
+    Logger.info("Copying file from #{meta.path} to #{dest}…")
+    File.cp!(meta.path, dest)
+    Logger.info("File copied.")
 
     # Generate a compressed version of the video if required.
     path_to_compressed =
@@ -187,7 +189,9 @@ defmodule JarmWeb.CreatePostLive.Index do
     end
 
     # Move file to media path.
-    File.rename!(meta.path, dest)
+    Logger.info("Copying file from #{meta.path} to #{dest}…")
+    File.cp!(meta.path, dest)
+    Logger.info("File copied.")
 
     [width, height] =
       if entry.client_type |> String.starts_with?("image") do
