@@ -1,6 +1,6 @@
 # Jarm
 
-[![builds.sr.ht status](https://builds.sr.ht/~reykjalin/jarm.svg)](https://builds.sr.ht/~reykjalin/jarm?)
+[![builds.sr.ht status](https://builds.sr.ht/~reykjalin/jarm/commits/main/build_ubuntu_release.yml.svg)](https://builds.sr.ht/~reykjalin/jarm/commits/main/build_ubuntu_release.yml?)
 
 Jarm provides an easy and simple way to share updates with family and friends in the form of photos, videos, and text updates.
 
