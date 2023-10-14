@@ -4,6 +4,8 @@
 
 Jarm provides an easy and simple way to share updates with family and friends in the form of photos, videos, and text updates.
 
+Screenshots and a better introduction are available at https://s.thorlaksson.com/projects/jarm.
+
 ## Goals
 
 - Private; intended for family and friends. Invite only.
