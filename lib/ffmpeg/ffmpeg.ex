@@ -33,35 +33,40 @@ defmodule Ffmpeg do
     end
   end
 
-  def compress_video_and_convert_to_mp4(path_to_video, output_path) do
+  def compress_video_and_convert_to_mp4(path_to_video, output_path, overwrite \\ false) do
     if not File.exists?(path_to_video) do
       {:error, "Provided video does not exist"}
     else
-      {output, exit_status} =
-        System.cmd("ffmpeg", [
-          "-i",
-          path_to_video,
-          "-c:v",
-          "libx264",
-          "-maxrate",
-          "2M",
-          "-bufsize",
-          "2M",
-          "-crf",
-          "23",
-          "-pix_fmt",
-          "yuv420p",
-          "-movflags",
-          "+faststart",
-          output_path
-        ])
+      if File.exists?(output_path) and not overwrite do
+        {:error, "Output file already exists."}
+      else
+        {output, exit_status} =
+          System.cmd("ffmpeg", [
+            "#{if overwrite, do: "-y"}",
+            "-i",
+            path_to_video,
+            "-c:v",
+            "libx264",
+            "-maxrate",
+            "2M",
+            "-bufsize",
+            "2M",
+            "-crf",
+            "23",
+            "-pix_fmt",
+            "yuv420p",
+            "-movflags",
+            "+faststart",
+            output_path
+          ])
 
-      case exit_status do
-        0 ->
-          {:ok, output_path}
+        case exit_status do
+          0 ->
+            {:ok, output_path}
 
-        _ ->
-          {:error, "Failed to compress video", output}
+          _ ->
+            {:error, "Failed to compress video", output}
+        end
       end
     end
   end

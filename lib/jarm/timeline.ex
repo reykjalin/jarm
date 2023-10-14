@@ -99,6 +99,12 @@ defmodule Jarm.Timeline do
     Ecto.Query.CastError -> nil
   end
 
+  def get_media_by_id(id) do
+    from(m in Media, where: m.id == ^id) |> Repo.one()
+  rescue
+    Ecto.Query.CastError -> nil
+  end
+
   @doc """
   Creates a post.
 
