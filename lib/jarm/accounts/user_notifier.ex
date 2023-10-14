@@ -113,7 +113,7 @@ defmodule Jarm.Accounts.UserNotifier do
         route = get_url_without_port() <> get_post_url(p)
 
         text = """
-        <p><a href="#{route}">#{route}</a><p>
+        <p><a href="#{route}">#{route}</a></p>
         #{Phoenix.HTML.Format.text_to_html(p.body) |> Phoenix.HTML.safe_to_string()}
         <hr>
         """
